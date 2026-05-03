@@ -24,13 +24,15 @@
               mono: ["JetBrains Mono", "ui-monospace", "monospace"],
             },
             colors: {
-              ink: "#0a0a0a",
-              paper: "#fafaf7",
-              chip: "#f3f2ee",
-              soft: "#f6f4ef",
-              line: "#e7e5df",
-              muted: "#7a7873",
-              accent: "#2563eb",
+              ink: "#1f1f23",
+              paper: "#f7f7f9",
+              chip: "#e5e5ea",
+              soft: "#eeeef1",
+              line: "#d9d9df",
+              muted: "#6b6b73",
+              slate: "#262626",
+              coal: "#0b0b0b",
+              accent: "#1c00ff",
             },
             boxShadow: {
               card: "0 1px 2px rgba(0,0,0,.04), 0 8px 30px rgba(0,0,0,.06)",
@@ -41,53 +43,68 @@
       };
     </script>
     <link rel="stylesheet" href="styles.css" />
+    <noscript>
+      <style>
+        body.hero-intro-active .hero-ambient,
+        body.hero-intro-active .hero-reveal,
+        body.hero-intro-active .iphone-lift {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+        body.hero-intro-active #site-header {
+          opacity: 1 !important;
+          pointer-events: auto !important;
+          transform: none !important;
+        }
+        #hero-intro-layer { display: none !important; }
+      </style>
+    </noscript>
   </head>
-  <body class="bg-white text-ink font-sans antialiased selection:bg-black selection:text-white">
+  <body class="hero-intro-active bg-paper text-ink font-sans antialiased selection:bg-coal selection:text-white">
     <!-- ==================== Header ==================== -->
     <header
       id="site-header"
       class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-line/60"
     >
-      <div class="mx-auto max-w-[1320px] px-6">
-        <nav class="flex h-16 items-center justify-between">
-          <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
-            <span class="grid h-6 w-6 place-items-center rounded-md bg-black text-white text-[12px] font-bold">J</span>
-            <span class="text-[15px]">Jenna AI</span>
+      <div class="mx-auto max-w-[1320px] px-5 sm:px-6">
+        <nav class="flex h-12 items-center justify-between">
+          <a href="#" class="flex items-center" aria-label="Jenna AI">
+            <img src="assets/logos/jenna-wordmark.png" alt="Jenna AI" class="h-7 w-auto" />
           </a>
 
-          <ul class="hidden lg:flex items-center gap-7 text-[14px] text-ink/80">
+          <ul class="hidden lg:flex items-center gap-5 text-[13px] text-ink/80">
             <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-black">
+              <button class="flex items-center gap-1 hover:text-coal">
                 Creative Platform
                 <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
               </button>
             </li>
             <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-black">
+              <button class="flex items-center gap-1 hover:text-coal">
                 Agents Platform
                 <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
               </button>
             </li>
-            <li><a href="#" class="hover:text-black">Developers</a></li>
+            <li><a href="#" class="hover:text-coal">Developers</a></li>
             <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-black">
+              <button class="flex items-center gap-1 hover:text-coal">
                 Resources
                 <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
               </button>
             </li>
-            <li><a href="#" class="hover:text-black">Enterprise</a></li>
-            <li><a href="#" class="hover:text-black">Pricing</a></li>
+            <li><a href="#" class="hover:text-coal">Enterprise</a></li>
+            <li><a href="#" class="hover:text-coal">Pricing</a></li>
           </ul>
 
           <div class="flex items-center gap-2">
             <a
               href="#"
-              class="hidden sm:inline-flex h-9 items-center rounded-full border border-line bg-white px-4 text-[13px] font-medium hover:border-black/40"
+              class="hidden sm:inline-flex h-8 items-center rounded-full border border-line bg-white px-3.5 text-[12px] font-medium hover:border-coal/40"
               >Log in</a
             >
             <a
               href="#"
-              class="inline-flex h-9 items-center rounded-full bg-black px-4 text-[13px] font-medium text-white hover:bg-black/85"
+              class="inline-flex h-8 items-center rounded-full bg-coal px-3.5 text-[12px] font-medium text-white hover:bg-coal/85"
               >Book Demo</a
             >
           </div>
@@ -96,125 +113,118 @@
     </header>
 
     <!-- ==================== Hero ==================== -->
-    <section class="relative overflow-hidden">
-      <div class="pointer-events-none absolute inset-x-0 -top-40 h-[640px] bg-gradient-to-b from-[#dbe6f7] via-[#eef2fa] to-white"></div>
-      <div class="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-[#cfe0f5] blur-3xl opacity-70"></div>
-      <div class="pointer-events-none absolute right-[-6rem] top-10 h-72 w-72 rounded-full bg-[#e8d4f3] blur-3xl opacity-60"></div>
+    <section id="hero" class="relative overflow-hidden">
+      <div class="hero-ambient pointer-events-none absolute inset-x-0 -top-40 h-[640px] bg-gradient-to-b from-[#dbe6f7] via-[#eef2fa] to-paper"></div>
+      <div class="hero-ambient pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-[#cfe0f5] blur-3xl opacity-70"></div>
+      <div class="hero-ambient pointer-events-none absolute right-[-6rem] top-10 h-72 w-72 rounded-full bg-[#e8d4f3] blur-3xl opacity-60"></div>
+      <div id="hero-intro-layer" class="hero-intro-layer" aria-hidden="true"></div>
 
       <!-- iPhone screen hanging from top, fades into header -->
-      <div class="iphone-stick" aria-hidden="true">
-        <div class="iphone-screen">
-          <div class="iphone-chat">
-            <div class="msg msg-user">
-              <div class="bubble bubble-user">Yeah hey, can I get a chicken parm?</div>
-            </div>
-            <div class="msg msg-agent">
-              <div class="avatar-orb" aria-hidden="true"></div>
-              <div class="bubble bubble-agent">Of course — fries or a side salad with that?</div>
-            </div>
-            <div class="msg msg-user">
-              <div class="bubble bubble-user">Fries. And a Coke.</div>
-            </div>
-            <div class="msg msg-agent">
-              <div class="avatar-orb" aria-hidden="true"></div>
-              <div class="bubble bubble-agent">Got it. That's $18.50, ready in 20 minutes.</div>
-            </div>
-
-            <div class="msg-status">
-              <span class="status-pill status-pill-success">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10.5l3.5 3.5L15 7"/></svg>
-                Order placed
-              </span>
-              <span class="status-pill status-pill-muted">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h12M11 6l4 4-4 4"/></svg>
-                Sent to Toast
-              </span>
+      <div class="iphone-lift" aria-hidden="true">
+        <div class="iphone-stick">
+          <div class="iphone-screen">
+            <div class="iphone-agent-work">
+              <div class="iphone-shimmer-wrap">
+                <span id="iphone-action-text" class="iphone-shimmer-text">Pulling hours</span>
+              </div>
             </div>
           </div>
-
-          <button class="iphone-call-btn" type="button">Tap to call</button>
+        </div>
+        <div class="iphone-edge-blur">
+          <span style="--edge-blur: 1px"></span>
+          <span style="--edge-blur: 2px"></span>
+          <span style="--edge-blur: 3px"></span>
+          <span style="--edge-blur: 6px"></span>
+          <span style="--edge-blur: 12px"></span>
         </div>
       </div>
 
-      <div class="relative z-10 mx-auto max-w-[1320px] px-5 sm:px-6 lg:px-8 pt-[400px] sm:pt-[420px] lg:pt-[460px] pb-16 sm:pb-20 lg:pb-28 text-center">
-        <h1 class="mx-auto max-w-3xl text-[34px] sm:text-[48px] md:text-[54px] lg:text-[58px] leading-[1.05] font-semibold tracking-tight">
-          The AI Hostess That
-          <span class="block">Never Misses a Call</span>
+      <div id="hero-pos-logos" class="hero-pos-logos" aria-hidden="true">
+        <div class="hero-pos-logo" data-pos-logo>
+          <span class="hero-pos-logo__inner">
+            <img src="assets/logos/toast-logo.png" alt="" />
+          </span>
+        </div>
+        <div class="hero-pos-logo" data-pos-logo>
+          <span class="hero-pos-logo__inner">
+            <img src="assets/logos/square-logo.png" alt="" />
+          </span>
+        </div>
+        <div class="hero-pos-logo" data-pos-logo>
+          <span class="hero-pos-logo__inner">
+            <img src="assets/logos/clover-logo.png" alt="" />
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-reveal relative z-10 mx-auto max-w-[1320px] px-5 sm:px-6 lg:px-8 pt-[328px] sm:pt-[348px] lg:pt-[386px] pb-16 sm:pb-20 lg:pb-28 text-center">
+        <h1 class="mx-auto max-w-md md:max-w-3xl text-[42px] sm:text-[48px] md:text-[54px] lg:text-[58px] leading-[1.05] font-semibold tracking-tight">
+          Meet Jenna,
+          <span class="block">Your AI Hostess</span>
         </h1>
-        <p class="mx-auto mt-4 sm:mt-5 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-muted">
+        <p class="mx-auto mt-4 sm:mt-5 max-w-md px-4 sm:px-0 md:max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-muted">
           Jenna answers every call, takes orders, books reservations, and sends
           them straight to your POS.
         </p>
 
-        <div
-          class="shine-card relative mx-auto mt-8 sm:mt-10 lg:mt-12 w-full max-w-[420px] overflow-hidden rounded-xl bg-white text-left shadow-card"
-        >
-          <!-- CardHeader -->
-          <div class="px-6 pt-6 pb-2">
-            <h3 class="text-[18px] font-semibold tracking-tight leading-none">Book a demo</h3>
-            <p class="mt-2 text-[13px] leading-relaxed text-muted">
-              See Jenna in action — we'll reach out within 24 hours.
-            </p>
-          </div>
+        <div class="signup-card mx-auto mt-8 sm:mt-10 lg:mt-12 w-full max-w-md rounded-2xl bg-white p-4 text-left sm:p-8">
+          <h3 class="text-xl font-bold text-neutral-800">Book a demo</h3>
+          <p class="mt-2 max-w-sm text-sm leading-relaxed text-neutral-600">
+            See Jenna in action — we'll reach out within 24 hours.
+          </p>
 
-          <!-- CardContent -->
-          <div class="px-6 pt-3 pb-2">
-            <form onsubmit="event.preventDefault();" class="grid grid-cols-2 gap-3">
-              <label class="col-span-1 flex flex-col gap-1.5">
-                <span class="text-[12px] font-medium text-ink">Name</span>
+          <form onsubmit="event.preventDefault();" class="my-8">
+            <div class="mb-4 flex flex-col gap-4 sm:flex-row">
+              <label class="form-field">
+                <span class="form-label">Name</span>
                 <input
                   type="text"
                   name="name"
                   placeholder="Jane Doe"
-                  class="h-9 rounded-md border border-line bg-white px-3 text-[14px] outline-none transition focus:border-black/60"
+                  class="form-input"
                   autocomplete="name"
                 />
               </label>
-              <label class="col-span-1 flex flex-col gap-1.5">
-                <span class="text-[12px] font-medium text-ink">Number</span>
+              <label class="form-field">
+                <span class="form-label">Number</span>
                 <input
                   type="tel"
                   name="phone"
                   placeholder="(555) 123-4567"
-                  class="h-9 rounded-md border border-line bg-white px-3 text-[14px] outline-none transition focus:border-black/60"
+                  class="form-input"
                   autocomplete="tel"
                 />
               </label>
-              <label class="col-span-1 flex flex-col gap-1.5">
-                <span class="text-[12px] font-medium text-ink">Restaurant</span>
-                <input
-                  type="text"
-                  name="restaurant"
-                  placeholder="Joe's Pizzeria"
-                  class="h-9 rounded-md border border-line bg-white px-3 text-[14px] outline-none transition focus:border-black/60"
-                />
-              </label>
-              <label class="col-span-1 flex flex-col gap-1.5">
-                <span class="text-[12px] font-medium text-ink">POS</span>
-                <select
-                  name="pos"
-                  class="h-9 appearance-none rounded-md border border-line bg-white px-3 text-[14px] outline-none transition focus:border-black/60"
-                >
-                  <option value="">Select a POS</option>
-                  <option>Toast</option>
-                  <option>Square</option>
-                  <option>Clover</option>
-                  <option>TouchBistro</option>
-                  <option>Other</option>
-                </select>
-              </label>
-            </form>
-          </div>
+            </div>
 
-          <!-- CardFooter -->
-          <div class="px-6 pt-3 pb-6">
-            <button
-              type="button"
-              class="inline-flex h-10 w-full items-center justify-center rounded-md bg-black text-[13px] font-semibold text-white transition hover:bg-black/85"
-            >
-              Book demo
+            <label class="form-field mb-4">
+              <span class="form-label">Restaurant</span>
+              <input
+                type="text"
+                name="restaurant"
+                placeholder="Joe's Pizzeria"
+                class="form-input"
+              />
+            </label>
+
+            <label class="form-field mb-8">
+              <span class="form-label">POS</span>
+              <select name="pos" class="form-input appearance-none">
+                <option value="">Select a POS</option>
+                <option>Toast</option>
+                <option>Square</option>
+                <option>Clover</option>
+                <option>TouchBistro</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <button class="form-submit" type="submit">
+              Book demo &rarr;
+              <span class="btn-bottom-gradient"></span>
+              <span class="btn-bottom-glow"></span>
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </section>
@@ -280,8 +290,8 @@
                 <div class="fc-tile fc-transcript">
                   <div class="fc-tag">Live transcript</div>
                   <div class="fc-msg dark">"Hi, this is Jenna — how can I help?"</div>
-                  <div class="fc-msg light">"Hey, can I get a chicken parm?"</div>
-                  <div class="fc-msg dark">"Of course — fries or salad?"</div>
+                  <div class="fc-msg light">"Yeah, do you have any tables for two tonight?"</div>
+                  <div class="fc-msg dark">"We do — 6:30 or 8:00 work?"</div>
                 </div>
               </div>
 
@@ -442,9 +452,9 @@
             redeploying.
           </p>
           <ul class="mt-6 space-y-3 text-[14px]">
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-black"></span>Branching, conditions, and fallbacks</li>
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-black"></span>Tools / function calling</li>
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-black"></span>Live agent handoff and call transfers</li>
+            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Branching, conditions, and fallbacks</li>
+            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Tools / function calling</li>
+            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Live agent handoff and call transfers</li>
           </ul>
         </div>
 
@@ -455,15 +465,15 @@
               <div class="rounded-2xl border border-line bg-soft p-4">
                 <div class="text-[11px] uppercase tracking-wider text-muted">Greet</div>
                 <div class="mt-2 text-[13px] font-medium">Welcome &amp; intent</div>
-                <div class="mt-3 h-1 w-2/3 rounded bg-black/80"></div>
+                <div class="mt-3 h-1 w-2/3 rounded bg-coal/80"></div>
               </div>
               <div class="rounded-2xl border border-line bg-soft p-4">
                 <div class="text-[11px] uppercase tracking-wider text-muted">Branch</div>
                 <div class="mt-2 text-[13px] font-medium">Support · Sales · Other</div>
                 <div class="mt-3 flex gap-1">
-                  <span class="h-1 w-6 rounded bg-black/80"></span>
-                  <span class="h-1 w-6 rounded bg-black/40"></span>
-                  <span class="h-1 w-6 rounded bg-black/20"></span>
+                  <span class="h-1 w-6 rounded bg-coal/80"></span>
+                  <span class="h-1 w-6 rounded bg-coal/40"></span>
+                  <span class="h-1 w-6 rounded bg-coal/20"></span>
                 </div>
               </div>
               <div class="rounded-2xl border border-line bg-soft p-4">
@@ -473,14 +483,14 @@
               </div>
             </div>
 
-            <div class="mt-4 rounded-2xl border border-line bg-[#0b0b0b] p-4 text-white">
+            <div class="mt-4 rounded-2xl border border-line bg-coal p-4 text-white">
               <div class="flex items-center gap-2 text-[11px] text-white/60">
                 <span class="h-2 w-2 rounded-full bg-emerald-400"></span> Live test
               </div>
               <div class="mt-3 space-y-2 text-[13px]">
-                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">Hi, this is Aria — how can I help today?</div>
-                <div class="ml-auto rounded-xl bg-white text-black px-3 py-1.5 max-w-[80%]">I'd like to check on order 4821.</div>
-                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">One moment — your order shipped this morning, arrival Friday.</div>
+                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">Hi, this is Jenna — what can I do for you?</div>
+                <div class="ml-auto rounded-xl bg-white text-ink px-3 py-1.5 max-w-[80%]">Can I push my 7:30 reservation to 8?</div>
+                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">Got it — your 7:30 for four is now at 8:00.</div>
               </div>
             </div>
           </div>
@@ -502,25 +512,25 @@
                     <div>
                       <div class="flex justify-between text-[12px]"><span>Stability</span><span class="text-muted">62</span></div>
                       <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[62%] rounded-full bg-black"></div>
+                        <div class="h-full w-[62%] rounded-full bg-coal"></div>
                       </div>
                     </div>
                     <div>
                       <div class="flex justify-between text-[12px]"><span>Similarity</span><span class="text-muted">78</span></div>
                       <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[78%] rounded-full bg-black"></div>
+                        <div class="h-full w-[78%] rounded-full bg-coal"></div>
                       </div>
                     </div>
                     <div>
                       <div class="flex justify-between text-[12px]"><span>Style</span><span class="text-muted">35</span></div>
                       <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[35%] rounded-full bg-black"></div>
+                        <div class="h-full w-[35%] rounded-full bg-coal"></div>
                       </div>
                     </div>
                     <div>
                       <div class="flex justify-between text-[12px]"><span>Speaker boost</span><span class="text-muted">On</span></div>
                       <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[100%] rounded-full bg-black"></div>
+                        <div class="h-full w-[100%] rounded-full bg-coal"></div>
                       </div>
                     </div>
                   </div>
@@ -639,31 +649,31 @@
               real-time conversation.
             </p>
             <div class="mt-7 flex flex-wrap gap-2">
-              <a href="#" class="rounded-full bg-white text-black px-4 h-9 inline-flex items-center text-[13px] font-medium">View docs</a>
+              <a href="#" class="rounded-full bg-white text-ink px-4 h-9 inline-flex items-center text-[13px] font-medium">View docs</a>
               <a href="#" class="rounded-full border border-white/20 px-4 h-9 inline-flex items-center text-[13px] font-medium hover:border-white/60">API reference</a>
             </div>
           </div>
 
           <div class="col-span-12 lg:col-span-7">
-            <div class="rounded-3xl bg-[#101010] border border-white/10 p-5 font-mono text-[13px] leading-relaxed shadow-card overflow-x-auto">
+            <div class="rounded-3xl bg-coal border border-white/10 p-5 font-mono text-[13px] leading-relaxed shadow-card overflow-x-auto">
               <div class="flex items-center gap-2 pb-3 text-white/50 text-[11px]">
                 <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
                 <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
                 <span class="ml-3">agent.ts</span>
               </div>
-<pre class="text-white/90"><span class="text-pink-400">import</span> { Agent } <span class="text-pink-400">from</span> <span class="text-emerald-300">"@elevenlabs/agents"</span>;
+<pre class="text-white/90"><span class="text-pink-400">import</span> { Agent } <span class="text-pink-400">from</span> <span class="text-emerald-300">"@jenna/agents"</span>;
 
 <span class="text-pink-400">const</span> agent = <span class="text-pink-400">await</span> Agent.create({
-  name: <span class="text-emerald-300">"Aria"</span>,
-  voice: <span class="text-emerald-300">"voice_aria_warm"</span>,
+  name: <span class="text-emerald-300">"Jenna"</span>,
+  voice: <span class="text-emerald-300">"voice_jenna_warm"</span>,
   language: <span class="text-emerald-300">"en"</span>,
-  tools: [getOrder, bookMeeting],
-  knowledge: [<span class="text-emerald-300">"./handbook.pdf"</span>],
+  tools: [takeOrder, bookReservation, sendToPOS],
+  knowledge: [<span class="text-emerald-300">"./menu.pdf"</span>],
 });
 
 agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
-  call.say(<span class="text-emerald-300">"Hi, this is Aria — how can I help?"</span>);
+  call.say(<span class="text-emerald-300">"Hi, you've reached Jenna — thanks for calling."</span>);
 });</pre>
             </div>
           </div>
@@ -746,7 +756,7 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
         evolve it without rebuilding.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="#" class="inline-flex h-11 items-center rounded-full bg-black px-6 text-[13px] font-semibold uppercase tracking-wide text-white">Get started free</a>
+        <a href="#" class="inline-flex h-11 items-center rounded-full bg-coal px-6 text-[13px] font-semibold uppercase tracking-wide text-white">Get started free</a>
         <a href="#" class="inline-flex h-11 items-center rounded-full border border-line bg-white px-6 text-[13px] font-semibold uppercase tracking-wide">Talk to sales</a>
       </div>
     </section>
@@ -761,7 +771,7 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
             High-volume usage, dedicated capacity, and white-glove onboarding
             for teams running mission-critical voice experiences.
           </p>
-          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-black px-5 text-[13px] font-semibold uppercase text-white">Contact sales</a>
+          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-coal px-5 text-[13px] font-semibold uppercase text-white">Contact sales</a>
         </div>
         <div class="rounded-3xl bg-ink text-white p-8 shadow-soft flex flex-col">
           <p class="text-[12px] uppercase tracking-[0.18em] text-white/60">Developer program</p>
@@ -770,7 +780,7 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
             Free credits, early access to models, and direct engineering
             support — designed for teams shipping with voice.
           </p>
-          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-white text-black px-5 text-[13px] font-semibold uppercase">Apply now</a>
+          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-white text-ink px-5 text-[13px] font-semibold uppercase">Apply now</a>
         </div>
       </div>
     </section>
@@ -811,7 +821,7 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
           The most realistic voice AI platform
         </h2>
         <div class="relative mt-8 flex flex-wrap justify-center gap-3">
-          <a href="#" class="inline-flex h-11 items-center rounded-full bg-white text-black px-6 text-[13px] font-semibold uppercase tracking-wide">Get started free</a>
+          <a href="#" class="inline-flex h-11 items-center rounded-full bg-white text-ink px-6 text-[13px] font-semibold uppercase tracking-wide">Get started free</a>
           <a href="#" class="inline-flex h-11 items-center rounded-full border border-white/30 px-6 text-[13px] font-semibold uppercase tracking-wide hover:border-white">Contact sales</a>
         </div>
       </div>
@@ -821,12 +831,13 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
     <footer class="bg-white border-t border-line/60">
       <div class="mx-auto max-w-[1320px] px-6 py-8 flex flex-wrap items-center justify-between gap-4 text-[12px] text-muted">
         <div class="flex items-center gap-2">
-          <span class="grid h-5 w-5 place-items-center rounded bg-black text-white text-[10px] font-bold">J</span>
+          <img src="assets/logos/jenna-logo.png" alt="Jenna AI" class="h-5 w-5 rounded object-cover" />
           <span>© Jenna AI 2026</span>
         </div>
       </div>
     </footer>
 
+    <script src="caller-card.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
