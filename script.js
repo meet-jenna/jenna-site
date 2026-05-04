@@ -1,11 +1,30 @@
-// ===== ElevenLabs agents page recreation — interactivity =====
+// ===== Jenna AI marketing site — interactivity =====
+//
+// Sections, in order:
+//   1. Configuration constants
+//   2. Pure utilities (shuffle, wait, animation tracker)
+//   3. iPhone action ticker (the "Pulling hours…" shimmer text)
+//   4. Hero intro animation (cards rain in, get absorbed, page reveals)
+//   5. POS logo emission (Toast / Square / Clover float out of the phone)
+//   6. FAQ accordion (single-open)
+//   7. Header shadow on scroll
+//   8. Feature carousel (auto-cycle + click + mouse-tracked gradient)
+//   9. Section reveal on intersection
+//   10. Book demo form (submit feedback)
+//   11. Init
 
 (function () {
-  const prefersReducedMotion = window.matchMedia(
+  "use strict";
+
+  // ----------------------------------------------------------------
+  // 1. Configuration
+  // ----------------------------------------------------------------
+
+  const PREFERS_REDUCED_MOTION = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const heroRequestActions = [
+  const HERO_REQUESTS = [
     { quote: "Are you open on Sunday?", action: "Pulling hours" },
     { quote: "I want to book a table for 6", action: "Booking table" },
     { quote: "Can I get a chicken parm?", action: "Placing order" },
@@ -18,6 +37,111 @@
     { quote: "Is there outdoor seating tonight?", action: "Checking patio" },
     { quote: "Do you have any gluten-free options?", action: "Filtering menu" },
   ];
+
+  // Pixel offsets from the cluster center for each hero card.
+  const CARD_CLUSTER_OFFSETS = [
+    { dx: -10, dy: -95, rotation: -6 },
+    { dx: 80, dy: -55, rotation: 4 },
+    { dx: -90, dy: -25, rotation: -3 },
+    { dx: 50, dy: -10, rotation: 5 },
+    { dx: -50, dy: 25, rotation: 6 },
+    { dx: 95, dy: 35, rotation: -4 },
+    { dx: -100, dy: 65, rotation: 3 },
+  ];
+
+  // Decelerating gaps (ms) between successive card entrances.
+  // 6 gaps for 7 cards — last card lands at ~5.3s.
+  const CARD_GAPS_MS = [1500, 1300, 1000, 700, 500, 300];
+
+  const HERO_DURATIONS_MS = {
+    cardEntrance: 360,
+    phoneSlide: 720,
+    postPhoneBeat: 500,
+    cardAbsorb: 700,
+    cardAbsorbStagger: 28,
+    postAbsorbBeat: 450,
+    layerFade: 200,
+    pageRevealDelay: 120,
+    pageRevealStagger: 110,
+    pageReveal: 620,
+    postRevealBeat: 850,
+    posLogoEntrance: 720,
+    posLogoStagger: 200,
+  };
+
+  const HERO_LAYOUT = {
+    visibleHeightCap: 760,
+    posLogoSideMargin: 12,
+    posLogoEdgeClamp: 4,
+  };
+
+  const ACTION_TICKER = {
+    initialDelayMs: 900,
+    intervalMs: 3400,
+    fadeOutMs: 180,
+  };
+
+  const CAROUSEL = {
+    autoAdvanceMs: 3000,
+  };
+
+  const HEADER_SHADOW_AT_PX = 8;
+  const SECTION_REVEAL_THRESHOLD = 0.08;
+  const ABORT_EVENTS = ["scroll", "wheel", "touchmove", "keydown"];
+
+  // Sentinel error type used to short-circuit the hero-intro promise chain
+  // when the user scrolls / interacts before the animation completes.
+  class HeroIntroAborted extends Error {
+    constructor() {
+      super("hero-intro-aborted");
+      this.name = "HeroIntroAborted";
+    }
+  }
+
+  // ----------------------------------------------------------------
+  // 2. Utilities
+  // ----------------------------------------------------------------
+
+  function shuffle(items) {
+    const copy = items.slice();
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function wait(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  // Wraps WAAPI animations so we can cancel everything in flight at once.
+  function createAnimationTracker() {
+    const live = new Set();
+    return {
+      track(animation) {
+        live.add(animation);
+        animation.finished
+          .catch(() => {})
+          .finally(() => live.delete(animation));
+        return animation;
+      },
+      cancelAll() {
+        live.forEach((animation) => {
+          try {
+            animation.cancel();
+          } catch (_) {
+            // animation already finished — ignore
+          }
+        });
+        live.clear();
+      },
+    };
+  }
+
+  // ----------------------------------------------------------------
+  // 3. iPhone action ticker
+  // ----------------------------------------------------------------
 
   function createIphoneActionTicker(actions) {
     const textEl = document.getElementById("iphone-action-text");
@@ -37,7 +161,7 @@
         changeTimer = null;
       }
 
-      if (!animated || prefersReducedMotion) {
+      if (!animated || PREFERS_REDUCED_MOTION) {
         textEl.textContent = nextText;
         textEl.classList.remove("is-waiting", "is-changing");
         return;
@@ -49,22 +173,22 @@
         textEl.textContent = nextText;
         textEl.classList.remove("is-changing");
         changeTimer = null;
-      }, 180);
+      }, ACTION_TICKER.fadeOutMs);
     }
 
     textEl.textContent = "";
     textEl.classList.add("is-waiting");
 
     return {
-      start(initialDelay = 900) {
-        if (startTimer || timer || prefersReducedMotion) return;
+      start(initialDelay = ACTION_TICKER.initialDelayMs) {
+        if (startTimer || timer || PREFERS_REDUCED_MOTION) return;
         startTimer = window.setTimeout(() => {
           startTimer = null;
           render(index, true);
           timer = window.setInterval(() => {
             index = (index + 1) % actions.length;
             render(index, true);
-          }, 3400);
+          }, ACTION_TICKER.intervalMs);
         }, initialDelay);
       },
       stop() {
@@ -84,6 +208,10 @@
     };
   }
 
+  // ----------------------------------------------------------------
+  // 4. Hero intro animation
+  // ----------------------------------------------------------------
+
   function runHeroIntro() {
     const hero = document.getElementById("hero");
     const layer = document.getElementById("hero-intro-layer");
@@ -97,231 +225,266 @@
       if (layer && layer.parentNode) layer.remove();
     }
 
-    if (!hero || !layer || !phone || !window.CallerCard) {
+    const canAnimate =
+      hero &&
+      layer &&
+      phone &&
+      window.CallerCard &&
+      !PREFERS_REDUCED_MOTION &&
+      "animate" in layer;
+
+    if (!canAnimate) {
       finish();
       return;
     }
 
-    if (prefersReducedMotion || !("animate" in layer)) {
-      finish();
-      return;
-    }
+    const tracker = createAnimationTracker();
 
-    // Tight central pile — pixel offsets from cluster center.
-    const clusterOffsets = [
-      { dx: -10, dy: -95, r: -6 },
-      { dx: 80, dy: -55, r: 4 },
-      { dx: -90, dy: -25, r: -3 },
-      { dx: 50, dy: -10, r: 5 },
-      { dx: -50, dy: 25, r: 6 },
-      { dx: 95, dy: 35, r: -4 },
-      { dx: -100, dy: 65, r: 3 },
-    ];
-
-    // Decelerating gaps between cards (ms): 1500, 1300, 1000, then continuing
-    // down. 6 gaps for 7 cards — last card lands at ~5.2s.
-    const cardGaps = [1500, 1300, 1000, 700, 500, 300];
-
-    function shuffle(items) {
-      const copy = items.slice();
-      for (let i = copy.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
-
-    const shuffledRequests = shuffle(
+    const requests = shuffle(
       Array.from(
-        { length: clusterOffsets.length },
-        (_, i) => heroRequestActions[i % heroRequestActions.length]
+        { length: CARD_CLUSTER_OFFSETS.length },
+        (_, i) => HERO_REQUESTS[i % HERO_REQUESTS.length]
       )
     );
-    const shuffledOffsets = shuffle(clusterOffsets);
-    const actionTicker = createIphoneActionTicker(
-      shuffledRequests.map((request) => request.action)
-    );
+    const offsets = shuffle(CARD_CLUSTER_OFFSETS);
+    const ticker = createIphoneActionTicker(requests.map((r) => r.action));
 
+    const cards = createHeroCards({ layer, requests, offsets });
+
+    let aborted = false;
+    function abort() {
+      if (aborted) return;
+      aborted = true;
+      tracker.cancelAll();
+      ticker.stop();
+      finish();
+    }
+    ABORT_EVENTS.forEach((evt) => {
+      window.addEventListener(evt, abort, { once: true, passive: true });
+    });
+
+    function checkAborted() {
+      if (aborted) throw new HeroIntroAborted();
+    }
+
+    animateCardEntrances(cards, tracker)
+      .then(() => {
+        checkAborted();
+        return animatePhoneSlide(phone, tracker);
+      })
+      .then(() => wait(HERO_DURATIONS_MS.postPhoneBeat))
+      .then(() => {
+        checkAborted();
+        return absorbCardsIntoPhone({ layer, phone, cards, tracker });
+      })
+      .then(() => {
+        ticker.start(0);
+        return wait(HERO_DURATIONS_MS.postAbsorbBeat);
+      })
+      .then(() => {
+        checkAborted();
+        return revealPage({ layer, revealEls, tracker });
+      })
+      .then(() => {
+        checkAborted();
+        return emitPosLogos({ phone, tracker });
+      })
+      .catch((err) => {
+        if (!(err instanceof HeroIntroAborted)) console.error(err);
+        finish();
+      });
+  }
+
+  function createHeroCards({ layer, requests, offsets }) {
     const layerRect = layer.getBoundingClientRect();
-    const visibleHeight = Math.min(window.innerHeight - layerRect.top, 760);
+    const visibleHeight = Math.min(
+      window.innerHeight - layerRect.top,
+      HERO_LAYOUT.visibleHeightCap
+    );
     const centerX = layerRect.width / 2;
     const centerY = visibleHeight * 0.5;
 
-    const cards = shuffledOffsets.map((offset, index) => {
+    return offsets.map((offset, index) => {
       const shell = document.createElement("div");
       shell.className = "hero-intro-card";
       shell.append(
         window.CallerCard({
           avatarUrl: `https://i.pravatar.cc/64?img=${index + 12}`,
-          quote: shuffledRequests[index].quote,
+          quote: requests[index].quote,
         })
       );
       layer.append(shell);
 
       return {
         el: shell,
-        tx: centerX + offset.dx,
-        ty: centerY + offset.dy,
-        r: offset.r,
+        targetX: centerX + offset.dx,
+        targetY: centerY + offset.dy,
+        rotation: offset.rotation,
       };
     });
+  }
 
-    let aborted = false;
-    const liveAnimations = new Set();
+  function animateCardEntrances(cards, tracker) {
+    let cumulativeDelay = 0;
+    const finished = cards.map((card, index) => {
+      if (index > 0) cumulativeDelay += CARD_GAPS_MS[index - 1] || 50;
+      const { el, targetX, targetY, rotation } = card;
+      const base = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
 
-    function track(animation) {
-      liveAnimations.add(animation);
-      animation.finished
-        .catch(() => {})
-        .finally(() => liveAnimations.delete(animation));
-      return animation;
-    }
-
-    function wait(ms) {
-      return new Promise((resolve) => {
-        window.setTimeout(resolve, ms);
-      });
-    }
-
-    function emitPosLogos() {
-      const logoShell = document.getElementById("hero-pos-logos");
-      const logos = logoShell
-        ? Array.from(logoShell.querySelectorAll("[data-pos-logo]"))
-        : [];
-
-      if (!logoShell || !logos.length) return Promise.resolve();
-
-      document.body.classList.add("hero-pos-complete");
-
-      const shellRect = logoShell.getBoundingClientRect();
-      const phoneRect = phone.getBoundingClientRect();
-      const sourceX =
-        phoneRect.left - shellRect.left + phoneRect.width / 2;
-      const sourceY =
-        phoneRect.top - shellRect.top + phoneRect.height * 0.72;
-
-      const phoneLeftInShell = phoneRect.left - shellRect.left;
-      const phoneRightInShell = phoneLeftInShell + phoneRect.width;
-      const phoneBottomInShell = Math.max(
-        0,
-        phoneRect.bottom - shellRect.top
+      const animation = el.animate(
+        [
+          {
+            opacity: 0,
+            transform: `${base} rotate(${rotation - 8}deg) scale(.7)`,
+            filter: "blur(4px)",
+          },
+          {
+            opacity: 1,
+            transform: `${base} rotate(${rotation}deg) scale(1.08)`,
+            filter: "blur(0)",
+            offset: 0.7,
+          },
+          {
+            opacity: 1,
+            transform: `${base} rotate(${rotation}deg) scale(1)`,
+            filter: "blur(0)",
+          },
+        ],
+        {
+          delay: cumulativeDelay,
+          duration: HERO_DURATIONS_MS.cardEntrance,
+          easing: "cubic-bezier(.16, 1, .3, 1)",
+          fill: "both",
+        }
       );
+      tracker.track(animation);
+      return animation.finished;
+    });
 
-      const sampleRect = logos[0].getBoundingClientRect();
-      const sideMargin = 12;
-      const leftZoneWidth = phoneLeftInShell - sideMargin;
-      const rightZoneWidth =
-        shellRect.width - (phoneRightInShell + sideMargin);
-      const sidesFitLogo =
-        leftZoneWidth > sampleRect.width + 8 &&
-        rightZoneWidth > sampleRect.width + 8;
+    return Promise.all(finished);
+  }
 
-      function shuffleArr(arr) {
-        const copy = arr.slice();
-        for (let i = copy.length - 1; i > 0; i -= 1) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [copy[i], copy[j]] = [copy[j], copy[i]];
-        }
-        return copy;
+  function animatePhoneSlide(phone, tracker) {
+    const animation = phone.animate(
+      [
+        { opacity: 0.75, transform: "translateX(-50%) translateY(-100%)" },
+        { opacity: 0.75, transform: "translateX(-50%) translateY(0)" },
+      ],
+      {
+        duration: HERO_DURATIONS_MS.phoneSlide,
+        easing: "cubic-bezier(.22, 1, .36, 1)",
+        fill: "both",
       }
+    );
+    tracker.track(animation);
+    return animation.finished;
+  }
 
-      let spots;
-      if (sidesFitLogo) {
-        // A handful of intentional layouts that flank the iPhone column and
-        // stay above the headline. Each combo is 3 anchor centers expressed
-        // as fractions of the shell box.
-        const combos = [
-          [
-            { xPct: 0.08, yPct: 0.18 },
-            { xPct: 0.18, yPct: 0.74 },
-            { xPct: 0.92, yPct: 0.30 },
-          ],
-          [
-            { xPct: 0.10, yPct: 0.42 },
-            { xPct: 0.86, yPct: 0.18 },
-            { xPct: 0.94, yPct: 0.72 },
-          ],
-          [
-            { xPct: 0.10, yPct: 0.22 },
-            { xPct: 0.92, yPct: 0.20 },
-            { xPct: 0.20, yPct: 0.78 },
-          ],
-          [
-            { xPct: 0.18, yPct: 0.40 },
-            { xPct: 0.84, yPct: 0.66 },
-            { xPct: 0.92, yPct: 0.16 },
-          ],
-        ];
-        const combo = combos[Math.floor(Math.random() * combos.length)];
-        spots = shuffleArr(combo).map((anchor) => ({
-          left: anchor.xPct * shellRect.width - sampleRect.width / 2,
-          top: anchor.yPct * shellRect.height - sampleRect.height / 2,
-        }));
-      } else {
-        // Narrow viewports: drop into a row just under the phone.
-        const yBase = phoneBottomInShell + 12;
-        const rowCombos = [
-          [
-            { left: shellRect.width * 0.18 - sampleRect.width / 2, top: yBase + 14 },
-            { left: shellRect.width * 0.50 - sampleRect.width / 2, top: yBase },
-            { left: shellRect.width * 0.82 - sampleRect.width / 2, top: yBase + 8 },
-          ],
-          [
-            { left: shellRect.width * 0.16 - sampleRect.width / 2, top: yBase + 6 },
-            { left: shellRect.width * 0.48 - sampleRect.width / 2, top: yBase + 18 },
-            { left: shellRect.width * 0.80 - sampleRect.width / 2, top: yBase + 2 },
-          ],
-        ];
-        spots = shuffleArr(
-          rowCombos[Math.floor(Math.random() * rowCombos.length)]
-        );
-      }
+  function absorbCardsIntoPhone({ layer, phone, cards, tracker }) {
+    // Cards fly into the visible center of the iPhone — the iPhone's top is
+    // hidden behind the sticky header, so we target the midpoint of the
+    // visible portion below the header.
+    const layerRect = layer.getBoundingClientRect();
+    const phoneRect = phone.getBoundingClientRect();
+    const phoneTopInLayer = phoneRect.top - layerRect.top;
+    const phoneBottomInLayer = phoneRect.bottom - layerRect.top;
+    const visibleTop = Math.max(0, phoneTopInLayer);
+    const targetX = phoneRect.left - layerRect.left + phoneRect.width / 2;
+    const targetY = (visibleTop + phoneBottomInLayer) / 2;
 
-      const logoAnimations = logos.map((logo, index) => {
-        const rect = logo.getBoundingClientRect();
-        let { left, top } = spots[index];
+    const finished = cards.map(
+      ({ el, targetX: tx, targetY: ty, rotation }, index) => {
+        const base = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
+        const midX = tx + (targetX - tx) * 0.4;
+        const midY = ty + (targetY - ty) * 0.28;
+        const mid = `translate(${midX}px, ${midY}px) translate(-50%, -50%)`;
+        const target = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
 
-        const overlapsPhoneX =
-          left + rect.width > phoneLeftInShell - sideMargin &&
-          left < phoneRightInShell + sideMargin;
-        const overlapsPhoneY =
-          top + rect.height > -sideMargin &&
-          top < phoneBottomInShell + sideMargin;
-
-        if (overlapsPhoneX && overlapsPhoneY) {
-          const center = left + rect.width / 2;
-          if (
-            center < shellRect.width / 2 &&
-            leftZoneWidth > rect.width
-          ) {
-            left = phoneLeftInShell - sideMargin - rect.width;
-          } else if (
-            center >= shellRect.width / 2 &&
-            rightZoneWidth > rect.width
-          ) {
-            left = phoneRightInShell + sideMargin;
-          } else {
-            top = phoneBottomInShell + sideMargin;
+        const animation = el.animate(
+          [
+            { opacity: 1, transform: `${base} rotate(${rotation}deg) scale(1)` },
+            {
+              opacity: 0.78,
+              transform: `${mid} rotate(${rotation * 0.3}deg) scale(.34)`,
+              offset: 0.42,
+            },
+            { opacity: 0, transform: `${target} rotate(0deg) scale(.06)` },
+          ],
+          {
+            delay: index * HERO_DURATIONS_MS.cardAbsorbStagger,
+            duration: HERO_DURATIONS_MS.cardAbsorb,
+            easing: "cubic-bezier(.7, 0, .95, .35)",
+            fill: "both",
           }
+        );
+        tracker.track(animation);
+        return animation.finished;
+      }
+    );
+
+    return Promise.all(finished);
+  }
+
+  function revealPage({ layer, revealEls, tracker }) {
+    document.body.classList.remove("hero-intro-active");
+    document.body.classList.add("hero-intro-complete");
+
+    const layerOut = layer.animate(
+      [{ opacity: 1 }, { opacity: 0 }],
+      {
+        duration: HERO_DURATIONS_MS.layerFade,
+        easing: "ease-out",
+        fill: "forwards",
+      }
+    );
+    tracker.track(layerOut);
+    layerOut.finished
+      .then(() => {
+        if (layer.parentNode) layer.remove();
+      })
+      .catch(() => {});
+
+    revealEls.forEach((el, index) => {
+      const animation = el.animate(
+        [
+          { opacity: 0, transform: "translateY(18px) scale(.985)" },
+          { opacity: 1, transform: "translateY(0) scale(1)" },
+        ],
+        {
+          delay:
+            HERO_DURATIONS_MS.pageRevealDelay +
+            index * HERO_DURATIONS_MS.pageRevealStagger,
+          duration: HERO_DURATIONS_MS.pageReveal,
+          easing: "cubic-bezier(.22, .8, .28, 1)",
+          fill: "both",
         }
+      );
+      tracker.track(animation);
+    });
 
-        left = Math.max(
-          4,
-          Math.min(shellRect.width - rect.width - 4, left)
-        );
-        top = Math.max(
-          4,
-          Math.min(shellRect.height - rect.height - 4, top)
-        );
+    return wait(HERO_DURATIONS_MS.postRevealBeat);
+  }
 
+  // ----------------------------------------------------------------
+  // 5. POS logo emission
+  // ----------------------------------------------------------------
+
+  function emitPosLogos({ phone, tracker }) {
+    const logoShell = document.getElementById("hero-pos-logos");
+    const logos = logoShell
+      ? Array.from(logoShell.querySelectorAll("[data-pos-logo]"))
+      : [];
+
+    if (!logoShell || !logos.length) return Promise.resolve();
+
+    document.body.classList.add("hero-pos-complete");
+
+    const placements = computePosLogoPlacements({ logoShell, phone, logos });
+
+    const finished = placements.map(
+      ({ logo, left, top, fromX, fromY, tilt, delayMs }) => {
         logo.style.left = `${left}px`;
         logo.style.top = `${top}px`;
-
-        const logoCenterX = left + rect.width / 2;
-        const logoCenterY = top + rect.height / 2;
-        const fromX = sourceX - logoCenterX;
-        const fromY = sourceY - logoCenterY;
-        const tilt = (Math.random() * 16 - 8).toFixed(2);
 
         const animation = logo.animate(
           [
@@ -343,261 +506,225 @@
             },
           ],
           {
-            delay: index * 200,
-            duration: 720,
+            delay: delayMs,
+            duration: HERO_DURATIONS_MS.posLogoEntrance,
             easing: "cubic-bezier(.16, 1, .3, 1)",
             fill: "both",
           }
         );
-
-        track(animation);
+        tracker.track(animation);
         return animation.finished;
-      });
+      }
+    );
 
-      return Promise.all(logoAnimations);
-    }
-
-    function revealPage() {
-      if (aborted) throw new Error("aborted");
-      // Header and hero content reveal only after the requests have been
-      // absorbed and the iPhone has started thinking.
-      document.body.classList.remove("hero-intro-active");
-      document.body.classList.add("hero-intro-complete");
-
-      const layerOut = layer.animate(
-        [{ opacity: 1 }, { opacity: 0 }],
-        {
-          duration: 200,
-          easing: "ease-out",
-          fill: "forwards",
-        }
-      );
-      track(layerOut);
-      layerOut.finished
-        .then(() => {
-          if (layer.parentNode) layer.remove();
-        })
-        .catch(() => {});
-
-      revealEls.forEach((el, index) => {
-        const anim = el.animate(
-          [
-            { opacity: 0, transform: "translateY(18px) scale(.985)" },
-            { opacity: 1, transform: "translateY(0) scale(1)" },
-          ],
-          {
-            delay: 120 + index * 110,
-            duration: 620,
-            easing: "cubic-bezier(.22, .8, .28, 1)",
-            fill: "both",
-          }
-        );
-        track(anim);
-      });
-
-      return wait(850);
-    }
-
-    function abort() {
-      if (aborted) return;
-      aborted = true;
-      liveAnimations.forEach((animation) => {
-        try {
-          animation.cancel();
-        } catch (_) {
-          // ignore
-        }
-      });
-      actionTicker.stop();
-      finish();
-    }
-
-    ["scroll", "wheel", "touchmove", "keydown"].forEach((evt) => {
-      window.addEventListener(evt, abort, { once: true, passive: true });
-    });
-
-    function abortGuard(err) {
-      if (err && err.message === "aborted") return;
-      console.error(err);
-      finish();
-    }
-
-    let cumulativeDelay = 0;
-    const entrancePromises = cards.map((card, index) => {
-      if (index > 0) cumulativeDelay += cardGaps[index - 1] || 50;
-      const { el, tx, ty, r } = card;
-      const base = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-
-      const animation = el.animate(
-        [
-          {
-            opacity: 0,
-            transform: `${base} rotate(${r - 8}deg) scale(.7)`,
-            filter: "blur(4px)",
-          },
-          {
-            opacity: 1,
-            transform: `${base} rotate(${r}deg) scale(1.08)`,
-            filter: "blur(0)",
-            offset: 0.7,
-          },
-          {
-            opacity: 1,
-            transform: `${base} rotate(${r}deg) scale(1)`,
-            filter: "blur(0)",
-          },
-        ],
-        {
-          delay: cumulativeDelay,
-          duration: 360,
-          easing: "cubic-bezier(.16, 1, .3, 1)",
-          fill: "both",
-        }
-      );
-      track(animation);
-      return animation.finished;
-    });
-
-    Promise.all(entrancePromises)
-      .then(() => {
-        if (aborted) throw new Error("aborted");
-        // iPhone slides down from behind the header into its resting position.
-        const phoneAnim = phone.animate(
-          [
-            {
-              opacity: 0.75,
-              transform: "translateX(-50%) translateY(-100%)",
-            },
-            {
-              opacity: 0.75,
-              transform: "translateX(-50%) translateY(0)",
-            },
-          ],
-          {
-            duration: 720,
-            easing: "cubic-bezier(.22, 1, .36, 1)",
-            fill: "both",
-          }
-        );
-        track(phoneAnim);
-        return phoneAnim.finished;
-      })
-      .then(
-        () =>
-          new Promise((resolve) => {
-            // Brief beat so the user registers "Jenna".
-            window.setTimeout(resolve, 500);
-          })
-      )
-      .then(() => {
-        if (aborted) throw new Error("aborted");
-        // Absorption: all cards fly into the visible center of the iPhone
-        // (the iPhone is mostly hidden behind the header, so we target the
-        // midpoint of the visible portion below the header).
-        const layerRect2 = layer.getBoundingClientRect();
-        const phoneRect = phone.getBoundingClientRect();
-        const phoneTopInLayer = phoneRect.top - layerRect2.top;
-        const phoneBottomInLayer = phoneRect.bottom - layerRect2.top;
-        const visibleTop = Math.max(0, phoneTopInLayer);
-        const targetX =
-          phoneRect.left - layerRect2.left + phoneRect.width / 2;
-        const targetY = (visibleTop + phoneBottomInLayer) / 2;
-
-        const absorptions = cards.map(({ el, tx, ty, r }, index) => {
-          const base = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-          const midX = tx + (targetX - tx) * 0.4;
-          const midY = ty + (targetY - ty) * 0.28;
-          const mid = `translate(${midX}px, ${midY}px) translate(-50%, -50%)`;
-          const target = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
-
-          const animation = el.animate(
-            [
-              {
-                opacity: 1,
-                transform: `${base} rotate(${r}deg) scale(1)`,
-              },
-              {
-                opacity: 0.78,
-                transform: `${mid} rotate(${r * 0.3}deg) scale(.34)`,
-                offset: 0.42,
-              },
-              {
-                opacity: 0,
-                transform: `${target} rotate(0deg) scale(.06)`,
-              },
-            ],
-            {
-              delay: index * 28,
-              duration: 700,
-              easing: "cubic-bezier(.7, 0, .95, .35)",
-              fill: "both",
-            }
-          );
-          track(animation);
-          return animation.finished;
-        });
-
-        return Promise.all(absorptions).then(() => {
-          actionTicker.start(0);
-          return wait(450);
-        });
-      })
-      .then(revealPage)
-      .then(() => {
-        if (aborted) throw new Error("aborted");
-        return emitPosLogos();
-      })
-      .catch(abortGuard);
+    return Promise.all(finished);
   }
 
-  runHeroIntro();
+  function computePosLogoPlacements({ logoShell, phone, logos }) {
+    const shellRect = logoShell.getBoundingClientRect();
+    const phoneRect = phone.getBoundingClientRect();
 
-  const faqs = document.querySelectorAll("#faq details.faq");
-  faqs.forEach((d) => {
-    d.addEventListener("toggle", () => {
-      if (d.open) {
+    const sourceX = phoneRect.left - shellRect.left + phoneRect.width / 2;
+    const sourceY = phoneRect.top - shellRect.top + phoneRect.height * 0.72;
+    const phoneLeftInShell = phoneRect.left - shellRect.left;
+    const phoneRightInShell = phoneLeftInShell + phoneRect.width;
+    const phoneBottomInShell = Math.max(0, phoneRect.bottom - shellRect.top);
+
+    const sampleRect = logos[0].getBoundingClientRect();
+    const margin = HERO_LAYOUT.posLogoSideMargin;
+    const leftZoneWidth = phoneLeftInShell - margin;
+    const rightZoneWidth = shellRect.width - (phoneRightInShell + margin);
+    const sidesFitLogo =
+      leftZoneWidth > sampleRect.width + 8 &&
+      rightZoneWidth > sampleRect.width + 8;
+
+    const spots = sidesFitLogo
+      ? pickFlankingSpots({ shellRect, sampleRect })
+      : pickRowSpots({
+          shellRect,
+          sampleRect,
+          yBase: phoneBottomInShell + 12,
+        });
+
+    return logos.map((logo, index) => {
+      const rect = logo.getBoundingClientRect();
+      let { left, top } = spots[index];
+
+      ({ left, top } = nudgeOffPhone({
+        left,
+        top,
+        rect,
+        phoneLeftInShell,
+        phoneRightInShell,
+        phoneBottomInShell,
+        leftZoneWidth,
+        rightZoneWidth,
+        shellWidth: shellRect.width,
+        margin,
+      }));
+
+      left = clamp(
+        left,
+        HERO_LAYOUT.posLogoEdgeClamp,
+        shellRect.width - rect.width - HERO_LAYOUT.posLogoEdgeClamp
+      );
+      top = clamp(
+        top,
+        HERO_LAYOUT.posLogoEdgeClamp,
+        shellRect.height - rect.height - HERO_LAYOUT.posLogoEdgeClamp
+      );
+
+      const logoCenterX = left + rect.width / 2;
+      const logoCenterY = top + rect.height / 2;
+      const fromX = sourceX - logoCenterX;
+      const fromY = sourceY - logoCenterY;
+      const tilt = Number((Math.random() * 16 - 8).toFixed(2));
+
+      return {
+        logo,
+        left,
+        top,
+        fromX,
+        fromY,
+        tilt,
+        delayMs: index * HERO_DURATIONS_MS.posLogoStagger,
+      };
+    });
+  }
+
+  function clamp(value, min, max) {
+    if (max < min) return min;
+    return Math.max(min, Math.min(max, value));
+  }
+
+  // Layouts that flank the iPhone column (kept above the headline). Each
+  // combo is 3 anchor centers expressed as fractions of the shell box.
+  function pickFlankingSpots({ shellRect, sampleRect }) {
+    const COMBOS = [
+      [
+        { xPct: 0.08, yPct: 0.18 },
+        { xPct: 0.18, yPct: 0.74 },
+        { xPct: 0.92, yPct: 0.30 },
+      ],
+      [
+        { xPct: 0.10, yPct: 0.42 },
+        { xPct: 0.86, yPct: 0.18 },
+        { xPct: 0.94, yPct: 0.72 },
+      ],
+      [
+        { xPct: 0.10, yPct: 0.22 },
+        { xPct: 0.92, yPct: 0.20 },
+        { xPct: 0.20, yPct: 0.78 },
+      ],
+      [
+        { xPct: 0.18, yPct: 0.40 },
+        { xPct: 0.84, yPct: 0.66 },
+        { xPct: 0.92, yPct: 0.16 },
+      ],
+    ];
+    const combo = COMBOS[Math.floor(Math.random() * COMBOS.length)];
+    return shuffle(combo).map((anchor) => ({
+      left: anchor.xPct * shellRect.width - sampleRect.width / 2,
+      top: anchor.yPct * shellRect.height - sampleRect.height / 2,
+    }));
+  }
+
+  // Narrow viewports: drop logos into a row just under the phone.
+  function pickRowSpots({ shellRect, sampleRect, yBase }) {
+    const COMBOS = [
+      [
+        { left: shellRect.width * 0.18 - sampleRect.width / 2, top: yBase + 14 },
+        { left: shellRect.width * 0.50 - sampleRect.width / 2, top: yBase },
+        { left: shellRect.width * 0.82 - sampleRect.width / 2, top: yBase + 8 },
+      ],
+      [
+        { left: shellRect.width * 0.16 - sampleRect.width / 2, top: yBase + 6 },
+        { left: shellRect.width * 0.48 - sampleRect.width / 2, top: yBase + 18 },
+        { left: shellRect.width * 0.80 - sampleRect.width / 2, top: yBase + 2 },
+      ],
+    ];
+    return shuffle(COMBOS[Math.floor(Math.random() * COMBOS.length)]);
+  }
+
+  function nudgeOffPhone({
+    left,
+    top,
+    rect,
+    phoneLeftInShell,
+    phoneRightInShell,
+    phoneBottomInShell,
+    leftZoneWidth,
+    rightZoneWidth,
+    shellWidth,
+    margin,
+  }) {
+    const overlapsX =
+      left + rect.width > phoneLeftInShell - margin &&
+      left < phoneRightInShell + margin;
+    const overlapsY =
+      top + rect.height > -margin && top < phoneBottomInShell + margin;
+
+    if (!overlapsX || !overlapsY) return { left, top };
+
+    const center = left + rect.width / 2;
+    if (center < shellWidth / 2 && leftZoneWidth > rect.width) {
+      return { left: phoneLeftInShell - margin - rect.width, top };
+    }
+    if (center >= shellWidth / 2 && rightZoneWidth > rect.width) {
+      return { left: phoneRightInShell + margin, top };
+    }
+    return { left, top: phoneBottomInShell + margin };
+  }
+
+  // ----------------------------------------------------------------
+  // 6. FAQ accordion (single-open)
+  // ----------------------------------------------------------------
+
+  function setupFaqAccordion() {
+    const faqs = document.querySelectorAll("#faq details.faq");
+    faqs.forEach((current) => {
+      current.addEventListener("toggle", () => {
+        if (!current.open) return;
         faqs.forEach((other) => {
-          if (other !== d) other.open = false;
+          if (other !== current) other.open = false;
         });
-      }
-    });
-  });
-
-  const header = document.getElementById("site-header");
-  let last = 0;
-  window.addEventListener(
-    "scroll",
-    () => {
-      const y = window.scrollY;
-      header.classList.toggle("shadow-sm", y > 8);
-      last = y;
-    },
-    { passive: true }
-  );
-
-  const voiceBtn = document.getElementById("voice-chat");
-  if (voiceBtn) {
-    voiceBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      voiceBtn.classList.toggle("bg-emerald-600");
-      const label = voiceBtn.querySelector("span:nth-child(2)");
-      if (label) {
-        label.textContent =
-          label.textContent.trim() === "Voice chat"
-            ? "Listening…"
-            : "Voice chat";
-      }
+      });
     });
   }
 
-  // Feature carousel: auto-cycle, mouse-tracking gradient, click-to-advance
-  const fcCard = document.getElementById("fc-card");
-  if (fcCard) {
-    const TOTAL = 6;
-    const INTERVAL_MS = 3000;
-    const pills = fcCard.querySelectorAll(".fc-pill");
-    const texts = fcCard.querySelectorAll(".fc-text");
-    const visuals = fcCard.querySelectorAll(".fc-visual");
+  // ----------------------------------------------------------------
+  // 7. Header shadow on scroll
+  // ----------------------------------------------------------------
+
+  function setupHeaderShadow() {
+    const header = document.getElementById("site-header");
+    if (!header) return;
+    window.addEventListener(
+      "scroll",
+      () => {
+        header.classList.toggle(
+          "shadow-sm",
+          window.scrollY > HEADER_SHADOW_AT_PX
+        );
+      },
+      { passive: true }
+    );
+  }
+
+  // ----------------------------------------------------------------
+  // 8. Feature carousel
+  // ----------------------------------------------------------------
+
+  function setupFeatureCarousel() {
+    const card = document.getElementById("fc-card");
+    if (!card) return;
+
+    const pills = card.querySelectorAll(".fc-pill");
+    const texts = card.querySelectorAll(".fc-text");
+    const visuals = card.querySelectorAll(".fc-visual");
+    const totalSteps = pills.length;
+    if (totalSteps === 0) return;
+
     let step = 0;
     let timer = null;
 
@@ -610,28 +737,27 @@
     }
 
     function advance() {
-      step = (step + 1) % TOTAL;
+      step = (step + 1) % totalSteps;
       render();
     }
 
     function setStep(i) {
-      step = ((i % TOTAL) + TOTAL) % TOTAL;
+      step = ((i % totalSteps) + totalSteps) % totalSteps;
       render();
     }
 
     function startTimer() {
       stopTimer();
-      timer = setInterval(advance, INTERVAL_MS);
+      timer = window.setInterval(advance, CAROUSEL.autoAdvanceMs);
     }
     function stopTimer() {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-      }
+      if (!timer) return;
+      window.clearInterval(timer);
+      timer = null;
     }
 
-    pills.forEach((p, i) => {
-      p.addEventListener("click", (e) => {
+    pills.forEach((pill, i) => {
+      pill.addEventListener("click", (e) => {
         e.stopPropagation();
         setStep(i);
         startTimer();
@@ -646,47 +772,87 @@
       });
     }
 
-    fcCard.addEventListener("mousemove", (e) => {
-      const rect = fcCard.getBoundingClientRect();
-      fcCard.style.setProperty("--x", `${e.clientX - rect.left}px`);
-      fcCard.style.setProperty("--y", `${e.clientY - rect.top}px`);
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--y", `${e.clientY - rect.top}px`);
     });
 
-    if (prefersReducedMotion) {
-      render();
-    } else {
-      render();
-      startTimer();
-      // pause when tab is hidden
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) stopTimer();
-        else startTimer();
-      });
-    }
+    render();
+    if (PREFERS_REDUCED_MOTION) return;
+
+    startTimer();
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopTimer();
+      else startTimer();
+    });
   }
 
-  const reveal = document.querySelectorAll(
-    "section:not(#hero) h1, section:not(#hero) h2, section:not(#hero) h3, section:not(#hero) .rounded-3xl"
-  );
-  if ("IntersectionObserver" in window) {
+  // ----------------------------------------------------------------
+  // 9. Section reveal on intersection
+  // ----------------------------------------------------------------
+
+  function setupSectionReveal() {
+    if (!("IntersectionObserver" in window)) return;
+
+    const reveal = document.querySelectorAll(
+      "section:not(#hero) h1, section:not(#hero) h2, section:not(#hero) h3, section:not(#hero) .rounded-3xl"
+    );
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.transition =
-              "opacity 600ms ease, transform 600ms ease";
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-            io.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+          entry.target.style.transition =
+            "opacity 600ms ease, transform 600ms ease";
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          io.unobserve(entry.target);
         });
       },
-      { threshold: 0.08 }
+      { threshold: SECTION_REVEAL_THRESHOLD }
     );
+
     reveal.forEach((el) => {
       el.style.opacity = "0";
       el.style.transform = "translateY(12px)";
       io.observe(el);
     });
   }
+
+  // ----------------------------------------------------------------
+  // 10. Book demo form
+  // ----------------------------------------------------------------
+
+  function setupBookDemoForm() {
+    const form = document.querySelector(".signup-card form");
+    if (!form) return;
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const button = form.querySelector(".form-submit");
+      if (!button) return;
+
+      const originalHtml = button.innerHTML;
+      button.disabled = true;
+      button.textContent = "Thanks — we'll be in touch.";
+
+      window.setTimeout(() => {
+        button.innerHTML = originalHtml;
+        button.disabled = false;
+        form.reset();
+      }, 4200);
+    });
+  }
+
+  // ----------------------------------------------------------------
+  // 11. Init
+  // ----------------------------------------------------------------
+
+  runHeroIntro();
+  setupFaqAccordion();
+  setupHeaderShadow();
+  setupFeatureCarousel();
+  setupSectionReveal();
+  setupBookDemoForm();
 })();

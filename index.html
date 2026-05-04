@@ -3,11 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The conversational agents platform — ElevenLabs</title>
+    <title>Jenna AI — The AI Hostess for Restaurants</title>
     <meta
       name="description"
-      content="Build, deploy, and scale conversational AI voice agents with the most realistic voices. Workflows, multilingual support, and developer tools in one platform."
+      content="Jenna answers every call, takes orders, books reservations, and pushes them straight to your POS — Toast, Square, or Clover."
     />
+    <meta name="theme-color" content="#0b0b0b" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jenna AI — The AI Hostess for Restaurants" />
+    <meta
+      property="og:description"
+      content="Jenna answers every call, takes orders, books reservations, and pushes them straight to your POS."
+    />
+    <meta property="og:image" content="assets/logos/jenna-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="assets/logos/jenna-logo.png" />
+    <link rel="apple-touch-icon" href="assets/logos/jenna-logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -150,7 +161,13 @@
             See Jenna in action — we'll reach out within 24 hours.
           </p>
 
-          <form onsubmit="event.preventDefault();" class="my-8">
+          <form
+            action="#"
+            method="post"
+            class="my-8"
+            novalidate
+            data-jenna-demo-form
+          >
             <div class="mb-4 flex flex-col gap-4 sm:flex-row">
               <label class="form-field">
                 <span class="form-label">Name</span>
@@ -250,7 +267,15 @@
               </div>
               <div class="how-card__body">
                 <div class="how-call">
-                  <img class="how-call__avatar" src="https://i.pravatar.cc/120?img=14" alt="" width="56" height="56" loading="lazy" />
+                  <img
+                    class="how-call__avatar"
+                    src="https://i.pravatar.cc/120?img=14"
+                    alt=""
+                    width="56"
+                    height="56"
+                    loading="lazy"
+                    onerror="this.removeAttribute('src');this.style.background='#eeeef1';"
+                  />
                   <div class="how-call__meta">
                     <div class="how-call__name">Maya R.</div>
                     <div class="how-call__sub">Mobile · +1 (415) 555 · 0188</div>
@@ -504,24 +529,28 @@
       <h2 class="text-[32px] font-semibold tracking-tight text-center">Frequently asked questions</h2>
       <div id="faq" class="mt-10 divide-y divide-line border-y border-line">
         <details class="faq group">
-          <summary class="faq-summary"><span>What is the conversational agents platform?</span><span class="faq-icon"></span></summary>
-          <div class="faq-body">A managed runtime for voice agents — combining low-latency speech, language understanding, and tool use so you can ship production conversations fast.</div>
+          <summary class="faq-summary"><span>Do I need to change my phone number?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">No. Jenna sits on top of your existing restaurant line. Customers call the same number — Jenna picks up in one ring, 24/7.</div>
         </details>
         <details class="faq group">
-          <summary class="faq-summary"><span>How do I bring my own data?</span><span class="faq-icon"></span></summary>
-          <div class="faq-body">Upload PDFs, connect URLs, or stream from your databases and CRMs. The agent answers grounded in the sources you authorize.</div>
+          <summary class="faq-summary"><span>Which POS systems does Jenna work with?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">Toast, Square, Clover, and TouchBistro out of the box. Orders flow into the same tickets your kitchen already uses — no extra hardware, no parallel system to reconcile.</div>
         </details>
         <details class="faq group">
-          <summary class="faq-summary"><span>Which telephony providers are supported?</span><span class="faq-icon"></span></summary>
-          <div class="faq-body">Native integrations with Twilio, Telnyx, SIP, and WebRTC. We also offer a browser SDK for in-app voice.</div>
+          <summary class="faq-summary"><span>How does Jenna learn my menu?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">Jenna pulls directly from your live POS menu and modifiers. Update a price or 86 a dish, and Jenna knows on the next call — no manual training, no out-of-date specials.</div>
         </details>
         <details class="faq group">
-          <summary class="faq-summary"><span>Is there a free tier?</span><span class="faq-icon"></span></summary>
-          <div class="faq-body">Yes. You can build, test, and ship a small agent on the free plan. Upgrade when your traffic grows.</div>
+          <summary class="faq-summary"><span>Can Jenna take reservations?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">Yes. Jenna connects to OpenTable and Resy to see real-time availability, and confirms the booking with the guest before you ever pick up the phone.</div>
         </details>
         <details class="faq group">
-          <summary class="faq-summary"><span>How do you handle security?</span><span class="faq-icon"></span></summary>
-          <div class="faq-body">SOC 2 Type II, GDPR, HIPAA-aligned controls, regional data residency, and SSO/RBAC for enterprise teams.</div>
+          <summary class="faq-summary"><span>What languages does Jenna speak?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">English and Spanish are turned on by default. We also support 30+ other languages, including French, Mandarin, and Portuguese — Jenna detects and switches mid-call.</div>
+        </details>
+        <details class="faq group">
+          <summary class="faq-summary"><span>How long does it take to go live?</span><span class="faq-icon"></span></summary>
+          <div class="faq-body">Most restaurants are answering calls with Jenna within 48 hours of signing up. We handle the POS connection, port forwarding, and a short calibration call to match your tone of voice.</div>
         </details>
       </div>
     </section>

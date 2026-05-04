@@ -1,4 +1,4 @@
-/* ===== ElevenLabs agents page recreation — custom styles ===== */
+/* ===== Jenna AI marketing site — custom styles ===== */
 
 html {
   scroll-behavior: smooth;
@@ -475,72 +475,6 @@ body.hero-intro-complete #site-header {
   }
 }
 
-/* ----- Chips (used in multilingual section) ----- */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border-radius: 9999px;
-  background: #fff;
-  border: 1px solid var(--tw-border-line, #d9d9df);
-  font-size: 12px;
-  font-weight: 500;
-  color: #1f1f23;
-}
-
-/* ----- Logo wall faux logos ----- */
-.logo {
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: -0.02em;
-  text-align: center;
-  opacity: 0.55;
-  transition: opacity 200ms ease;
-}
-.logo:hover {
-  opacity: 0.95;
-}
-
-/* ----- Audio waveform stylings ----- */
-.wave {
-  --bar: 3px;
-  height: 32px;
-  background-image: repeating-linear-gradient(
-    to right,
-    #d9d9df 0,
-    #d9d9df var(--bar),
-    transparent var(--bar),
-    transparent calc(var(--bar) + 4px)
-  );
-  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 32' preserveAspectRatio='none'><path d='M0 16 L20 8 L40 22 L60 6 L80 18 L100 12 L120 24 L140 4 L160 18 L180 10 L200 22 L220 6 L240 18 L260 12 L280 24 L300 8 L320 18 L340 4 L360 22 L380 10 L400 18 L420 6 L440 24 L460 12 L480 18 L500 8 L520 22 L540 6 L560 18 L580 12 L600 22 L600 32 L0 32 Z' fill='black'/></svg>");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 32' preserveAspectRatio='none'><path d='M0 16 L20 8 L40 22 L60 6 L80 18 L100 12 L120 24 L140 4 L160 18 L180 10 L200 22 L220 6 L240 18 L260 12 L280 24 L300 8 L320 18 L340 4 L360 22 L380 10 L400 18 L420 6 L440 24 L460 12 L480 18 L500 8 L520 22 L540 6 L560 18 L580 12 L600 22 L600 32 L0 32 Z' fill='black'/></svg>");
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-}
-
-.play-btn {
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background: #0b0b0b;
-  color: #fff;
-  flex: none;
-  transition: transform 150ms ease;
-}
-.play-btn:hover {
-  transform: scale(1.05);
-}
-.play-btn svg {
-  width: 12px;
-  height: 12px;
-}
-
 /* ----- FAQ accordion ----- */
 .faq {
   padding: 0;
@@ -595,30 +529,6 @@ body.hero-intro-complete #site-header {
   line-height: 1.6;
   color: #6b6b73;
   max-width: 60ch;
-}
-
-/* ----- Subtle hero pulse ----- */
-@keyframes ping-soft {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  80%,
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-/* ----- Voice chat widget pulse ----- */
-#voice-chat::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  animation: ping-soft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-  pointer-events: none;
 }
 
 /* ===================================================== */
@@ -716,131 +626,6 @@ body.hero-intro-complete #site-header {
   border-top: none;
 }
 
-.iphone-chat {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0 4px;
-}
-
-.msg {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-.msg-agent {
-  justify-content: flex-start;
-}
-.msg-user {
-  justify-content: flex-end;
-  margin-top: 2px;
-}
-
-.avatar-orb {
-  flex: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, #ffffff 0%, rgba(255, 255, 255, 0) 30%),
-    radial-gradient(circle at 72% 78%, #1e3a64 0%, rgba(30, 58, 100, 0) 55%),
-    conic-gradient(
-      from 200deg at 50% 50%,
-      #aacaee,
-      #6e9bcf,
-      #4d77b3,
-      #92b8e0,
-      #c0d6ee,
-      #aacaee
-    );
-  box-shadow:
-    inset 0 -1px 3px rgba(20, 40, 80, 0.3),
-    inset 0 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-.bubble {
-  font-size: 13.5px;
-  line-height: 1.35;
-  padding: 9px 14px;
-  border-radius: 18px;
-  max-width: 78%;
-  letter-spacing: -0.005em;
-}
-
-.bubble-agent {
-  position: relative;
-  background: #0b0b0b;
-  color: #fff;
-  border-top-left-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
-}
-
-.bubble-user {
-  background: rgba(255, 255, 255, 0.55);
-  color: #4a4a4a;
-  border-top-right-radius: 6px;
-  max-width: 78%;
-}
-
-/* status pills (order placed / sent to toast) */
-.msg-status {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
-}
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  background: rgba(255, 255, 255, 0.55);
-  color: #4a4a4a;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-.status-pill svg {
-  width: 12px;
-  height: 12px;
-  flex: none;
-}
-.status-pill-success {
-  background: rgba(220, 245, 230, 0.85);
-  color: #15803d;
-  border-color: rgba(187, 232, 200, 0.7);
-}
-.status-pill-muted {
-  background: rgba(255, 255, 255, 0.4);
-  color: #6e6e6e;
-  font-weight: 500;
-}
-
-.iphone-call-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: #ffffff;
-  color: #1f1f23;
-  border: none;
-  border-radius: 999px;
-  padding: 14px 18px;
-  font: 600 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  box-shadow:
-    0 1px 2px rgba(20, 30, 70, 0.04),
-    0 4px 12px rgba(20, 30, 70, 0.05);
-  transition: background-color 150ms ease;
-}
-.iphone-call-btn:hover {
-  background: #eeeef1;
-}
-
 @media (max-width: 640px) {
   .iphone-lift {
     width: 76vw;
@@ -863,10 +648,6 @@ body.hero-intro-complete #site-header {
     padding: 18px 12px 12px;
     gap: 10px;
   }
-  .iphone-call-btn {
-    padding: 12px 16px;
-    font-size: 13px;
-  }
 }
 
 @media (max-width: 380px) {
@@ -887,60 +668,6 @@ body.hero-intro-complete #site-header {
   }
   .iphone-screen {
     min-height: 270px;
-  }
-  .bubble {
-    font-size: 12.5px;
-    padding: 8px 12px;
-  }
-}
-
-/* ===================================================== */
-/* Shine border (Magic UI inspired)                       */
-/* ===================================================== */
-.shine-card {
-  position: relative;
-  isolation: isolate;
-}
-.shine-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: radial-gradient(
-    transparent,
-    transparent,
-    #5b87bf,
-    #5b8def,
-    #7dc4e8,
-    transparent,
-    transparent
-  );
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  animation: shine-pulse 14s linear infinite;
-  opacity: 0.67;
-  pointer-events: none;
-}
-.shine-card > * {
-  position: relative;
-  z-index: 1;
-}
-@keyframes shine-pulse {
-  0%,
-  100% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
   }
 }
 
@@ -988,7 +715,7 @@ body.hero-intro-complete #site-header {
   z-index: 1;
 }
 .fc-shell::after {
-  /* subtle inner glow on hover from the gradient bleeding in */
+  /* hairline inner border to soften the shell edge against the dark gradient */
   pointer-events: none;
   content: "";
   position: absolute;
@@ -1391,7 +1118,6 @@ body.hero-intro-complete #site-header {
   }
 }
 
-/* ----- Reduce motion preference ----- */
 /* ===========================================================
    How Jenna works — connected 3-scene flow
    =========================================================== */
@@ -1491,7 +1217,7 @@ body.hero-intro-complete #site-header {
   border-bottom: 1px solid rgba(15, 15, 25, 0.06);
   background: linear-gradient(180deg, rgba(247, 247, 249, 0.7), rgba(247, 247, 249, 0));
   font-size: 11.5px;
-  color: var(--muted, #6b6b73);
+  color: #6b6b73;
 }
 .how-card__chrome-label {
   font-weight: 600;
@@ -1784,7 +1510,7 @@ body.hero-intro-complete #site-header {
 .how-step__desc {
   font-size: 13.5px;
   line-height: 1.5;
-  color: var(--muted, #6b6b73);
+  color: #6b6b73;
   margin: 0;
 }
 

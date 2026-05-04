@@ -17,12 +17,11 @@ When asking an agent to use these:
 - **Aspect ratio:** ~2.8:1 (wide)
 - **Suggested use:**
   - Header logo (currently used in `index.html` `<header>` — replaces the icon + "Jenna AI" text)
-  - iPhone hero screen (currently used in `.iphone-jenna`)
   - Anywhere a horizontal wordmark is appropriate
 - **Alt text:** "Jenna AI" (or just "Jenna" in decorative contexts)
 - **Notes:**
   - Generated from `Jenna_AI__6_-...png` by chroma-keying the solid black background to transparent.
-  - Brand blue is approximately `#1F00FF` (pure blue). Tailwind `accent` is currently `#2563eb` — consider matching.
+  - Brand blue is approximately `#1F00FF` (pure blue). Tailwind `accent` is set to `#1c00ff` in `index.html` — keep these in sync if either changes.
 
 ### jenna-logo.png  ← square icon variant
 - **Path:** `assets/logos/jenna-logo.png`
