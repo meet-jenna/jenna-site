@@ -273,13 +273,30 @@ body.hero-intro-complete #site-header {
   pointer-events: none;
 }
 
-.hero-intro-card {
+/* Magic UI AnimatedList-style stack: cards prepend at the top, the new
+   card pops in with a springy scale, and existing cards slide down via
+   a FLIP transform. Anchored just below the iPhone. */
+.hero-intro-stack {
   position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transform-origin: center;
-  will-change: transform, opacity, filter;
+  left: 50%;
+  /* `top` is set inline by JS based on the iPhone's actual bottom edge. */
+  transform: translateX(-50%);
+  width: min(340px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.hero-intro-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  opacity: 0; /* fill: both on the WAAPI animation takes over immediately */
+  transform-origin: center top; /* matches AnimatedList's `originY: 0` */
+  will-change: transform, opacity;
 }
 
 .hero-intro-card .caller-card {
@@ -388,23 +405,130 @@ body.hero-intro-complete #site-header {
 /* iPhone internal-action panel — only content shown on the phone screen */
 .iphone-agent-work {
   position: absolute;
-  /* Anchor inside the visible portion of the iPhone (bottom 65% below the header). */
-  inset: 35% 0 0 0;
+  /* Anchor inside the visible portion of the iPhone (header hides the upper third). */
+  inset: 55% 0 0 0;
   z-index: 3;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 18px;
-  text-align: center;
+  gap: 12px;
+  padding: 0 14px;
+  text-align: left;
   pointer-events: none;
+}
+
+.jenna-orb {
+  position: relative;
+  width: 48px;
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 999px;
+  isolation: isolate;
+  transform: translateZ(0);
+  filter: drop-shadow(0 6px 12px rgba(103, 126, 218, 0.28));
+  animation: jenna-orb-breathe 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.jenna-orb__core,
+.jenna-orb__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.jenna-orb__core {
+  z-index: 2;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #cfdfff 0%, #6c7cff 60%, #2d3aa8 100%);
+  box-shadow:
+    inset 5px 6px 10px rgba(255, 255, 255, 0.45),
+    inset -6px -7px 12px rgba(20, 28, 100, 0.38),
+    inset 0 0 8px rgba(255, 255, 255, 0.25);
+}
+
+.jenna-orb__swirl {
+  position: absolute;
+  inset: -18%;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, filter;
+}
+
+.jenna-orb__swirl--a {
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(255, 178, 235, 0.95) 0%,
+      rgba(255, 255, 255, 0) 22%,
+      rgba(132, 196, 255, 0.92) 48%,
+      rgba(255, 255, 255, 0) 72%,
+      rgba(255, 178, 235, 0.95) 100%
+    );
+  filter: blur(4px) saturate(1.15);
+  animation: jenna-orb-spin-a 9s linear infinite;
+}
+
+.jenna-orb__swirl--b {
+  background:
+    conic-gradient(
+      from 180deg,
+      rgba(112, 92, 255, 0) 0%,
+      rgba(255, 124, 222, 0.85) 18%,
+      rgba(255, 255, 255, 0) 42%,
+      rgba(64, 188, 255, 0.9) 64%,
+      rgba(255, 255, 255, 0) 88%,
+      rgba(112, 92, 255, 0) 100%
+    );
+  filter: blur(6px) saturate(1.2);
+  opacity: 0.92;
+  animation: jenna-orb-spin-b 13s linear infinite;
+}
+
+.jenna-orb__swirl--c {
+  inset: -8%;
+  background:
+    radial-gradient(closest-side at 32% 36%, rgba(255, 220, 255, 0.95), transparent 58%),
+    radial-gradient(closest-side at 70% 30%, rgba(255, 152, 230, 0.78), transparent 60%),
+    radial-gradient(closest-side at 70% 72%, rgba(82, 184, 255, 0.85), transparent 60%),
+    radial-gradient(closest-side at 30% 70%, rgba(168, 232, 255, 0.7), transparent 60%);
+  filter: blur(4px);
+  animation: jenna-orb-orbit 11s ease-in-out infinite;
+}
+
+.jenna-orb__highlight {
+  position: absolute;
+  width: 50%;
+  height: 32%;
+  left: 14%;
+  top: 14%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.9), transparent 70%);
+  filter: blur(3px);
+  opacity: 0.9;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: jenna-orb-highlight 6.5s ease-in-out infinite;
+}
+
+.jenna-orb__glow {
+  z-index: 1;
+  inset: -28%;
+  background:
+    radial-gradient(circle, rgba(124, 119, 255, 0.38), transparent 64%),
+    radial-gradient(circle at 35% 30%, rgba(249, 145, 255, 0.26), transparent 58%);
+  filter: blur(10px);
+  opacity: 0.9;
+  animation: jenna-orb-glow 4.2s ease-in-out infinite;
 }
 
 .iphone-shimmer-wrap {
   position: relative;
-  max-width: calc(100% - 8px);
+  flex: 0 1 auto;
+  min-width: 0;
   overflow: hidden;
-  padding: 8px 6px 10px;
+  padding: 2px 2px 4px;
 }
 
 .iphone-shimmer-text {
@@ -422,10 +546,10 @@ body.hero-intro-complete #site-header {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-size: clamp(17px, 5.5vw, 24px);
-  font-weight: 750;
-  letter-spacing: -0.04em;
-  line-height: 1.16;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   white-space: nowrap;
   animation:
     iphone-shimmer 2.5s linear infinite,
@@ -467,7 +591,83 @@ body.hero-intro-complete #site-header {
   }
 }
 
+@keyframes jenna-orb-breathe {
+  0%,
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+  50% {
+    transform: scale(1.04) translateZ(0);
+  }
+}
+
+@keyframes jenna-orb-spin-a {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jenna-orb-spin-b {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes jenna-orb-orbit {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0) scale(1);
+    filter: blur(8px) hue-rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg) translate3d(2%, -1%, 0) scale(1.04);
+    filter: blur(9px) hue-rotate(-12deg);
+  }
+  50% {
+    transform: rotate(180deg) translate3d(0, 1%, 0) scale(0.98);
+    filter: blur(10px) hue-rotate(8deg);
+  }
+  75% {
+    transform: rotate(270deg) translate3d(-2%, 0, 0) scale(1.03);
+    filter: blur(9px) hue-rotate(-6deg);
+  }
+  100% {
+    transform: rotate(360deg) translate3d(0, 0, 0) scale(1);
+    filter: blur(8px) hue-rotate(0deg);
+  }
+}
+
+@keyframes jenna-orb-highlight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.78;
+  }
+  50% {
+    transform: translate3d(8%, 4%, 0);
+    opacity: 0.95;
+  }
+}
+
+@keyframes jenna-orb-glow {
+  0%,
+  100% {
+    opacity: 0.78;
+    transform: scale(0.96) rotate(0deg);
+    filter: blur(20px) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08) rotate(20deg);
+    filter: blur(22px) hue-rotate(18deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .jenna-orb,
+  .jenna-orb__core,
+  .jenna-orb__glow,
+  .jenna-orb__swirl,
+  .jenna-orb__highlight,
   .iphone-shimmer-text,
   .iphone-shimmer-text.is-changing {
     animation: none;
@@ -537,7 +737,7 @@ body.hero-intro-complete #site-header {
 
 .iphone-lift {
   position: absolute;
-  top: -147px; /* hide top ~35% behind/above the header (65% visible) */
+  top: -98px; /* hide top ~35% behind/above the header (65% visible) */
   left: 50%;
   transform: translateX(-50%);
   width: min(340px, 76vw);
@@ -546,14 +746,14 @@ body.hero-intro-complete #site-header {
   /* drop-shadow lives here (no mask) so it isn't clipped by mask-clip */
   filter:
     drop-shadow(0 8px 12px rgba(15, 23, 42, 0.14))
-    drop-shadow(0 24px 44px rgba(15, 23, 42, 0.18))
-    drop-shadow(0 60px 110px rgba(15, 23, 42, 0.20));
+    drop-shadow(0 20px 36px rgba(15, 23, 42, 0.18))
+    drop-shadow(0 50px 90px rgba(15, 23, 42, 0.20));
 }
 
 .iphone-stick {
   position: relative;
   width: 100%;
-  border-radius: 0 0 28px 28px;
+  border-radius: 0 0 32px 32px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(
     to bottom,
@@ -575,7 +775,7 @@ body.hero-intro-complete #site-header {
 
 .iphone-edge-blur {
   position: absolute;
-  top: 126px;
+  top: 84px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -608,10 +808,10 @@ body.hero-intro-complete #site-header {
 
 .iphone-screen {
   position: relative;
-  border-radius: 0 0 28px 28px;
+  border-radius: 0 0 32px 32px;
   overflow: hidden;
-  min-height: 420px;
-  padding: 22px 14px 14px;
+  min-height: 280px;
+  padding: 18px 14px 14px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -622,15 +822,13 @@ body.hero-intro-complete #site-header {
     #f5f5f7 50%,
     #efeff2 100%
   );
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-top: none;
 }
 
 @media (max-width: 640px) {
   .iphone-lift {
     width: 76vw;
     max-width: 320px;
-    top: -105px;
+    top: -78px;
   }
   .hero-pos-logos {
     inset: 50px 0 auto 0;
@@ -644,16 +842,26 @@ body.hero-intro-complete #site-header {
     border-radius: 18px;
   }
   .iphone-screen {
-    min-height: 300px;
-    padding: 18px 12px 12px;
+    min-height: 220px;
+    padding: 16px 12px 12px;
     gap: 10px;
+  }
+  .iphone-agent-work {
+    gap: 10px;
+    padding: 0 12px;
+  }
+  .jenna-orb {
+    width: 40px;
+  }
+  .iphone-shimmer-text {
+    font-size: 22px;
   }
 }
 
 @media (max-width: 380px) {
   .iphone-lift {
     width: 80vw;
-    top: -95px;
+    top: -68px;
   }
   .hero-pos-logos {
     inset: 40px 0 auto 0;
@@ -667,7 +875,17 @@ body.hero-intro-complete #site-header {
     border-radius: 16px;
   }
   .iphone-screen {
-    min-height: 270px;
+    min-height: 200px;
+  }
+  .iphone-agent-work {
+    gap: 8px;
+    padding: 0 10px;
+  }
+  .jenna-orb {
+    width: 32px;
+  }
+  .iphone-shimmer-text {
+    font-size: 18px;
   }
 }
 
@@ -1123,15 +1341,11 @@ body.hero-intro-complete #site-header {
    =========================================================== */
 .how-section {
   isolation: isolate;
+  background-color: #eeeef1; /* soft */
+  border-radius: 24px;
 }
 .how-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(60% 60% at 12% 25%, rgba(207, 224, 245, 0.45), transparent 60%),
-    radial-gradient(55% 55% at 88% 80%, rgba(232, 212, 243, 0.45), transparent 60%);
-  pointer-events: none;
+  display: none;
 }
 
 .how-stage {

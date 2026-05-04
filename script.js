@@ -4,7 +4,7 @@
 //   1. Configuration constants
 //   2. Pure utilities (shuffle, wait, animation tracker)
 //   3. iPhone action ticker (the "Pulling hours…" shimmer text)
-//   4. Hero intro animation (cards rain in, get absorbed, page reveals)
+//   4. Hero intro animation (AnimatedList stack, phone slide, absorb, reveal)
 //   5. POS logo emission (Toast / Square / Clover float out of the phone)
 //   6. FAQ accordion (single-open)
 //   7. Header shadow on scroll
@@ -38,23 +38,20 @@
     { quote: "Do you have any gluten-free options?", action: "Filtering menu" },
   ];
 
-  // Pixel offsets from the cluster center for each hero card.
-  const CARD_CLUSTER_OFFSETS = [
-    { dx: -10, dy: -95, rotation: -6 },
-    { dx: 80, dy: -55, rotation: 4 },
-    { dx: -90, dy: -25, rotation: -3 },
-    { dx: 50, dy: -10, rotation: 5 },
-    { dx: -50, dy: 25, rotation: 6 },
-    { dx: 95, dy: 35, rotation: -4 },
-    { dx: -100, dy: 65, rotation: 3 },
-  ];
+  // Hero intro shows the requests as a Magic UI-style AnimatedList: cards
+  // prepend at the top of a centered stack, the new card pops in with a
+  // springy scale, and the existing cards smoothly slide down (FLIP) to
+  // make room.
+  const HERO_CARD_COUNT = 7;
 
   // Decelerating gaps (ms) between successive card entrances.
-  // 6 gaps for 7 cards — last card lands at ~5.3s.
-  const CARD_GAPS_MS = [1500, 1300, 1000, 700, 500, 300];
+  // 6 gaps for 7 cards — last card lands at ~3.0s, matching the snappier
+  // AnimatedList cadence (Magic UI's default delay is 1000ms).
+  const CARD_GAPS_MS = [780, 660, 540, 440, 360, 280];
 
   const HERO_DURATIONS_MS = {
-    cardEntrance: 360,
+    cardEntrance: 420,
+    cardShift: 380,
     phoneSlide: 720,
     postPhoneBeat: 500,
     cardAbsorb: 700,
@@ -68,6 +65,11 @@
     posLogoEntrance: 720,
     posLogoStagger: 200,
   };
+
+  // Stack springs feel best with a slight overshoot — these cubic-beziers
+  // approximate framer-motion's `spring(stiffness: 350, damping: 40)`.
+  const SPRING_POP = "cubic-bezier(.34, 1.45, .64, 1)";
+  const SPRING_SHIFT = "cubic-bezier(.34, 1.25, .64, 1)";
 
   const HERO_LAYOUT = {
     visibleHeightCap: 760,
@@ -115,16 +117,32 @@
     return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
-  // Wraps WAAPI animations so we can cancel everything in flight at once.
+  // Wraps WAAPI animations + scheduled timers so we can cancel everything
+  // in flight at once. Also exposes an AbortSignal that fires on cancelAll
+  // so loop-driven choreography (like the AnimatedList card entrances) can
+  // unwind cleanly if the user scrolls mid-intro.
   function createAnimationTracker() {
     const live = new Set();
+    const timers = new Set();
+    const abortController = new AbortController();
     return {
+      signal: abortController.signal,
       track(animation) {
         live.add(animation);
         animation.finished
           .catch(() => {})
           .finally(() => live.delete(animation));
         return animation;
+      },
+      schedule(callback, delayMs) {
+        let id = null;
+        const wrapped = () => {
+          timers.delete(id);
+          callback();
+        };
+        id = window.setTimeout(wrapped, delayMs);
+        timers.add(id);
+        return id;
       },
       cancelAll() {
         live.forEach((animation) => {
@@ -135,6 +153,9 @@
           }
         });
         live.clear();
+        timers.forEach((id) => window.clearTimeout(id));
+        timers.clear();
+        if (!abortController.signal.aborted) abortController.abort();
       },
     };
   }
@@ -242,14 +263,13 @@
 
     const requests = shuffle(
       Array.from(
-        { length: CARD_CLUSTER_OFFSETS.length },
+        { length: HERO_CARD_COUNT },
         (_, i) => HERO_REQUESTS[i % HERO_REQUESTS.length]
       )
     );
-    const offsets = shuffle(CARD_CLUSTER_OFFSETS);
     const ticker = createIphoneActionTicker(requests.map((r) => r.action));
 
-    const cards = createHeroCards({ layer, requests, offsets });
+    const intro = createHeroCards({ layer, phone, requests });
 
     let aborted = false;
     function abort() {
@@ -267,7 +287,7 @@
       if (aborted) throw new HeroIntroAborted();
     }
 
-    animateCardEntrances(cards, tracker)
+    animateCardEntrances(intro, tracker)
       .then(() => {
         checkAborted();
         return animatePhoneSlide(phone, tracker);
@@ -275,7 +295,7 @@
       .then(() => wait(HERO_DURATIONS_MS.postPhoneBeat))
       .then(() => {
         checkAborted();
-        return absorbCardsIntoPhone({ layer, phone, cards, tracker });
+        return absorbCardsIntoPhone({ layer, phone, cards: intro.cards, tracker });
       })
       .then(() => {
         ticker.start(0);
@@ -295,73 +315,110 @@
       });
   }
 
-  function createHeroCards({ layer, requests, offsets }) {
+  function createHeroCards({ layer, phone, requests }) {
+    // Anchor the AnimatedList stack just below the iPhone's visible bottom
+    // so the stack grows downward into the open hero space and ends up
+    // roughly where the absorb animation will pull the cards up from.
     const layerRect = layer.getBoundingClientRect();
+    const phoneRect = phone.getBoundingClientRect();
+    const phoneBottomInLayer = phoneRect.bottom - layerRect.top;
     const visibleHeight = Math.min(
       window.innerHeight - layerRect.top,
       HERO_LAYOUT.visibleHeightCap
     );
-    const centerX = layerRect.width / 2;
-    const centerY = visibleHeight * 0.5;
+    const stackTop = Math.max(
+      Math.min(phoneBottomInLayer + 24, visibleHeight - 80),
+      visibleHeight * 0.28
+    );
 
-    return offsets.map((offset, index) => {
+    const stack = document.createElement("div");
+    stack.className = "hero-intro-stack";
+    stack.style.top = `${stackTop}px`;
+    layer.append(stack);
+
+    const cards = requests.map((req, index) => {
       const shell = document.createElement("div");
       shell.className = "hero-intro-card";
       shell.append(
         window.CallerCard({
           avatarUrl: `https://i.pravatar.cc/64?img=${index + 12}`,
-          quote: requests[index].quote,
+          quote: req.quote,
         })
       );
-      layer.append(shell);
-
-      return {
-        el: shell,
-        targetX: centerX + offset.dx,
-        targetY: centerY + offset.dy,
-        rotation: offset.rotation,
-      };
+      return { el: shell };
     });
+
+    return { stack, cards };
   }
 
-  function animateCardEntrances(cards, tracker) {
-    let cumulativeDelay = 0;
-    const finished = cards.map((card, index) => {
-      if (index > 0) cumulativeDelay += CARD_GAPS_MS[index - 1] || 50;
-      const { el, targetX, targetY, rotation } = card;
-      const base = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
-
-      const animation = el.animate(
-        [
-          {
-            opacity: 0,
-            transform: `${base} rotate(${rotation - 8}deg) scale(.7)`,
-            filter: "blur(4px)",
-          },
-          {
-            opacity: 1,
-            transform: `${base} rotate(${rotation}deg) scale(1.08)`,
-            filter: "blur(0)",
-            offset: 0.7,
-          },
-          {
-            opacity: 1,
-            transform: `${base} rotate(${rotation}deg) scale(1)`,
-            filter: "blur(0)",
-          },
-        ],
-        {
-          delay: cumulativeDelay,
-          duration: HERO_DURATIONS_MS.cardEntrance,
-          easing: "cubic-bezier(.16, 1, .3, 1)",
-          fill: "both",
-        }
+  // AnimatedList behavior, ported from Magic UI to vanilla WAAPI:
+  //   - new card is prepended at the top of the stack
+  //   - existing cards smoothly slide down via FLIP to make room
+  //   - new card pops in with a springy scale from its top edge (originY: 0)
+  function animateCardEntrances({ stack, cards }, tracker) {
+    return new Promise((resolve, reject) => {
+      if (tracker.signal.aborted) {
+        reject(new HeroIntroAborted());
+        return;
+      }
+      tracker.signal.addEventListener(
+        "abort",
+        () => reject(new HeroIntroAborted()),
+        { once: true }
       );
-      tracker.track(animation);
-      return animation.finished;
-    });
 
-    return Promise.all(finished);
+      let i = 0;
+
+      function addNext() {
+        if (tracker.signal.aborted) return;
+
+        const card = cards[i];
+        const existing = Array.from(stack.children);
+        const oldRects = existing.map((el) => el.getBoundingClientRect());
+
+        stack.prepend(card.el);
+
+        existing.forEach((el, idx) => {
+          const dy = oldRects[idx].top - el.getBoundingClientRect().top;
+          if (dy === 0) return;
+          const animation = el.animate(
+            [
+              { transform: `translateY(${dy}px)` },
+              { transform: "translateY(0)" },
+            ],
+            {
+              duration: HERO_DURATIONS_MS.cardShift,
+              easing: SPRING_SHIFT,
+              fill: "both",
+            }
+          );
+          tracker.track(animation);
+        });
+
+        const popIn = card.el.animate(
+          [
+            { opacity: 0, transform: "scale(0)" },
+            { opacity: 1, transform: "scale(1)" },
+          ],
+          {
+            duration: HERO_DURATIONS_MS.cardEntrance,
+            easing: SPRING_POP,
+            fill: "both",
+          }
+        );
+        tracker.track(popIn);
+
+        i += 1;
+        if (i < cards.length) {
+          tracker.schedule(addNext, CARD_GAPS_MS[i - 1] || 50);
+        } else {
+          // Resolve once the last card finishes its pop-in (or is cancelled).
+          popIn.finished.then(() => resolve(), () => resolve());
+        }
+      }
+
+      addNext();
+    });
   }
 
   function animatePhoneSlide(phone, tracker) {
@@ -383,7 +440,9 @@
   function absorbCardsIntoPhone({ layer, phone, cards, tracker }) {
     // Cards fly into the visible center of the iPhone — the iPhone's top is
     // hidden behind the sticky header, so we target the midpoint of the
-    // visible portion below the header.
+    // visible portion below the header. Each card now lives in flex layout,
+    // so the absorb delta is computed from its actual rendered rect rather
+    // than a precomputed cluster offset.
     const layerRect = layer.getBoundingClientRect();
     const phoneRect = phone.getBoundingClientRect();
     const phoneTopInLayer = phoneRect.top - layerRect.top;
@@ -392,23 +451,34 @@
     const targetX = phoneRect.left - layerRect.left + phoneRect.width / 2;
     const targetY = (visibleTop + phoneBottomInLayer) / 2;
 
-    const finished = cards.map(
-      ({ el, targetX: tx, targetY: ty, rotation }, index) => {
-        const base = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-        const midX = tx + (targetX - tx) * 0.4;
-        const midY = ty + (targetY - ty) * 0.28;
-        const mid = `translate(${midX}px, ${midY}px) translate(-50%, -50%)`;
-        const target = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
+    // `cards` is in creation order — index 0 was prepended first and now
+    // sits at the BOTTOM of the stack; the last entry sits at the top.
+    // Reversing iterates top-to-bottom so the stack visibly "drains"
+    // upward into the phone, top card first.
+    const finished = cards
+      .slice()
+      .reverse()
+      .map(({ el }, index) => {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left - layerRect.left + rect.width / 2;
+        const cy = rect.top - layerRect.top + rect.height / 2;
+        const dx = targetX - cx;
+        const dy = targetY - cy;
+        const midDx = dx * 0.4;
+        const midDy = dy * 0.28;
 
         const animation = el.animate(
           [
-            { opacity: 1, transform: `${base} rotate(${rotation}deg) scale(1)` },
+            { opacity: 1, transform: "translate(0, 0) scale(1)" },
             {
               opacity: 0.78,
-              transform: `${mid} rotate(${rotation * 0.3}deg) scale(.34)`,
+              transform: `translate(${midDx}px, ${midDy}px) scale(.34)`,
               offset: 0.42,
             },
-            { opacity: 0, transform: `${target} rotate(0deg) scale(.06)` },
+            {
+              opacity: 0,
+              transform: `translate(${dx}px, ${dy}px) scale(.06)`,
+            },
           ],
           {
             delay: index * HERO_DURATIONS_MS.cardAbsorbStagger,
@@ -419,8 +489,7 @@
         );
         tracker.track(animation);
         return animation.finished;
-      }
-    );
+      });
 
     return Promise.all(finished);
   }
