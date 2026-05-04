@@ -593,7 +593,7 @@
   // Feature carousel: auto-cycle, mouse-tracking gradient, click-to-advance
   const fcCard = document.getElementById("fc-card");
   if (fcCard) {
-    const TOTAL = 4;
+    const TOTAL = 6;
     const INTERVAL_MS = 3000;
     const pills = fcCard.querySelectorAll(".fc-pill");
     const texts = fcCard.querySelectorAll(".fc-text");
@@ -604,7 +604,6 @@
     function render() {
       pills.forEach((p, i) => {
         p.dataset.active = i === step ? "true" : "false";
-        p.dataset.completed = i < step ? "true" : "false";
       });
       texts.forEach((t, i) => t.classList.toggle("active", i === step));
       visuals.forEach((v, i) => v.classList.toggle("active", i === step));

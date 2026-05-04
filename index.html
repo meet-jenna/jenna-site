@@ -73,37 +73,14 @@
           </a>
 
           <ul class="hidden lg:flex items-center gap-5 text-[13px] text-ink/80">
-            <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-coal">
-                Creative Platform
-                <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
-              </button>
-            </li>
-            <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-coal">
-                Agents Platform
-                <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
-              </button>
-            </li>
-            <li><a href="#" class="hover:text-coal">Developers</a></li>
-            <li class="group relative">
-              <button class="flex items-center gap-1 hover:text-coal">
-                Resources
-                <svg class="h-3 w-3 opacity-60" viewBox="0 0 20 20" fill="currentColor"><path d="M5.25 7.5L10 12.25 14.75 7.5z"/></svg>
-              </button>
-            </li>
-            <li><a href="#" class="hover:text-coal">Enterprise</a></li>
-            <li><a href="#" class="hover:text-coal">Pricing</a></li>
+            <li><a href="#how-it-works" class="hover:text-coal">How it works</a></li>
+            <li><a href="#feature-carousel" class="hover:text-coal">Features</a></li>
+            <li><a href="#faq" class="hover:text-coal">FAQ</a></li>
           </ul>
 
           <div class="flex items-center gap-2">
             <a
-              href="#"
-              class="hidden sm:inline-flex h-8 items-center rounded-full border border-line bg-white px-3.5 text-[12px] font-medium hover:border-coal/40"
-              >Log in</a
-            >
-            <a
-              href="#"
+              href="#hero"
               class="inline-flex h-8 items-center rounded-full bg-coal px-3.5 text-[12px] font-medium text-white hover:bg-coal/85"
               >Book Demo</a
             >
@@ -229,26 +206,162 @@
       </div>
     </section>
 
+    <!-- ==================== How Jenna works ==================== -->
+    <section id="how-it-works" class="how-section relative mx-auto max-w-[1320px] px-6 py-24">
+      <div class="how-bg" aria-hidden="true"></div>
+
+      <div class="relative text-center mb-14">
+        <p class="text-[12px] font-semibold uppercase tracking-[0.18em] text-muted">How it works</p>
+        <h2 class="mt-3 text-[40px] sm:text-[48px] leading-[1.05] font-semibold tracking-tight">
+          One call. One Jenna. Straight to your POS.
+        </h2>
+        <p class="mt-4 text-[16px] text-muted">
+          No new hardware. No new number. Live in under a week.
+        </p>
+      </div>
+
+      <div class="how-stage relative max-w-6xl mx-auto">
+        <!-- Animated flow line behind the cards -->
+        <svg class="how-flow" viewBox="0 0 1100 120" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="howFlowGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#1c00ff" stop-opacity="0.05" />
+              <stop offset="50%" stop-color="#1c00ff" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="#1c00ff" stop-opacity="0.05" />
+            </linearGradient>
+          </defs>
+          <path id="howFlowPath" class="how-flow__track" d="M40,60 C260,10 360,110 560,60 C760,10 860,110 1060,60" fill="none" />
+          <path class="how-flow__dash" d="M40,60 C260,10 360,110 560,60 C760,10 860,110 1060,60" fill="none" stroke="url(#howFlowGrad)" />
+          <circle class="how-flow__dot" r="5" fill="#1c00ff">
+            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#howFlowPath" />
+            </animateMotion>
+          </circle>
+        </svg>
+
+        <ol class="how-grid">
+          <!-- Step 1: Customer calls -->
+          <li class="how-step">
+            <div class="how-card how-card--call">
+              <div class="how-card__chrome">
+                <span class="how-card__dot how-card__dot--live"></span>
+                <span class="how-card__chrome-label">Incoming call</span>
+                <span class="how-card__chrome-time">11:42 PM</span>
+              </div>
+              <div class="how-card__body">
+                <div class="how-call">
+                  <img class="how-call__avatar" src="https://i.pravatar.cc/120?img=14" alt="" width="56" height="56" loading="lazy" />
+                  <div class="how-call__meta">
+                    <div class="how-call__name">Maya R.</div>
+                    <div class="how-call__sub">Mobile · +1 (415) 555 · 0188</div>
+                    <div class="how-call__ring" aria-hidden="true">
+                      <span></span><span></span><span></span>
+                      <em>Ringing…</em>
+                    </div>
+                  </div>
+                </div>
+                <div class="how-call__bubble">"Hey, can I order a large pepperoni for pickup?"</div>
+              </div>
+            </div>
+
+            <div class="how-step__label">
+              <span class="how-step__num">01</span>
+              <div>
+                <h3 class="how-step__title">Customer calls</h3>
+                <p class="how-step__desc">Same restaurant number, same caller experience.</p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Step 2: Jenna picks up -->
+          <li class="how-step">
+            <div class="how-card how-card--jenna">
+              <div class="how-card__chrome">
+                <span class="how-card__dot how-card__dot--accent"></span>
+                <span class="how-card__chrome-label">Jenna · live</span>
+                <span class="how-card__chrome-time">0:08</span>
+              </div>
+              <div class="how-card__body">
+                <div class="how-wave" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="how-chat">
+                  <div class="how-chat__msg how-chat__msg--in">"Of course! Anything to drink with that?"</div>
+                  <div class="how-chat__msg how-chat__msg--out">"Yeah, two cokes."</div>
+                  <div class="how-chat__msg how-chat__msg--in">"Got it — pickup ready in 18 minutes."</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="how-step__label">
+              <span class="how-step__num">02</span>
+              <div>
+                <h3 class="how-step__title">Jenna picks up</h3>
+                <p class="how-step__desc">Answers in one ring. Takes the full order, end to end.</p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Step 3: Order hits POS -->
+          <li class="how-step">
+            <div class="how-card how-card--pos">
+              <div class="how-card__chrome">
+                <span class="how-card__dot how-card__dot--ok"></span>
+                <span class="how-card__chrome-label">Order #1842 · sent</span>
+                <span class="how-card__chrome-time">Pickup · 18m</span>
+              </div>
+              <div class="how-card__body">
+                <ul class="how-pos__items">
+                  <li><span>1 ×</span><span>Large pepperoni</span><span>$18.50</span></li>
+                  <li><span>2 ×</span><span>Coke</span><span>$7.00</span></li>
+                  <li><span>1 ×</span><span>Garlic knots</span><span>$5.00</span></li>
+                </ul>
+                <div class="how-pos__total"><span>Total</span><span>$30.50</span></div>
+                <div class="how-pos__targets">
+                  <span class="how-pos__chip"><img src="assets/logos/toast-logo.png" alt="Toast" /></span>
+                  <span class="how-pos__chip"><img src="assets/logos/square-logo.png" alt="Square" /></span>
+                  <span class="how-pos__chip"><img src="assets/logos/clover-logo.png" alt="Clover" /></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="how-step__label">
+              <span class="how-step__num">03</span>
+              <div>
+                <h3 class="how-step__title">Order hits your POS</h3>
+                <p class="how-step__desc">Straight into Toast, Square, Clover — wherever you work.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ==================== Feature carousel ==================== -->
     <section class="mx-auto max-w-[1320px] px-6 py-20" id="feature-carousel">
       <div class="text-center mb-10">
         <h2 class="text-[40px] sm:text-[48px] leading-[1.05] font-semibold tracking-tight">
-          What Jenna does
+          Everything Jenna handles
         </h2>
         <p class="mt-4 text-[16px] text-muted">
-          A walkthrough of every call — from ring to receipt.
+          One agent, every call your restaurant gets.
         </p>
       </div>
 
       <div class="animated-cards relative w-full rounded-[16px]" id="fc-card">
         <div class="fc-shell relative w-full overflow-hidden rounded-3xl border border-black/10">
-          <!-- Step nav -->
-          <nav class="fc-steps" aria-label="Progress">
+          <!-- Feature nav -->
+          <nav class="fc-steps" aria-label="Features">
             <ol id="fc-steps-list">
-              <li><button class="fc-pill" data-step="0" data-active="true"><span class="fc-dot"><span class="fc-num">1</span></span><span class="fc-label">Step 1</span></button></li>
-              <li><button class="fc-pill" data-step="1"><span class="fc-dot"><span class="fc-num">2</span></span><span class="fc-label">Step 2</span></button></li>
-              <li><button class="fc-pill" data-step="2"><span class="fc-dot"><span class="fc-num">3</span></span><span class="fc-label">Step 3</span></button></li>
-              <li><button class="fc-pill" data-step="3"><span class="fc-dot"><span class="fc-num">4</span></span><span class="fc-label">Step 4</span></button></li>
+              <li><button class="fc-pill" data-step="0" data-active="true" aria-label="Feature 1"><span class="fc-dot"><span class="fc-num">1</span></span></button></li>
+              <li><button class="fc-pill" data-step="1" aria-label="Feature 2"><span class="fc-dot"><span class="fc-num">2</span></span></button></li>
+              <li><button class="fc-pill" data-step="2" aria-label="Feature 3"><span class="fc-dot"><span class="fc-num">3</span></span></button></li>
+              <li><button class="fc-pill" data-step="3" aria-label="Feature 4"><span class="fc-dot"><span class="fc-num">4</span></span></button></li>
+              <li><button class="fc-pill" data-step="4" aria-label="Feature 5"><span class="fc-dot"><span class="fc-num">5</span></span></button></li>
+              <li><button class="fc-pill" data-step="5" aria-label="Feature 6"><span class="fc-dot"><span class="fc-num">6</span></span></button></li>
             </ol>
           </nav>
 
@@ -257,46 +370,35 @@
             <!-- Text panes -->
             <div class="fc-text-stack">
               <div class="fc-text active" data-step="0">
-                <h3>Picks up every call</h3>
-                <p>Jenna answers in one ring, 24/7 — no holds, no missed orders, no overflow voicemail.</p>
+                <h3>Takes orders</h3>
+                <p>Pickup, delivery, full menu — straight into your POS.</p>
               </div>
               <div class="fc-text" data-step="1">
-                <h3>Knows your menu</h3>
-                <p>Reads from your live menu and modifiers. Upsells where it makes sense, never where it doesn't.</p>
+                <h3>Never sleeps</h3>
+                <p>24/7. Holidays. Dinner rush. Always on.</p>
               </div>
               <div class="fc-text" data-step="2">
                 <h3>Books reservations</h3>
-                <p>Connects to OpenTable and Resy so Jenna sees real-time availability and confirms tables instantly.</p>
+                <p>Party size, time, seating — done.</p>
               </div>
               <div class="fc-text" data-step="3">
-                <h3>Sends to your POS</h3>
-                <p>Pushes orders straight into Toast, Square, or Clover — wherever you ring tickets today.</p>
+                <h3>Handles every call at once</h3>
+                <p>Ten callers, one Jenna. Nobody waits on hold.</p>
+              </div>
+              <div class="fc-text" data-step="4">
+                <h3>Answers FAQs</h3>
+                <p>Hours, location, specials, dietary — every time.</p>
+              </div>
+              <div class="fc-text" data-step="5">
+                <h3>Sends SMS receipts</h3>
+                <p>Order summary texted to the customer instantly.</p>
               </div>
             </div>
 
             <!-- Visual panes -->
             <div class="fc-visual-stack">
-              <!-- Step 0: Incoming call + transcript -->
+              <!-- Feature 1: Takes orders -->
               <div class="fc-visual active" data-step="0">
-                <div class="fc-tile fc-incoming">
-                  <div class="fc-tag">Incoming · Live</div>
-                  <div class="fc-incoming-name">+1 (555) 814-2207</div>
-                  <div class="fc-incoming-meta">Front of house line</div>
-                  <div class="fc-incoming-actions">
-                    <span class="fc-btn green"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.65 2.93a1 1 0 011.32-.07l2.4 1.85a1 1 0 01.21 1.36l-1.07 1.55a10 10 0 005.88 5.88l1.55-1.07a1 1 0 011.36.21l1.85 2.4a1 1 0 01-.07 1.32l-1.05 1.05a3 3 0 01-3.07.73A17 17 0 011.55 6.07a3 3 0 01.73-3.07l1.37-1.37z"/></svg></span>
-                    <span class="fc-btn red"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 4a10 10 0 00-7.42 3.32 1 1 0 00.05 1.4l1.78 1.62a1 1 0 001.34.02l1.86-1.55a1 1 0 00.36-.81V6.85A8 8 0 0114 6.85V8a1 1 0 00.36.81l1.86 1.55a1 1 0 001.34-.02l1.78-1.62a1 1 0 00.05-1.4A10 10 0 0010 4z"/></svg></span>
-                  </div>
-                </div>
-                <div class="fc-tile fc-transcript">
-                  <div class="fc-tag">Live transcript</div>
-                  <div class="fc-msg dark">"Hi, this is Jenna — how can I help?"</div>
-                  <div class="fc-msg light">"Yeah, do you have any tables for two tonight?"</div>
-                  <div class="fc-msg dark">"We do — 6:30 or 8:00 work?"</div>
-                </div>
-              </div>
-
-              <!-- Step 1: Menu + order -->
-              <div class="fc-visual" data-step="1">
                 <div class="fc-tile fc-menu">
                   <div class="fc-tag">Menu</div>
                   <div class="fc-row"><span>Chicken parm</span><span>$14.50</span></div>
@@ -306,15 +408,30 @@
                   <div class="fc-row dim"><span>Tiramisu</span><span>$8.00</span></div>
                 </div>
                 <div class="fc-tile fc-order">
-                  <div class="fc-tag">Order #1842</div>
+                  <div class="fc-tag">Order #1842 · Pickup</div>
                   <div class="fc-row"><span>1 × Chicken parm</span><span>$14.50</span></div>
                   <div class="fc-row"><span>1 × Fries</span><span>$4.00</span></div>
                   <div class="fc-row"><span>1 × Coke</span><span>$3.50</span></div>
-                  <div class="fc-total"><span>Total</span><span>$22.00</span></div>
+                  <div class="fc-total"><span>Sent to Toast</span><span>$22.00</span></div>
                 </div>
               </div>
 
-              <!-- Step 2: Reservations calendar -->
+              <!-- Feature 2: Never sleeps -->
+              <div class="fc-visual" data-step="1">
+                <div class="fc-tile fc-cal">
+                  <div class="fc-tag">Always on · last 24 hrs</div>
+                  <ol class="fc-cal-list">
+                    <li class="booked"><span class="fc-time">3:42 AM</span><span>Order · #2104</span></li>
+                    <li class="booked"><span class="fc-time">7:15 AM</span><span>Reservation · 4</span></li>
+                    <li class="booked highlight"><span class="fc-time">12:30 PM</span><span>Lunch rush · 14 calls</span></li>
+                    <li class="booked"><span class="fc-time">6:48 PM</span><span>Order · #2189</span></li>
+                    <li class="booked"><span class="fc-time">10:21 PM</span><span>Reservation · 2</span></li>
+                    <li class="booked"><span class="fc-time">1:05 AM</span><span>FAQ · hours</span></li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- Feature 3: Books reservations -->
               <div class="fc-visual" data-step="2">
                 <div class="fc-tile fc-cal">
                   <div class="fc-tag">Friday, May 8</div>
@@ -329,458 +446,55 @@
                 </div>
               </div>
 
-              <!-- Step 3: POS sync -->
+              <!-- Feature 4: Handles every call at once -->
               <div class="fc-visual" data-step="3">
-                <div class="fc-tile fc-pos">
-                  <div class="fc-pos-head">
-                    <span class="fc-brand">Toast</span>
-                    <span class="fc-pos-id">Order #1842</span>
-                    <span class="fc-status">
-                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10.5l3.5 3.5L15 7"/></svg>
-                      Sent
-                    </span>
-                  </div>
-                  <div class="fc-row"><span>1 × Chicken parm</span><span>$14.50</span></div>
-                  <div class="fc-row"><span>1 × Fries</span><span>$4.00</span></div>
-                  <div class="fc-row"><span>1 × Coke</span><span>$3.50</span></div>
-                  <div class="fc-pos-foot">
-                    <span>Pickup · ready in 20 min</span>
-                    <span class="fc-pos-total">$22.00</span>
-                  </div>
+                <div class="fc-tile fc-cal">
+                  <div class="fc-tag">10 calls · live</div>
+                  <ol class="fc-cal-list">
+                    <li class="booked"><span class="fc-time">Line 1</span><span>Order · pickup</span></li>
+                    <li class="booked"><span class="fc-time">Line 2</span><span>Reservation · 4</span></li>
+                    <li class="booked highlight"><span class="fc-time">Line 3</span><span>Order · delivery</span></li>
+                    <li class="booked"><span class="fc-time">Line 4</span><span>FAQ · hours</span></li>
+                    <li class="booked"><span class="fc-time">Line 5</span><span>Reservation · 2</span></li>
+                    <li class="booked"><span class="fc-time">Line 6</span><span>Order · pickup</span></li>
+                  </ol>
+                </div>
+              </div>
+
+              <!-- Feature 5: Answers FAQs -->
+              <div class="fc-visual" data-step="4">
+                <div class="fc-tile fc-incoming">
+                  <div class="fc-tag">Caller · live</div>
+                  <div class="fc-incoming-name">"What time do you close?"</div>
+                  <div class="fc-incoming-meta">11:42 PM · front of house</div>
+                </div>
+                <div class="fc-tile fc-transcript">
+                  <div class="fc-tag">Jenna's reply</div>
+                  <div class="fc-msg dark">"We close at midnight tonight, and we're open 11 to 11 tomorrow."</div>
+                  <div class="fc-msg light">"Do you have gluten-free options?"</div>
+                  <div class="fc-msg dark">"Yes — our pasta, pizza, and most desserts can be made gluten-free."</div>
+                </div>
+              </div>
+
+              <!-- Feature 6: Sends SMS receipts -->
+              <div class="fc-visual" data-step="5">
+                <div class="fc-tile fc-incoming">
+                  <div class="fc-tag">SMS · to customer</div>
+                  <div class="fc-incoming-name">+1 (415) 555-7821</div>
+                  <div class="fc-incoming-meta">Just now · delivered</div>
+                </div>
+                <div class="fc-tile fc-transcript">
+                  <div class="fc-tag">Receipt · order #1842</div>
+                  <div class="fc-msg dark">"Thanks for ordering from Jenna's Kitchen!"</div>
+                  <div class="fc-msg dark">1 × Chicken parm — $14.50<br>1 × Fries — $4.00<br>1 × Coke — $3.50</div>
+                  <div class="fc-msg dark">Total $22.00 · pickup ready in 20 min.</div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Click anywhere to advance -->
-          <button class="fc-advance" id="fc-advance" aria-label="Next step"></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== How Jenna works ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 py-24">
-      <div class="text-center mb-14">
-        <h2 class="text-[40px] sm:text-[48px] leading-[1.05] font-semibold tracking-tight">
-          How Jenna works
-        </h2>
-        <p class="mt-4 text-[16px] text-muted">
-          Three steps. No new hardware. No new number.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-        <!-- Step 1: Customer calls -->
-        <div class="rounded-3xl border border-line/60 bg-soft p-8 text-center flex flex-col items-center">
-          <div class="grid h-14 w-14 place-items-center rounded-full bg-white border border-line shadow-soft">
-            <svg
-              viewBox="0 0 24 24"
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              <circle cx="20" cy="4" r="2.5" fill="#22c55e" stroke="none" />
-            </svg>
-          </div>
-          <h3 class="mt-5 text-[18px] font-semibold tracking-tight">Customer calls</h3>
-          <p class="mt-2 text-[14px] text-muted">Same restaurant number, same caller.</p>
-        </div>
-
-        <!-- Step 2: Jenna picks up -->
-        <div class="rounded-3xl border border-line/60 bg-soft p-8 text-center flex flex-col items-center">
-          <div class="grid h-14 w-14 place-items-center rounded-full bg-white border border-line shadow-soft">
-            <svg
-              viewBox="0 0 24 24"
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M11 4v9.5a3.5 3.5 0 0 1-7 0" />
-              <path d="M14.5 9c1 1 1.5 2 1.5 3s-.5 2-1.5 3" />
-              <path d="M17.5 7c1.6 1.5 2.5 3 2.5 5s-.9 3.5-2.5 5" />
-            </svg>
-          </div>
-          <h3 class="mt-5 text-[18px] font-semibold tracking-tight">Jenna picks up</h3>
-          <p class="mt-2 text-[14px] text-muted">Answers in one ring, takes the order.</p>
-        </div>
-
-        <!-- Step 3: Order hits POS -->
-        <div class="rounded-3xl border border-line/60 bg-soft p-8 text-center flex flex-col items-center">
-          <div class="grid h-14 w-14 place-items-center rounded-full bg-white border border-line shadow-soft">
-            <svg
-              viewBox="0 0 24 24"
-              class="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5-2 1.5z" />
-              <line x1="9" y1="8" x2="15" y2="8" />
-              <line x1="9" y1="11.5" x2="15" y2="11.5" />
-              <line x1="9" y1="15" x2="13" y2="15" />
-            </svg>
-          </div>
-          <h3 class="mt-5 text-[18px] font-semibold tracking-tight">Order hits your POS</h3>
-          <p class="mt-2 text-[14px] text-muted">Straight into Toast, Square, Clover — wherever you work.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Workflow section ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 py-20">
-      <div class="grid grid-cols-12 items-center gap-12">
-        <div class="col-span-12 lg:col-span-5">
-          <p class="text-[12px] uppercase tracking-[0.18em] text-muted">Workflows</p>
-          <h2 class="mt-4 text-[40px] leading-[1.06] font-semibold tracking-tight">
-            Orchestrate complex conversations
-          </h2>
-          <p class="mt-5 text-[15px] leading-relaxed text-muted">
-            Visually compose multi-step flows with branching, tools, and
-            handoffs. Test in the browser and roll out updates without
-            redeploying.
-          </p>
-          <ul class="mt-6 space-y-3 text-[14px]">
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Branching, conditions, and fallbacks</li>
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Tools / function calling</li>
-            <li class="flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-coal"></span>Live agent handoff and call transfers</li>
-          </ul>
-        </div>
-
-        <div class="col-span-12 lg:col-span-7">
-          <div class="rounded-3xl border border-line bg-white p-5 shadow-card">
-            <!-- Faux flow editor -->
-            <div class="grid grid-cols-3 gap-3">
-              <div class="rounded-2xl border border-line bg-soft p-4">
-                <div class="text-[11px] uppercase tracking-wider text-muted">Greet</div>
-                <div class="mt-2 text-[13px] font-medium">Welcome &amp; intent</div>
-                <div class="mt-3 h-1 w-2/3 rounded bg-coal/80"></div>
-              </div>
-              <div class="rounded-2xl border border-line bg-soft p-4">
-                <div class="text-[11px] uppercase tracking-wider text-muted">Branch</div>
-                <div class="mt-2 text-[13px] font-medium">Support · Sales · Other</div>
-                <div class="mt-3 flex gap-1">
-                  <span class="h-1 w-6 rounded bg-coal/80"></span>
-                  <span class="h-1 w-6 rounded bg-coal/40"></span>
-                  <span class="h-1 w-6 rounded bg-coal/20"></span>
-                </div>
-              </div>
-              <div class="rounded-2xl border border-line bg-soft p-4">
-                <div class="text-[11px] uppercase tracking-wider text-muted">Tool</div>
-                <div class="mt-2 text-[13px] font-medium">Lookup order</div>
-                <div class="mt-3 inline-flex items-center gap-1 rounded-full bg-white border border-line px-2 py-0.5 text-[11px] font-mono">/get_order</div>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-2xl border border-line bg-coal p-4 text-white">
-              <div class="flex items-center gap-2 text-[11px] text-white/60">
-                <span class="h-2 w-2 rounded-full bg-emerald-400"></span> Live test
-              </div>
-              <div class="mt-3 space-y-2 text-[13px]">
-                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">Hi, this is Jenna — what can I do for you?</div>
-                <div class="ml-auto rounded-xl bg-white text-ink px-3 py-1.5 max-w-[80%]">Can I push my 7:30 reservation to 8?</div>
-                <div class="rounded-xl bg-white/10 px-3 py-1.5 max-w-[80%]">Got it — your 7:30 for four is now at 8:00.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Customization section ==================== -->
-    <section class="bg-soft border-y border-line/60">
-      <div class="mx-auto max-w-[1320px] px-6 py-20">
-        <div class="grid grid-cols-12 items-center gap-12">
-          <div class="col-span-12 lg:col-span-7 order-2 lg:order-1">
-            <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
-              <div class="grid grid-cols-2 gap-6">
-                <!-- Sliders -->
-                <div>
-                  <p class="text-[12px] uppercase tracking-wider text-muted">Voice settings</p>
-                  <div class="mt-4 space-y-5">
-                    <div>
-                      <div class="flex justify-between text-[12px]"><span>Stability</span><span class="text-muted">62</span></div>
-                      <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[62%] rounded-full bg-coal"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex justify-between text-[12px]"><span>Similarity</span><span class="text-muted">78</span></div>
-                      <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[78%] rounded-full bg-coal"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex justify-between text-[12px]"><span>Style</span><span class="text-muted">35</span></div>
-                      <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[35%] rounded-full bg-coal"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex justify-between text-[12px]"><span>Speaker boost</span><span class="text-muted">On</span></div>
-                      <div class="mt-2 h-1.5 rounded-full bg-line overflow-hidden">
-                        <div class="h-full w-[100%] rounded-full bg-coal"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Knowledge base -->
-                <div>
-                  <p class="text-[12px] uppercase tracking-wider text-muted">Knowledge base</p>
-                  <div class="mt-4 space-y-2">
-                    <div class="flex items-center justify-between rounded-xl border border-line px-3 py-2 text-[13px]">
-                      <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-500"></span>handbook.pdf</span>
-                      <span class="text-muted text-[11px]">indexed</span>
-                    </div>
-                    <div class="flex items-center justify-between rounded-xl border border-line px-3 py-2 text-[13px]">
-                      <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-emerald-500"></span>faq.md</span>
-                      <span class="text-muted text-[11px]">indexed</span>
-                    </div>
-                    <div class="flex items-center justify-between rounded-xl border border-line px-3 py-2 text-[13px]">
-                      <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-500"></span>shopify.com/help</span>
-                      <span class="text-muted text-[11px]">syncing…</span>
-                    </div>
-                    <button class="w-full rounded-xl border border-dashed border-line px-3 py-2 text-[12px] text-muted hover:bg-soft">+ Add source</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-span-12 lg:col-span-5 order-1 lg:order-2">
-            <p class="text-[12px] uppercase tracking-[0.18em] text-muted">Customization</p>
-            <h2 class="mt-4 text-[40px] leading-[1.06] font-semibold tracking-tight">
-              Tuned to your brand and your data
-            </h2>
-            <p class="mt-5 text-[15px] leading-relaxed text-muted">
-              Choose from thousands of voices or clone your own. Ground your
-              agent in your documents, your CRM, and your live systems.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Multilingual ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 py-20">
-      <div class="grid grid-cols-12 gap-12 items-center">
-        <div class="col-span-12 lg:col-span-5">
-          <p class="text-[12px] uppercase tracking-[0.18em] text-muted">Multilingual</p>
-          <h2 class="mt-4 text-[40px] leading-[1.06] font-semibold tracking-tight">
-            Speak the language of every customer
-          </h2>
-          <p class="mt-5 text-[15px] leading-relaxed text-muted">
-            Real-time conversations in 32+ languages with automatic accent
-            adaptation. One agent, one voice — every market.
-          </p>
-          <div class="mt-6 flex flex-wrap gap-2">
-            <span class="chip">English</span>
-            <span class="chip">Español</span>
-            <span class="chip">Français</span>
-            <span class="chip">Deutsch</span>
-            <span class="chip">日本語</span>
-            <span class="chip">हिन्दी</span>
-            <span class="chip">العربية</span>
-            <span class="chip">Português</span>
-            <span class="chip">Polski</span>
-            <span class="chip">Türkçe</span>
-            <span class="chip">+22</span>
-          </div>
-        </div>
-
-        <div class="col-span-12 lg:col-span-7">
-          <div class="rounded-3xl border border-line bg-white p-6 shadow-card">
-            <div class="flex flex-col divide-y divide-line">
-              <!-- waveform rows -->
-              <div class="flex items-center gap-4 py-3">
-                <span class="w-9 text-[11px] font-mono text-muted">EN</span>
-                <button class="play-btn"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6z"/></svg></button>
-                <div class="wave flex-1"></div>
-                <span class="text-[11px] text-muted font-mono">0:32</span>
-              </div>
-              <div class="flex items-center gap-4 py-3">
-                <span class="w-9 text-[11px] font-mono text-muted">ES</span>
-                <button class="play-btn"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6z"/></svg></button>
-                <div class="wave flex-1"></div>
-                <span class="text-[11px] text-muted font-mono">0:29</span>
-              </div>
-              <div class="flex items-center gap-4 py-3">
-                <span class="w-9 text-[11px] font-mono text-muted">JP</span>
-                <button class="play-btn"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6z"/></svg></button>
-                <div class="wave flex-1"></div>
-                <span class="text-[11px] text-muted font-mono">0:35</span>
-              </div>
-              <div class="flex items-center gap-4 py-3">
-                <span class="w-9 text-[11px] font-mono text-muted">DE</span>
-                <button class="play-btn"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6 4l10 6-10 6z"/></svg></button>
-                <div class="wave flex-1"></div>
-                <span class="text-[11px] text-muted font-mono">0:31</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Developer section ==================== -->
-    <section class="bg-ink text-white">
-      <div class="mx-auto max-w-[1320px] px-6 py-20">
-        <div class="grid grid-cols-12 gap-10 items-center">
-          <div class="col-span-12 lg:col-span-5">
-            <p class="text-[12px] uppercase tracking-[0.18em] text-white/60">Developers</p>
-            <h2 class="mt-4 text-[40px] leading-[1.06] font-semibold tracking-tight">
-              Composable APIs and SDKs
-            </h2>
-            <p class="mt-5 text-[15px] leading-relaxed text-white/70">
-              Drop our streaming voice and agent runtime into any stack — Node,
-              Python, Swift, Kotlin, and more. Production-ready primitives for
-              real-time conversation.
-            </p>
-            <div class="mt-7 flex flex-wrap gap-2">
-              <a href="#" class="rounded-full bg-white text-ink px-4 h-9 inline-flex items-center text-[13px] font-medium">View docs</a>
-              <a href="#" class="rounded-full border border-white/20 px-4 h-9 inline-flex items-center text-[13px] font-medium hover:border-white/60">API reference</a>
-            </div>
-          </div>
-
-          <div class="col-span-12 lg:col-span-7">
-            <div class="rounded-3xl bg-coal border border-white/10 p-5 font-mono text-[13px] leading-relaxed shadow-card overflow-x-auto">
-              <div class="flex items-center gap-2 pb-3 text-white/50 text-[11px]">
-                <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
-                <span class="h-2.5 w-2.5 rounded-full bg-white/20"></span>
-                <span class="ml-3">agent.ts</span>
-              </div>
-<pre class="text-white/90"><span class="text-pink-400">import</span> { Agent } <span class="text-pink-400">from</span> <span class="text-emerald-300">"@jenna/agents"</span>;
-
-<span class="text-pink-400">const</span> agent = <span class="text-pink-400">await</span> Agent.create({
-  name: <span class="text-emerald-300">"Jenna"</span>,
-  voice: <span class="text-emerald-300">"voice_jenna_warm"</span>,
-  language: <span class="text-emerald-300">"en"</span>,
-  tools: [takeOrder, bookReservation, sendToPOS],
-  knowledge: [<span class="text-emerald-300">"./menu.pdf"</span>],
-});
-
-agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
-  call.say(<span class="text-emerald-300">"Hi, you've reached Jenna — thanks for calling."</span>);
-});</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Enterprise / security ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 py-20">
-      <div class="grid grid-cols-12 gap-12">
-        <div class="col-span-12 lg:col-span-5">
-          <p class="text-[12px] uppercase tracking-[0.18em] text-muted">Enterprise</p>
-          <h2 class="mt-4 text-[40px] leading-[1.06] font-semibold tracking-tight">
-            Enterprise-grade security and reliability
-          </h2>
-          <p class="mt-5 text-[15px] leading-relaxed text-muted">
-            SOC 2 Type II, GDPR, and HIPAA-aligned controls. Private deployments,
-            data residency, and dedicated support for teams that need it.
-          </p>
-        </div>
-
-        <div class="col-span-12 lg:col-span-7 grid grid-cols-3 gap-3">
-          <div class="rounded-2xl border border-line bg-white p-5 shadow-soft">
-            <div class="text-[11px] uppercase tracking-wider text-muted">Compliance</div>
-            <div class="mt-2 font-semibold">SOC 2 · GDPR · HIPAA</div>
-          </div>
-          <div class="rounded-2xl border border-line bg-white p-5 shadow-soft">
-            <div class="text-[11px] uppercase tracking-wider text-muted">Uptime</div>
-            <div class="mt-2 font-semibold">99.99%</div>
-          </div>
-          <div class="rounded-2xl border border-line bg-white p-5 shadow-soft">
-            <div class="text-[11px] uppercase tracking-wider text-muted">Regions</div>
-            <div class="mt-2 font-semibold">US · EU · APAC</div>
-          </div>
-          <div class="col-span-3 rounded-2xl border border-line bg-soft p-5">
-            <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 items-center text-muted">
-              <div class="text-center font-semibold tracking-wider">SOC 2</div>
-              <div class="text-center font-semibold tracking-wider">GDPR</div>
-              <div class="text-center font-semibold tracking-wider">HIPAA</div>
-              <div class="text-center font-semibold tracking-wider">C2PA</div>
-              <div class="text-center font-semibold tracking-wider">ISO</div>
-              <div class="text-center font-semibold tracking-wider">PCI</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== Logo wall ==================== -->
-    <section class="border-y border-line/60 bg-soft">
-      <div class="mx-auto max-w-[1320px] px-6 py-14 text-center">
-        <p class="text-[13px] text-muted">Trusted by teams shipping voice in production</p>
-        <div class="mt-8 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-y-8 gap-x-6 items-center text-ink/70">
-          <div class="logo">Acme</div>
-          <div class="logo">Northwind</div>
-          <div class="logo">Globex</div>
-          <div class="logo">Initech</div>
-          <div class="logo">Soylent</div>
-          <div class="logo">Hooli</div>
-          <div class="logo">Pied&nbsp;Piper</div>
-          <div class="logo">Cyberdyne</div>
-          <div class="logo">Stark&nbsp;Co</div>
-          <div class="logo">Wonka</div>
-          <div class="logo">Massive&nbsp;Dynamic</div>
-          <div class="logo">Wayne</div>
-          <div class="logo">Tyrell</div>
-          <div class="logo">Aperture</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== "Start in days" CTA ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 py-24 text-center">
-      <h2 class="text-[56px] leading-[1.02] font-semibold tracking-tight">
-        Start in days,
-        <span class="text-muted">not months.</span>
-      </h2>
-      <p class="mt-5 mx-auto max-w-xl text-muted">
-        Spin up a production-ready voice agent in a single afternoon, then
-        evolve it without rebuilding.
-      </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="#" class="inline-flex h-11 items-center rounded-full bg-coal px-6 text-[13px] font-semibold uppercase tracking-wide text-white">Get started free</a>
-        <a href="#" class="inline-flex h-11 items-center rounded-full border border-line bg-white px-6 text-[13px] font-semibold uppercase tracking-wide">Talk to sales</a>
-      </div>
-    </section>
-
-    <!-- ==================== Custom plan / Dev program ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 pb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <div class="rounded-3xl border border-line bg-white p-8 shadow-soft flex flex-col">
-          <p class="text-[12px] uppercase tracking-[0.18em] text-muted">Custom plan</p>
-          <h3 class="mt-3 text-[28px] font-semibold tracking-tight">Built for your scale</h3>
-          <p class="mt-3 text-muted text-[14px] leading-relaxed">
-            High-volume usage, dedicated capacity, and white-glove onboarding
-            for teams running mission-critical voice experiences.
-          </p>
-          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-coal px-5 text-[13px] font-semibold uppercase text-white">Contact sales</a>
-        </div>
-        <div class="rounded-3xl bg-ink text-white p-8 shadow-soft flex flex-col">
-          <p class="text-[12px] uppercase tracking-[0.18em] text-white/60">Developer program</p>
-          <h3 class="mt-3 text-[28px] font-semibold tracking-tight">Resources for builders</h3>
-          <p class="mt-3 text-white/70 text-[14px] leading-relaxed">
-            Free credits, early access to models, and direct engineering
-            support — designed for teams shipping with voice.
-          </p>
-          <a href="#" class="mt-auto pt-6 self-start inline-flex h-10 items-center rounded-full bg-white text-ink px-5 text-[13px] font-semibold uppercase">Apply now</a>
+          <button class="fc-advance" id="fc-advance" aria-label="Next feature"></button>
         </div>
       </div>
     </section>
@@ -809,21 +523,6 @@ agent.on(<span class="text-emerald-300">"call"</span>, (call) =&gt; {
           <summary class="faq-summary"><span>How do you handle security?</span><span class="faq-icon"></span></summary>
           <div class="faq-body">SOC 2 Type II, GDPR, HIPAA-aligned controls, regional data residency, and SSO/RBAC for enterprise teams.</div>
         </details>
-      </div>
-    </section>
-
-    <!-- ==================== Final hero CTA ==================== -->
-    <section class="mx-auto max-w-[1320px] px-6 pb-24">
-      <div class="rounded-3xl bg-gradient-to-br from-[#0d1320] via-[#0a0a0a] to-[#101a2a] text-white p-12 text-center relative overflow-hidden">
-        <div class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-blue-500/30 blur-3xl"></div>
-        <div class="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-fuchsia-500/20 blur-3xl"></div>
-        <h2 class="relative text-[44px] sm:text-[54px] leading-[1.05] font-semibold tracking-tight">
-          The most realistic voice AI platform
-        </h2>
-        <div class="relative mt-8 flex flex-wrap justify-center gap-3">
-          <a href="#" class="inline-flex h-11 items-center rounded-full bg-white text-ink px-6 text-[13px] font-semibold uppercase tracking-wide">Get started free</a>
-          <a href="#" class="inline-flex h-11 items-center rounded-full border border-white/30 px-6 text-[13px] font-semibold uppercase tracking-wide hover:border-white">Contact sales</a>
-        </div>
       </div>
     </section>
 
