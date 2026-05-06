@@ -1,16 +1,30 @@
-// Jenna AI — Hero interactions
-// Plays a scripted "live call" animation: timer ticks, transcript types in,
-// events fire. No audio yet — the user can drop in a real recording later
-// by attaching an <audio> element with id="demoAudio".
-
+// Jenna AI — Hero call card interactions
+//
+// Today (scaffolding): plays a scripted "live call" animation in the call
+// card — timer ticks, transcript bubbles type in, POS / SMS events fire.
+// Auto-plays once when the card enters the viewport. Replays whenever the
+// visitor taps the "Tap to Call Jenna" button.
+//
+// On mobile the button is an <a href="tel:..."> so the OS dial pad opens
+// and actually rings (631) 800-7774. On desktop tel: is a no-op for most
+// browsers — the visual still replays so the page feels alive.
+//
+// Phase 2 (real live transcript via Retell Web Call SDK):
+//   import { RetellWebClient } from "retell-client-js-sdk";
+//   const client = new RetellWebClient();
+//   client.on("update", ({ transcript }) => renderLiveTranscript(transcript));
+//   client.on("agent_start_talking", () => card.dataset.state = "playing");
+//   client.on("call_ended", () => stop());
+// Replace the body of `startCall()` below with a fetch to your token
+// endpoint + client.startCall({ accessToken }). The DOM hooks
+// (#callCard, #transcript, #callTime, #callJennaBtn) stay the same.
 (function () {
   const card = document.getElementById("callCard");
-  const demoBtn = document.getElementById("demoBtn");
-  const ctrlPlay = document.getElementById("ctrlPlay");
   const transcript = document.getElementById("transcript");
   const callTime = document.getElementById("callTime");
+  const callBtn = document.getElementById("callJennaBtn");
 
-  if (!card || !demoBtn || !ctrlPlay || !transcript || !callTime) return;
+  if (!card || !transcript || !callTime) return;
 
   const bubbles = transcript.querySelectorAll(".transcript-bubble");
   const events = transcript.querySelectorAll(".event");
@@ -40,7 +54,6 @@
   const stop = () => {
     playing = false;
     card.dataset.state = "idle";
-    demoBtn.setAttribute("aria-pressed", "false");
     if (tickInterval) clearInterval(tickInterval);
     tickInterval = null;
   };
@@ -49,7 +62,6 @@
     reset();
     playing = true;
     card.dataset.state = "playing";
-    demoBtn.setAttribute("aria-pressed", "true");
 
     tickInterval = setInterval(() => {
       elapsed += 1;
@@ -58,9 +70,7 @@
 
     bubbles.forEach((bubble) => {
       const delay = parseInt(bubble.dataset.delay || "0", 10);
-      timers.push(
-        setTimeout(() => bubble.classList.add("show"), delay)
-      );
+      timers.push(setTimeout(() => bubble.classList.add("show"), delay));
     });
 
     events.forEach((event) => {
@@ -68,27 +78,24 @@
       timers.push(setTimeout(() => event.classList.add("show"), delay));
     });
 
-    timers.push(
-      setTimeout(() => {
-        stop();
-      }, 7500)
-    );
+    timers.push(setTimeout(() => stop(), 7500));
   };
 
-  const toggle = () => {
-    if (playing) {
-      stop();
-    } else {
-      play();
-    }
+  // Phase 2 hook: replace the body of this function with the Retell Web
+  // Call SDK flow described at the top of this file. Keep the visual
+  // replay as a fallback for desktop until the SDK path is wired up.
+  const startCall = () => {
+    play();
   };
 
-  // The hero "Hear Jenna in action" CTA is wired up below in the audio
-  // demo IIFE — it scrolls to the real audio player and plays it.
-  // The on-card play button replays the scripted call-card animation.
-  ctrlPlay.addEventListener("click", toggle);
+  if (callBtn) {
+    callBtn.addEventListener("click", () => {
+      // Don't preventDefault — on mobile we want the tel: handoff to fire.
+      startCall();
+    });
+  }
 
-  // Auto-play once when the card enters the viewport (subtle "wow" moment)
+  // Auto-play once when the card enters the viewport (subtle "wow" moment).
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -292,22 +299,6 @@
 
   // ---- Initial paint ----
   updateUI(0);
-
-  // ---- "Hear Jenna in action" CTA in hero scrolls + plays this player ----
-  const heroBtn = document.getElementById("demoBtn");
-  if (heroBtn) {
-    heroBtn.addEventListener(
-      "click",
-      () => {
-        // Small delay to let the hero card animation start first.
-        setTimeout(() => {
-          demo.scrollIntoView({ behavior: "smooth", block: "center" });
-          if (!isPlaying) play();
-        }, 600);
-      },
-      { capture: false }
-    );
-  }
 })();
 
 // ============================================================
@@ -523,6 +514,51 @@
     try {
       localStorage.setItem(STORAGE_KEY, next);
     } catch (e) {}
+  });
+})();
+
+
+// ============================================================
+// Ripple buttons — port of magicui's RippleButton.
+// Any element with `.btn-ripple` spawns a circular ripple at the click
+// point that animates via the `btn-rippling` keyframe in styles.css.
+// Override the color per-button with `data-ripple-color="#ADD8E6"`.
+// ============================================================
+(function () {
+  const DEFAULT_COLOR = "#ffffff";
+  const DURATION_MS = 600;
+
+  function spawnRipple(host, event) {
+    const rect = host.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+
+    // For mouse/touch we have client coords; for keyboard activation
+    // (Enter/Space) clientX/Y are 0 — center the ripple in that case.
+    let x;
+    let y;
+    if (event && event.detail !== 0 && event.clientX !== undefined) {
+      x = event.clientX - rect.left - size / 2;
+      y = event.clientY - rect.top - size / 2;
+    } else {
+      x = rect.width / 2 - size / 2;
+      y = rect.height / 2 - size / 2;
+    }
+
+    const ripple = document.createElement("span");
+    ripple.className = "btn-ripple-effect";
+    ripple.style.width = `${size}px`;
+    ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    ripple.style.backgroundColor =
+      host.dataset.rippleColor || DEFAULT_COLOR;
+
+    host.appendChild(ripple);
+    setTimeout(() => ripple.remove(), DURATION_MS);
+  }
+
+  document.querySelectorAll(".btn-ripple").forEach((host) => {
+    host.addEventListener("click", (event) => spawnRipple(host, event));
   });
 })();
 

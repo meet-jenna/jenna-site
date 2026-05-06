@@ -232,20 +232,21 @@ button {
 }
 
 .btn-primary {
-  background: var(--fg);
-  color: var(--ink);
+  background: var(--surface-2);
+  color: var(--fg);
+  border: 1px solid var(--hairline-strong);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.55) inset,
-    0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 12px 30px -10px var(--btn-primary-glow);
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 6px 18px -10px var(--shadow-soft);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
+  background: var(--surface);
+  border-color: var(--overlay-border);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 18px 36px -10px var(--btn-primary-glow-strong);
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 12px 28px -12px var(--shadow-strong);
 }
 
 .btn-ghost {
@@ -280,6 +281,46 @@ button {
   background: var(--accent);
   color: var(--ink-on-accent);
   flex-shrink: 0;
+}
+
+/* Hero "Book a demo" CTA — clean white pill with dark text and arrow.
+   The rotating rainbow border treatment was removed; placeholder kept
+   so we can re-add it later without renaming the class. */
+.border-beam-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  height: 44px;
+  padding: 0 1.75rem;
+  border-radius: 0.625rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.18s var(--ease), background 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+
+.border-beam-btn:hover {
+  transform: translateY(-1px);
+  background: #f4f4f5;
+}
+
+.border-beam-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+.border-beam-btn:focus-visible {
+  outline: 2px solid hsl(210 100% 65%);
+  outline-offset: 3px;
 }
 
 .play-icon svg {
@@ -593,13 +634,9 @@ button {
     padding-top: 7rem;
   }
   .hero-cta {
-    width: 100%;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     margin-bottom: 3rem;
-  }
-  .hero-cta .btn {
-    width: 100%;
   }
 }
 
@@ -672,31 +709,51 @@ button {
 }
 
 .call-name {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--fg);
+  display: flex;
+  align-items: center;
+  line-height: 1;
 }
+
+/* Logo replaces the "Jenna" wordmark. Two PNGs are swapped by theme
+   so the mark stays legible against the call card background. */
+.call-name-logo {
+  display: block;
+  height: 1.05rem;
+  width: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.call-name-logo-dark { display: none; }
+[data-theme="dark"] .call-name-logo-light { display: none; }
+[data-theme="dark"] .call-name-logo-dark  { display: block; }
 
 .call-time {
   font-variant-numeric: tabular-nums;
-  font-size: 0.9rem;
-  color: var(--accent);
+  font-size: 0.72rem;
+  color: var(--fg-soft);
   letter-spacing: 0.02em;
 }
 
 .call-status {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.65rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--fg-muted);
   background: var(--overlay-2);
   border: 1px solid var(--hairline);
   border-radius: var(--r-pill);
+}
+
+/* "Ready" pill — green tinted to signal Jenna is ready to take a call */
+.call-status-ready {
+  color: var(--live);
+  background: color-mix(in srgb, var(--live) 12%, transparent);
+  border-color: color-mix(in srgb, var(--live) 35%, var(--hairline));
 }
 
 .status-dot {
@@ -705,6 +762,11 @@ button {
   border-radius: 50%;
   background: var(--fg-faint);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.call-status-ready .status-dot {
+  background: var(--live);
+  box-shadow: 0 0 8px var(--live-glow);
 }
 
 .call-card[data-state="playing"] .status-dot {
@@ -749,58 +811,153 @@ button {
   50% { height: 85%; }
 }
 
-/* Call control row */
-.call-controls {
+/* "Tap to Call Jenna" CTA — uses the Magic UI Rainbow Button styling
+   (MIT-licensed, ported from React/Tailwind to vanilla CSS).
+   https://magicui.design/docs/components/rainbow-button
+   The 5-color HSL palette, 3-layer background-clip gradient trick,
+   under-glow ::before, and 2s linear background-position animation
+   are 1:1 ports of the source. The phone number is rendered as a
+   subtle link below the button. */
+:root {
+  --rainbow-color-1: hsl(0 100% 63%);
+  --rainbow-color-2: hsl(270 100% 63%);
+  --rainbow-color-3: hsl(210 100% 63%);
+  --rainbow-color-4: hsl(195 100% 63%);
+  --rainbow-color-5: hsl(90 100% 63%);
+  --rainbow-fill: #121213;
+  --rainbow-fill-fade: rgba(18, 18, 19, 0.6);
+  --rainbow-fg: #fff;
+}
+
+[data-theme="dark"] {
+  --rainbow-fill: #fff;
+  --rainbow-fill-fade: rgba(255, 255, 255, 0.6);
+  --rainbow-fg: #121213;
+}
+
+.call-cta-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
-.ctrl {
-  width: 44px;
+.rainbow-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
   height: 44px;
-  border-radius: 50%;
-  display: grid;
+  padding: 0 2rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--rainbow-fg);
+  border: 0.125rem solid transparent;
+  border-radius: 0.75rem;
+  outline: none;
+  background:
+    linear-gradient(var(--rainbow-fill), var(--rainbow-fill)),
+    linear-gradient(
+      var(--rainbow-fill) 50%,
+      var(--rainbow-fill-fade) 80%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      var(--rainbow-color-1),
+      var(--rainbow-color-5),
+      var(--rainbow-color-3),
+      var(--rainbow-color-4),
+      var(--rainbow-color-2)
+    );
+  background-size: 200%;
+  background-clip: padding-box, border-box, border-box;
+  background-origin: border-box;
+  animation: rainbow 2s infinite linear;
+  transition: transform 0.18s var(--ease);
+}
+
+.rainbow-btn::before {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  z-index: -1;
+  width: 60%;
+  height: 20%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    var(--rainbow-color-1),
+    var(--rainbow-color-5),
+    var(--rainbow-color-3),
+    var(--rainbow-color-4),
+    var(--rainbow-color-2)
+  );
+  background-size: 200%;
+  filter: blur(0.75rem);
+  animation: rainbow 2s infinite linear;
+}
+
+.rainbow-btn:hover {
+  color: var(--rainbow-fg);
+  transform: translateY(-1px);
+}
+
+.rainbow-btn:active {
+  transform: translateY(0);
+}
+
+.rainbow-btn:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rainbow-color-3) 60%, transparent);
+}
+
+.rainbow-btn-icon {
+  display: inline-grid;
   place-items: center;
-  background: var(--overlay-2);
-  border: 1px solid var(--hairline);
-  color: var(--fg-muted);
-  transition: background 0.18s var(--ease), color 0.18s var(--ease),
-    transform 0.18s var(--ease), border-color 0.18s var(--ease);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  pointer-events: none;
 }
 
-.ctrl:hover {
+.rainbow-btn-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.call-cta-phone {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--fg-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: color 0.18s var(--ease);
+}
+
+.call-cta-phone:hover {
   color: var(--fg);
-  background: var(--overlay-5);
-  border-color: var(--overlay-border);
 }
 
-.ctrl svg {
-  width: 18px;
-  height: 18px;
+@keyframes rainbow {
+  0%   { background-position: 0%; }
+  100% { background-position: 200%; }
 }
 
-.ctrl-play {
-  width: 56px;
-  height: 56px;
-  background: var(--accent);
-  color: var(--ink-on-accent);
-  border-color: transparent;
-  box-shadow: 0 8px 24px -6px var(--accent-glow);
+@media (prefers-reduced-motion: reduce) {
+  .rainbow-btn,
+  .rainbow-btn::before {
+    animation: none;
+  }
 }
-
-.ctrl-play:hover {
-  background: var(--accent-bright);
-  color: var(--ink-on-accent);
-  transform: scale(1.04);
-}
-
-.ctrl-play svg { width: 22px; height: 22px; }
-.ctrl-icon-pause { display: none; }
-
-.call-card[data-state="playing"] .ctrl-icon-play { display: none; }
-.call-card[data-state="playing"] .ctrl-icon-pause { display: block; }
 
 /* Transcript side */
 .call-transcript {
@@ -1428,24 +1585,254 @@ button {
   margin-top: 1px;
 }
 
-/* SMS bubble */
-.sms-bubble {
-  margin-top: auto;
-  padding: 0.75rem 0.95rem;
-  background: var(--surface-translucent);
-  border: 1px solid var(--hairline);
-  border-radius: 14px;
-  border-bottom-left-radius: 4px;
-  font-size: 0.83rem;
-  line-height: 1.45;
-  color: var(--fg);
-  position: relative;
-  align-self: flex-start;
-  max-width: 95%;
+/* ============================================================
+   Remembers-every-caller card — folder header, animated ColorPanels
+   visual on the left, stack of returning-caller profile cards on the
+   right. Shader is the same as cult-ui's HeroColorPanels, just sized
+   to fit and mounted via @paper-design/shaders.
+   ============================================================ */
+.memory-folder-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
-.sms-text {
+/* Two-column body: shader visual | profile list */
+.memory-split {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.95fr) minmax(0, 1.35fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.memory-visual {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 220px;
+  border: 1px solid var(--hairline);
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(237, 64, 179, 0.55), transparent 60%),
+    radial-gradient(120% 90% at 80% 80%, rgba(110, 247, 204, 0.45), transparent 60%),
+    linear-gradient(135deg, #1a0033 0%, #060611 100%);
+}
+
+/* The shader package mounts its canvas absolutely inside this element */
+.memory-shader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.memory-visual-fallback {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  background:
+    conic-gradient(from 200deg at 50% 50%,
+      #ed40b3 0deg,
+      #b054de 90deg,
+      #6ef7cc 180deg,
+      #adfa1e 260deg,
+      #ed40b3 360deg);
+  filter: blur(28px) saturate(1.1);
+  opacity: 1;
+  transition: opacity 0.4s var(--ease);
+  animation: memory-fallback-spin 18s linear infinite;
+}
+
+/* Once the shader mounts, fade the fallback out */
+.memory-shader[data-mounted="true"] ~ .memory-visual-fallback {
+  opacity: 0;
+}
+
+@keyframes memory-fallback-spin {
+  to { transform: rotate(360deg); }
+}
+
+.memory-visual-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% 0%, transparent 40%, rgba(0, 0, 0, 0.25) 100%),
+    linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.memory-visual-label {
+  position: absolute;
+  z-index: 3;
+  left: 0.7rem;
+  bottom: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem 0.3rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(10, 10, 14, 0.55);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.memory-visual-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6ef7cc;
+  box-shadow: 0 0 8px #6ef7cc;
+  animation: memory-pulse 1.8s ease-in-out infinite;
+}
+
+/* Profile list */
+.memory-profiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.memory-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--surface-translucent);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  min-width: 0;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.memory-profile:hover {
+  border-color: var(--hairline-strong);
+  transform: translateY(-1px);
+}
+
+.memory-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+  flex-shrink: 0;
+  background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
+  box-shadow: 0 0 12px -3px var(--accent-glow);
+}
+
+/* Tones drawn from the shader's own palette so the card feels cohesive */
+.memory-profile-avatar[data-tone="pink"] {
+  background: linear-gradient(140deg, #ed40b3, #b054de);
+  box-shadow: 0 0 12px -3px rgba(237, 64, 179, 0.55);
+  color: #fff;
+}
+.memory-profile-avatar[data-tone="teal"] {
+  background: linear-gradient(140deg, #6ef7cc, #2a9d8f);
+  box-shadow: 0 0 12px -3px rgba(110, 247, 204, 0.55);
+  color: #08221c;
+}
+.memory-profile-avatar[data-tone="lime"] {
+  background: linear-gradient(140deg, #adfa1e, #6ec80a);
+  box-shadow: 0 0 12px -3px rgba(173, 250, 30, 0.55);
+  color: #1d2c00;
+}
+.memory-profile-avatar[data-tone="violet"] {
+  background: linear-gradient(140deg, #b054de, #6e34a8);
+  box-shadow: 0 0 12px -3px rgba(176, 84, 222, 0.55);
+  color: #fff;
+}
+
+.memory-profile-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.memory-profile-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.memory-profile-note {
+  font-size: 0.74rem;
+  color: var(--fg-soft);
+  line-height: 1.3;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.memory-profile-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6ef7cc;
+  box-shadow: 0 0 8px #6ef7cc;
+  margin-left: 0.25rem;
+  flex-shrink: 0;
+  animation: memory-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes memory-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-visual-fallback,
+  .memory-visual-dot,
+  .memory-profile-pulse { animation: none; }
+}
+
+/* Stack visual + profiles when the card narrows on tablet/mobile */
+@media (max-width: 720px) {
+  .memory-split {
+    grid-template-columns: 1fr;
+  }
+  .memory-visual {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+
+/* SMS screenshot — pre-cropped iMessage bubble PNG with transparent
+   surround. The figure stays a transparent container so the bubble's
+   own rounded corners + tail show through against the card surface;
+   the soft drop shadow follows the alpha channel via filter() so it
+   hugs the bubble shape rather than a rectangle. */
+.sms-screenshot {
+  margin: auto 0 0;
+  padding: 0;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.sms-screenshot img {
   display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 22px rgba(20, 20, 60, 0.18));
 }
 
 /* Payment card */

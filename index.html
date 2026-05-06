@@ -86,24 +86,16 @@
           </h1>
 
           <p class="hero-sub">
-            Jenna answers your phone, takes orders straight into your POS, books reservations, and handles payments — 24/7. She plugs into your existing business line and sounds completely human.
+            Connects to your phone. Handles every call start to finish — orders, reservations, payments, and more.
           </p>
 
           <div class="hero-cta">
-            <a class="btn btn-primary btn-lg" href="#book">
+            <a class="border-beam-btn" href="#book">
               Book a demo
               <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3 8h10m0 0L9 4m4 4l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </a>
-            <button class="btn btn-ghost btn-lg" type="button" id="demoBtn" aria-controls="callCard" aria-pressed="false">
-              <span class="play-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" fill="none">
-                  <path d="M5 3.5v9l8-4.5-8-4.5z" fill="currentColor" />
-                </svg>
-              </span>
-              Hear Jenna in action
-            </button>
           </div>
 
           <!-- Live call visualization -->
@@ -114,13 +106,28 @@
             <div class="call-phone">
               <div class="call-phone-header">
                 <div class="call-meta">
-                  <span class="call-tag">Incoming · Marco's Pizzeria</span>
-                  <div class="call-name">Jenna</div>
+                  <div class="call-name" aria-label="Jenna">
+                    <img
+                      class="call-name-logo call-name-logo-light"
+                      src="assets/logos/jenna-logo-blue.png"
+                      alt="Jenna"
+                      width="1024"
+                      height="300"
+                    />
+                    <img
+                      class="call-name-logo call-name-logo-dark"
+                      src="assets/logos/jenna-logo-white.png"
+                      alt=""
+                      aria-hidden="true"
+                      width="1024"
+                      height="300"
+                    />
+                  </div>
                   <div class="call-time" id="callTime">00:00</div>
                 </div>
-                <div class="call-status">
+                <div class="call-status call-status-ready">
                   <span class="status-dot" aria-hidden="true"></span>
-                  <span>On call</span>
+                  <span>Ready</span>
                 </div>
               </div>
 
@@ -133,17 +140,22 @@
                 <span></span><span></span><span></span><span></span><span></span>
               </div>
 
-              <div class="call-controls">
-                <button class="ctrl ctrl-mute" type="button" aria-label="Mute">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z" stroke="currentColor" stroke-width="1.5"/><path d="M5 11a7 7 0 0014 0M12 18v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </button>
-                <button class="ctrl ctrl-play" type="button" id="ctrlPlay" aria-label="Play demo">
-                  <svg class="ctrl-icon ctrl-icon-play" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7L8 5z" fill="currentColor"/></svg>
-                  <svg class="ctrl-icon ctrl-icon-pause" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>
-                </button>
-                <button class="ctrl ctrl-keypad" type="button" aria-label="Keypad">
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="1.4" fill="currentColor"/><circle cx="12" cy="6" r="1.4" fill="currentColor"/><circle cx="18" cy="6" r="1.4" fill="currentColor"/><circle cx="6" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18" cy="12" r="1.4" fill="currentColor"/><circle cx="6" cy="18" r="1.4" fill="currentColor"/><circle cx="12" cy="18" r="1.4" fill="currentColor"/><circle cx="18" cy="18" r="1.4" fill="currentColor"/></svg>
-                </button>
+              <div class="call-cta-row">
+                <a
+                  class="rainbow-btn"
+                  id="callJennaBtn"
+                  href="tel:+16318007774"
+                  data-phone="+16318007774"
+                  aria-label="Tap to call Jenna at (631) 800-7774"
+                >
+                  <span class="rainbow-btn-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M5 4h3l2 5-2.5 1.5a11 11 0 005.5 5.5L14.5 13.5 19.5 16v3a2 2 0 01-2 2A14 14 0 014 6.5a2 2 0 012-2.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  Tap to Call Jenna
+                </a>
+                <a class="call-cta-phone" href="tel:+16318007774">(631) 800-7774</a>
               </div>
             </div>
 
@@ -182,7 +194,6 @@
           <!-- Trust micro-row -->
           <ul class="trust-row" aria-label="Highlights">
             <li><span class="trust-num">95%</span><span class="trust-label">order accuracy</span></li>
-            <li><span class="trust-num">~2 wks</span><span class="trust-label">to live</span></li>
             <li><span class="trust-num">∞</span><span class="trust-label">simultaneous calls</span></li>
             <li><span class="trust-num">24/7</span><span class="trust-label">never on break</span></li>
           </ul>
@@ -253,33 +264,6 @@
           </article>
 
           <!-- Row 2 -->
-          <article class="bento-card bento-2x" role="listitem">
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M3.5 9.5h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <h3 class="card-title">Books reservations.</h3>
-            <p class="card-body">Sends a reservation link straight to the caller — they tap, they're booked, you're set.</p>
-
-            <!-- Mini calendar -->
-            <div class="mini-cal" aria-hidden="true">
-              <div class="mini-cal-head">FRI · MAR 28</div>
-              <div class="mini-cal-slots">
-                <span class="slot">6:00</span>
-                <span class="slot">6:30</span>
-                <span class="slot slot-active">7:00</span>
-                <span class="slot">7:30</span>
-                <span class="slot">8:00</span>
-              </div>
-              <div class="mini-cal-confirm">
-                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Table for 4 · Confirmed
-              </div>
-            </div>
-          </article>
-
           <article class="bento-card bento-2x bento-feature" role="listitem">
             <div class="card-tag">
               <span class="card-tag-dot"></span>
@@ -314,27 +298,64 @@
           </article>
 
           <!-- Row 3 -->
-          <article class="bento-card bento-1x" role="listitem">
-            <div class="card-icon" aria-hidden="true">
+          <article class="bento-card bento-2x bento-memory bento-feature" role="listitem">
+            <div class="card-icon memory-folder-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M4 21a8 8 0 0116 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M3 7.5a2 2 0 0 1 2-2h4.2a1.5 1.5 0 0 1 1.05.43l1.5 1.45a1.5 1.5 0 0 0 1.05.43H19a2 2 0 0 1 2 2v8.7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M3.5 11h17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <h3 class="card-title">Remembers every caller.</h3>
             <p class="card-body">Their name. Their orders. Their preferences. Year after year.</p>
 
-            <!-- Returning customer card -->
-            <div class="customer-card" aria-hidden="true">
-              <div class="customer-avatar">M</div>
-              <div class="customer-meta">
-                <div class="customer-name">Mark Devlin</div>
-                <div class="customer-note">4th visit · usually large pepperoni · no olives</div>
+            <div class="memory-split">
+              <!-- Animated ColorPanels shader visual -->
+              <div class="memory-visual" aria-hidden="true">
+                <div class="memory-shader" id="memoryShader"></div>
+                <div class="memory-visual-fallback"></div>
+                <div class="memory-visual-vignette"></div>
+                <div class="memory-visual-label">
+                  <span class="memory-visual-dot"></span>
+                  <span>Caller memory · live</span>
+                </div>
               </div>
+
+              <!-- Stacked returning-customer profile cards -->
+              <ul class="memory-profiles" aria-label="Returning callers">
+                <li class="memory-profile">
+                  <div class="memory-profile-avatar" data-tone="pink">M</div>
+                  <div class="memory-profile-meta">
+                    <div class="memory-profile-name">Mark Devlin</div>
+                    <div class="memory-profile-note">4th visit · large pepperoni · no olives</div>
+                  </div>
+                  <span class="memory-profile-pulse" aria-hidden="true"></span>
+                </li>
+                <li class="memory-profile">
+                  <div class="memory-profile-avatar" data-tone="teal">S</div>
+                  <div class="memory-profile-meta">
+                    <div class="memory-profile-name">Sara Patel</div>
+                    <div class="memory-profile-note">12th visit · vegan · usually Sunday 6pm</div>
+                  </div>
+                </li>
+                <li class="memory-profile">
+                  <div class="memory-profile-avatar" data-tone="lime">T</div>
+                  <div class="memory-profile-meta">
+                    <div class="memory-profile-name">Tom Russo</div>
+                    <div class="memory-profile-note">birthday Aug 14 · prefers booth · party of 6</div>
+                  </div>
+                </li>
+                <li class="memory-profile">
+                  <div class="memory-profile-avatar" data-tone="violet">J</div>
+                  <div class="memory-profile-meta">
+                    <div class="memory-profile-name">Jenna Kim</div>
+                    <div class="memory-profile-note">gluten-free · always orders tiramisu · tips 22%</div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </article>
 
-          <article class="bento-card bento-1x" role="listitem">
+          <article class="bento-card bento-2x" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <rect x="3.5" y="5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -344,12 +365,18 @@
             <h3 class="card-title">Sends SMS confirmations.</h3>
             <p class="card-body">Every order, every time. Callers get a text the moment they hang up.</p>
 
-            <div class="sms-bubble" aria-hidden="true">
-              <span class="sms-text">Marco's: Order #4421 confirmed — large pepperoni, Caesar, knots. Pickup 8:05.</span>
-            </div>
+            <figure class="sms-screenshot" aria-hidden="true">
+              <img
+                src="assets/screenshots/sms-confirmation.png"
+                alt="Text from Jenna: Hi Anthony, here's your order at Vito's Northport — Chicken Marsala with mixed vegetables, 6 garlic knots, Round pepperoni pie. — Jenna"
+                width="901"
+                height="621"
+                decoding="async"
+              />
+            </figure>
           </article>
 
-          <article class="bento-card bento-1x" role="listitem">
+          <article class="bento-card bento-2x" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <rect x="3.5" y="6" width="17" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
@@ -372,7 +399,7 @@
             </div>
           </article>
 
-          <article class="bento-card bento-1x" role="listitem">
+          <article class="bento-card bento-2x" role="listitem">
             <div class="card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M4 12h12m0 0l-4-4m4 4l-4 4M16 6h4v12h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -495,7 +522,7 @@
           </div>
 
           <div class="stat stat-feature" role="listitem">
-            <div class="stat-num"><em>0</em><span class="stat-unit">%</span></div>
+            <div class="stat-num"><em>17</em><span class="stat-unit">%</span></div>
             <div class="stat-label">Of callers can spot the AI</div>
             <p class="stat-detail">Most have a full conversation thinking they're talking to your hostess. They aren't.</p>
           </div>
@@ -1284,5 +1311,63 @@
     </footer>
 
     <script src="main.js" defer></script>
+    <script type="module">
+      // Mount the ColorPanels shader (same visual used by cult-ui's
+      // HeroColorPanels, just sized to fit the bento card). Loaded from the
+      // ESM CDN so we don't need a bundler.
+      import {
+        ShaderMount,
+        colorPanelsFragmentShader,
+        getShaderColorFromString,
+      } from "https://esm.sh/@paper-design/shaders@0.0.76?target=es2020";
+
+      const host = document.getElementById("memoryShader");
+      if (host) {
+        // Exact parameters from the cult-ui demo, mapped to shader uniforms.
+        const uniforms = {
+          u_colors: [
+            getShaderColorFromString("#ed40b3"),
+            getShaderColorFromString("#6ef7cc"),
+            getShaderColorFromString("#adfa1e"),
+            getShaderColorFromString("#b054de"),
+          ],
+          u_colorsCount: 4,
+          u_colorBack: getShaderColorFromString("#ffffff00"),
+          u_density: 5.03,
+          u_angle1: 0.68,
+          u_angle2: 0.28,
+          u_length: 1.13,
+          u_edges: true,
+          u_blur: 0.25,
+          u_fadeIn: 0.85,
+          u_fadeOut: 0.3,
+          u_gradient: 0.56,
+          u_fit: 1, // contain — matches @paper-design/shaders default
+          u_scale: 0.96,
+          u_rotation: 180,
+          u_offsetX: 0,
+          u_offsetY: 0,
+          u_originX: 0.5,
+          u_originY: 0.5,
+          u_worldWidth: 0,
+          u_worldHeight: 0,
+        };
+
+        try {
+          new ShaderMount(
+            host,
+            colorPanelsFragmentShader,
+            uniforms,
+            undefined,
+            4, // speed — matches demo `speed: 4`
+            0
+          );
+          host.dataset.mounted = "true";
+        } catch (err) {
+          host.dataset.unsupported = "true";
+          console.warn("[memory-shader] failed to mount", err);
+        }
+      }
+    </script>
   </body>
 </html>
