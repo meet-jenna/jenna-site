@@ -1,65 +1,39 @@
-import { Button } from '@/components/ui/button'
-import { useTheme } from '@/hooks/useTheme'
+import { Nav } from '@/components/layout/Nav'
 
 export default function App() {
-  const { theme, toggle } = useTheme()
-
   return (
-    <main className="min-h-screen flex items-center justify-center p-8 bg-bg text-fg">
-      <div className="flex flex-col items-center gap-8 text-center">
-        <span className="text-xs uppercase tracking-[0.2em] text-fg-soft">
-          Phase 1 · setup smoke test
-        </span>
+    <>
+      <Nav />
 
-        <h1 className="font-sans text-6xl md:text-7xl font-medium leading-[1.05] tracking-[-0.02em]">
-          The AI Hostess<br />
-          That{' '}
-          <em className="font-serif italic font-normal text-accent">
-            Never Misses a Call.
-          </em>
-        </h1>
-
-        <p className="max-w-xl text-lg text-fg-muted">
-          Tokens resolve. Dark mode flips on{' '}
-          <code className="rounded-sm bg-surface-2 px-1.5 py-0.5 text-sm text-fg">
-            [data-theme="dark"]
-          </code>
-          . Fonts load (Inter + Instrument Serif). Shadcn Button below.
-        </p>
-
-        <div className="flex items-center gap-3">
-          <Button onClick={toggle}>
-            Switch to {theme === 'dark' ? 'light' : 'dark'}
-          </Button>
-          <span className="text-sm text-fg-soft">
-            current: <strong className="text-fg">{theme}</strong>
+      {/* Placeholder body for scroll-island stress-testing.
+          Real sections land here in subsequent Phase-2 steps. */}
+      <main className="min-h-screen pt-32 px-6 bg-bg text-fg">
+        <div className="mx-auto max-w-3xl flex flex-col items-center gap-6 text-center">
+          <span className="text-xs uppercase tracking-[0.2em] text-fg-soft">
+            Phase 2.1 · nav (rebuilt)
           </span>
-        </div>
+          <h1 className="font-sans text-4xl md:text-5xl font-medium leading-[1.1] tracking-[-0.02em]">
+            Filled primary CTA · floating-island scroll · hover-chip links.
+          </h1>
+          <p className="text-fg-muted max-w-xl">
+            Scroll past 8px → the bar contracts into a centered pill with shadow
+            and translucent backdrop. Scroll back → it expands. Resize the window —
+            below 720px the floating state is disabled and the bar stays full-width.
+          </p>
+          <button
+            type="button"
+            className="btn btn-soft"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            Scroll to top
+          </button>
 
-        <div className="grid grid-cols-4 gap-3 mt-4">
-          {(['bg', 'surface', 'surface-2', 'accent'] as const).map((t) => (
-            <div
-              key={t}
-              className="flex flex-col items-center gap-2"
-              title={`var(--${t === 'surface-2' ? 'surface-2' : t})`}
-            >
-              <div
-                className={
-                  'h-12 w-12 rounded-md border border-hairline-strong ' +
-                  (t === 'bg'
-                    ? 'bg-bg'
-                    : t === 'surface'
-                    ? 'bg-surface'
-                    : t === 'surface-2'
-                    ? 'bg-surface-2'
-                    : 'bg-accent')
-                }
-              />
-              <span className="text-xs text-fg-soft">--{t}</span>
-            </div>
-          ))}
+          {/* 3 viewports of scroll runway so we can really test float ↔ top. */}
+          <div className="h-[300vh] w-full" aria-hidden="true" />
+
+          <p className="text-fg-soft text-sm">End of placeholder content.</p>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
