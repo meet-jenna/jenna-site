@@ -1,6 +1,7 @@
 import { Nav } from '@/components/layout/Nav'
 import { Hero } from '@/components/sections/Hero'
 import { BentoGrid } from '@/components/sections/BentoGrid'
+import { Pricing } from '@/components/sections/Pricing'
 
 export default function App() {
   return (
@@ -8,9 +9,10 @@ export default function App() {
       <Nav />
       <Hero />
       <BentoGrid />
+      <Pricing />
 
       {/* Spacer until remaining sections land. */}
-      <div className="h-[100vh]" aria-hidden="true" />
+      <div className="h-[60vh]" aria-hidden="true" />
     </>
   )
 }
