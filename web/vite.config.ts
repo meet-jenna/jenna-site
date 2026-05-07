@@ -9,5 +9,24 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+    // Force a single copy of React across all dependencies. Without
+    // this, Vite occasionally pre-bundles React under two different
+    // hashes when a dependency's "use client" directive triggers a
+    // separate optimization pass — causing the React-19/Vite "Invalid
+    // hook call" / "Cannot read properties of null (reading 'useContext')"
+    // crash inside Radix UI hooks (and earlier with framer-motion).
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    // Pre-bundle the Radix primitives we use eagerly so they share the
+    // same React copy from the start.
+    include: [
+      'react',
+      'react-dom',
+      'react-dom/client',
+      'react/jsx-runtime',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-slot',
+    ],
   },
 })

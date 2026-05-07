@@ -1,7 +1,9 @@
+import { ShaderCard } from '@/components/widgets/ShaderCard'
+
 // Section 2 — "What Jenna does" bento grid. Markup mirrors
-// /index.html lines 206–420. The memory card's WebGL shader is
-// stubbed for now (only the CSS conic-gradient fallback renders);
-// the real <ShaderCard> mounts in Phase 2.10.
+// /index.html lines 206–420. The memory card's WebGL shader mounts
+// via <ShaderCard /> (Phase 2.10); the CSS conic-gradient fallback
+// shows briefly before the shader's `data-mounted="true"` fades it.
 
 export function BentoGrid() {
   return (
@@ -136,8 +138,7 @@ export function BentoGrid() {
 
           <div className="memory-split">
             <div className="memory-visual" aria-hidden="true">
-              {/* Phase 2.10 mounts the @paper-design/shaders canvas here. */}
-              <div className="memory-shader" id="memoryShader" />
+              <ShaderCard />
               <div className="memory-visual-fallback" />
               <div className="memory-visual-vignette" />
               <div className="memory-visual-label">
