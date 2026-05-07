@@ -15,12 +15,20 @@
   color-scheme: light;
 
   /* Surface */
-  --bg: #f5f6fb;
+  --bg: #fafafa;
   --bg-elev: #fafbfd;
   --bg-elev-2: #ffffff;
   --surface: #ffffff;
-  --surface-2: #eef0f6;
+  --surface-2: #f5f5f5;
   --surface-translucent: rgba(238, 240, 246, 0.78);
+
+  /* Section backgrounds — paint per-section for visual rhythm.
+     Sections rotate main → contrast → paper → main → … so adjacent
+     sections always step. Steps are intentionally subtle (~5 units
+     between each tier) so the page reads as "all near-white, but
+     differentiated" rather than zebra-striped. */
+  --bg-contrast: #f5f5f5;
+  --bg-paper: #ffffff;
   --hairline: rgba(20, 20, 60, 0.06);
   --hairline-strong: rgba(20, 20, 60, 0.12);
 
@@ -30,11 +38,15 @@
   --fg-soft: #7e7f95;
   --fg-faint: #a8a9bd;
 
-  /* Brand */
-  --accent: #1c00ff;
-  --accent-bright: #5b3dff;
-  --accent-deep: #0c00a8;
-  --accent-glow: rgba(28, 0, 255, 0.18);
+  /* Brand — monochrome. The blue accent was retired; --accent now points
+     at primary text color so italic serif emphases, dots, numbers, and
+     selected states all read in the foreground tone. The bright/deep
+     pair drives every "Jenna" gradient (brand-mark, avatars, waveforms)
+     as a soft porcelain → slate gradient instead of blue. */
+  --accent: #0a0a14;
+  --accent-bright: #e7e9f2;
+  --accent-deep: #9a9cae;
+  --accent-glow: rgba(20, 20, 60, 0.10);
 
   /* Status */
   --live: #0fa674;
@@ -65,8 +77,8 @@
   --btn-primary-glow: rgba(10, 10, 20, 0.18);
   --btn-primary-glow-strong: rgba(10, 10, 20, 0.26);
 
-  --card-tint: rgba(28, 0, 255, 0.025);
-  --card-edge: linear-gradient(180deg, rgba(28, 0, 255, 0.10), transparent 1px);
+  --card-tint: rgba(20, 20, 60, 0.03);
+  --card-edge: linear-gradient(180deg, rgba(20, 20, 60, 0.10), transparent 1px);
 
   --glow-opacity: 0.35;
 
@@ -121,6 +133,12 @@
   --surface: #181822;
   --surface-2: #22222e;
   --surface-translucent: rgba(8, 8, 10, 0.6);
+
+  /* Section backgrounds — dark equivalents stay above the card range
+     (#0d0d14 → #13131c) so cards always sink slightly into the section
+     for the inverse lift effect. */
+  --bg-contrast: #16161e;
+  --bg-paper: #1f1f2a;
   --hairline: rgba(220, 220, 255, 0.07);
   --hairline-strong: rgba(220, 220, 255, 0.13);
 
@@ -129,7 +147,14 @@
   --fg-soft: #7e7f95;
   --fg-faint: #52536a;
 
-  --accent-glow: rgba(28, 0, 255, 0.40);
+  /* Brand — dark theme. Accent inverts to off-white so italic emphases,
+     dots, and selected states stay legible against the near-black
+     background. The bright/deep gradient pair flips to graphite →
+     near-black so brand-marks/avatars read as embossed pebbles. */
+  --accent: #f4f5fb;
+  --accent-bright: #3a3a48;
+  --accent-deep: #13131c;
+  --accent-glow: rgba(244, 245, 251, 0.18);
 
   --live: #22d3a4;
   --live-glow: rgba(34, 211, 164, 0.45);
@@ -157,8 +182,8 @@
   --btn-primary-glow: rgba(247, 245, 241, 0.28);
   --btn-primary-glow-strong: rgba(247, 245, 241, 0.36);
 
-  --card-tint: rgba(28, 0, 255, 0.10);
-  --card-edge: linear-gradient(180deg, rgba(28, 0, 255, 0.18), transparent 1px);
+  --card-tint: rgba(255, 255, 255, 0.04);
+  --card-edge: linear-gradient(180deg, rgba(255, 255, 255, 0.10), transparent 1px);
 
   --glow-opacity: 0.55;
 
@@ -220,11 +245,6 @@
    Keyframes — 10 ported verbatim from /styles.css.
    Tailwind has matching `animate-*` aliases (see tailwind.config.js).
    ============================================================ */
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%      { transform: scale(1.3); opacity: 0.6; }
-}
-
 @keyframes wave {
   0%, 100% { height: 20%; }
   50%      { height: 100%; }
@@ -387,6 +407,47 @@
     transform: translateX(2px);
   }
 
+  /* Hero "Book a demo" CTA — clean white pill with dark text and arrow.
+     Ported verbatim from feat/v4 styles.css. The rotating-rainbow border
+     treatment was removed upstream; the placeholder name is kept so we
+     can re-add it later without renaming the class. Hardcoded colors
+     are intentional — this CTA always reads as "white pill, dark ink"
+     in both themes (matches the original design). */
+  .border-beam-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55em;
+    height: 44px;
+    padding: 0 1.75rem;
+    border-radius: 0.625rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.18s var(--ease),
+      background 0.18s var(--ease),
+      border-color 0.18s var(--ease);
+  }
+
+  .border-beam-btn:hover {
+    transform: translateY(-1px);
+    background: #f4f4f5;
+  }
+
+  .border-beam-btn:focus-visible {
+    outline: 2px solid hsl(210 100% 65%);
+    outline-offset: 3px;
+  }
+
   /* ----------------------------------------------------------
      Nav (.nav-bar wrapper + .nav-inner content; .brand, .brand-logo,
      .nav-links, .nav-actions, .nav-cta, .theme-toggle, .theme-icon)
@@ -468,11 +529,12 @@
   .hero {
     position: relative;
     min-height: 100vh;
-    padding: 9rem 1.5rem 6rem;
+    padding: 12rem 1.5rem 6rem;
     display: flex;
     justify-content: center;
     isolation: isolate;
     overflow: hidden;
+    background: var(--bg);
   }
 
   .hero-bg {
@@ -498,7 +560,16 @@
     background: radial-gradient(
       closest-side,
       var(--accent-glow) 0%,
-      rgba(28, 0, 255, 0.08) 55%,
+      rgba(20, 20, 60, 0.05) 55%,
+      transparent 80%
+    );
+  }
+
+  [data-theme="dark"] .glow-a {
+    background: radial-gradient(
+      closest-side,
+      var(--accent-glow) 0%,
+      rgba(255, 255, 255, 0.08) 55%,
       transparent 80%
     );
   }
@@ -510,7 +581,7 @@
     height: 600px;
     background: radial-gradient(
       closest-side,
-      rgba(120, 90, 220, 0.18) 0%,
+      var(--accent-glow) 0%,
       transparent 75%
     );
     opacity: calc(var(--glow-opacity) + 0.15);
@@ -762,6 +833,7 @@
     position: relative;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
+    background: var(--bg-contrast);
   }
 
   .features-bg {
@@ -783,7 +855,7 @@
     opacity: 0.35;
     background: radial-gradient(
       closest-side,
-      rgba(120, 90, 220, 0.18) 0%,
+      var(--accent-glow) 0%,
       transparent 70%
     );
   }
@@ -1230,7 +1302,8 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.6rem;
     min-width: 0;
   }
 
@@ -1239,7 +1312,7 @@
     display: flex;
     align-items: center;
     gap: 0.7rem;
-    padding: 0.6rem 0.8rem;
+    padding: 0.75rem 0.85rem;
     background: var(--surface-translucent);
     border: 1px solid var(--hairline);
     border-radius: var(--r-md);
@@ -1422,6 +1495,7 @@
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     overflow: hidden;
+    background: var(--bg-paper);
   }
 
   .pricing-bg {
@@ -1640,6 +1714,7 @@
     isolation: isolate;
     overflow: hidden;
     text-align: center;
+    background: var(--bg);
   }
 
   .finale-bg {
@@ -1671,7 +1746,7 @@
     width: 600px;
     height: 600px;
     opacity: 0.45;
-    background: radial-gradient(closest-side, rgba(120, 90, 220, 0.15), transparent 75%);
+    background: radial-gradient(closest-side, var(--accent-glow), transparent 75%);
   }
 
   .finale-inner {
@@ -1925,6 +2000,7 @@
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     overflow: hidden;
+    background: var(--bg-contrast);
   }
 
   .savings-bg {
@@ -2285,9 +2361,10 @@
      ---------------------------------------------------------- */
   .customize {
     position: relative;
-    padding: 7rem 1.5rem 8rem;
+    padding: 7rem 1.5rem;
     isolation: isolate;
     overflow: hidden;
+    background: var(--bg);
   }
 
   .customize-bg {
@@ -2306,13 +2383,13 @@
     border-radius: 50%;
     filter: blur(160px);
     opacity: 0.28;
-    background: radial-gradient(closest-side, rgba(120, 90, 220, 0.18) 0%, transparent 70%);
+    background: radial-gradient(closest-side, var(--accent-glow) 0%, transparent 70%);
   }
 
   .config {
     position: relative;
     max-width: 1100px;
-    margin: 0 auto 4rem;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 290px 1fr;
     background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
@@ -2801,11 +2878,21 @@
 
   .voice-card.is-selected {
     background:
-      radial-gradient(circle at 100% 0%, rgba(28, 0, 255, 0.12), transparent 70%),
+      radial-gradient(circle at 100% 0%, rgba(20, 20, 60, 0.05), transparent 70%),
       var(--surface-translucent);
-    border-color: rgba(28, 0, 255, 0.45);
+    border-color: rgba(20, 20, 60, 0.25);
     box-shadow:
-      0 0 0 1px rgba(28, 0, 255, 0.25),
+      0 0 0 1px rgba(20, 20, 60, 0.12),
+      0 12px 30px -12px var(--accent-glow);
+  }
+
+  [data-theme="dark"] .voice-card.is-selected {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05), transparent 70%),
+      var(--surface-translucent);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.13),
       0 12px 30px -12px var(--accent-glow);
   }
 
@@ -3047,8 +3134,12 @@
   .timeline-step.is-current .timeline-dot {
     background: var(--bg);
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(28, 0, 255, 0.15), 0 0 16px var(--accent-glow);
+    box-shadow: 0 0 0 4px rgba(20, 20, 60, 0.08), 0 0 16px var(--accent-glow);
     animation: pulse-current 2s var(--ease) infinite;
+  }
+
+  [data-theme="dark"] .timeline-step.is-current .timeline-dot {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08), 0 0 16px var(--accent-glow);
   }
 
   .timeline-content {
@@ -3111,9 +3202,16 @@
 
   .forward-card-jenna {
     background:
-      radial-gradient(circle at 100% 0%, rgba(28, 0, 255, 0.12), transparent 65%),
+      radial-gradient(circle at 100% 0%, rgba(20, 20, 60, 0.05), transparent 65%),
       var(--surface-translucent);
-    border-color: rgba(28, 0, 255, 0.35);
+    border-color: rgba(20, 20, 60, 0.18);
+  }
+
+  [data-theme="dark"] .forward-card-jenna {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05), transparent 65%),
+      var(--surface-translucent);
+    border-color: rgba(255, 255, 255, 0.20);
   }
 
   .forward-jenna {
@@ -3181,6 +3279,7 @@
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     overflow: hidden;
+    background: var(--bg-paper);
   }
 
   .proof-bg {
@@ -3824,9 +3923,14 @@
 
   .transcript-bubble.jenna {
     align-self: flex-end;
-    background: linear-gradient(180deg, rgba(28, 0, 255, 0.18), rgba(12, 0, 168, 0.08));
-    border: 1px solid rgba(28, 0, 255, 0.25);
+    background: linear-gradient(180deg, rgba(20, 20, 60, 0.08), rgba(20, 20, 60, 0.03));
+    border: 1px solid rgba(20, 20, 60, 0.12);
     text-align: right;
+  }
+
+  [data-theme="dark"] .transcript-bubble.jenna {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    border-color: rgba(255, 255, 255, 0.13);
   }
 
   .bubble-who {
@@ -3917,9 +4021,15 @@
   .trust-num { font-size: 1.85rem; }
 }
 
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 10rem;
+  }
+}
+
 @media (max-width: 480px) {
   .hero {
-    padding-top: 7rem;
+    padding-top: 9rem;
   }
   .hero-cta {
     flex-direction: column;
@@ -4082,7 +4192,7 @@
 
 @media (max-width: 540px) {
   .customize {
-    padding: 5rem 1.25rem 6rem;
+    padding: 5rem 1.25rem;
   }
   .config-panels {
     padding: 1.4rem;

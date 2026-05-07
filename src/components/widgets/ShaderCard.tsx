@@ -1,72 +1,58 @@
 import { useEffect, useRef } from 'react'
 
-import {
-  ShaderMount,
-  colorPanelsFragmentShader,
-  getShaderColorFromString,
-} from '@paper-design/shaders'
+import type { PaperShaderElement } from '@paper-design/shaders'
+import { ColorPanels } from '@paper-design/shaders-react'
 
 // "Caller memory" shader visual on the bento memory card.
-// Uniforms ported 1:1 from the cult-ui HeroColorPanels demo
-// (also documented in /index.html lines 1314–1370). The CSS fallback
-// (.memory-visual-fallback) renders behind this; once `data-mounted`
-// flips to "true", the existing CSS rule fades the fallback out.
+// Uses the official @paper-design/shaders-react <ColorPanels /> wrapper
+// (same component cult-ui's hero-color-panel registry uses) so the RAF
+// loop, ResizeObserver, and visibility handling are managed for us —
+// fixes the stuttery/frozen animation we hit when driving ShaderMount
+// directly inside an `isolate; overflow:hidden` parent.
+//
+// Props mirror the cult-ui HeroColorPanels desktop preset 1:1.
 
 export function ShaderCard() {
-  const hostRef = useRef<HTMLDivElement>(null)
+  const hostRef = useRef<PaperShaderElement>(null)
 
+  // Flip data-mounted="true" after the wrapper renders so the existing
+  // CSS rule (.memory-shader[data-mounted="true"] ~ .memory-visual-fallback)
+  // fades the conic-gradient fallback out. If WebGL fails on the device
+  // the canvas is missing and the fallback stays visible.
   useEffect(() => {
     const host = hostRef.current
     if (!host) return
-    let mount: ShaderMount | undefined
-
-    try {
-      mount = new ShaderMount(
-        host,
-        colorPanelsFragmentShader,
-        {
-          u_colors: [
-            getShaderColorFromString('#ed40b3'),
-            getShaderColorFromString('#6ef7cc'),
-            getShaderColorFromString('#adfa1e'),
-            getShaderColorFromString('#b054de'),
-          ],
-          u_colorsCount: 4,
-          u_colorBack: getShaderColorFromString('#ffffff00'),
-          u_density: 5.03,
-          u_angle1: 0.68,
-          u_angle2: 0.28,
-          u_length: 1.13,
-          u_edges: true,
-          u_blur: 0.25,
-          u_fadeIn: 0.85,
-          u_fadeOut: 0.3,
-          u_gradient: 0.56,
-          u_fit: 1, // contain
-          u_scale: 0.96,
-          u_rotation: 180,
-          u_offsetX: 0,
-          u_offsetY: 0,
-          u_originX: 0.5,
-          u_originY: 0.5,
-          u_worldWidth: 0,
-          u_worldHeight: 0,
-        },
-        undefined,
-        4, // speed — matches demo
-        0, // start frame
-      )
-      host.dataset.mounted = 'true'
-    } catch (err) {
-      host.dataset.unsupported = 'true'
-      console.warn('[memory-shader] failed to mount', err)
-    }
-
+    const id = window.requestAnimationFrame(() => {
+      if (host.querySelector('canvas')) {
+        host.dataset.mounted = 'true'
+      }
+    })
     return () => {
-      mount?.dispose()
+      window.cancelAnimationFrame(id)
       delete host.dataset.mounted
     }
   }, [])
 
-  return <div ref={hostRef} className="memory-shader" id="memoryShader" />
+  return (
+    <ColorPanels
+      ref={hostRef}
+      id="memoryShader"
+      className="memory-shader"
+      colors={['#ed40b3', '#6ef7cc', '#adfa1e', '#b054de']}
+      colorBack="#ffffff00"
+      density={5.03}
+      angle1={0.68}
+      angle2={0.28}
+      length={1.13}
+      edges
+      blur={0.25}
+      fadeIn={0.85}
+      fadeOut={0.3}
+      gradient={0.56}
+      speed={4}
+      fit="contain"
+      scale={0.96}
+      rotation={180}
+    />
+  )
 }

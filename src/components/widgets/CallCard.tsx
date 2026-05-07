@@ -27,7 +27,6 @@ const BUBBLES = [
 
 const EVENTS = [
   { text: 'Order pushed to POS',     delay: 5200 },
-  { text: 'SMS confirmation sent',   delay: 5500 },
 ]
 
 const STOP_AFTER_MS = 7500

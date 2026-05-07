@@ -170,13 +170,6 @@ export function BentoGrid() {
                   <div className="memory-profile-note">birthday Aug 14 · prefers booth · party of 6</div>
                 </div>
               </li>
-              <li className="memory-profile">
-                <div className="memory-profile-avatar" data-tone="violet">J</div>
-                <div className="memory-profile-meta">
-                  <div className="memory-profile-name">Jenna Kim</div>
-                  <div className="memory-profile-note">gluten-free · always orders tiramisu · tips 22%</div>
-                </div>
-              </li>
             </ul>
           </div>
         </article>

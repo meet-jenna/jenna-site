@@ -124,10 +124,6 @@ export default {
       // live in index.css (so dev-time edits are local) — these are the
       // Tailwind aliases.
       keyframes: {
-        'pulse-dot': {
-          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-          '50%': { transform: 'scale(1.3)', opacity: '0.6' },
-        },
         wave: {
           '0%, 100%': { height: '20%' },
           '50%': { height: '100%' },
@@ -167,7 +163,6 @@ export default {
       },
 
       animation: {
-        'pulse-dot': 'pulse-dot 1.6s ease-in-out infinite',
         wave: 'wave 1.1s ease-in-out infinite',
         'wave-mini': 'wave-mini 1.4s ease-in-out infinite',
         rainbow: 'rainbow var(--rainbow-speed, 2s) infinite linear',

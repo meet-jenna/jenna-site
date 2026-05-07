@@ -2,8 +2,8 @@ import { CallCard } from '@/components/widgets/CallCard'
 
 // Hero section. Markup mirrors /index.html lines 70–200 of the vanilla
 // site, with the Phase 2.2 design upgrades baked in:
-//   - CTA replaces the old hardcoded-white .border-beam-btn with the
-//     theme-correct .btn .btn-primary .btn-lg combo.
+//   - CTA uses .border-beam-btn (clean white pill with dark text and
+//     arrow), ported verbatim from feat/v4 — the original hero treatment.
 //   - Tighter type rhythm (handled in index.css).
 //   - Subtle staggered fade-in entrance (animate-fade-in + per-element
 //     animation-delay; suppressed under prefers-reduced-motion via
@@ -19,19 +19,10 @@ export function Hero() {
       </div>
 
       <div className="hero-inner">
-        <a
-          className="live-pill animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '0ms' }}
-          href="#demo"
-        >
-          <span className="live-dot" aria-hidden="true" />
-          <span>Live now · Answering calls 24/7</span>
-        </a>
-
         <h1
           id="hero-title"
           className="hero-title animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '80ms' }}
+          style={{ animationDelay: '0ms' }}
         >
           The AI Hostess<br />
           That <em>Never Misses a Call.</em>
@@ -39,16 +30,16 @@ export function Hero() {
 
         <p
           className="hero-sub animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '160ms' }}
+          style={{ animationDelay: '80ms' }}
         >
           Connects to your phone. Handles every call start to finish — orders, reservations, payments, and more.
         </p>
 
         <div
           className="hero-cta animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '240ms' }}
+          style={{ animationDelay: '160ms' }}
         >
-          <a className="btn btn-primary btn-lg" href="#book">
+          <a className="border-beam-btn" href="#book">
             Book a demo
             <svg className="btn-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
@@ -66,7 +57,7 @@ export function Hero() {
 
         <ul
           className="trust-row animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '400ms' }}
+          style={{ animationDelay: '320ms' }}
           aria-label="Highlights"
         >
           <li>

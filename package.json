@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "jenna-site",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@paper-design/shaders": "^0.0.76",
+    "@paper-design/shaders-react": "^0.0.76",
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toggle-group": "^1.1.11",
