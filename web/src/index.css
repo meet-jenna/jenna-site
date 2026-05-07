@@ -3172,6 +3172,354 @@
     text-transform: uppercase;
     color: var(--fg-soft);
   }
+
+  /* ----------------------------------------------------------
+     Section 3 — Proof (Audio demo + Stats + Manifesto) — verbatim
+     ---------------------------------------------------------- */
+  .proof {
+    position: relative;
+    padding: 7rem 1.5rem 8rem;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .proof-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .proof-glow {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1100px;
+    height: 700px;
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.25;
+    background: radial-gradient(closest-side, var(--accent-glow) 0%, transparent 70%);
+  }
+
+  .audio-demo {
+    position: relative;
+    margin: 0 auto 5rem;
+    max-width: 760px;
+    padding: 1.85rem;
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    isolation: isolate;
+    box-shadow:
+      0 1px 0 var(--inset-card) inset,
+      0 30px 80px -30px var(--shadow-strong);
+  }
+
+  .audio-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+    background: radial-gradient(700px 250px at 50% 0%, var(--accent-glow), transparent 70%);
+  }
+
+  .audio-demo[data-state="playing"] .audio-glow {
+    opacity: 1;
+  }
+
+  .audio-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .audio-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-align: left;
+  }
+
+  .audio-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
+    display: grid;
+    place-items: center;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.45),
+      0 0 22px var(--accent-glow);
+    flex-shrink: 0;
+  }
+
+  .avatar-mark {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #08080c;
+  }
+
+  .audio-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+    margin-bottom: 0.25rem;
+  }
+
+  .audio-title {
+    font-size: 1.12rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+  }
+
+  .audio-time {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    color: var(--fg-muted);
+    white-space: nowrap;
+  }
+
+  .audio-time-divider {
+    color: var(--fg-faint);
+    margin: 0 0.25rem;
+  }
+
+  #audioCurrent {
+    color: var(--accent);
+  }
+
+  .audio-waveform {
+    position: relative;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 2px;
+  }
+
+  .audio-waveform .bar {
+    flex: 1;
+    min-width: 2px;
+    height: 30%;
+    background: var(--surface-2);
+    border-radius: 2px;
+    transition: background 0.05s linear, transform 0.15s var(--ease);
+  }
+
+  .audio-waveform .bar.played {
+    background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
+  }
+
+  .audio-waveform .bar.playhead {
+    background: var(--fg);
+    transform: scaleY(1.08);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  .audio-demo[data-state="playing"] .audio-waveform .bar.playhead {
+    animation: playhead-glow 0.9s var(--ease) infinite alternate;
+  }
+
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .audio-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1rem 0.65rem 0.75rem;
+    background: var(--accent);
+    color: var(--ink-on-accent);
+    border-radius: var(--r-pill);
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 22px -6px var(--accent-glow);
+    transition: transform 0.18s var(--ease), background 0.18s var(--ease);
+  }
+
+  .audio-play:hover {
+    background: var(--accent-bright);
+    transform: translateY(-1px);
+  }
+
+  .audio-play .ctrl-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .audio-play .ctrl-icon-pause { display: none; }
+  .audio-demo[data-state="playing"] .audio-play .ctrl-icon-play { display: none; }
+  .audio-demo[data-state="playing"] .audio-play .ctrl-icon-pause { display: block; }
+
+  .audio-hint {
+    font-size: 0.85rem;
+    color: var(--fg-soft);
+    line-height: 1.4;
+  }
+
+  .audio-transcript {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 1.1rem 0 0;
+    border-top: 1px dashed var(--hairline-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    text-align: left;
+  }
+
+  .audio-transcript li {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 0.85rem;
+    align-items: baseline;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--fg-faint);
+    transition: color 0.3s var(--ease);
+  }
+
+  .audio-transcript li .who {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    font-weight: 500;
+    transition: color 0.3s var(--ease);
+  }
+
+  .audio-transcript li.read {
+    color: var(--fg-muted);
+  }
+
+  .audio-transcript li.active {
+    color: var(--fg);
+  }
+
+  .audio-transcript li.active .who {
+    color: var(--accent);
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .stat {
+    position: relative;
+    padding: 2.2rem 1.85rem;
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    text-align: left;
+    transition: border-color 0.3s var(--ease);
+  }
+
+  .stat:hover {
+    border-color: var(--hairline-strong);
+  }
+
+  .stat-feature {
+    background:
+      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
+      linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+  }
+
+  .stat-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: var(--card-edge);
+    opacity: 0.6;
+  }
+
+  .stat-num {
+    display: flex;
+    align-items: baseline;
+    font-family: var(--font-serif);
+    font-size: clamp(4rem, 9vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--fg);
+    margin-bottom: 0.7rem;
+  }
+
+  .stat-num em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .stat-unit {
+    font-style: normal;
+    font-size: 0.5em;
+    letter-spacing: -0.02em;
+    color: var(--fg-muted);
+    margin-left: 0.05em;
+    align-self: center;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    margin-bottom: 0.65rem;
+  }
+
+  .stat-detail {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--fg-muted);
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  .manifesto {
+    margin: 6rem auto 0;
+    max-width: 18ch;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5.5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--fg);
+  }
+
+  .manifesto em {
+    font-style: italic;
+    color: var(--accent);
+  }
 }
 
 /* ============================================================
@@ -3392,6 +3740,40 @@
     flex-direction: row;
     transform: rotate(90deg);
     justify-self: center;
+  }
+}
+
+/* Proof / audio-demo / stats responsive */
+@media (max-width: 880px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    padding: 1.85rem 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .audio-demo {
+    padding: 1.4rem;
+    border-radius: var(--r-lg);
+  }
+  .audio-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .audio-title { font-size: 1rem; }
+  .audio-transcript li {
+    grid-template-columns: 56px 1fr;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .proof {
+    padding: 5rem 1.25rem 6rem;
   }
 }
 
