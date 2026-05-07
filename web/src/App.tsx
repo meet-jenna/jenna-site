@@ -1,15 +1,16 @@
 import { Nav } from '@/components/layout/Nav'
 import { Hero } from '@/components/sections/Hero'
+import { BentoGrid } from '@/components/sections/BentoGrid'
 
 export default function App() {
   return (
     <>
       <Nav />
       <Hero />
+      <BentoGrid />
 
-      {/* Spacer so the nav floating-island state can still be exercised
-          past the hero's 100vh while the rest of Phase 2 is unbuilt. */}
-      <div className="h-[200vh]" aria-hidden="true" />
+      {/* Spacer until remaining sections land. */}
+      <div className="h-[100vh]" aria-hidden="true" />
     </>
   )
 }

@@ -231,8 +231,8 @@
 }
 
 @keyframes wave-mini {
-  0%, 100% { height: 12%; }
-  50%      { height: 85%; }
+  0%, 100% { height: 30%; }
+  50%      { height: 90%; }
 }
 
 @keyframes rainbow {
@@ -251,8 +251,8 @@
 }
 
 @keyframes memory-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50%      { transform: scale(1.15); opacity: 0.4; }
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50%      { opacity: 1;   transform: scale(1.1); }
 }
 
 @keyframes playhead-glow {
@@ -754,6 +754,665 @@
   .theme-icon-moon { display: block; }
   [data-theme="dark"] .theme-icon-sun  { display: block; }
   [data-theme="dark"] .theme-icon-moon { display: none; }
+
+  /* ----------------------------------------------------------
+     Section 2 — What Jenna Does (Bento) — ported verbatim
+     ---------------------------------------------------------- */
+  .features {
+    position: relative;
+    padding: 7rem 1.5rem 8rem;
+    isolation: isolate;
+  }
+
+  .features-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .features-glow {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.35;
+    background: radial-gradient(
+      closest-side,
+      rgba(120, 90, 220, 0.18) 0%,
+      transparent 70%
+    );
+  }
+
+  /* Section header — shared with future sections */
+  .section-head {
+    max-width: 720px;
+    margin: 0 auto 4.5rem;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+    margin-bottom: 1.1rem;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.2rem;
+    color: var(--fg);
+  }
+
+  .section-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    font-size: 1.08em;
+    letter-spacing: -0.02em;
+  }
+
+  .section-sub {
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    color: var(--fg-muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* Bento grid */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .bento-1x { grid-column: span 1; }
+  .bento-2x { grid-column: span 2; }
+  .bento-3x { grid-column: span 3; }
+
+  .bento-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    min-height: 240px;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+
+  .bento-card:hover {
+    border-color: var(--hairline-strong);
+    transform: translateY(-2px);
+  }
+
+  /* Featured cards get a soft accent wash */
+  .bento-feature {
+    background:
+      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
+      linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+  }
+
+  .bento-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--card-edge);
+    opacity: 0.6;
+  }
+
+  .card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-md);
+    display: grid;
+    place-items: center;
+    background: var(--overlay-2);
+    border: 1px solid var(--hairline);
+    color: var(--fg);
+    margin-bottom: 0.2rem;
+  }
+
+  .card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    align-self: flex-start;
+  }
+
+  .card-tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  .card-title {
+    font-size: 1.18rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--fg);
+  }
+
+  .bento-feature .card-title {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .card-body {
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  .bento-feature .card-body {
+    font-size: 1rem;
+    max-width: 38ch;
+  }
+
+  /* 24/7 clock */
+  .card-clock {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--fg);
+  }
+
+  .card-clock-divider {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* POS ticket */
+  .pos-ticket {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 1.1rem;
+    background: var(--surface-translucent);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pos-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+  }
+
+  .pos-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .pos-items li {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 0.6rem;
+    color: var(--fg);
+    align-items: baseline;
+  }
+
+  .pos-items li > span:first-child {
+    color: var(--fg-soft);
+  }
+
+  .pos-typing {
+    color: var(--fg-muted) !important;
+  }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 6px;
+    height: 0.9em;
+    background: var(--accent);
+    vertical-align: -2px;
+    margin-left: 2px;
+    animation: blink 1s steps(2) infinite;
+  }
+
+  .pos-pending {
+    color: var(--fg-soft);
+  }
+
+  .pos-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.55rem;
+    border-top: 1px dashed var(--hairline-strong);
+    font-size: 0.78rem;
+  }
+
+  .pos-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--live);
+  }
+
+  /* Shared status-dot used across cards (stable bg, no animation by default) */
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg-faint);
+    transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+
+  .status-dot-live {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live-glow);
+    animation: live-dot-pulse 1.8s var(--ease) infinite;
+  }
+
+  .pos-total {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--accent);
+  }
+
+  /* Multi-line lanes */
+  .lines {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface-translucent);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+  }
+
+  .line {
+    display: grid;
+    grid-template-columns: 80px 1fr 40px;
+    gap: 0.7rem;
+    align-items: center;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .line-name {
+    color: var(--fg-soft);
+    letter-spacing: 0.04em;
+  }
+
+  .line-time {
+    color: var(--accent);
+    text-align: right;
+  }
+
+  .line-wave {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 18px;
+  }
+
+  .line-wave span {
+    flex: 1;
+    height: 30%;
+    background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
+    border-radius: 1px;
+    opacity: 0.85;
+    animation: wave-mini 1.2s var(--ease) infinite;
+  }
+
+  .line-wave span:nth-child(1) { animation-delay: 0.0s; }
+  .line-wave span:nth-child(2) { animation-delay: 0.1s; }
+  .line-wave span:nth-child(3) { animation-delay: 0.2s; }
+  .line-wave span:nth-child(4) { animation-delay: 0.3s; }
+  .line-wave span:nth-child(5) { animation-delay: 0.15s; }
+  .line-wave span:nth-child(6) { animation-delay: 0.25s; }
+  .line-wave span:nth-child(7) { animation-delay: 0.05s; }
+  .line-wave span:nth-child(8) { animation-delay: 0.35s; }
+
+  .line:nth-child(2) .line-wave span { animation-duration: 1s; }
+  .line:nth-child(3) .line-wave span { animation-duration: 1.4s; }
+
+  .line-more {
+    color: var(--fg-soft);
+    opacity: 0.6;
+  }
+
+  .line-more .line-time {
+    color: var(--fg-muted);
+  }
+
+  /* Memory card — folder icon, shader visual + profile list */
+  .memory-folder-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .memory-split {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: minmax(160px, 0.95fr) minmax(0, 1.35fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .memory-visual {
+    position: relative;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    isolation: isolate;
+    min-height: 220px;
+    border: 1px solid var(--hairline);
+    background:
+      radial-gradient(120% 90% at 30% 20%, rgba(237, 64, 179, 0.55), transparent 60%),
+      radial-gradient(120% 90% at 80% 80%, rgba(110, 247, 204, 0.45), transparent 60%),
+      linear-gradient(135deg, #1a0033 0%, #060611 100%);
+  }
+
+  .memory-shader {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .memory-visual-fallback {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    background:
+      conic-gradient(from 200deg at 50% 50%,
+        #ed40b3 0deg,
+        #b054de 90deg,
+        #6ef7cc 180deg,
+        #adfa1e 260deg,
+        #ed40b3 360deg);
+    filter: blur(28px) saturate(1.1);
+    opacity: 1;
+    transition: opacity 0.4s var(--ease);
+    animation: memory-fallback-spin 18s linear infinite;
+  }
+
+  /* Once the shader mounts, fade the fallback out */
+  .memory-shader[data-mounted="true"] ~ .memory-visual-fallback {
+    opacity: 0;
+  }
+
+  .memory-visual-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% 0%, transparent 40%, rgba(0, 0, 0, 0.25) 100%),
+      linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  }
+
+  .memory-visual-label {
+    position: absolute;
+    z-index: 3;
+    left: 0.7rem;
+    bottom: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.6rem 0.3rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(10, 10, 14, 0.55);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .memory-visual-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #6ef7cc;
+    box-shadow: 0 0 8px #6ef7cc;
+    animation: memory-pulse 1.8s ease-in-out infinite;
+  }
+
+  .memory-profiles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .memory-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.6rem 0.8rem;
+    background: var(--surface-translucent);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    min-width: 0;
+    transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+
+  .memory-profile:hover {
+    border-color: var(--hairline-strong);
+    transform: translateY(-1px);
+  }
+
+  .memory-profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #fff;
+    flex-shrink: 0;
+    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
+    box-shadow: 0 0 12px -3px var(--accent-glow);
+  }
+
+  .memory-profile-avatar[data-tone="pink"] {
+    background: linear-gradient(140deg, #ed40b3, #b054de);
+    box-shadow: 0 0 12px -3px rgba(237, 64, 179, 0.55);
+    color: #fff;
+  }
+  .memory-profile-avatar[data-tone="teal"] {
+    background: linear-gradient(140deg, #6ef7cc, #2a9d8f);
+    box-shadow: 0 0 12px -3px rgba(110, 247, 204, 0.55);
+    color: #08221c;
+  }
+  .memory-profile-avatar[data-tone="lime"] {
+    background: linear-gradient(140deg, #adfa1e, #6ec80a);
+    box-shadow: 0 0 12px -3px rgba(173, 250, 30, 0.55);
+    color: #1d2c00;
+  }
+  .memory-profile-avatar[data-tone="violet"] {
+    background: linear-gradient(140deg, #b054de, #6e34a8);
+    box-shadow: 0 0 12px -3px rgba(176, 84, 222, 0.55);
+    color: #fff;
+  }
+
+  .memory-profile-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .memory-profile-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .memory-profile-note {
+    font-size: 0.74rem;
+    color: var(--fg-soft);
+    line-height: 1.3;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .memory-profile-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #6ef7cc;
+    box-shadow: 0 0 8px #6ef7cc;
+    margin-left: 0.25rem;
+    flex-shrink: 0;
+    animation: memory-pulse 1.8s ease-in-out infinite;
+  }
+
+  /* SMS screenshot — pre-cropped iMessage bubble PNG */
+  .sms-screenshot {
+    margin: auto 0 0;
+    padding: 0;
+    align-self: flex-start;
+    max-width: 100%;
+  }
+
+  .sms-screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 12px 22px rgba(20, 20, 60, 0.18));
+  }
+
+  /* Payment card */
+  .pay-row {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .pay-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0.85rem;
+    background: var(--surface-translucent);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+
+  .pay-card-tag {
+    font-size: 0.72rem;
+    color: var(--fg-soft);
+    letter-spacing: 0.1em;
+  }
+
+  .pay-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--live);
+  }
+
+  /* Transfer chip */
+  .transfer-chip {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 0.85rem;
+    background: var(--surface-translucent);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    font-size: 0.78rem;
+  }
+
+  .transfer-from,
+  .transfer-to {
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--r-pill);
+    background: var(--overlay-2);
+    border: 1px solid var(--hairline);
+    color: var(--fg-muted);
+  }
+
+  .transfer-to {
+    color: var(--ink-on-accent);
+    background: var(--accent);
+    border-color: transparent;
+  }
+
+  .transfer-arrow {
+    color: var(--fg-soft);
+  }
+
+  .transfer-msg {
+    color: var(--fg);
+    font-style: italic;
+  }
 }
 
 /* ============================================================
@@ -800,10 +1459,63 @@
   }
 }
 
+/* Bento responsive */
+@media (max-width: 920px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-1x,
+  .bento-2x,
+  .bento-3x {
+    grid-column: span 2;
+  }
+  .bento-1x:not(.bento-feature) {
+    grid-column: span 1;
+  }
+  .bento-feature .card-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Memory card stacks visual + profiles vertically */
+  .memory-split {
+    grid-template-columns: 1fr;
+  }
+  .memory-visual {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .features {
+    padding: 5rem 1.25rem 6rem;
+  }
+  .bento {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .bento-1x,
+  .bento-2x,
+  .bento-3x,
+  .bento-1x:not(.bento-feature) {
+    grid-column: span 1;
+  }
+  .bento-card {
+    min-height: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-bar,
   .nav-inner,
   .nav-links a {
     transition-duration: 0.01ms;
+  }
+  .memory-visual-fallback,
+  .memory-visual-dot,
+  .memory-profile-pulse {
+    animation: none;
   }
 }
