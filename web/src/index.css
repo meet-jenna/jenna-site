@@ -3520,6 +3520,368 @@
     font-style: italic;
     color: var(--accent);
   }
+
+  /* ----------------------------------------------------------
+     Live Call Card (hero) — ported verbatim
+     ---------------------------------------------------------- */
+  .call-card {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(280px, 1.2fr);
+    gap: 0;
+    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow:
+      0 1px 0 var(--inset-card) inset,
+      0 30px 80px -30px var(--shadow-soft),
+      0 0 0 1px var(--inset-card-2);
+  }
+
+  .call-card-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s var(--ease);
+    background: radial-gradient(
+      600px 200px at 50% 0%,
+      var(--accent-glow),
+      transparent 70%
+    );
+  }
+
+  .call-card[data-state="playing"] .call-card-glow {
+    opacity: 1;
+  }
+
+  .call-phone {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-right: 1px solid var(--hairline);
+    text-align: left;
+  }
+
+  .call-phone-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .call-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .call-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-soft);
+  }
+
+  .call-name {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .call-name-logo {
+    display: block;
+    height: 1.05rem;
+    width: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .call-name-logo-dark { display: none; }
+  [data-theme="dark"] .call-name-logo-light { display: none; }
+  [data-theme="dark"] .call-name-logo-dark  { display: block; }
+
+  .call-time {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+    color: var(--fg-soft);
+    letter-spacing: 0.02em;
+  }
+
+  .call-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    background: var(--overlay-2);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-pill);
+  }
+
+  .call-status-ready {
+    color: var(--live);
+    background: color-mix(in srgb, var(--live) 12%, transparent);
+    border-color: color-mix(in srgb, var(--live) 35%, var(--hairline));
+  }
+
+  .call-status-ready .status-dot {
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live-glow);
+  }
+
+  .call-card[data-state="playing"] .status-dot {
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live-glow);
+    animation: live-dot-pulse 1.8s var(--ease) infinite;
+  }
+
+  /* Hero waveform */
+  .waveform {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+    height: 64px;
+    padding: 0 0.25rem;
+  }
+
+  .waveform span {
+    flex: 1;
+    height: 8%;
+    min-height: 4px;
+    background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
+    border-radius: 2px;
+    opacity: 0.35;
+    transition: height 0.2s var(--ease), opacity 0.2s var(--ease);
+  }
+
+  .call-card[data-state="playing"] .waveform span {
+    opacity: 0.9;
+    animation: wave 1.2s var(--ease) infinite;
+  }
+
+  .call-card[data-state="playing"] .waveform span:nth-child(3n)     { animation-delay: 0.1s;  animation-duration: 1.4s; }
+  .call-card[data-state="playing"] .waveform span:nth-child(3n + 1) { animation-delay: 0.2s;  animation-duration: 0.9s; }
+  .call-card[data-state="playing"] .waveform span:nth-child(3n + 2) { animation-delay: 0.05s; animation-duration: 1.1s; }
+  .call-card[data-state="playing"] .waveform span:nth-child(5n)     { animation-delay: 0.3s; }
+  .call-card[data-state="playing"] .waveform span:nth-child(7n)     { animation-delay: 0.15s; }
+
+  /* Tap-to-Call rainbow CTA — Magic UI port (1:1 with vanilla styles.css) */
+  .call-cta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .rainbow-btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+    height: 44px;
+    padding: 0 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--rainbow-fg);
+    border: 0.125rem solid transparent;
+    border-radius: 0.75rem;
+    outline: none;
+    background:
+      linear-gradient(var(--rainbow-fill), var(--rainbow-fill)),
+      linear-gradient(
+        var(--rainbow-fill) 50%,
+        var(--rainbow-fill-fade) 80%,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        var(--rainbow-color-1),
+        var(--rainbow-color-5),
+        var(--rainbow-color-3),
+        var(--rainbow-color-4),
+        var(--rainbow-color-2)
+      );
+    background-size: 200%;
+    background-clip: padding-box, border-box, border-box;
+    background-origin: border-box;
+    animation: rainbow 2s infinite linear;
+    transition: transform 0.18s var(--ease);
+  }
+
+  .rainbow-btn::before {
+    content: "";
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    z-index: -1;
+    width: 60%;
+    height: 20%;
+    transform: translateX(-50%);
+    background: linear-gradient(
+      90deg,
+      var(--rainbow-color-1),
+      var(--rainbow-color-5),
+      var(--rainbow-color-3),
+      var(--rainbow-color-4),
+      var(--rainbow-color-2)
+    );
+    background-size: 200%;
+    filter: blur(0.75rem);
+    animation: rainbow 2s infinite linear;
+  }
+
+  .rainbow-btn:hover  { color: var(--rainbow-fg); transform: translateY(-1px); }
+  .rainbow-btn:active { transform: translateY(0); }
+
+  .rainbow-btn:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--rainbow-color-3) 60%, transparent);
+  }
+
+  .rainbow-btn-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
+  .rainbow-btn-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .call-cta-phone {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--fg-soft);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: color 0.18s var(--ease);
+  }
+
+  .call-cta-phone:hover {
+    color: var(--fg);
+  }
+
+  /* Transcript side */
+  .call-transcript {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    text-align: left;
+    background:
+      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 60%),
+      var(--bg-elev-2);
+    min-height: 320px;
+  }
+
+  .transcript-bubble {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.5s var(--ease),
+      transform 0.5s var(--ease);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    max-width: 92%;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--r-md);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .transcript-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .transcript-bubble.caller {
+    align-self: flex-start;
+    background: var(--overlay-2);
+    border: 1px solid var(--hairline);
+  }
+
+  .transcript-bubble.jenna {
+    align-self: flex-end;
+    background: linear-gradient(180deg, rgba(28, 0, 255, 0.18), rgba(12, 0, 168, 0.08));
+    border: 1px solid rgba(28, 0, 255, 0.25);
+    text-align: right;
+  }
+
+  .bubble-who {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+  }
+
+  .transcript-bubble.jenna .bubble-who {
+    color: var(--accent);
+  }
+
+  .bubble-text {
+    color: var(--fg);
+  }
+
+  .transcript-bubble.caller .bubble-text {
+    color: var(--fg-muted);
+  }
+
+  .transcript-events {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .event {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+    color: var(--live);
+    background: rgba(34, 211, 164, 0.08);
+    border: 1px solid rgba(34, 211, 164, 0.2);
+    border-radius: var(--r-pill);
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.4s var(--ease),
+      transform 0.4s var(--ease);
+  }
+
+  .event.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .event svg {
+    width: 12px;
+    height: 12px;
+  }
 }
 
 /* ============================================================
@@ -3774,6 +4136,28 @@
 @media (max-width: 540px) {
   .proof {
     padding: 5rem 1.25rem 6rem;
+  }
+}
+
+/* Call card responsive */
+@media (max-width: 760px) {
+  .call-card {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+  }
+  .call-phone {
+    border-right: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .call-transcript {
+    min-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rainbow-btn,
+  .rainbow-btn::before {
+    animation: none;
   }
 }
 

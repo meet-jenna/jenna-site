@@ -1,3 +1,5 @@
+import { CallCard } from '@/components/widgets/CallCard'
+
 // Hero section. Markup mirrors /index.html lines 70–200 of the vanilla
 // site, with the Phase 2.2 design upgrades baked in:
 //   - CTA replaces the old hardcoded-white .border-beam-btn with the
@@ -6,10 +8,7 @@
 //   - Subtle staggered fade-in entrance (animate-fade-in + per-element
 //     animation-delay; suppressed under prefers-reduced-motion via
 //     Tailwind's motion-reduce: modifier).
-//
-// The call-card slot intentionally sits empty — it ports in Phase 2.9.
-// You'll see the full vertical rhythm (CTA → empty hole → trust row)
-// during 2.2 review so we can judge the final dimensional feel.
+//   - Phase 2.9 mounted the live <CallCard /> into the slot below the CTA.
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -63,11 +62,11 @@ export function Hero() {
           </a>
         </div>
 
-        {/* Call-card slot — Phase 2.9. Intentionally empty during 2.2 review. */}
+        <CallCard />
 
         <ul
           className="trust-row animate-fade-in motion-reduce:animate-none"
-          style={{ animationDelay: '320ms' }}
+          style={{ animationDelay: '400ms' }}
           aria-label="Highlights"
         >
           <li>
