@@ -1,8 +1,8 @@
 import { useTheme } from '@/hooks/useTheme'
 
-// Pill icon button. Sun/moon are both rendered; CSS in index.css shows the
-// correct one based on [data-theme]. SVGs are 1:1 ports of the inline SVGs
-// at /index.html lines 57–63 (vanilla site).
+// Pill icon button. Sun/moon are both rendered; CSS in index.css shows
+// the correct one based on [data-theme]. Inline SVGs match the site's
+// stroke-based icon vocabulary.
 export function ThemeToggle() {
   const { theme, toggle } = useTheme()
   const label = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'

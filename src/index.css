@@ -1,6 +1,11 @@
 /* ============================================================
-   Jenna AI · Design Tokens (ported verbatim from /styles.css)
+   Jenna AI · Design Tokens — Shares-inspired refresh
    ============================================================
+   White-canvas / brand-violet system adapted from Refero's
+   "Shares" reference (https://styles.refero.design/style/cd293b92).
+   Substitutes our brand violet (#1c00ff) for Shares Violet and
+   Quicksand for the runtime typeface (rounded geometric sans).
+
    Source of truth for all colors, surfaces, type, motion, radii.
    Tailwind utilities resolve to these vars (see tailwind.config.js).
    ============================================================ */
@@ -9,46 +14,54 @@
 @tailwind utilities;
 
 /* ------------------------------------------------------------
-   :root — Cool Porcelain (light, default)
+   :root — Canvas White / Brand Violet (light, only theme)
+   ------------------------------------------------------------
+   Two-surface system: Canvas White (#ffffff) for the page +
+   Cloud Gray (#f6f6f6) for cards and alternating section bands.
+   Single chromatic accent: Jenna Violet (#1c00ff).
    ------------------------------------------------------------ */
 :root {
   color-scheme: light;
 
-  /* Surface */
-  --bg: #fafafa;
-  --bg-elev: #fafbfd;
-  --bg-elev-2: #ffffff;
+  /* ─── Surfaces ────────────────────────────────────────────── */
+  --bg: #ffffff;
+  --bg-elev: #f6f6f6;
+  --bg-elev-2: #f6f6f6;
   --surface: #ffffff;
-  --surface-2: #f5f5f5;
-  --surface-translucent: rgba(238, 240, 246, 0.78);
+  --surface-2: #f6f6f6;
+  --surface-translucent: rgba(255, 255, 255, 0.78);
 
-  /* Section backgrounds — paint per-section for visual rhythm.
-     Sections rotate main → contrast → paper → main → … so adjacent
-     sections always step. Steps are intentionally subtle (~5 units
-     between each tier) so the page reads as "all near-white, but
-     differentiated" rather than zebra-striped. */
-  --bg-contrast: #f5f5f5;
+  /* Section rotation — strict canvas ↔ cloud alternation.
+     Sections call --bg / --bg-contrast / --bg-paper directly:
+       Hero, Proof, Savings, Finale → --bg / --bg-paper (canvas)
+       Bento, Customize, Pricing     → --bg-contrast (cloud) */
+  --bg-contrast: #f6f6f6;
   --bg-paper: #ffffff;
-  --hairline: rgba(20, 20, 60, 0.06);
-  --hairline-strong: rgba(20, 20, 60, 0.12);
 
-  /* Text */
-  --fg: #0a0a14;
-  --fg-muted: #4a4b60;
-  --fg-soft: #7e7f95;
-  --fg-faint: #a8a9bd;
+  /* Hairlines — Silver Mist for default, Stone Gray for emphasis */
+  --hairline: #e7e7e7;
+  --hairline-strong: #b0b0b0;
 
-  /* Brand — monochrome. The blue accent was retired; --accent now points
-     at primary text color so italic serif emphases, dots, numbers, and
-     selected states all read in the foreground tone. The bright/deep
-     pair drives every "Jenna" gradient (brand-mark, avatars, waveforms)
-     as a soft porcelain → slate gradient instead of blue. */
-  --accent: #0a0a14;
-  --accent-bright: #e7e9f2;
-  --accent-deep: #9a9cae;
-  --accent-glow: rgba(20, 20, 60, 0.10);
+  /* ─── Text — Shares ink stack ─────────────────────────────── */
+  --fg: #1f1f1f;          /* Ink Black — headings, strong body */
+  --fg-muted: #333333;    /* Carbon Gray — secondary text, icons */
+  --fg-soft: #5d5d5d;     /* Slate Gray — muted body, helper */
+  --fg-faint: #888888;    /* Steel Gray — Shares' "do not go lighter" floor */
 
-  /* Status */
+  /* ─── Brand — single chromatic accent ─────────────────────────
+     Jenna brand violet (#1c00ff) takes the slot Shares fills with
+     #594ff4. Used exclusively for primary CTAs, interactive cues,
+     brand gradients (avatars, waveforms, brand-mark).
+     Exemptions documented in the .cursorrules notes:
+       - .rainbow-btn keeps its multi-color stack
+       - memory-profile avatars keep tone-coded (pink/teal/lime)
+     ─────────────────────────────────────────────────────────── */
+  --accent: #1c00ff;
+  --accent-bright: #4d3aff;
+  --accent-deep: #1200a3;
+  --accent-glow: rgba(28, 0, 255, 0.18);
+
+  /* Status — kept as semantic system extension (live-call cue) */
   --live: #0fa674;
   --live-glow: rgba(15, 166, 116, 0.28);
 
@@ -56,141 +69,185 @@
   --ink: #ffffff;
   --ink-on-accent: #ffffff;
 
-  --overlay-1: rgba(10, 10, 20, 0.025);
-  --overlay-2: rgba(10, 10, 20, 0.035);
-  --overlay-3: rgba(10, 10, 20, 0.045);
-  --overlay-4: rgba(10, 10, 20, 0.055);
-  --overlay-5: rgba(10, 10, 20, 0.07);
-  --overlay-border: rgba(10, 10, 20, 0.14);
+  /* Overlays — derived from Ink Black at low alpha so they read
+     as subtle veils on Canvas White / Cloud Gray. */
+  --overlay-1: rgba(31, 31, 31, 0.025);
+  --overlay-2: rgba(31, 31, 31, 0.035);
+  --overlay-3: rgba(31, 31, 31, 0.045);
+  --overlay-4: rgba(31, 31, 31, 0.055);
+  --overlay-5: rgba(31, 31, 31, 0.07);
+  --overlay-border: rgba(31, 31, 31, 0.14);
 
   --inset-card: transparent;
   --inset-card-2: transparent;
 
-  --grid-stroke: rgba(20, 20, 60, 0.05);
+  --grid-stroke: rgba(31, 31, 31, 0.05);
 
-  --shadow-soft: rgba(20, 20, 60, 0.10);
-  --shadow-strong: rgba(20, 20, 60, 0.14);
+  /* Single shadow per Shares spec — kept under both legacy aliases
+     so existing component CSS doesn't break before the sweep. */
+  --shadow-soft: rgba(0, 0, 0, 0.12);
+  --shadow-strong: rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.12);
 
-  --nav-bg-1: rgba(245, 246, 251, 0.85);
-  --nav-bg-2: rgba(245, 246, 251, 0.5);
+  /* Nav — translucent canvas surface */
+  --nav-bg-1: rgba(255, 255, 255, 0.85);
+  --nav-bg-2: rgba(255, 255, 255, 0.5);
 
-  --btn-primary-glow: rgba(10, 10, 20, 0.18);
-  --btn-primary-glow-strong: rgba(10, 10, 20, 0.26);
+  --btn-primary-glow: rgba(28, 0, 255, 0.18);
+  --btn-primary-glow-strong: rgba(28, 0, 255, 0.26);
 
-  --card-tint: rgba(20, 20, 60, 0.03);
-  --card-edge: linear-gradient(180deg, rgba(20, 20, 60, 0.10), transparent 1px);
+  --card-tint: rgba(28, 0, 255, 0.03);
+  --card-edge: linear-gradient(180deg, rgba(31, 31, 31, 0.08), transparent 1px);
 
   --glow-opacity: 0.35;
 
-  /* Shape */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 28px;
-  --r-pill: 999px;
+  /* ─── Shape — Shares radius scale ─────────────────────────────
+     small=4 / inputs=16 / accordion=24 / cards=36 / largeFeatures=60 / pill=99
+     ─────────────────────────────────────────────────────────── */
+  --r-sm: 4px;        /* small (badges, inline chips) */
+  --r-md: 16px;       /* inputs, inline panels */
+  --r-lg: 24px;       /* mid surfaces, accordions */
+  --r-xl: 36px;       /* cards (default) */
+  --r-2xl: 60px;      /* large feature surfaces */
+  --r-pill: 99px;     /* buttons, pills */
 
-  /* Type */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  /* ─── Type — Quicksand ────────────────────────────────────────
+     Rounded geometric sans, weights 500 (body) + 700 (headlines).
+     Quicksand has more natural air than Inter/Aeonik — the Shares
+     +0.075em tracking would read too diffuse, so global tracking
+     drops to +0.02em. Display-scale headlines tighten further
+     (-0.01em) for a confident deliberate feel. Uppercase labels
+     keep their 0.12em spread.
+     --font-serif aliased to the same stack so any leftover serif
+     references degrade to bold sans gracefully. */
+  --font-sans: 'Quicksand', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Quicksand', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --tracking-shares: 0.02em;
+  --tracking-display: -0.01em;
 
-  /* Motion */
+  /* Shares type scale — exposed for component sweep */
+  --text-caption: 14px;
+  --text-body: 16px;
+  --text-subheading: 20px;
+  --text-heading-sm: 26px;
+  --text-heading: 36px;
+  --text-heading-lg: 56px;
+  --text-display: 72px;
+
+  /* ─── Layout — Shares grid ───────────────────────────────────
+     Page max-width 1224px, 48px section gap, 24px card padding. */
+  --page-max-width: 1224px;
+  --section-gap: 48px;
+  --card-padding: 24px;
+  --element-gap: 24px;
+
+  /* Motion — preserved (matches Shares' polish curve) */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Rainbow-button tokens (Magic UI port) */
+  /* ─── Rainbow-button tokens — preserved verbatim ──────────────
+     Per design call: the Magic UI rainbow CTA on the live-call
+     card has its own color stack and is exempt from the
+     single-accent rule. Do not migrate to brand violet. */
   --rainbow-color-1: hsl(0 100% 63%);
   --rainbow-color-2: hsl(270 100% 63%);
   --rainbow-color-3: hsl(210 100% 63%);
   --rainbow-color-4: hsl(195 100% 63%);
   --rainbow-color-5: hsl(90 100% 63%);
-  --rainbow-fill: #121213;
-  --rainbow-fill-fade: rgba(18, 18, 19, 0.6);
-  --rainbow-fg: #fff;
+  --rainbow-fill: #f6f6f6;
+  --rainbow-fill-fade: rgba(246, 246, 246, 0.6);
+  --rainbow-fg: #1f1f1f;
 
-  /* shadcn alias bridge — primitives reference these names; we point them
-     at the brand tokens so we never have to edit a shadcn component to get
-     correct colors. */
+  /* Footer divider — flips per theme so it stays subtle on whichever
+     surface (dark in light theme, light in dark theme). */
+  --footer-divider: rgba(255, 255, 255, 0.08);
+
+  /* shadcn alias bridge — primitives auto-resolve to brand tokens. */
   --background: var(--bg);
   --foreground: var(--fg);
   --primary: var(--accent);
   --primary-foreground: var(--ink-on-accent);
   --muted: var(--surface-2);
   --muted-foreground: var(--fg-muted);
-  --border: var(--hairline-strong);
-  --input: var(--hairline-strong);
+  --border: var(--hairline);
+  --input: var(--hairline);
   --ring: var(--accent);
   --radius: var(--r-md);
 }
 
 /* ------------------------------------------------------------
-   [data-theme="dark"] — Cool Carbon
+   [data-theme="dark"] — Inverse Shares
+   ------------------------------------------------------------
+   Simple inversion of the light token set. Brand violet stays
+   identical in both themes (single accent rule). Status green
+   brightens slightly for legibility on dark.
+
+   The footer is bound to var(--fg) for its background and
+   var(--bg) for the notch, so it auto-inverts: dark footer in
+   light theme → light footer in dark theme. The notch follows.
    ------------------------------------------------------------ */
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #08080c;
-  --bg-elev: #0d0d14;
-  --bg-elev-2: #13131c;
-  --surface: #181822;
-  --surface-2: #22222e;
-  --surface-translucent: rgba(8, 8, 10, 0.6);
+  /* ─── Surfaces ────────────────────────────────────────────── */
+  --bg: #0a0a0a;
+  --bg-elev: #1a1a1a;
+  --bg-elev-2: #1a1a1a;
+  --surface: #0a0a0a;
+  --surface-2: #1a1a1a;
+  --surface-translucent: rgba(10, 10, 10, 0.78);
+  --bg-contrast: #1a1a1a;
+  --bg-paper: #0a0a0a;
 
-  /* Section backgrounds — dark equivalents stay above the card range
-     (#0d0d14 → #13131c) so cards always sink slightly into the section
-     for the inverse lift effect. */
-  --bg-contrast: #16161e;
-  --bg-paper: #1f1f2a;
-  --hairline: rgba(220, 220, 255, 0.07);
-  --hairline-strong: rgba(220, 220, 255, 0.13);
+  /* Hairlines — Stone Gray inverts to a low-light neutral */
+  --hairline: #2a2a2a;
+  --hairline-strong: #4a4a4a;
 
-  --fg: #f4f5fb;
-  --fg-muted: #b0b1c2;
-  --fg-soft: #7e7f95;
-  --fg-faint: #52536a;
+  /* ─── Text ─────────────────────────────────────────────────── */
+  --fg: #f5f5f5;
+  --fg-muted: #d0d0d0;
+  --fg-soft: #a0a0a0;
+  --fg-faint: #6e6e6e;
 
-  /* Brand — dark theme. Accent inverts to off-white so italic emphases,
-     dots, and selected states stay legible against the near-black
-     background. The bright/deep gradient pair flips to graphite →
-     near-black so brand-marks/avatars read as embossed pebbles. */
-  --accent: #f4f5fb;
-  --accent-bright: #3a3a48;
-  --accent-deep: #13131c;
-  --accent-glow: rgba(244, 245, 251, 0.18);
+  /* ─── Brand — single chromatic accent (unchanged) ────────────
+     Violet stays #1c00ff for primary CTAs. Glow strengthens on
+     dark for better visibility. */
+  --accent-glow: rgba(28, 0, 255, 0.35);
 
+  /* Status — brighter green on dark for legibility */
   --live: #22d3a4;
   --live-glow: rgba(34, 211, 164, 0.45);
 
-  --ink: #08080c;
+  /* Theme-aware atoms */
+  --ink: #0a0a0a;
 
-  --overlay-1: rgba(255, 255, 255, 0.03);
-  --overlay-2: rgba(255, 255, 255, 0.04);
-  --overlay-3: rgba(255, 255, 255, 0.05);
-  --overlay-4: rgba(255, 255, 255, 0.06);
-  --overlay-5: rgba(255, 255, 255, 0.08);
-  --overlay-border: rgba(255, 255, 255, 0.18);
+  /* Overlays flip from black-tinted to white-tinted */
+  --overlay-1: rgba(255, 255, 255, 0.025);
+  --overlay-2: rgba(255, 255, 255, 0.035);
+  --overlay-3: rgba(255, 255, 255, 0.045);
+  --overlay-4: rgba(255, 255, 255, 0.055);
+  --overlay-5: rgba(255, 255, 255, 0.07);
+  --overlay-border: rgba(255, 255, 255, 0.14);
 
-  --inset-card: rgba(255, 255, 255, 0.04);
-  --inset-card-2: rgba(255, 255, 255, 0.02);
+  --grid-stroke: rgba(255, 255, 255, 0.05);
 
-  --grid-stroke: rgba(255, 255, 255, 0.025);
+  /* Shadow deepens on dark */
+  --shadow-soft: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.5);
 
-  --shadow-soft: rgba(0, 0, 0, 0.6);
-  --shadow-strong: rgba(0, 0, 0, 0.7);
+  --nav-bg-1: rgba(10, 10, 10, 0.85);
+  --nav-bg-2: rgba(10, 10, 10, 0.5);
 
-  --nav-bg-1: rgba(10, 10, 12, 0.85);
-  --nav-bg-2: rgba(10, 10, 12, 0.5);
+  --btn-primary-glow: rgba(28, 0, 255, 0.3);
+  --btn-primary-glow-strong: rgba(28, 0, 255, 0.4);
 
-  --btn-primary-glow: rgba(247, 245, 241, 0.28);
-  --btn-primary-glow-strong: rgba(247, 245, 241, 0.36);
-
-  --card-tint: rgba(255, 255, 255, 0.04);
-  --card-edge: linear-gradient(180deg, rgba(255, 255, 255, 0.10), transparent 1px);
+  --card-tint: rgba(28, 0, 255, 0.06);
+  --card-edge: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 1px);
 
   --glow-opacity: 0.55;
 
-  /* Rainbow-button dark overrides */
-  --rainbow-fill: #fff;
-  --rainbow-fill-fade: rgba(255, 255, 255, 0.6);
-  --rainbow-fg: #121213;
+  /* Footer divider — flips to dark-tinted on light footer. */
+  --footer-divider: rgba(0, 0, 0, 0.08);
 }
 
 /* ============================================================
@@ -313,86 +370,83 @@
    ============================================================ */
 @layer components {
   /* ----------------------------------------------------------
-     Buttons (.btn, .btn-primary, .btn-ghost, .btn-arrow,
-     .border-beam-btn)
+     Buttons — Shares spec, Quicksand-tuned
+       .btn          → base pill (99px radius, 500 weight, +0.02em)
+       .btn-primary  → filled brand violet, white text
+       .btn-soft     → light ghost (transparent + carbon text/border)
+       .btn-ghost    → near-transparent inline action
+       .border-beam-btn → hero CTA, alias of primary violet
+     Padding follows Shares Primary Button: 16px vertical / 24px horizontal.
      ---------------------------------------------------------- */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.55em;
-    padding: 0.7rem 1.1rem;
+    padding: 16px 24px;
     font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: -0.01em;
+    font-size: 16px;
+    letter-spacing: 0.02em;
     border-radius: var(--r-pill);
     white-space: nowrap;
     transition:
       transform 0.18s var(--ease),
       background 0.18s var(--ease),
       border-color 0.18s var(--ease),
-      color 0.18s var(--ease),
-      box-shadow 0.25s var(--ease);
+      color 0.18s var(--ease);
     will-change: transform;
   }
 
   .btn-lg {
-    padding: 0.95rem 1.5rem;
-    font-size: 1rem;
+    padding: 18px 28px;
+    font-size: 17px;
   }
 
-  /* .btn-primary — high-contrast filled pill. The primary action on the
-     page (Book a demo, Pricing CTA, Finale CTA). Theme-aware:
-       light: near-black bg + white text
-       dark : off-white bg + near-black text
-     Uses the --btn-primary-glow* tokens (already defined per-theme in
-     :root / [data-theme="dark"]) for the colored under-glow. */
+  /* .btn-primary — Shares Primary Violet Button. Filled brand violet
+     (#1c00ff), white text, 99px pill, no shadow by default (Shares
+     spec: "transparency and minimal depth are preferred"). Hover
+     lifts via translateY + a slightly brighter violet. */
   .btn-primary {
-    background: var(--fg);
-    color: var(--ink);
-    border: 1px solid var(--fg);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.10) inset,
-      0 6px 18px -10px var(--btn-primary-glow);
+    background: var(--accent);
+    color: var(--ink-on-accent);
+    border: 1px solid var(--accent);
   }
 
   .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.15) inset,
-      0 12px 28px -10px var(--btn-primary-glow-strong);
+    background: var(--accent-bright);
+    border-color: var(--accent-bright);
   }
 
-  /* .btn-soft — neutral surface-2 pill. The previous .btn-primary look,
-     kept around for future secondary CTAs. Not used yet. */
+  /* .btn-soft — Shares Light Ghost Button. Transparent background,
+     Carbon Gray text + Stone Gray border. Used for secondary actions
+     on light backgrounds. Padding matches Shares ghost spec
+     (12px vertical / 32px horizontal). */
   .btn-soft {
-    background: var(--surface-2);
-    color: var(--fg);
+    padding: 12px 32px;
+    background: transparent;
+    color: var(--fg-muted);
     border: 1px solid var(--hairline-strong);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.4) inset,
-      0 6px 18px -10px var(--shadow-soft);
   }
 
   .btn-soft:hover {
     transform: translateY(-1px);
-    background: var(--surface);
-    border-color: var(--overlay-border);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.5) inset,
-      0 12px 28px -12px var(--shadow-strong);
+    color: var(--fg);
+    border-color: var(--fg-muted);
   }
 
+  /* .btn-ghost — Shares Text Link Button. No background, no radius
+     specified by spec (effectively square). Color in Carbon Gray /
+     Slate Gray, used for "learn more"-style inline actions. */
   .btn-ghost {
-    color: var(--fg);
-    background: var(--overlay-1);
-    border: 1px solid var(--hairline-strong);
-    backdrop-filter: blur(8px);
+    color: var(--fg-muted);
+    background: transparent;
+    border: 1px solid transparent;
   }
 
   .btn-ghost:hover {
-    background: var(--overlay-4);
-    border-color: var(--overlay-border);
+    color: var(--fg);
+    background: var(--overlay-2);
     transform: translateY(-1px);
   }
 
@@ -407,31 +461,28 @@
     transform: translateX(2px);
   }
 
-  /* Hero "Book a demo" CTA — clean white pill with dark text and arrow.
-     Ported verbatim from feat/v4 styles.css. The rotating-rainbow border
-     treatment was removed upstream; the placeholder name is kept so we
-     can re-add it later without renaming the class. Hardcoded colors
-     are intentional — this CTA always reads as "white pill, dark ink"
-     in both themes (matches the original design). */
+  /* Hero "Book a demo" CTA — Shares Primary Violet Button.
+     Visually identical to .btn-primary (filled violet pill); kept as
+     a separate class so the Hero can swap aesthetics later without
+     renaming. Padding matches Shares' main CTA: 16/24px. */
   .border-beam-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.55em;
-    height: 44px;
-    padding: 0 1.75rem;
-    border-radius: 0.625rem;
+    padding: 16px 24px;
+    border-radius: var(--r-pill);
     font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: -0.005em;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
-    background: #ffffff;
-    color: #0a0a0a;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--accent);
+    color: var(--ink-on-accent);
+    border: 1px solid var(--accent);
     transition:
       transform 0.18s var(--ease),
       background 0.18s var(--ease),
@@ -440,11 +491,12 @@
 
   .border-beam-btn:hover {
     transform: translateY(-1px);
-    background: #f4f4f5;
+    background: var(--accent-bright);
+    border-color: var(--accent-bright);
   }
 
   .border-beam-btn:focus-visible {
-    outline: 2px solid hsl(210 100% 65%);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 
@@ -506,26 +558,21 @@
     max-width: 720px;
     padding: 0.7rem 1.1rem 0.7rem 1.5rem;
     background: var(--surface-translucent);
-    border-color: var(--hairline-strong);
+    border-color: var(--hairline);
     border-radius: var(--r-pill);
-    box-shadow: 0 12px 32px -16px var(--shadow-soft);
+    box-shadow: var(--shadow-xl);
   }
 
   /* ----------------------------------------------------------
-     Hero (.hero, .hero-bg, .glow*, .grid, .hero-inner,
-     .live-pill, .live-dot, .hero-title, .hero-sub, .hero-cta,
-     .trust-row, .trust-num, .trust-label)
-
-     Ported from /styles.css with three deliberate refinements
-     vs. the vanilla version (Phase 2.2 design review):
-       - .hero-title font-size clamped tighter (was 2.6/7vw/5.6 →
-         now 2.4/5.5vw/4.5) and letter-spacing loosened from
-         -0.035em to -0.02em — references sit at 56–72px.
-       - .trust-num bumped from 1.85rem → 2.4rem (mobile keeps
-         the old 1.85rem under the 540px breakpoint).
-     Everything else (eyebrow pill, accent serif italic, glow
-     palette, grid mask, .hero-cta wrapper) is verbatim.
+     Hero — Shares spec
+       Background: Canvas White (--bg). Section rotation pairs
+       Hero (canvas) with Bento (cloud) for the alternation rhythm.
+       Title: 56–72px Quicksand 700, -0.01em display tracking.
+       <em> emphasis renders as bold violet Quicksand (no italic).
      ---------------------------------------------------------- */
+  /* Hero — Cloud Gray wallpaper. The landing surface is the only
+     section that's NOT canvas white; it sits like a soft gray
+     stage on which the white call-card lifts via shadow + radius. */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -534,7 +581,7 @@
     justify-content: center;
     isolation: isolate;
     overflow: hidden;
-    background: var(--bg);
+    background: var(--bg-contrast);
   }
 
   .hero-bg {
@@ -551,6 +598,8 @@
     opacity: var(--glow-opacity);
   }
 
+  /* Hero glow — violet wash from --accent-glow. The grid pattern + glow
+     together form the only visual decoration in the hero; no shadows. */
   .glow-a {
     top: -10%;
     left: 50%;
@@ -560,16 +609,7 @@
     background: radial-gradient(
       closest-side,
       var(--accent-glow) 0%,
-      rgba(20, 20, 60, 0.05) 55%,
-      transparent 80%
-    );
-  }
-
-  [data-theme="dark"] .glow-a {
-    background: radial-gradient(
-      closest-side,
-      var(--accent-glow) 0%,
-      rgba(255, 255, 255, 0.08) 55%,
+      var(--overlay-2) 55%,
       transparent 80%
     );
   }
@@ -587,39 +627,28 @@
     opacity: calc(var(--glow-opacity) + 0.15);
   }
 
-  .grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(to right, var(--grid-stroke) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-stroke) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 35%, transparent 80%);
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 35%, transparent 80%);
-  }
-
   .hero-inner {
     width: 100%;
-    max-width: 1100px;
+    max-width: var(--page-max-width);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
+  /* Live pill — Canvas White chip on the Cloud Gray hero wallpaper. */
   .live-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.4rem 0.85rem 0.4rem 0.7rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.01em;
+    padding: 8px 14px 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-muted);
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-pill);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     margin-bottom: 1.6rem;
     transition:
       border-color 0.2s var(--ease),
@@ -638,39 +667,40 @@
     border-radius: 50%;
     background: var(--live);
     box-shadow: 0 0 0 0 var(--live-glow);
-    /* Uses a dedicated keyframe (renamed from `pulse` to avoid colliding
-       with Tailwind's built-in animate-pulse). Definition sits in the
-       keyframes block above + tailwind.config.js exposes animate-pulse-dot. */
     animation: live-dot-pulse 1.8s var(--ease) infinite;
   }
 
+  /* Hero title — Quicksand display scale, weight 700.
+     Quicksand at 42–72px wants slightly negative tracking to feel
+     deliberate (the rounded shapes already breathe). */
   .hero-title {
-    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-    font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: var(--tracking-display);
     margin: 0 0 1.4rem;
-    max-width: 16ch;
+    max-width: 18ch;
     color: var(--fg);
   }
 
+  /* <em> emphasis — bold violet Quicksand 700, no italic. Inherits
+     headline tracking. */
   .hero-title em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
-    letter-spacing: -0.02em;
-    /* Optical lift — serif italic sits a hair lower than sans. */
-    font-size: 1.08em;
+    letter-spacing: inherit;
   }
 
   .hero-sub {
-    font-size: clamp(1rem, 1.3vw, 1.18rem);
-    line-height: 1.55;
-    color: var(--fg-muted);
+    font-size: clamp(16px, 1.3vw, 18px);
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--fg-soft);
     max-width: 640px;
     margin: 0 0 2.4rem;
-    letter-spacing: -0.005em;
+    letter-spacing: 0.02em;
   }
 
   .hero-cta {
@@ -696,21 +726,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
+    gap: 0.4rem;
   }
 
+  /* Trust numbers — was serif italic at 2.4rem; now bold sans in the
+     accent violet so the numbers still read as the visual anchor. */
   .trust-num {
-    font-family: var(--font-serif);
+    font-family: inherit;
+    font-weight: 700;
     font-size: 2.4rem;
-    letter-spacing: -0.02em;
-    color: var(--fg);
+    letter-spacing: 0;
+    color: var(--accent);
     line-height: 1;
   }
 
   .trust-label {
-    font-size: 0.78rem;
+    font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--fg-soft);
   }
 
@@ -718,11 +752,13 @@
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    font-weight: 600;
-    font-size: 1.12rem;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.02em;
   }
 
+  /* Brand mark — uses the violet bright→deep gradient. Drives every
+     "Jenna" avatar / brand-mark on the page. */
   .brand-mark {
     width: 26px;
     height: 26px;
@@ -730,16 +766,14 @@
     background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
     display: grid;
     place-items: center;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.4),
-      0 0 22px var(--accent-glow);
+    box-shadow: 0 0 22px var(--accent-glow);
   }
 
   .brand-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #08080c;
+    background: var(--ink-on-accent);
   }
 
   .brand-logo {
@@ -750,25 +784,30 @@
     -webkit-user-drag: none;
   }
 
+  /* Logo variants flip with the active theme. Both <img> elements
+     stay in markup; CSS toggles which is visible. */
   .brand-logo-dark { display: none; }
-
   [data-theme="dark"] .brand-logo-light { display: none; }
   [data-theme="dark"] .brand-logo-dark  { display: block; }
 
+  /* Nav links — Slate Gray text per Shares Navigation Link spec.
+     Resting state has no chrome; hover adds a subtle pill chip. */
   .nav-links {
     display: flex;
     gap: 1.85rem;
-    font-size: 0.92rem;
-    color: var(--fg-muted);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
   }
 
   /* Hover chip — adds a subtle padded background on hover without
      shifting layout. Negative margin cancels the resting padding so
      the visible link position is identical to the non-hover state. */
   .nav-links a {
-    padding: 6px 10px;
-    margin: -6px -10px;
-    border-radius: var(--r-sm);
+    padding: 8px 14px;
+    margin: -8px -14px;
+    border-radius: var(--r-pill);
     transition:
       color 0.18s var(--ease),
       background-color 0.18s var(--ease);
@@ -779,9 +818,11 @@
     background-color: var(--overlay-2);
   }
 
+  /* .nav-cta inherits .btn .btn-primary — already filled violet pill.
+     Override only what the nav requires (compact size). */
   .nav-cta {
-    font-size: 0.88rem;
-    padding: 0.55rem 1rem;
+    font-size: 14px;
+    padding: 10px 20px;
   }
 
   .nav-actions {
@@ -790,6 +831,8 @@
     gap: 0.75rem;
   }
 
+  /* Theme toggle — light/dark switcher in the nav.
+     Sun/moon icons swap based on the current data-theme attr. */
   .theme-toggle {
     width: 38px;
     height: 38px;
@@ -798,20 +841,15 @@
     border-radius: var(--r-pill);
     color: var(--fg-muted);
     background: var(--overlay-1);
-    border: 1px solid var(--hairline);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     transition:
       color 0.2s var(--ease),
       background 0.2s var(--ease),
-      border-color 0.2s var(--ease),
       transform 0.2s var(--ease);
   }
 
   .theme-toggle:hover {
     color: var(--fg);
     background: var(--overlay-3);
-    border-color: var(--hairline-strong);
     transform: translateY(-1px);
   }
 
@@ -821,6 +859,7 @@
     transition: opacity 0.18s var(--ease), transform 0.25s var(--ease);
   }
 
+  /* Light theme shows moon (offer-to-go-dark); dark shows sun. */
   .theme-icon-sun  { display: none; }
   .theme-icon-moon { display: block; }
   [data-theme="dark"] .theme-icon-sun  { display: block; }
@@ -829,11 +868,12 @@
   /* ----------------------------------------------------------
      Section 2 — What Jenna Does (Bento) — ported verbatim
      ---------------------------------------------------------- */
+  /* Bento — Canvas White section; cards inside are Cloud Gray. */
   .features {
     position: relative;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
-    background: var(--bg-contrast);
+    background: var(--bg);
   }
 
   .features-bg {
@@ -860,7 +900,9 @@
     );
   }
 
-  /* Section header — shared with future sections */
+  /* Section header — shared.
+     Eyebrow uses uppercase wider tracking (its own micro-typography).
+     Title takes display tracking (-0.01em); sub takes body (+0.02em). */
   .section-head {
     max-width: 720px;
     margin: 0 auto 4.5rem;
@@ -869,7 +911,7 @@
 
   .eyebrow {
     display: inline-block;
-    font-size: 0.78rem;
+    font-size: 14px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--fg-soft);
@@ -877,37 +919,40 @@
     font-weight: 500;
   }
 
+  /* Section title — display Quicksand 700, slightly negative tracking. */
   .section-title {
     font-size: clamp(2rem, 4.4vw, 3.6rem);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: var(--tracking-display);
     margin: 0 0 1.2rem;
     color: var(--fg);
   }
 
+  /* <em> in section titles — bold violet Quicksand, inherits tracking. */
   .section-title em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
-    font-size: 1.08em;
-    letter-spacing: -0.02em;
+    letter-spacing: inherit;
   }
 
   .section-sub {
-    font-size: clamp(1rem, 1.2vw, 1.1rem);
-    color: var(--fg-muted);
+    font-size: clamp(16px, 1.2vw, 18px);
+    font-weight: 500;
+    color: var(--fg-soft);
     margin: 0;
-    line-height: 1.55;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
   }
 
-  /* Bento grid */
+  /* Bento grid — page-max-width container, 24px gutter (Shares element gap). */
   .bento {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    max-width: 1200px;
+    gap: var(--element-gap);
+    max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
@@ -915,15 +960,18 @@
   .bento-2x { grid-column: span 2; }
   .bento-3x { grid-column: span 3; }
 
+  /* Bento card — Cloud Gray on Canvas White section, 36px Shares
+     card radius, 32px padding, hairline border. Inner panels (POS,
+     lines, profiles, etc.) flip back to white for nested contrast. */
   .bento-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
-    padding: 1.5rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
+    gap: 16px;
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
+    border-radius: var(--r-xl);
     overflow: hidden;
     min-height: 240px;
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
@@ -934,11 +982,13 @@
     transform: translateY(-2px);
   }
 
-  /* Featured cards get a soft accent wash */
+  /* Featured cards — same 36px radius as standard bento cards for a
+     consistent grid silhouette, plus the soft violet wash that marks
+     them as feature surfaces. */
   .bento-feature {
     background:
       radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
-      linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+      var(--surface-2);
   }
 
   .bento-feature::before {
@@ -950,15 +1000,17 @@
     opacity: 0.6;
   }
 
+  /* Card icon chip — 16px input radius, Canvas White fill on the
+     Cloud Gray bento card. */
   .card-icon {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--r-md);
     display: grid;
     place-items: center;
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
-    color: var(--fg);
+    background: var(--bg);
+    border: none;
+    color: var(--fg-muted);
     margin-bottom: 0.2rem;
   }
 
@@ -967,14 +1019,16 @@
     height: 18px;
   }
 
+  /* Eyebrow tag inside cards — uppercase caption, slate text, violet dot. */
   .card-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.06em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--fg-muted);
+    color: var(--fg-soft);
     align-self: flex-start;
   }
 
@@ -986,70 +1040,80 @@
     box-shadow: 0 0 8px var(--accent-glow);
   }
 
+  /* Card title — Shares subheading scale (20px) for 1x cards,
+     heading-sm (26px) for feature cards. Weight 700, +0.02em. */
   .card-title {
-    font-size: 1.18rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    line-height: 1.25;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.43;
+    letter-spacing: 0.02em;
     margin: 0;
     color: var(--fg);
   }
 
   .bento-feature .card-title {
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-size: 26px;
+    line-height: 1.33;
+    letter-spacing: 0.02em;
   }
 
   .card-body {
-    font-size: 0.93rem;
-    line-height: 1.55;
-    color: var(--fg-muted);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
     margin: 0;
   }
 
   .bento-feature .card-body {
-    font-size: 1rem;
     max-width: 38ch;
   }
 
-  /* 24/7 clock */
+  /* 24/7 clock — was serif italic; now bold Quicksand in violet so the
+     numerals still read as the visual anchor. Tracking neutralized
+     since wide tracking looks awkward on stand-alone digits. */
   .card-clock {
     margin-top: auto;
     display: inline-flex;
     align-items: baseline;
     gap: 0.3rem;
-    font-family: var(--font-serif);
+    font-family: inherit;
+    font-weight: 700;
     font-size: 3rem;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     line-height: 1;
-    color: var(--fg);
+    color: var(--accent);
   }
 
   .card-clock-divider {
     color: var(--accent);
-    font-style: italic;
+    font-style: normal;
+    font-weight: 500;
   }
 
-  /* POS ticket */
+  /* POS ticket — Canvas White inner panel on the Cloud Gray bento
+     card. Tabular content keeps its own micro-typography (no body
+     tracking on numerics). */
   .pos-ticket {
     margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-    padding: 1rem 1.1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 16px 18px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
 
   .pos-head {
     display: flex;
     justify-content: space-between;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
@@ -1098,8 +1162,8 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 0.55rem;
-    border-top: 1px dashed var(--hairline-strong);
-    font-size: 0.78rem;
+    border-top: 1px dashed var(--hairline);
+    font-size: 14px;
   }
 
   .pos-status {
@@ -1107,9 +1171,10 @@
     align-items: center;
     gap: 0.4rem;
     color: var(--live);
+    font-weight: 500;
   }
 
-  /* Shared status-dot used across cards (stable bg, no animation by default) */
+  /* Shared status-dot — neutral resting state, --status-dot-live for active. */
   .status-dot {
     width: 6px;
     height: 6px;
@@ -1127,21 +1192,25 @@
     animation: live-dot-pulse 1.8s var(--ease) infinite;
   }
 
+  /* POS total — was serif italic violet; now bold sans violet so the
+     dollar amount still anchors the receipt visually. */
   .pos-total {
-    font-family: var(--font-serif);
+    font-family: inherit;
+    font-weight: 700;
     font-size: 1.2rem;
+    letter-spacing: 0;
     color: var(--accent);
   }
 
-  /* Multi-line lanes */
+  /* Multi-line lanes — Canvas White inner panel on bento cloud card. */
   .lines {
     margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
-    padding: 0.85rem 1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 14px 18px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
   }
 
@@ -1150,18 +1219,20 @@
     grid-template-columns: 80px 1fr 40px;
     gap: 0.7rem;
     align-items: center;
-    font-size: 0.78rem;
+    font-size: 13px;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
 
   .line-name {
     color: var(--fg-soft);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
 
   .line-time {
     color: var(--accent);
     text-align: right;
+    font-weight: 700;
   }
 
   .line-wave {
@@ -1215,13 +1286,17 @@
     align-items: stretch;
   }
 
+  /* Memory visual — exempt from single-accent rule. The shader's
+     pink/teal/lime/violet palette is a brand graphic, not a UI tone.
+     Radius bumped from --r-md (16px) to --r-lg (24px) to feel less
+     cramped against the surrounding card's 36/60px corners. */
   .memory-visual {
     position: relative;
-    border-radius: var(--r-md);
+    border-radius: var(--r-lg);
     overflow: hidden;
     isolation: isolate;
     min-height: 220px;
-    border: 1px solid var(--hairline);
+    border: none;
     background:
       radial-gradient(120% 90% at 30% 20%, rgba(237, 64, 179, 0.55), transparent 60%),
       radial-gradient(120% 90% at 80% 80%, rgba(110, 247, 204, 0.45), transparent 60%),
@@ -1307,14 +1382,15 @@
     min-width: 0;
   }
 
+  /* Memory profile — Canvas White row inside the cloud bento-feature card. */
   .memory-profile {
     position: relative;
     display: flex;
     align-items: center;
     gap: 0.7rem;
-    padding: 0.75rem 0.85rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 12px 14px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
     min-width: 0;
     transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
@@ -1325,14 +1401,17 @@
     transform: translateY(-1px);
   }
 
+  /* Memory profile avatar — default falls back to brand violet gradient.
+     Per-tone overrides (pink/teal/lime/violet) are exempt from the
+     single-accent rule (caller-memory exemption). */
   .memory-profile-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 14px;
     color: #fff;
     flex-shrink: 0;
     background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
@@ -1368,8 +1447,9 @@
   }
 
   .memory-profile-name {
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     line-height: 1.2;
     color: var(--fg);
     white-space: nowrap;
@@ -1378,7 +1458,9 @@
   }
 
   .memory-profile-note {
-    font-size: 0.74rem;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
     line-height: 1.3;
     margin-top: 1px;
@@ -1398,7 +1480,8 @@
     animation: memory-pulse 1.8s ease-in-out infinite;
   }
 
-  /* SMS screenshot — pre-cropped iMessage bubble PNG */
+  /* SMS screenshot — graphic, exempt. Drop-shadow uses Shares' single
+     elevation token (rgba(0,0,0,0.12)) for the lifted-image feel. */
   .sms-screenshot {
     margin: auto 0 0;
     padding: 0;
@@ -1410,7 +1493,7 @@
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 12px 22px rgba(20, 20, 60, 0.18));
+    filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.12));
   }
 
   /* Payment card */
@@ -1421,54 +1504,63 @@
     gap: 0.65rem;
   }
 
+  /* Pay card — Canvas White inner panel on cloud bento card. */
   .pay-card {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.7rem 0.85rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 12px 14px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
 
   .pay-card-tag {
-    font-size: 0.72rem;
+    font-size: 12px;
+    font-weight: 700;
     color: var(--fg-soft);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
   }
 
   .pay-status {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.78rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--live);
   }
 
-  /* Transfer chip */
+  /* Transfer chip — Canvas White inner panel on cloud bento card.
+     The from/to pills inside flip to cloud so they're visible
+     on the now-white panel. */
   .transfer-chip {
     margin-top: auto;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.7rem 0.85rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 12px 14px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
-    font-size: 0.78rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .transfer-from,
   .transfer-to {
-    padding: 0.2rem 0.55rem;
+    padding: 4px 10px;
     border-radius: var(--r-pill);
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
+    background: var(--surface-2);
+    border: none;
     color: var(--fg-muted);
   }
 
@@ -1482,20 +1574,24 @@
     color: var(--fg-soft);
   }
 
+  /* Transfer message — was italic; now medium-weight in Ink Black so
+     it reads cleanly without the italic flourish. */
   .transfer-msg {
     color: var(--fg);
-    font-style: italic;
+    font-style: normal;
+    font-weight: 500;
   }
 
   /* ----------------------------------------------------------
      Section 6 — Pricing (Receipt) — ported verbatim
      ---------------------------------------------------------- */
+  /* Pricing — Canvas White section; receipt card is Cloud Gray. */
   .pricing {
     position: relative;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     overflow: hidden;
-    background: var(--bg-paper);
+    background: var(--bg);
   }
 
   .pricing-bg {
@@ -1518,22 +1614,18 @@
     background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
   }
 
-  .pricing .section-title em {
-    font-size: 1.1em;
-  }
-
+  /* Receipt — Cloud Gray card on Canvas White section, 36px Shares
+     card radius, 32px padding. */
   .receipt {
     position: relative;
     max-width: 620px;
     margin: 0 auto 3.5rem;
-    padding: 2.2rem 2.4rem 2.4rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-xl);
     isolation: isolate;
-    box-shadow:
-      0 1px 0 var(--inset-card) inset,
-      0 30px 80px -30px var(--shadow-strong);
+    box-shadow: var(--shadow-xl);
   }
 
   .receipt-glow {
@@ -1552,7 +1644,7 @@
     align-items: center;
     gap: 1rem;
     padding-bottom: 1.4rem;
-    border-bottom: 1px dashed var(--hairline-strong);
+    border-bottom: 1px dashed var(--hairline);
     flex-wrap: wrap;
   }
 
@@ -1560,8 +1652,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-muted);
   }
@@ -1575,7 +1668,8 @@
   }
 
   .receipt-meta {
-    font-size: 0.78rem;
+    font-size: 12px;
+    font-weight: 500;
     color: var(--fg-soft);
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.02em;
@@ -1594,9 +1688,11 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    padding: 0.95rem 0;
+    padding: 14px 0;
     border-bottom: 1px dashed var(--hairline);
-    font-size: 0.95rem;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
   }
 
@@ -1605,7 +1701,7 @@
   }
 
   .receipt-label {
-    color: var(--fg-muted);
+    color: var(--fg-soft);
   }
 
   .receipt-value {
@@ -1616,17 +1712,21 @@
     white-space: nowrap;
   }
 
+  /* Receipt amount — was huge serif italic violet; now bold sans violet
+     tabular. The dollar amounts are the receipt's anchor. */
   .receipt-value em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.65rem;
-    letter-spacing: -0.02em;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0;
     color: var(--accent);
     line-height: 1;
   }
 
   .receipt-unit {
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--fg-soft);
     font-style: normal;
     letter-spacing: 0.02em;
@@ -1634,61 +1734,64 @@
 
   .receipt-line-charge .receipt-label {
     color: var(--fg);
-    font-weight: 500;
+    font-weight: 700;
   }
 
   .receipt-line-zero .receipt-label {
     color: var(--fg-faint);
     text-decoration: line-through;
-    text-decoration-color: rgba(220, 220, 255, 0.18);
+    text-decoration-color: var(--hairline);
     text-decoration-thickness: 1px;
   }
 
+  /* "Free" zero-line label — was serif italic; now bold sans faint. */
   .receipt-zero {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
     color: var(--fg-faint);
-    letter-spacing: 0.04em;
-    font-style: italic;
+    letter-spacing: 0.02em;
   }
 
   .receipt-line-total {
     margin-top: 0.5rem;
     padding-top: 1.3rem;
-    border-top: 1px dashed var(--hairline-strong);
+    border-top: 1px dashed var(--hairline);
     border-bottom: 0 !important;
   }
 
   .receipt-line-total .receipt-label {
     color: var(--fg);
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.02em;
   }
 
   .receipt-line-total .receipt-value em {
-    font-size: 2.4rem;
-    letter-spacing: -0.025em;
+    font-size: 36px;
   }
 
   .receipt-line-total .receipt-unit {
-    font-size: 0.9rem;
-    color: var(--fg-muted);
+    font-size: 14px;
+    color: var(--fg-soft);
   }
 
   .receipt-foot {
     margin: 1.6rem 0 0;
     padding-top: 1.4rem;
-    border-top: 1px dashed var(--hairline-strong);
-    font-size: 0.92rem;
-    color: var(--fg-muted);
-    line-height: 1.55;
+    border-top: 1px dashed var(--hairline);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
+    line-height: 1.5;
     text-align: center;
   }
 
   .receipt-foot strong {
     color: var(--fg);
-    font-weight: 500;
+    font-weight: 700;
   }
 
   .pricing-cta {
@@ -1700,9 +1803,10 @@
   }
 
   .pricing-cta-note {
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
-    letter-spacing: 0.01em;
   }
 
   /* ----------------------------------------------------------
@@ -1760,36 +1864,35 @@
 
   .finale-title {
     font-size: clamp(2.4rem, 6.5vw, 5.2rem);
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.05;
-    letter-spacing: -0.035em;
+    letter-spacing: var(--tracking-display);
     color: var(--fg);
     margin: 0.2rem 0 0.4rem;
-    max-width: 14ch;
+    max-width: 16ch;
   }
 
+  /* <em> in finale title — bold violet sans, no italic. */
   .finale-title em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
-    font-size: 1.1em;
   }
 
+  /* Promise card — Cloud Gray, 24px Shares accordion radius. */
   .finale-promise {
     position: relative;
     width: 100%;
     max-width: 640px;
-    padding: 1.6rem 1.85rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-lg);
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
     text-align: left;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
   }
 
   .finale-promise-badge {
@@ -1797,13 +1900,14 @@
     align-items: center;
     gap: 0.45rem;
     align-self: flex-start;
-    padding: 0.3rem 0.7rem 0.3rem 0.55rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    padding: 6px 12px 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--live);
-    background: rgba(34, 211, 164, 0.08);
-    border: 1px solid rgba(34, 211, 164, 0.2);
+    background: rgba(15, 166, 116, 0.08);
+    border: 1px solid rgba(15, 166, 116, 0.2);
     border-radius: var(--r-pill);
   }
 
@@ -1813,31 +1917,32 @@
     border-radius: 50%;
     background: var(--live);
     box-shadow: 0 0 8px var(--live-glow);
-    /* Renamed from `pulse` to live-dot-pulse — same ring-expansion. */
     animation: live-dot-pulse 1.8s var(--ease) infinite;
   }
 
   .finale-promise-text {
-    font-size: 1.05rem;
-    line-height: 1.55;
-    color: var(--fg-muted);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--fg-soft);
     margin: 0;
   }
 
+  /* <em> in promise text — bold ink-black sans, no italic. */
   .finale-promise-text em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--fg);
-    font-size: 1.1em;
-    letter-spacing: -0.005em;
   }
 
   .btn-finale {
     margin-top: 0.5rem;
-    padding: 1.1rem 2rem;
-    font-size: 1.05rem;
+    padding: 18px 28px;
+    font-size: 17px;
     font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .btn-finale .btn-arrow {
@@ -1859,9 +1964,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.85rem;
-    color: var(--fg-muted);
-    letter-spacing: 0.005em;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-soft);
+    letter-spacing: 0.02em;
   }
 
   .finale-trust svg {
@@ -1873,30 +1979,41 @@
   /* ----------------------------------------------------------
      Footer — ported verbatim
      ---------------------------------------------------------- */
+  /* ----------------------------------------------------------
+     Footer — dark Shares-style
+       Background: Ink Black (#1f1f1f, mirrors Shares' --gray-950).
+       Text: Stone Gray (#b0b0b0) main, Steel Gray (#888888) muted.
+       Accent <em>: stays brand violet (still legible on dark).
+       Notch: a ::before pseudo paints a 60px Canvas White cap with
+              60px-radius bottom corners, mirroring Shares' pattern
+              of `.section-corners_bottom` overlapping the footer.
+     ---------------------------------------------------------- */
   .footer {
     position: relative;
-    padding: 4.5rem 1.5rem 2rem;
-    border-top: 1px solid var(--hairline);
-    background: var(--surface-translucent);
+    padding: 120px 1.5rem 2rem;
+    border-top: none;
+    background: var(--fg); /* Ink Black */
+    color: var(--hairline-strong); /* Stone Gray base text */
     isolation: isolate;
     overflow: hidden;
   }
 
-  .footer-glow {
+  /* Rounded white "notch" overlapping the top 60px of the dark footer.
+     Matches Shares' section-corners_bottom + margin-top:-60px trick. */
+  .footer::before {
+    content: "";
     position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(
-      600px 200px at 50% 0%,
-      var(--accent-glow),
-      transparent 70%
-    );
-    opacity: 0.5;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--bg);
+    border-radius: 0 0 60px 60px;
+    z-index: 1;
   }
 
   .footer-inner {
-    max-width: 720px;
+    max-width: var(--page-max-width);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -1904,27 +2021,32 @@
     text-align: center;
     gap: 1.4rem;
     padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--footer-divider);
   }
 
+  /* .footer-brand — uses var(--ink) so it stays high-contrast against
+     the footer surface in both themes (white in light, near-black in dark). */
   .footer-brand {
-    font-size: 1.18rem;
+    font-size: 18px;
+    color: var(--ink);
   }
 
   .footer-tag {
-    font-size: 0.95rem;
-    color: var(--fg-muted);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--hairline-strong); /* Stone Gray on dark */
     margin: 0;
     line-height: 1.5;
-    max-width: 32ch;
+    max-width: 36ch;
   }
 
+  /* <em> in footer tag — bold violet sans, no italic. Reads cleanly on dark. */
   .footer-tag em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
-    font-size: 1.05em;
   }
 
   .footer-links,
@@ -1935,47 +2057,50 @@
     align-items: baseline;
     gap: 0.55rem 0.75rem;
     margin: 0;
-    font-size: 0.92rem;
-    letter-spacing: -0.005em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .footer-links a,
   .footer-contact a {
-    color: var(--fg-muted);
+    color: var(--hairline-strong); /* Stone Gray */
     transition: color 0.18s var(--ease);
     position: relative;
   }
 
+  /* Hover lift uses var(--ink) so it inverts correctly per theme. */
   .footer-links a:hover,
   .footer-contact a:hover {
-    color: var(--fg);
+    color: var(--ink);
   }
 
   .footer-contact {
-    font-size: 0.88rem;
-    color: var(--fg-soft);
+    font-size: 13px;
+    color: var(--fg-faint); /* Steel Gray */
     font-variant-numeric: tabular-nums;
   }
 
   .footer-contact a {
-    color: var(--fg-soft);
+    color: var(--fg-faint);
   }
 
   .footer-sep {
-    color: var(--fg-faint);
+    color: var(--fg-faint); /* Steel Gray */
     user-select: none;
   }
 
   .footer-base {
-    max-width: 720px;
+    max-width: var(--page-max-width);
     margin: 1.4rem auto 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    font-size: 0.8rem;
-    color: var(--fg-soft);
-    letter-spacing: 0.005em;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-faint); /* Steel Gray */
     flex-wrap: wrap;
   }
 
@@ -1987,20 +2112,22 @@
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    color: var(--fg-muted);
-    font-size: 0.78rem;
+    color: var(--fg-faint);
+    font-size: 12px;
+    font-weight: 500;
     letter-spacing: 0.02em;
   }
 
   /* ----------------------------------------------------------
      Section 5 — Savings (ROI calculator) — ported verbatim
      ---------------------------------------------------------- */
+  /* Savings — Canvas White section per Shares alternation rhythm. */
   .savings {
     position: relative;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     overflow: hidden;
-    background: var(--bg-contrast);
+    background: var(--bg);
   }
 
   .savings-bg {
@@ -2022,20 +2149,20 @@
     background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
   }
 
+  /* ROI calculator card — Cloud Gray on Canvas, 36px Shares card radius,
+     32px padding, single elevation token. */
   .calc {
     position: relative;
     max-width: 880px;
     margin: 0 auto 4rem;
-    padding: 2.4rem 2.4rem 2rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-xl);
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    box-shadow:
-      0 1px 0 var(--inset-card) inset,
-      0 30px 80px -30px var(--shadow-strong);
+    box-shadow: var(--shadow-xl);
     isolation: isolate;
   }
 
@@ -2055,33 +2182,37 @@
     align-items: center;
     text-align: center;
     gap: 0.4rem;
-    padding: 0.5rem 0 0.7rem;
-    border-bottom: 1px dashed var(--hairline-strong);
-    padding-bottom: 1.6rem;
+    padding: 0.5rem 0 1.6rem;
+    border-bottom: 1px dashed var(--hairline);
   }
 
   .calc-result-eyebrow {
-    font-size: 0.74rem;
+    font-size: 12px;
+    font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
+  /* Calc figure — was huge serif italic; now bold sans display-scale,
+     violet for emphasis. The marquee number of the section. */
   .calc-figure {
     display: inline-flex;
     align-items: baseline;
     gap: 0.05em;
-    font-family: var(--font-serif);
-    font-style: italic;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     font-size: clamp(4rem, 11vw, 7.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    line-height: 1.05;
+    letter-spacing: 0;
     color: var(--accent);
     margin: 0.2rem 0 0.1rem;
   }
 
   .calc-currency {
     font-size: 0.6em;
+    font-weight: 700;
     color: var(--fg-muted);
     font-style: normal;
     align-self: flex-start;
@@ -2096,16 +2227,19 @@
 
   .calc-period {
     font-size: 0.28em;
+    font-weight: 500;
     color: var(--fg-soft);
     font-style: normal;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     align-self: flex-end;
     margin-bottom: 0.5em;
     margin-left: 0.15em;
   }
 
   .calc-result-sub {
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
   }
 
@@ -2129,16 +2263,19 @@
   }
 
   .calc-row-label {
-    font-size: 0.95rem;
+    font-size: 16px;
     color: var(--fg);
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.02em;
   }
 
+  /* Row value — was serif italic; now bold sans violet tabular. */
   .calc-row-value {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.4rem;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0;
     color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
@@ -2146,9 +2283,10 @@
   .calc-row-foot {
     display: flex;
     justify-content: space-between;
-    font-size: 0.72rem;
+    font-size: 11px;
+    font-weight: 500;
     color: var(--fg-faint);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     font-variant-numeric: tabular-nums;
     padding: 0 2px;
   }
@@ -2180,15 +2318,16 @@
     outline-style: dashed;
   }
 
+  /* Range slider thumb — solid violet, white center for the puck feel. */
   .calc-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--fg);
+    background: var(--ink-on-accent);
     border: 4px solid var(--accent);
-    box-shadow: 0 0 0 1px var(--shadow-strong), 0 4px 14px var(--accent-glow);
+    box-shadow: var(--shadow-xl);
     cursor: grab;
     transition: transform 0.15s var(--ease);
   }
@@ -2200,9 +2339,9 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--fg);
+    background: var(--ink-on-accent);
     border: 4px solid var(--accent);
-    box-shadow: 0 0 0 1px var(--shadow-strong), 0 4px 14px var(--accent-glow);
+    box-shadow: var(--shadow-xl);
     cursor: grab;
     transition: transform 0.15s var(--ease);
   }
@@ -2217,9 +2356,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
-    padding: 1.3rem 1.4rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 20px 22px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
   }
 
@@ -2228,14 +2367,16 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 1rem;
-    font-size: 0.93rem;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .calc-line-label {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    color: var(--fg-muted);
+    color: var(--fg-soft);
   }
 
   .calc-line-sign {
@@ -2244,27 +2385,30 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: var(--overlay-3);
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--surface-2);
     color: var(--fg-soft);
     flex-shrink: 0;
+    letter-spacing: 0;
   }
 
   .sign-pos {
-    background: rgba(34, 211, 164, 0.12);
+    background: rgba(15, 166, 116, 0.12);
     color: var(--live);
   }
 
   .sign-neg {
-    background: var(--overlay-3);
+    background: var(--surface-2);
     color: var(--fg-muted);
   }
 
+  /* Line amount — was serif tabular; now bold sans tabular. */
   .calc-line-amount {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    letter-spacing: -0.01em;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0;
     color: var(--fg);
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum";
@@ -2273,42 +2417,49 @@
   .calc-line-total {
     margin-top: 0.4rem;
     padding-top: 0.85rem;
-    border-top: 1px dashed var(--hairline-strong);
+    border-top: 1px dashed var(--hairline);
   }
 
   .calc-line-total .calc-line-label {
     color: var(--fg);
-    font-weight: 500;
+    font-weight: 700;
   }
 
+  /* Total line — was italic violet; now bold violet sans, larger. */
   .calc-line-amount-total {
-    font-style: italic;
-    font-size: 1.5rem;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0;
     color: var(--accent);
   }
 
   .calc-note {
-    font-size: 0.82rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
-    line-height: 1.55;
+    line-height: 1.5;
     margin: 0 auto;
     text-align: center;
     max-width: 60ch;
   }
 
+  /* Benefits — Cloud Gray cards on Canvas section, 36px Shares card radius. */
   .benefits {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 1100px;
+    gap: var(--element-gap);
+    max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
   .benefit {
-    padding: 1.6rem 1.6rem 1.85rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
+    border-radius: var(--r-xl);
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -2321,14 +2472,14 @@
   }
 
   .benefit-icon {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--r-md);
     display: grid;
     place-items: center;
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
-    color: var(--fg);
+    background: var(--bg);
+    border: none;
+    color: var(--fg-muted);
     margin-bottom: 0.3rem;
   }
 
@@ -2338,17 +2489,19 @@
   }
 
   .benefit-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     margin: 0;
     color: var(--fg);
-    line-height: 1.25;
+    line-height: 1.43;
   }
 
   .benefit-body {
-    font-size: 0.92rem;
-    color: var(--fg-muted);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
     margin: 0;
     line-height: 1.5;
   }
@@ -2359,9 +2512,12 @@
      selector switched from aria-selected="true" to
      data-state="active" to match Radix's contract.
      ---------------------------------------------------------- */
+  /* Customize — Canvas White section; config + promise cards are Cloud Gray.
+     Vertical padding ramps smoothly across viewports via clamp so we
+     don't get an abrupt jump from desktop (7rem) to mobile (5rem). */
   .customize {
     position: relative;
-    padding: 7rem 1.5rem;
+    padding: clamp(4.5rem, 8vw, 7rem) clamp(1.25rem, 4vw, 1.5rem);
     isolation: isolate;
     overflow: hidden;
     background: var(--bg);
@@ -2386,19 +2542,19 @@
     background: radial-gradient(closest-side, var(--accent-glow) 0%, transparent 70%);
   }
 
+  /* Config card — Cloud Gray on Canvas White section, 36px Shares
+     card radius, single elevation token. */
   .config {
     position: relative;
-    max-width: 1100px;
+    max-width: var(--page-max-width);
     margin: 0 auto;
     display: grid;
     grid-template-columns: 290px 1fr;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-xl);
     overflow: hidden;
-    box-shadow:
-      0 1px 0 var(--inset-card) inset,
-      0 30px 80px -30px var(--shadow-soft);
+    box-shadow: var(--shadow-xl);
   }
 
   .config-glow {
@@ -2411,6 +2567,7 @@
     z-index: 0;
   }
 
+  /* Tab rail — Canvas White sidebar inside the cloud config card. */
   .config-tabs {
     position: relative;
     z-index: 1;
@@ -2419,7 +2576,7 @@
     gap: 0.4rem;
     padding: 1.4rem 1rem;
     border-right: 1px solid var(--hairline);
-    background: var(--surface-translucent);
+    background: var(--bg);
   }
 
   .config-rail-head {
@@ -2427,8 +2584,9 @@
     align-items: center;
     gap: 0.55rem;
     padding: 0.4rem 0.85rem 1rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
@@ -2445,7 +2603,7 @@
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.85rem 0.95rem;
+    padding: 12px 14px;
     border-radius: var(--r-md);
     text-align: left;
     color: var(--fg-muted);
@@ -2455,23 +2613,25 @@
       transform 0.18s var(--ease);
   }
 
+  /* Tab states sit on the white rail, so hover/active fill cloud. */
   .config-tab:hover {
-    background: var(--overlay-1);
+    background: var(--surface-2);
     color: var(--fg);
   }
 
-  /* Radix data-state replaces the vanilla aria-selected. */
   .config-tab[data-state="active"] {
-    background: var(--overlay-3);
+    background: var(--surface-2);
     color: var(--fg);
     box-shadow: inset 0 0 0 1px var(--hairline-strong);
   }
 
+  /* Tab number — was serif italic; now bold sans, violet on active. */
   .tab-num {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.15rem;
-    letter-spacing: -0.02em;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0;
     color: var(--fg-faint);
     width: 26px;
     text-align: center;
@@ -2485,26 +2645,28 @@
   .tab-meta {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 2px;
     min-width: 0;
   }
 
   .tab-name {
-    font-size: 0.95rem;
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.02em;
   }
 
   .tab-hint {
-    font-size: 0.78rem;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
-    line-height: 1.3;
+    line-height: 1.4;
   }
 
   .config-panels {
     position: relative;
     z-index: 1;
-    padding: 2rem 2.2rem 2.2rem;
+    padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.25rem, 3vw, 2.2rem) clamp(1.5rem, 3vw, 2.2rem);
     min-height: 420px;
     background:
       radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
@@ -2526,18 +2688,20 @@
   }
 
   .panel-title {
-    font-size: 1.55rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.33;
     margin: 0;
     color: var(--fg);
   }
 
   .panel-body {
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--fg-muted);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--fg-soft);
     margin: 0;
   }
 
@@ -2548,14 +2712,17 @@
   }
 
   .control-label {
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
   .control-hint {
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
     margin: 0.1rem 0 0;
   }
@@ -2566,13 +2733,15 @@
     flex-wrap: wrap;
   }
 
+  /* Day pills — white default on cloud config-panels, filled violet active. */
   .day-pill {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.85rem;
+    padding: 8px 16px;
+    font-size: 14px;
     font-weight: 500;
+    letter-spacing: 0.02em;
     border-radius: var(--r-pill);
-    background: var(--overlay-1);
-    border: 1px solid var(--hairline);
+    background: var(--bg);
+    border: none;
     color: var(--fg-muted);
     transition:
       background 0.18s var(--ease),
@@ -2589,7 +2758,6 @@
     background: var(--accent);
     color: var(--ink-on-accent);
     border-color: transparent;
-    box-shadow: 0 0 16px -6px var(--accent-glow);
   }
 
   .hour-row {
@@ -2599,27 +2767,33 @@
     flex-wrap: wrap;
   }
 
+  /* Time input — Canvas White on cloud config card. Allowed to shrink
+     so the hour-row wraps gracefully on narrow viewports instead of
+     bleeding past the panel padding. */
   .time-input {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 0.55rem 0.95rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 10px 16px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
-    min-width: 130px;
+    flex: 1 1 130px;
+    min-width: 0;
   }
 
   .time-input-label {
-    font-size: 0.7rem;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--fg-soft);
   }
 
   .time-input-value {
     font-variant-numeric: tabular-nums;
-    font-size: 0.95rem;
+    font-size: 15px;
+    font-weight: 500;
     color: var(--fg);
   }
 
@@ -2628,14 +2802,16 @@
     font-size: 1.1rem;
   }
 
-  /* Switch — native checkbox styled with adjacent-sibling selectors */
+  /* Switch — native checkbox with custom track + thumb. */
   .switch {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     cursor: pointer;
     user-select: none;
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-muted);
   }
 
@@ -2645,13 +2821,15 @@
     pointer-events: none;
   }
 
+  /* Switch track — Canvas White inactive on cloud config card. */
   .switch-track {
     position: relative;
     width: 36px;
     height: 22px;
     border-radius: var(--r-pill);
-    background: var(--overlay-5);
-    transition: background 0.2s var(--ease);
+    background: var(--bg);
+    border: 1px solid var(--hairline-strong);
+    transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
     flex-shrink: 0;
   }
 
@@ -2659,10 +2837,10 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: var(--fg-muted);
+    background: var(--fg-soft);
     transition:
       transform 0.22s var(--ease),
       background 0.2s var(--ease);
@@ -2670,12 +2848,12 @@
 
   .switch input:checked + .switch-track {
     background: var(--accent);
-    box-shadow: 0 0 14px -4px var(--accent-glow);
+    border-color: var(--accent);
   }
 
   .switch input:checked + .switch-track .switch-thumb {
     transform: translateX(14px);
-    background: #08080c;
+    background: var(--ink-on-accent);
   }
 
   .switch input:focus-visible + .switch-track {
@@ -2683,13 +2861,13 @@
     outline-offset: 2px;
   }
 
-  /* Stepper */
+  /* Stepper — Canvas White pill on cloud config card. */
   .stepper {
     display: inline-flex;
     align-items: center;
     gap: 0;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-pill);
     width: max-content;
   }
@@ -2707,20 +2885,25 @@
 
   .stepper-btn:hover {
     color: var(--fg);
-    background: var(--overlay-2);
+    background: var(--surface-2);
   }
 
   .stepper-value {
     padding: 0 0.85rem;
-    font-size: 0.9rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
 
+  /* Stepper number was serif italic; now bold sans violet. */
   .stepper-value [data-stepper-value] {
-    font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0;
     color: var(--accent);
     margin-right: 0.2rem;
   }
@@ -2735,14 +2918,15 @@
     gap: 0.5rem;
   }
 
+  /* Upsell item — Canvas White row on cloud config card. */
   .upsell-item {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 1rem;
     align-items: center;
-    padding: 0.85rem 1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 14px 16px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
     transition: border-color 0.2s var(--ease);
   }
@@ -2759,19 +2943,22 @@
   }
 
   .upsell-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
   .upsell-text {
-    font-size: 0.92rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
-  /* Rule list (transfer rules) */
+  /* Rule list (transfer rules). */
   .rule-list {
     list-style: none;
     margin: 0;
@@ -2781,14 +2968,15 @@
     gap: 0.5rem;
   }
 
+  /* Rule — Canvas White row on cloud config card. */
   .rule {
     display: grid;
     grid-template-columns: 1fr auto auto;
     gap: 1rem;
     align-items: center;
-    padding: 0.95rem 1.1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 14px 18px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
   }
 
@@ -2800,14 +2988,17 @@
   }
 
   .rule-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
   .rule-value {
-    font-size: 0.92rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg);
   }
 
@@ -2830,8 +3021,8 @@
     place-items: center;
     background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
     color: var(--ink-on-accent);
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 14px;
     box-shadow: 0 0 12px -4px var(--accent-glow);
     flex-shrink: 0;
   }
@@ -2842,12 +3033,16 @@
   }
 
   .rule-target span {
-    font-size: 0.9rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg);
   }
 
   .rule-target small {
-    font-size: 0.75rem;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
   }
 
@@ -2858,13 +3053,15 @@
     gap: 0.6rem;
   }
 
+  /* Voice card — Canvas White surface on cloud config card; selected
+     card picks up a violet border + tint. */
   .voice-card {
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
-    padding: 1rem 1.1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 16px 18px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
     text-align: left;
     transition:
@@ -2878,22 +3075,10 @@
 
   .voice-card.is-selected {
     background:
-      radial-gradient(circle at 100% 0%, rgba(20, 20, 60, 0.05), transparent 70%),
-      var(--surface-translucent);
-    border-color: rgba(20, 20, 60, 0.25);
-    box-shadow:
-      0 0 0 1px rgba(20, 20, 60, 0.12),
-      0 12px 30px -12px var(--accent-glow);
-  }
-
-  [data-theme="dark"] .voice-card.is-selected {
-    background:
-      radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05), transparent 70%),
-      var(--surface-translucent);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.13),
-      0 12px 30px -12px var(--accent-glow);
+      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 70%),
+      var(--bg);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-xl);
   }
 
   .voice-card-head {
@@ -2903,20 +3088,22 @@
   }
 
   .voice-name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     color: var(--fg);
   }
 
+  /* Voice check chip — sits on a white voice-card; uses cloud fill
+     so the unselected circle is still visible against the card. */
   .voice-check {
     width: 22px;
     height: 22px;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
+    background: var(--surface-2);
+    border: 1px solid var(--hairline-strong);
     color: transparent;
     transition: background 0.2s var(--ease), color 0.2s var(--ease);
   }
@@ -2957,9 +3144,11 @@
   .voice-card.is-selected .voice-wave span:nth-child(5n) { animation-delay: 0.05s; }
 
   .voice-tag {
-    font-size: 0.78rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .voice-card:nth-child(1) .voice-wave span:nth-child(1) { height: 35%; }
@@ -3014,12 +3203,13 @@
   .voice-card:nth-child(4) .voice-wave span:nth-child(11) { height: 40%; }
   .voice-card:nth-child(4) .voice-wave span:nth-child(12) { height: 30%; }
 
-  /* Promise cards */
+  /* Promise cards — Cloud Gray on Canvas White section, 36px Shares
+     card radius, 32px padding. */
   .promises {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-width: 1100px;
+    gap: var(--element-gap);
+    max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
@@ -3027,11 +3217,11 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
-    padding: 1.85rem 1.85rem 2rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
+    gap: 24px;
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
+    border-radius: var(--r-xl);
     overflow: hidden;
     min-height: 280px;
   }
@@ -3043,31 +3233,35 @@
   }
 
   .promise-eyebrow {
-    font-size: 0.74rem;
-    letter-spacing: 0.1em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
   .promise-title {
-    font-size: 1.55rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.33;
     color: var(--fg);
     margin: 0;
   }
 
+  /* <em> in promise titles — bold violet sans, no italic. */
   .promise-title em {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
   }
 
   .promise-note {
-    font-size: 0.9rem;
-    color: var(--fg-muted);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
     line-height: 1.5;
     margin: 0;
     margin-top: auto;
@@ -3134,12 +3328,8 @@
   .timeline-step.is-current .timeline-dot {
     background: var(--bg);
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(20, 20, 60, 0.08), 0 0 16px var(--accent-glow);
+    box-shadow: 0 0 0 4px var(--card-tint), 0 0 16px var(--accent-glow);
     animation: pulse-current 2s var(--ease) infinite;
-  }
-
-  [data-theme="dark"] .timeline-step.is-current .timeline-dot {
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08), 0 0 16px var(--accent-glow);
   }
 
   .timeline-content {
@@ -3150,8 +3340,9 @@
   }
 
   .timeline-day {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
@@ -3161,9 +3352,11 @@
   }
 
   .timeline-text {
-    font-size: 0.88rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg);
-    line-height: 1.3;
+    line-height: 1.5;
   }
 
   /* Forwarding flow */
@@ -3174,10 +3367,11 @@
     align-items: center;
   }
 
+  /* Forward card — Canvas White on cloud config card. */
   .forward-card {
-    padding: 0.85rem 1rem;
-    background: var(--surface-translucent);
-    border: 1px solid var(--hairline);
+    padding: 14px 16px;
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-md);
     display: flex;
     flex-direction: column;
@@ -3186,40 +3380,38 @@
   }
 
   .forward-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
 
+  /* Forward number — was serif italic; now bold sans tabular. */
   .forward-number {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    letter-spacing: -0.01em;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0;
     color: var(--fg);
     font-variant-numeric: tabular-nums;
   }
 
+  /* Jenna's forwarding card — Canvas White with a violet wash. */
   .forward-card-jenna {
     background:
-      radial-gradient(circle at 100% 0%, rgba(20, 20, 60, 0.05), transparent 65%),
-      var(--surface-translucent);
-    border-color: rgba(20, 20, 60, 0.18);
-  }
-
-  [data-theme="dark"] .forward-card-jenna {
-    background:
-      radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.05), transparent 65%),
-      var(--surface-translucent);
-    border-color: rgba(255, 255, 255, 0.20);
+      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 65%),
+      var(--bg);
+    border-color: var(--accent);
   }
 
   .forward-jenna {
     display: flex;
     align-items: center;
     gap: 0.55rem;
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     color: var(--fg);
   }
 
@@ -3237,7 +3429,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #08080c;
+    background: var(--ink-on-accent);
   }
 
   .forward-arrow {
@@ -3265,8 +3457,9 @@
   }
 
   .forward-arrow small {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
@@ -3302,21 +3495,21 @@
     background: radial-gradient(closest-side, var(--accent-glow) 0%, transparent 70%);
   }
 
+  /* Audio demo card — Cloud Gray on Canvas section, 36px Shares card
+     radius, 32px padding, single elevation token (no layered shadows). */
   .audio-demo {
     position: relative;
     margin: 0 auto 5rem;
     max-width: 760px;
-    padding: 1.85rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-xl);
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
     isolation: isolate;
-    box-shadow:
-      0 1px 0 var(--inset-card) inset,
-      0 30px 80px -30px var(--shadow-strong);
+    box-shadow: var(--shadow-xl);
   }
 
   .audio-glow {
@@ -3348,6 +3541,8 @@
     text-align: left;
   }
 
+  /* Audio avatar — brand-mark gradient (violet bright→deep), no inset
+     highlight (Shares: minimal depth). */
   .audio-avatar {
     width: 44px;
     height: 44px;
@@ -3355,9 +3550,7 @@
     background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
     display: grid;
     place-items: center;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.45),
-      0 0 22px var(--accent-glow);
+    box-shadow: 0 0 22px var(--accent-glow);
     flex-shrink: 0;
   }
 
@@ -3365,32 +3558,35 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #08080c;
+    background: var(--ink-on-accent);
   }
 
   .audio-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.06em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
     margin-bottom: 0.25rem;
   }
 
   .audio-title {
-    font-size: 1.12rem;
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     color: var(--fg);
   }
 
+  /* Audio time — was serif italic; now bold sans tabular. */
   .audio-time {
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 17px;
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
     color: var(--fg-muted);
     white-space: nowrap;
   }
@@ -3415,11 +3611,14 @@
     padding: 0 2px;
   }
 
+  /* Unplayed bar — Canvas White on the Cloud Gray audio-demo card so
+     the waveform reads at low intensity but stays visible. Played
+     bars override to violet, playhead bar to ink. */
   .audio-waveform .bar {
     flex: 1;
     min-width: 2px;
     height: 30%;
-    background: var(--surface-2);
+    background: var(--bg);
     border-radius: 2px;
     transition: background 0.05s linear, transform 0.15s var(--ease);
   }
@@ -3445,17 +3644,19 @@
     flex-wrap: wrap;
   }
 
+  /* Play button — Shares Primary Violet pill, 99px radius. Inherits
+     button proportions from the spec: 12/16 padding works at this size. */
   .audio-play {
     display: inline-flex;
     align-items: center;
     gap: 0.65rem;
-    padding: 0.65rem 1rem 0.65rem 0.75rem;
+    padding: 12px 20px 12px 14px;
     background: var(--accent);
     color: var(--ink-on-accent);
     border-radius: var(--r-pill);
     font-weight: 500;
-    font-size: 0.95rem;
-    box-shadow: 0 8px 22px -6px var(--accent-glow);
+    font-size: 16px;
+    letter-spacing: 0.02em;
     transition: transform 0.18s var(--ease), background 0.18s var(--ease);
   }
 
@@ -3474,16 +3675,18 @@
   .audio-demo[data-state="playing"] .audio-play .ctrl-icon-pause { display: block; }
 
   .audio-hint {
-    font-size: 0.85rem;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: var(--fg-soft);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .audio-transcript {
     list-style: none;
     margin: 0.6rem 0 0;
     padding: 1.1rem 0 0;
-    border-top: 1px dashed var(--hairline-strong);
+    border-top: 1px dashed var(--hairline);
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
@@ -3495,18 +3698,20 @@
     grid-template-columns: 70px 1fr;
     gap: 0.85rem;
     align-items: baseline;
-    font-size: 0.93rem;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     line-height: 1.5;
     color: var(--fg-faint);
     transition: color 0.3s var(--ease);
   }
 
   .audio-transcript li .who {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 12px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-faint);
-    font-weight: 500;
+    font-weight: 700;
     transition: color 0.3s var(--ease);
   }
 
@@ -3522,21 +3727,23 @@
     color: var(--accent);
   }
 
-  /* Stats row */
+  /* Stats row — page-max-width container, 24px element gap. */
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 1100px;
+    gap: var(--element-gap);
+    max-width: var(--page-max-width);
     margin: 0 auto;
   }
 
+  /* Stat card — Cloud Gray on Canvas section, 36px Shares card radius,
+     32px padding. Hairline border replaces the gradient depth. */
   .stat {
     position: relative;
-    padding: 2.2rem 1.85rem;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
+    padding: 32px;
+    background: var(--surface-2);
+    border: none;
+    border-radius: var(--r-xl);
     text-align: left;
     transition: border-color 0.3s var(--ease);
   }
@@ -3548,7 +3755,7 @@
   .stat-feature {
     background:
       radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
-      linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
+      var(--surface-2);
   }
 
   .stat-feature::before {
@@ -3561,67 +3768,78 @@
     opacity: 0.6;
   }
 
+  /* Stat number — was serif italic; now bold sans, with the
+     emphasized digit picking up brand violet. */
   .stat-num {
     display: flex;
     align-items: baseline;
-    font-family: var(--font-serif);
+    font-family: inherit;
+    font-weight: 700;
     font-size: clamp(4rem, 9vw, 6rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    line-height: 1;
+    letter-spacing: 0;
     color: var(--fg);
     margin-bottom: 0.7rem;
   }
 
   .stat-num em {
-    font-style: italic;
+    font-style: normal;
     color: var(--accent);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   .stat-unit {
     font-style: normal;
+    font-weight: 700;
     font-size: 0.5em;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     color: var(--fg-muted);
     margin-left: 0.05em;
     align-self: center;
   }
 
   .stat-label {
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg);
     margin-bottom: 0.65rem;
   }
 
   .stat-detail {
-    font-size: 0.92rem;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     line-height: 1.5;
-    color: var(--fg-muted);
+    color: var(--fg-soft);
     margin: 0;
     max-width: 32ch;
   }
 
+  /* Manifesto — bold Quicksand display. */
   .manifesto {
     margin: 6rem auto 0;
-    max-width: 18ch;
+    max-width: 22ch;
     text-align: center;
-    font-family: var(--font-serif);
+    font-family: inherit;
     font-size: clamp(2rem, 5.5vw, 4rem);
-    font-weight: 400;
+    font-weight: 700;
     line-height: 1.1;
-    letter-spacing: -0.025em;
+    letter-spacing: var(--tracking-display);
     color: var(--fg);
   }
 
   .manifesto em {
-    font-style: italic;
+    font-style: normal;
+    font-weight: 700;
     color: var(--accent);
   }
 
   /* ----------------------------------------------------------
-     Live Call Card (hero) — ported verbatim
+     Live Call Card (hero) — Canvas White product surface on the
+     Cloud Gray hero wallpaper. Shares-style "product mockup on
+     cloud" treatment, lifted via shadow + 36px radius.
      ---------------------------------------------------------- */
   .call-card {
     position: relative;
@@ -3630,14 +3848,11 @@
     display: grid;
     grid-template-columns: minmax(280px, 1fr) minmax(280px, 1.2fr);
     gap: 0;
-    background: linear-gradient(180deg, var(--bg-elev) 0%, var(--bg-elev-2) 100%);
-    border: 1px solid var(--hairline);
+    background: var(--bg);
+    border: none;
     border-radius: var(--r-xl);
     overflow: hidden;
-    box-shadow:
-      0 1px 0 var(--inset-card) inset,
-      0 30px 80px -30px var(--shadow-soft),
-      0 0 0 1px var(--inset-card-2);
+    box-shadow: var(--shadow-xl);
   }
 
   .call-card-glow {
@@ -3659,7 +3874,7 @@
   }
 
   .call-phone {
-    padding: 1.75rem;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -3681,9 +3896,10 @@
   }
 
   .call-tag {
-    font-size: 0.72rem;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     color: var(--fg-soft);
   }
 
@@ -3701,28 +3917,33 @@
     -webkit-user-drag: none;
   }
 
+  /* Logo variants flip with the active theme. */
   .call-name-logo-dark { display: none; }
   [data-theme="dark"] .call-name-logo-light { display: none; }
   [data-theme="dark"] .call-name-logo-dark  { display: block; }
 
   .call-time {
     font-variant-numeric: tabular-nums;
-    font-size: 0.72rem;
+    font-size: 11px;
+    font-weight: 500;
     color: var(--fg-soft);
     letter-spacing: 0.02em;
   }
 
+  /* Status chip — Cloud Gray on the now-white call card so it reads
+     as a quiet inline tag. */
   .call-status {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-muted);
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
+    background: var(--surface-2);
+    border: none;
     border-radius: var(--r-pill);
   }
 
@@ -3868,7 +4089,7 @@
   }
 
   .call-cta-phone {
-    font-size: 0.85rem;
+    font-size: 14px;
     font-weight: 500;
     color: var(--fg-soft);
     font-variant-numeric: tabular-nums;
@@ -3881,16 +4102,19 @@
     color: var(--fg);
   }
 
-  /* Transcript side */
+  /* Transcript side — Cloud Gray panel inside the white call card,
+     with a subtle violet tint corner highlight. The two halves of
+     the call card (phone left / transcript right) are differentiated
+     by surface color since border-right alone is too subtle. */
   .call-transcript {
-    padding: 1.75rem;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
     text-align: left;
     background:
       radial-gradient(circle at 100% 0%, var(--card-tint), transparent 60%),
-      var(--bg-elev-2);
+      var(--surface-2);
     min-height: 320px;
   }
 
@@ -3904,10 +4128,12 @@
     flex-direction: column;
     gap: 0.2rem;
     max-width: 92%;
-    padding: 0.65rem 0.85rem;
+    padding: 10px 14px;
     border-radius: var(--r-md);
-    font-size: 0.92rem;
-    line-height: 1.45;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
   }
 
   .transcript-bubble.show {
@@ -3915,27 +4141,26 @@
     transform: translateY(0);
   }
 
+  /* Caller bubble — Canvas White on Cloud Gray transcript panel. */
   .transcript-bubble.caller {
     align-self: flex-start;
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
+    background: var(--bg);
+    border: none;
   }
 
+  /* Jenna bubble — picks up a violet tint to mark the brand voice.
+     Dark override deleted (light-only theme). */
   .transcript-bubble.jenna {
     align-self: flex-end;
-    background: linear-gradient(180deg, rgba(20, 20, 60, 0.08), rgba(20, 20, 60, 0.03));
-    border: 1px solid rgba(20, 20, 60, 0.12);
+    background: var(--card-tint);
+    border: 1px solid var(--accent);
     text-align: right;
   }
 
-  [data-theme="dark"] .transcript-bubble.jenna {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-    border-color: rgba(255, 255, 255, 0.13);
-  }
-
   .bubble-who {
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--fg-soft);
   }
@@ -3964,11 +4189,14 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.35rem 0.65rem;
-    font-size: 0.78rem;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--live);
-    background: rgba(34, 211, 164, 0.08);
-    border: 1px solid rgba(34, 211, 164, 0.2);
+    background: rgba(15, 166, 116, 0.08);
+    border: 1px solid rgba(15, 166, 116, 0.2);
     border-radius: var(--r-pill);
     opacity: 0;
     transform: translateY(4px);
@@ -3985,6 +4213,45 @@
   .event svg {
     width: 12px;
     height: 12px;
+  }
+
+  /* ----------------------------------------------------------
+     Atmospheric violet glows — disabled.
+     ----------------------------------------------------------
+     These radial-gradient washes (positioned in section corners
+     or as edge halos on cards) read as a soft blue/purple tint
+     across the page. Killed at user request to keep surfaces
+     flat / canvas-clean. Re-enable a specific section by adding
+     `display: revert` for that selector, or remove this whole
+     block to restore the full set.
+
+     Small functional dot/avatar box-shadow halos (.brand-mark,
+     .card-tag-dot, .receipt-tag-dot, .config-rail-dot,
+     .timeline-dot, .memory-profile-avatar, .rule-avatar,
+     .forward-jenna-avatar, .audio-avatar, .audio-waveform .bar.playhead)
+     are NOT affected — those are inline brand accents on dots,
+     not atmospheric washes. Flag if any of those read as shading
+     and I'll strip them too.
+     ---------------------------------------------------------- */
+  .glow,
+  .glow-a,
+  .glow-b,
+  .features-glow,
+  .proof-glow,
+  .audio-glow,
+  .savings-glow,
+  .calc-glow,
+  .customize-glow,
+  .config-glow,
+  .pricing-glow,
+  .receipt-glow,
+  .finale-glow,
+  .finale-glow-a,
+  .finale-glow-b,
+  .footer-glow,
+  .call-card-glow,
+  .forward-arrow > span {
+    display: none !important;
   }
 }
 
@@ -4155,8 +4422,33 @@
   }
 }
 
-/* Customize responsive */
+/* ---------------------------------------------------------------
+   Customize section — progressive responsive structure.
+
+   Breakpoints (mobile-up reads bottom-to-top):
+     ≤960  — slightly narrower rail to give the panel more room
+              before the full collapse at 880.
+     ≤880  — config card collapses to a single column; tabs become a
+              horizontal scrolling rail (existing behavior, refined).
+     ≤640  — voice grid drops from 2 to 1 column, hour-row tightens,
+              promises stack (existing behavior moved here).
+     ≤540  — section padding/section-head tightens, panel-title sizes
+              down, day-pills become equal-width, transfer rules stack
+              vertically, hour-row stacks open/close.
+     ≤420  — final tightening for small phones (panel padding, stepper).
+   --------------------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .config {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
 @media (max-width: 880px) {
+  /* Section heading tightens once the section becomes a single column. */
+  .customize .section-head {
+    margin-bottom: 3rem;
+  }
   .config {
     grid-template-columns: 1fr;
   }
@@ -4166,38 +4458,121 @@
     overflow-x: auto;
     border-right: 0;
     border-bottom: 1px solid var(--hairline);
-    padding: 1rem;
-    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    gap: 0.4rem;
+    /* Hide scrollbar but keep keyboard / touch scrolling. */
+    scrollbar-width: none;
+  }
+  .config-tabs::-webkit-scrollbar {
+    display: none;
   }
   .config-rail-head {
     display: none;
   }
   .config-tab {
     flex: 0 0 auto;
-    padding: 0.7rem 0.85rem;
+    padding: 0.65rem 0.9rem;
+    gap: 0.6rem;
   }
   .tab-hint {
     display: none;
   }
   .config-panels {
-    padding: 1.6rem;
+    /* Drop the desktop floor — content varies per tab and a 420px
+       reserve looks empty on tablet/mobile widths. */
+    min-height: 0;
   }
+}
+
+@media (max-width: 640px) {
   .voice-grid {
     grid-template-columns: 1fr;
   }
   .promises {
     grid-template-columns: 1fr;
   }
+  .config-panel {
+    gap: 1.3rem;
+  }
+  .panel-head {
+    gap: 0.4rem;
+  }
 }
 
 @media (max-width: 540px) {
-  .customize {
-    padding: 5rem 1.25rem;
+  .customize .section-head {
+    margin-bottom: 2.25rem;
   }
-  .config-panels {
-    padding: 1.4rem;
+  .panel-title {
+    font-size: 1.25rem;
   }
-  .panel-title { font-size: 1.3rem; }
+  .panel-body {
+    font-size: 15px;
+  }
+
+  /* Day pills become a 4-up grid — uniform touch targets, no awkward
+     orphaned pill on the second row. */
+  .day-pills {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+  .day-pill {
+    padding: 10px 8px;
+    text-align: center;
+    min-height: 40px;
+  }
+
+  /* Hour row stacks: open / close inputs sit on top, switch hosts
+     below. The horizontal arrow becomes vertical so the read order
+     stays "open → close → 24/7". */
+  .hour-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+  .time-input {
+    flex: 1 1 auto;
+  }
+  .hour-divider {
+    display: none;
+  }
+  .hour-row .switch {
+    align-self: flex-start;
+    margin-top: 0.2rem;
+  }
+
+  /* Upsell rows stack tag/text above the switch so long copy doesn't
+     get crushed against the toggle. */
+  .upsell-item {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 14px 14px;
+  }
+  .upsell-item .switch {
+    justify-self: flex-start;
+  }
+
+  /* Transfer rules stack: when-block, vertical arrow, to-block. */
+  .rule {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    padding: 14px 16px;
+    justify-items: stretch;
+  }
+  .rule-arrow {
+    transform: rotate(90deg);
+    justify-self: flex-start;
+    line-height: 1;
+  }
+
+  /* Voice card padding eases up on tight viewports. */
+  .voice-card {
+    padding: 14px 16px;
+    gap: 0.7rem;
+  }
+
+  /* Promise timeline keeps its existing 2-up + no-rail treatment. */
   .timeline {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -4212,6 +4587,26 @@
     flex-direction: row;
     transform: rotate(90deg);
     justify-self: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .config-tab {
+    padding: 0.6rem 0.75rem;
+  }
+  .tab-num {
+    font-size: 15px;
+    width: 22px;
+  }
+  .tab-name {
+    font-size: 14px;
+  }
+  .stepper-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .stepper-value {
+    padding: 0 0.65rem;
   }
 }
 

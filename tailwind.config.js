@@ -2,8 +2,9 @@ import animate from 'tailwindcss-animate'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  // Theme switch is driven by [data-theme="dark"] on <html>, matching the
-  // vanilla site. Tailwind's `dark:` variant maps to that selector.
+  // Light-only theme post-Shares revamp. The dark `data-theme="dark"`
+  // selector still resolves to a no-op (no dark :root block exists);
+  // any `dark:` utility in the codebase is dead code and harmless.
   darkMode: ['selector', '[data-theme="dark"]'],
 
   content: ['./index.html', './src/**/*.{ts,tsx}'],
@@ -14,13 +15,24 @@ export default {
     // new responsive markup we add.
     extend: {
       colors: {
-        // Surface
+        // ─── Surfaces — Shares two-surface system ───────────────────
         bg: 'var(--bg)',
         'bg-elev': 'var(--bg-elev)',
         'bg-elev-2': 'var(--bg-elev-2)',
         surface: 'var(--surface)',
         'surface-2': 'var(--surface-2)',
         'surface-translucent': 'var(--surface-translucent)',
+
+        // Direct Shares-named utilities for new markup
+        'canvas-white': '#ffffff',
+        'cloud-gray': '#f6f6f6',
+        'silver-mist': '#e7e7e7',
+        'stone-gray': '#b0b0b0',
+        'slate-gray': '#5d5d5d',
+        'steel-gray': '#888888',
+        'carbon-gray': '#333333',
+        'ink-black': '#1f1f1f',
+        'shares-violet': '#1c00ff',
 
         // Hairlines
         hairline: 'var(--hairline)',
@@ -32,7 +44,7 @@ export default {
         'fg-soft': 'var(--fg-soft)',
         'fg-faint': 'var(--fg-faint)',
 
-        // Brand
+        // Brand — Jenna Violet (#1c00ff)
         accent: 'var(--accent)',
         'accent-bright': 'var(--accent-bright)',
         'accent-deep': 'var(--accent-deep)',
@@ -69,7 +81,8 @@ export default {
 
         'card-tint': 'var(--card-tint)',
 
-        // Rainbow-button tokens (Magic UI port)
+        // Rainbow-button tokens (Magic UI port — preserved exemption,
+        // do NOT migrate to brand violet)
         'rainbow-1': 'var(--rainbow-color-1)',
         'rainbow-2': 'var(--rainbow-color-2)',
         'rainbow-3': 'var(--rainbow-color-3)',
@@ -95,17 +108,94 @@ export default {
         input: 'var(--input)',
       },
 
+      // ─── Shares radius scale ───────────────────────────────────────
+      // small=4 / inputs=16 / accordion=24 / cards=36 / largeFeatures=60 / pill=99
+      // Legacy aliases (sm/md/lg/xl/pill) preserved so existing component
+      // CSS keeps resolving; new semantic names exposed for new markup.
       borderRadius: {
         sm: 'var(--r-sm)',
         md: 'var(--r-md)',
         lg: 'var(--r-lg)',
         xl: 'var(--r-xl)',
+        '2xl': 'var(--r-2xl)',
         pill: 'var(--r-pill)',
+        // Shares-named semantic radii (per Refero spec)
+        small: '4px',
+        inputs: '16px',
+        accordion: '24px',
+        cards: '36px',
+        'large-features': '60px',
+        buttons: '99px',
       },
 
+      // ─── Type — Quicksand ───────────────────────────────────────────
+      // Rounded geometric sans, runtime font for the entire site.
+      // Two-weight system (500 body / 700 headlines + emphasis).
+      // CSS var `--font-serif` still resolves to the same Quicksand
+      // stack so any legacy serif reference degrades to bold sans.
       fontFamily: {
         sans: ['var(--font-sans)'],
-        serif: ['var(--font-serif)'],
+        quicksand: ['var(--font-sans)'],
+      },
+
+      // ─── Type scale — Shares sizes, Quicksand-tuned tracking ────────
+      // [size, { lineHeight, letterSpacing }]
+      // Body/caption/subheading: +0.02em (Quicksand has natural air).
+      // Display tiers: -0.01em (rounded shapes need a hair of pull).
+      fontSize: {
+        caption: ['14px', { lineHeight: '1.5',  letterSpacing: '0.02em' }],
+        body:    ['16px', { lineHeight: '1.5',  letterSpacing: '0.02em' }],
+        subheading: ['20px', { lineHeight: '1.43', letterSpacing: '0.02em' }],
+        'heading-sm': ['26px', { lineHeight: '1.33', letterSpacing: '0.02em' }],
+        heading:    ['36px', { lineHeight: '1.18', letterSpacing: '-0.01em' }],
+        'heading-lg': ['56px', { lineHeight: '1.10', letterSpacing: '-0.01em' }],
+        display:    ['72px', { lineHeight: '1.05', letterSpacing: '-0.01em' }],
+      },
+
+      fontWeight: {
+        // Quicksand: 500 body / 700 headlines + emphasis.
+        medium: '500',
+        bold:   '700',
+      },
+
+      letterSpacing: {
+        // Default body tracking for new markup.
+        shares: '0.02em',
+        // Display-scale tracking (used by .hero-title, .section-title,
+        // .finale-title, .manifesto, etc.) — slightly negative.
+        display: '-0.01em',
+      },
+
+      // ─── Layout ─────────────────────────────────────────────────────
+      maxWidth: {
+        page: 'var(--page-max-width)', // 1224px
+      },
+
+      spacing: {
+        // Shares 4-base spacing scale exposed as utilities.
+        // These extend Tailwind's defaults without colliding with
+        // its numeric scale (Tailwind's `4` = 1rem = 16px, ours = 4px).
+        'shares-4':  '4px',
+        'shares-8':  '8px',
+        'shares-12': '12px',
+        'shares-16': '16px',
+        'shares-20': '20px',
+        'shares-24': '24px',
+        'shares-28': '28px',
+        'shares-32': '32px',
+        'shares-48': '48px',
+        'shares-52': '52px',
+        'shares-96': '96px',
+        // Semantic layout tokens
+        section: 'var(--section-gap)',  // 48px
+        card:    'var(--card-padding)', // 24px
+        element: 'var(--element-gap)',  // 24px
+      },
+
+      boxShadow: {
+        // Single Shares elevation token.
+        xl: 'var(--shadow-xl)',
+        shares: 'var(--shadow-xl)',
       },
 
       transitionTimingFunction: {

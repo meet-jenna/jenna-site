@@ -6,6 +6,9 @@ import { useScrollPastThreshold } from '@/hooks/useScrollPastThreshold'
 //   - After scroll > 8px: contracts into a centered floating pill island
 //     with translucent surface, hairline border, and soft shadow.
 // The transition is driven entirely by CSS — JS only flips a data attribute.
+//
+// Both brand-logo variants stay in markup; CSS toggles which is visible
+// based on the active [data-theme] on <html>.
 export function Nav() {
   const floating = useScrollPastThreshold(8)
 

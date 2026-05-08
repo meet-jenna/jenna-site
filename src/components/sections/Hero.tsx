@@ -1,3 +1,4 @@
+import { BackgroundPaths } from '@/components/widgets/BackgroundPaths'
 import { CallCard } from '@/components/widgets/CallCard'
 
 // Hero section. Markup mirrors /index.html lines 70–200 of the vanilla
@@ -15,7 +16,7 @@ export function Hero() {
       <div className="hero-bg" aria-hidden="true">
         <div className="glow glow-a" />
         <div className="glow glow-b" />
-        <div className="grid" />
+        <BackgroundPaths />
       </div>
 
       <div className="hero-inner">

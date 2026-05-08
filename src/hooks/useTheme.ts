@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 
-// Mirrors the IIFE in /main.js — same storage key, same attribute mechanism,
-// same default (light). The pre-paint script in index.html sets the initial
-// attribute before React mounts so there's no FOUC.
+// Theme switcher. Persisted via localStorage under STORAGE_KEY; the
+// pre-paint script in index.html applies the saved theme before React
+// mounts so there's no FOUC.
 const STORAGE_KEY = 'jenna-theme'
 
 type Theme = 'light' | 'dark'
@@ -32,7 +32,7 @@ export function useTheme() {
   }, [apply])
 
   // Re-sync if the attribute is changed by something outside React (e.g. the
-  // pre-paint script on a hot reload).
+  // pre-paint script on a hot reload, or a system-pref listener later).
   useEffect(() => {
     setTheme(readCurrent())
   }, [])

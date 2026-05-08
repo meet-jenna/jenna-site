@@ -8,6 +8,18 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+    watch: {
+      // Skip folders that have nothing to do with the React app but
+      // would otherwise churn the watcher (and HMR re-runs) on every
+      // unrelated edit. legacy/ holds the pre-Vite vanilla site,
+      // dist/ is build output, public/assets/ is static media.
+      ignored: [
+        '**/legacy/**',
+        '**/dist/**',
+        '**/public/assets/**',
+        '**/.git/**',
+      ],
+    },
   },
   resolve: {
     alias: {
