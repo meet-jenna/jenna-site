@@ -26,7 +26,7 @@ src/
 ├── components/
 │   ├── layout/   ← Nav, Footer
 │   ├── sections/ ← Hero, BentoGrid, Proof, Customize, Savings, Pricing, Finale
-│   ├── widgets/  ← CallCard, ShaderCard, AudioDemo, ConfigPanel, RoiCalculator, ThemeToggle
+│   ├── widgets/  ← PhoneScreen, ShaderCard, AudioDemo, ConfigPanel, RoiCalculator, ThemeToggle
 │   └── ui/       ← shadcn primitives (button.tsx, …)
 ├── hooks/        ← useTheme, useScrollPastThreshold
 ├── lib/          ← cn, format helpers

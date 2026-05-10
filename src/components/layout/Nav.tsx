@@ -1,19 +1,19 @@
+import { ArrowUpRight } from 'lucide-react'
 import { ThemeToggle } from '@/components/widgets/ThemeToggle'
-import { useScrollPastThreshold } from '@/hooks/useScrollPastThreshold'
 
-// Sticky header. Two visual states:
-//   - At top of page (default): full-width gradient bar with backdrop blur.
-//   - After scroll > 8px: contracts into a centered floating pill island
-//     with translucent surface, hairline border, and soft shadow.
-// The transition is driven entirely by CSS — JS only flips a data attribute.
+// Always-floating header. A single translucent rounded rectangle hovers
+// at the top of the page with three slots:
+//   - Left:  brand chip wrapping the Jenna logo (small inner radius)
+//   - Mid:   plain-text nav links
+//   - Right: theme toggle + ghost CTA (matching small inner radius)
+// The "chip-inside-pill" pattern (small radius nested in larger radius)
+// is the signature of the General Intelligence Co. nav this is based on.
 //
 // Both brand-logo variants stay in markup; CSS toggles which is visible
 // based on the active [data-theme] on <html>.
 export function Nav() {
-  const floating = useScrollPastThreshold(8)
-
   return (
-    <header className="nav-bar" data-floating={floating || undefined}>
+    <header className="nav-bar">
       <div className="nav-inner">
         <a className="brand" href="#" aria-label="Jenna home">
           <img
@@ -41,8 +41,9 @@ export function Nav() {
 
         <div className="nav-actions">
           <ThemeToggle />
-          <a className="btn btn-primary nav-cta" href="#book">
+          <a className="btn nav-cta" href="#book">
             Book a demo
+            <ArrowUpRight className="nav-cta-icon" aria-hidden="true" />
           </a>
         </div>
       </div>
