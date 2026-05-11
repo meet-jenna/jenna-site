@@ -25,27 +25,7 @@ export function BentoGrid() {
 
       <div className="bento" role="list">
         {/* Row 1 */}
-        <article className="bento-card bento-1x" role="listitem">
-          <div className="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 4h3l2 5-2.5 1.5a11 11 0 005.5 5.5L14.5 13.5 19.5 16v3a2 2 0 01-2 2A14 14 0 014 6.5a2 2 0 012-2.5z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <h3 className="card-title">Answers every call</h3>
-          <p className="card-body">Day, night, weekends, holidays. Jenna picks up before the second ring — every time.</p>
-          <div className="card-clock" aria-hidden="true">
-            <span>24</span>
-            <span className="card-clock-divider">/</span>
-            <span>7</span>
-          </div>
-        </article>
-
-        <article className="bento-card bento-3x bento-feature" role="listitem">
+        <article className="bento-card bento-4x bento-feature" role="listitem">
           <div className="card-tag">
             <span className="card-tag-dot" />
             POS Integration
@@ -198,29 +178,6 @@ export function BentoGrid() {
         <article className="bento-card bento-2x" role="listitem">
           <div className="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3.5" y="6" width="17" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M3.5 10h17" stroke="currentColor" strokeWidth="1.5" />
-              <rect x="6.5" y="13" width="3" height="2" rx="0.5" fill="currentColor" />
-            </svg>
-          </div>
-          <h3 className="card-title">Processes payments by phone.</h3>
-          <p className="card-body">Securely, hands-off. Your team never touches a card.</p>
-
-          <div className="pay-row" aria-hidden="true">
-            <div className="pay-card">
-              <div className="pay-card-num">•••• 4242</div>
-              <div className="pay-card-tag">VISA</div>
-            </div>
-            <div className="pay-status">
-              <span className="status-dot status-dot-live" aria-hidden="true" />
-              Encrypted
-            </div>
-          </div>
-        </article>
-
-        <article className="bento-card bento-2x" role="listitem">
-          <div className="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
               <path
                 d="M4 12h12m0 0l-4-4m4 4l-4 4M16 6h4v12h-4"
                 stroke="currentColor"
@@ -233,12 +190,34 @@ export function BentoGrid() {
           <h3 className="card-title">Transfers calls the right way.</h3>
           <p className="card-body">She tells you who's calling and why before handing it over.</p>
 
-          <div className="transfer-chip" aria-hidden="true">
-            <span className="transfer-from">Caller</span>
-            <span className="transfer-arrow">→</span>
-            <span className="transfer-msg">"Vendor about Friday delivery"</span>
-            <span className="transfer-arrow">→</span>
-            <span className="transfer-to">Manager</span>
+          <div className="handoff-card" aria-hidden="true">
+            <div className="handoff-call">
+              <div className="handoff-avatar">V</div>
+              <div className="handoff-meta">
+                <div className="handoff-label">Incoming call</div>
+                <div className="handoff-name">Vendor: Friday delivery</div>
+              </div>
+              <div className="handoff-status">
+                <span className="status-dot status-dot-live" />
+                Screened
+              </div>
+            </div>
+
+            <div className="handoff-summary">
+              <div className="handoff-summary-label">Jenna brief</div>
+              <p>"Asking if the manager can confirm tomorrow's produce drop."</p>
+              <div className="handoff-tags">
+                <span>Vendor</span>
+                <span>Delivery</span>
+                <span>Needs manager</span>
+              </div>
+            </div>
+
+            <div className="handoff-route">
+              <span className="handoff-route-from">Jenna</span>
+              <span className="handoff-route-line" />
+              <span className="handoff-route-to">Manager ready</span>
+            </div>
           </div>
         </article>
       </div>
