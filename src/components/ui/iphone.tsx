@@ -87,7 +87,7 @@ export function Iphone({
 
       {hasChildren && (
         <div
-          className="absolute z-0 overflow-hidden"
+          className="iphone-screen-slot absolute z-0 overflow-hidden"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,

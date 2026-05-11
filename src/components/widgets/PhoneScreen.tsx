@@ -1,20 +1,25 @@
+import { motion } from 'framer-motion'
 import { Mic } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
 const BUBBLES = [
-  { who: 'Caller', text: 'Hey, do you guys deliver to the Heights tonight?',  delay: 200,  side: 'caller' as const },
-  { who: 'Jenna',  text: "We sure do — until 11pm. Want me to start an order?", delay: 1400, side: 'jenna'  as const },
-  { who: 'Caller', text: 'Yeah — large pepperoni and a Caesar.',                delay: 2800, side: 'caller' as const },
-  { who: 'Jenna',  text: "Got it. That's $28.40 — text confirmation on the way.", delay: 4400, side: 'jenna'  as const },
+  { who: 'Caller', text: 'Hi, can I place an order?',                                       delay:   300, side: 'caller' as const },
+  { who: 'Jenna',  text: 'Sure! Can I get a name? And is it pickup or delivery?',           delay:  1700, side: 'jenna'  as const },
+  { who: 'Caller', text: 'Mike. Pickup, please.',                                           delay:  3100, side: 'caller' as const },
+  { who: 'Jenna',  text: 'Got it, Mike. What can I get started for you?',                   delay:  4400, side: 'jenna'  as const },
+  { who: 'Caller', text: 'Large pepperoni and a Caesar salad.',                             delay:  5700, side: 'caller' as const },
+  { who: 'Jenna',  text: 'Anything to drink with that?',                                    delay:  7000, side: 'jenna'  as const },
+  { who: 'Caller', text: 'Just water, thanks.',                                             delay:  8200, side: 'caller' as const },
+  { who: 'Jenna',  text: "Perfect. $28.40 — ready in 20. I'll text your receipt now.",      delay:  9500, side: 'jenna'  as const },
 ]
 
 const EVENTS = [
-  { text: 'Order pushed to POS', delay: 5200 },
+  { text: 'Order sent to POS', delay: 11000 },
 ]
 
-const STOP_AFTER_MS = 7500
+const STOP_AFTER_MS = 12500
 
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -28,55 +33,84 @@ const CheckIcon = () => (
   </svg>
 )
 
+// Bell-curve voice wave — taller in the middle, shorter at the edges,
+// matching the iOS Siri/voice-assistant convention. Driven by
+// framer-motion so each bar gets its own slightly randomised
+// oscillation, which reads as a "live voice" rather than a fixed pulse.
+const WAVE_BAR_COUNT = 13
+
+function VoiceWave({ active }: { active: boolean }) {
+  return (
+    <div className="phone-voice-wave" aria-hidden="true">
+      {Array.from({ length: WAVE_BAR_COUNT }).map((_, i) => {
+        const center = (WAVE_BAR_COUNT - 1) / 2
+        const distance = Math.abs(i - center)
+        // Bell envelope — outer bars stay shorter so the wave reads
+        // as a centered pulse rather than a flat block.
+        const envelope = 1 - distance * 0.09
+        return (
+          <motion.span
+            key={i}
+            animate={
+              active
+                ? {
+                    scaleY: [
+                      0.3 * envelope,
+                      1.0 * envelope,
+                      0.45 * envelope,
+                      0.85 * envelope,
+                      0.3 * envelope,
+                    ],
+                  }
+                : { scaleY: 0.25 * envelope }
+            }
+            transition={{
+              duration: 1.1 + (i % 3) * 0.18,
+              repeat: active ? Infinity : 0,
+              ease: 'easeInOut',
+              delay: (i * 0.05) % 0.35,
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
 // Live-call demo rendered inside the iPhone mockup.
 //
-// Layout: header row (Jenna left / Ready right) → iMessage-style transcript
-// (bigger body, brand-violet Jenna bubbles right-aligned, gray caller bubbles
-// left-aligned) → footer with mic button + inline audio wave.
+// Layout: BIG centered mic at the top → tight bell-curve voice wave directly
+// under the mic → iMessage-style transcript that fills the remaining screen
+// height. The transcript auto-scrolls to keep the newest bubble in view as
+// the scripted timeline plays.
 //
 // Behavior: auto-plays once on viewport entry; clicking the mic replays the
-// scripted timeline and animates the wave. The mic is a placeholder for the
-// real-time voice integration we'll wire up later — see TODO below for the
-// hookup point. Today, "speaking with Jenna" simply triggers the same demo
-// so the visual UX matches what the live version will feel like.
+// scripted timeline. The mic is a placeholder for the real-time voice
+// integration we'll wire up later — see TODO in handleMicClick.
 export function PhoneScreen() {
   const screenRef = useRef<HTMLDivElement>(null)
+  const transcriptRef = useRef<HTMLDivElement>(null)
   const timersRef = useRef<number[]>([])
-  const tickIntervalRef = useRef<number | null>(null)
   const autoplayedRef = useRef(false)
 
   const [state, setState] = useState<'idle' | 'playing'>('idle')
-  const [, setElapsed] = useState(0)
   const [shownBubbles, setShownBubbles] = useState<Set<number>>(new Set())
   const [shownEvents, setShownEvents] = useState<Set<number>>(new Set())
 
   const reset = useCallback(() => {
     timersRef.current.forEach((t) => clearTimeout(t))
     timersRef.current = []
-    if (tickIntervalRef.current !== null) {
-      clearInterval(tickIntervalRef.current)
-      tickIntervalRef.current = null
-    }
-    setElapsed(0)
     setShownBubbles(new Set())
     setShownEvents(new Set())
   }, [])
 
   const stop = useCallback(() => {
     setState('idle')
-    if (tickIntervalRef.current !== null) {
-      clearInterval(tickIntervalRef.current)
-      tickIntervalRef.current = null
-    }
   }, [])
 
   const play = useCallback(() => {
     reset()
     setState('playing')
-
-    tickIntervalRef.current = window.setInterval(() => {
-      setElapsed((e) => e + 1)
-    }, 1000)
 
     BUBBLES.forEach((_, idx) => {
       const t = window.setTimeout(() => {
@@ -116,9 +150,15 @@ export function PhoneScreen() {
     return () => observer.disconnect()
   }, [play])
 
+  // Keep the latest bubble in view as the timeline drops messages in.
+  useEffect(() => {
+    const el = transcriptRef.current
+    if (!el) return
+    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+  }, [shownBubbles, shownEvents])
+
   useEffect(() => () => {
     timersRef.current.forEach((t) => clearTimeout(t))
-    if (tickIntervalRef.current !== null) clearInterval(tickIntervalRef.current)
   }, [])
 
   // TODO(retell): Replace this handler with a Retell Web Call SDK session.
@@ -131,6 +171,8 @@ export function PhoneScreen() {
     play()
   }
 
+  const isPlaying = state === 'playing'
+
   return (
     <div
       ref={screenRef}
@@ -139,68 +181,65 @@ export function PhoneScreen() {
       role="region"
       aria-label="Live call demo"
     >
-      <header className="phone-screen-header">
-        <div className="phone-screen-brand" aria-label="Jenna">
-          <img
-            className="phone-screen-logo phone-screen-logo-light"
-            src="/assets/logos/jenna-logo-blue.png"
-            alt="Jenna"
-            width={1024}
-            height={300}
-          />
-          <img
-            className="phone-screen-logo phone-screen-logo-dark"
-            src="/assets/logos/jenna-logo-white.png"
-            alt=""
-            aria-hidden="true"
-            width={1024}
-            height={300}
-          />
-        </div>
-        <span className="phone-screen-status">
-          <span className="phone-screen-dot" aria-hidden="true" />
-          Ready
-        </span>
-      </header>
+      <span className="phone-screen-mark" aria-label="Jenna">
+        <img
+          className="phone-screen-mark-img phone-screen-mark-light"
+          src="/assets/logos/jenna-logo-blue.png"
+          alt="Jenna"
+          width={1024}
+          height={300}
+        />
+        <img
+          className="phone-screen-mark-img phone-screen-mark-dark"
+          src="/assets/logos/jenna-logo-white.png"
+          alt=""
+          aria-hidden="true"
+          width={1024}
+          height={300}
+        />
+      </span>
 
-      <div className="phone-screen-transcript" aria-live="polite">
-        {BUBBLES.map((b, idx) => (
-          <div
-            key={idx}
-            className={cn('phone-bubble', b.side, shownBubbles.has(idx) && 'show')}
-          >
-            <span className="phone-bubble-who">{b.who}</span>
-            <span className="phone-bubble-text">{b.text}</span>
-          </div>
-        ))}
-
-        {EVENTS.map((e, idx) => (
-          <div
-            key={idx}
-            className={cn('phone-event', shownEvents.has(idx) && 'show')}
-          >
-            <CheckIcon />
-            {e.text}
-          </div>
-        ))}
-      </div>
-
-      <div className="phone-screen-footer">
+      <div className="phone-screen-stage">
         <button
           type="button"
           className="phone-screen-mic"
           aria-label="Tap to speak with Jenna"
-          aria-pressed={state === 'playing'}
+          aria-pressed={isPlaying}
           onClick={handleMicClick}
         >
           <Mic aria-hidden="true" />
         </button>
 
-        <div className="phone-screen-wave" aria-hidden="true">
-          {Array.from({ length: 26 }).map((_, i) => (
-            <span key={i} />
-          ))}
-        </div>
+        <VoiceWave active={isPlaying} />
+      </div>
+
+      <div
+        ref={transcriptRef}
+        className="phone-screen-transcript"
+        aria-live="polite"
+      >
+        {BUBBLES.map((b, idx) => (
+          shownBubbles.has(idx) ? (
+            <div
+              key={idx}
+              className={cn('phone-bubble', b.side, 'show')}
+            >
+              <span className="phone-bubble-text">{b.text}</span>
+            </div>
+          ) : null
+        ))}
+
+        {EVENTS.map((e, idx) => (
+          shownEvents.has(idx) ? (
+            <div
+              key={idx}
+              className="phone-event show"
+            >
+              <CheckIcon />
+              {e.text}
+            </div>
+          ) : null
+        ))}
       </div>
     </div>
   )
