@@ -1,4 +1,6 @@
+import { PosIntegrationDiagram } from '@/components/widgets/PosIntegrationDiagram'
 import { ShaderCard } from '@/components/widgets/ShaderCard'
+import { SmsAnimatedList } from '@/components/widgets/SmsAnimatedList'
 
 // Section 2 — "What Jenna does" bento grid. Markup mirrors
 // /index.html lines 206–420. The memory card's WebGL shader mounts
@@ -26,43 +28,30 @@ export function BentoGrid() {
       <div className="bento" role="list">
         {/* Row 1 */}
         <article className="bento-card bento-4x bento-feature" role="listitem">
-          <div className="card-tag">
-            <span className="card-tag-dot" />
-            POS Integration
+          <div className="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
+              <rect x="8" y="6" width="8" height="5" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M8 14.5h8M8 17.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
           </div>
           <h3 className="card-title">Takes orders straight into your POS.</h3>
           <p className="card-body">No manual entry. No missed tickets. Orders land hot and ready, the moment Jenna hangs up.</p>
 
-          {/* Mini POS ticket */}
-          <div className="pos-ticket" aria-hidden="true">
-            <div className="pos-head">
-              <span className="pos-store">MARCO'S · Order #4421</span>
-              <span className="pos-time">7:42 PM</span>
-            </div>
-            <ul className="pos-items">
-              <li><span>1 ×</span><span>Large Pepperoni</span><span>$18.00</span></li>
-              <li><span>1 ×</span><span>Caesar Salad</span><span>$10.40</span></li>
-              <li className="pos-typing">
-                <span>1 ×</span>
-                <span>Garlic Knots <i className="cursor-blink" /></span>
-                <span className="pos-pending">…</span>
-              </li>
-            </ul>
-            <div className="pos-foot">
-              <span className="pos-status">
-                <span className="status-dot status-dot-live" aria-hidden="true" />
-                Live · Pushing to Toast
-              </span>
-              <span className="pos-total">$28.40</span>
-            </div>
-          </div>
+          <PosIntegrationDiagram />
         </article>
 
         {/* Row 2 */}
         <article className="bento-card bento-2x bento-feature" role="listitem">
-          <div className="card-tag">
-            <span className="card-tag-dot" />
-            No busy signal — ever
+          <div className="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M6.5 14.5c-1.94 0-3.5-1.57-3.5-3.5s1.56-3.5 3.5-3.5c2.83 0 5.67 7 8.5 7 1.94 0 3.5-1.57 3.5-3.5s-1.56-3.5-3.5-3.5c-2.83 0-5.67 7-8.5 7Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
           <h3 className="card-title">Handles unlimited calls at once.</h3>
           <p className="card-body">Friday rush, holiday weekend, brunch. Every line is Jenna. Every caller gets answered.</p>
@@ -161,18 +150,10 @@ export function BentoGrid() {
               <path d="M7 10h7M7 14h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
           </div>
-          <h3 className="card-title">Sends SMS confirmations.</h3>
-          <p className="card-body">Every order, every time. Callers get a text the moment they hang up.</p>
+          <h3 className="card-title">Sends automated texts.</h3>
+          <p className="card-body">Order review, confirmations, reservations and more.</p>
 
-          <figure className="sms-screenshot" aria-hidden="true">
-            <img
-              src="/assets/screenshots/sms-confirmation.png"
-              alt="Text from Jenna: Hi Anthony, here's your order at Vito's Northport — Chicken Marsala with mixed vegetables, 6 garlic knots, Round pepperoni pie. — Jenna"
-              width={901}
-              height={621}
-              decoding="async"
-            />
-          </figure>
+          <SmsAnimatedList />
         </article>
 
         <article className="bento-card bento-2x" role="listitem">

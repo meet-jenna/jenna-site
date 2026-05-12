@@ -392,6 +392,22 @@
   100% { box-shadow: 0 0 0 0   color-mix(in srgb, var(--accent) 0%, transparent); }
 }
 
+/* Idle "tap me" affordance — slow breathing halo on the mic button
+   itself, paired with two staggered ripple rings on the ::before /
+   ::after pseudo-elements that expand outward and fade. Reads as
+   "I'm listening, tap me" without competing with the louder playing
+   state pulse above. */
+@keyframes phone-mic-breathe {
+  0%, 100% { box-shadow: 0 0 0 0      color-mix(in srgb, var(--accent) 0%,  transparent); }
+  50%      { box-shadow: 0 0 0 1.2cqw color-mix(in srgb, var(--accent) 22%, transparent); }
+}
+
+@keyframes phone-mic-ripple {
+  0%   { opacity: 0.65; transform: scale(1); }
+  80%  { opacity: 0;    transform: scale(1.4); }
+  100% { opacity: 0;    transform: scale(1.5); }
+}
+
 @keyframes phone-message-in {
   from { opacity: 0; transform: translateY(1.5cqw); }
   to   { opacity: 1; transform: translateY(0); }
@@ -2295,7 +2311,7 @@
     border-radius: inherit;
     pointer-events: none;
     z-index: -1;
-    background: radial-gradient(700px 250px at 50% 0%, var(--accent-glow), transparent 65%);
+    background: radial-gradient(700px 250px at 50% 0%, rgba(31, 31, 31, 0.06), transparent 65%);
     opacity: 0.6;
   }
 
@@ -2317,8 +2333,8 @@
     color: var(--fg-soft);
   }
 
-  /* Calc figure — was huge serif italic; now bold sans display-scale,
-     violet for emphasis. The marquee number of the section. */
+  /* Calc figure — neutral ink. Brand violet reserved for the
+     "Net savings per month" total line in the breakdown. */
   .calc-figure {
     display: inline-flex;
     align-items: baseline;
@@ -2329,7 +2345,7 @@
     font-size: clamp(4rem, 11vw, 7.5rem);
     line-height: 1.05;
     letter-spacing: 0;
-    color: var(--accent);
+    color: var(--fg);
     margin: 0.2rem 0 0.1rem;
   }
 
@@ -2392,14 +2408,14 @@
     letter-spacing: 0.02em;
   }
 
-  /* Row value — was serif italic; now bold sans violet tabular. */
+  /* Row value — bold sans tabular, neutral ink. */
   .calc-row-value {
     font-family: inherit;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     letter-spacing: 0;
-    color: var(--accent);
+    color: var(--fg);
     font-variant-numeric: tabular-nums;
   }
 
@@ -2425,8 +2441,8 @@
     border-radius: var(--r-pill);
     background: linear-gradient(
       to right,
-      var(--accent) 0%,
-      var(--accent) var(--p),
+      var(--fg) 0%,
+      var(--fg) var(--p),
       var(--overlay-5) var(--p),
       var(--overlay-5) 100%
     );
@@ -2436,12 +2452,12 @@
   }
 
   .calc-range:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--fg);
     outline-offset: 6px;
     outline-style: dashed;
   }
 
-  /* Range slider thumb — solid violet, white center for the puck feel. */
+  /* Range slider thumb — neutral ink ring, white center for the puck feel. */
   .calc-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -2449,7 +2465,7 @@
     height: 22px;
     border-radius: 50%;
     background: var(--ink-on-accent);
-    border: 4px solid var(--accent);
+    border: 4px solid var(--fg);
     box-shadow: var(--shadow-xl);
     cursor: grab;
     transition: transform 0.15s var(--ease);
@@ -2463,7 +2479,7 @@
     height: 22px;
     border-radius: 50%;
     background: var(--ink-on-accent);
-    border: 4px solid var(--accent);
+    border: 4px solid var(--fg);
     box-shadow: var(--shadow-xl);
     cursor: grab;
     transition: transform 0.15s var(--ease);
@@ -4093,21 +4109,24 @@
   [data-theme="dark"] .phone-screen-mark-light { display: none; }
   [data-theme="dark"] .phone-screen-mark-dark  { display: block; }
 
-  /* Stage — top of the screen. Holds the BIG centered mic with the
-     tight bell-curve voice wave directly underneath it. The whole
-     stage is the visual anchor; the conversation transcript fills
-     everything below. Sized to leave the most room possible for the
-     transcript while keeping the mic dominant. */
+  /* Stage — sits in the upper portion of the screen, well clear of
+     the dynamic island. Holds the BIG centered mic with the tight
+     bell-curve voice wave directly underneath it. Top padding gives
+     the mic + its idle ripple rings breathing room from the island;
+     bottom padding separates the wave from the transcript below.
+     All values in cqw so the spacing scales with the iPhone width
+     on every breakpoint. */
   .phone-screen-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2cqw;
-    padding: 1cqw 0 0.5cqw;
+    gap: 2.5cqw;
+    padding: 8cqw 0 3cqw;
   }
 
   .phone-screen-mic {
+    position: relative;
     display: inline-grid;
     place-items: center;
     width: 20cqw;
@@ -4123,6 +4142,21 @@
       transform 0.18s var(--ease),
       box-shadow 0.3s var(--ease),
       background-color 0.18s var(--ease);
+  }
+
+  /* Ripple rings for the idle "tap me" affordance. Hollow border-only
+     circles so they expand around the mic without ever covering the
+     icon. Two rings staggered by half the duration give a continuous
+     "breathing outward" rhythm. */
+  .phone-screen-mic::before,
+  .phone-screen-mic::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 0.45cqw solid color-mix(in srgb, var(--accent) 55%, transparent);
+    opacity: 0;
+    pointer-events: none;
   }
 
   .phone-screen-mic:hover {
@@ -4143,6 +4177,18 @@
     width: 8.5cqw;
     height: 8.5cqw;
     stroke-width: 2;
+  }
+
+  .phone-screen[data-state="idle"] .phone-screen-mic {
+    animation: phone-mic-breathe 2.4s var(--ease) infinite;
+  }
+
+  .phone-screen[data-state="idle"] .phone-screen-mic::before {
+    animation: phone-mic-ripple 2.4s var(--ease) infinite;
+  }
+
+  .phone-screen[data-state="idle"] .phone-screen-mic::after {
+    animation: phone-mic-ripple 2.4s var(--ease) 1.2s infinite;
   }
 
   .phone-screen[data-state="playing"] .phone-screen-mic {
@@ -4902,7 +4948,10 @@
   .memory-visual-fallback,
   .memory-visual-dot,
   .memory-profile-pulse,
-  .handoff-route-line::after {
+  .handoff-route-line::after,
+  .phone-screen-mic,
+  .phone-screen-mic::before,
+  .phone-screen-mic::after {
     animation: none;
   }
 }
