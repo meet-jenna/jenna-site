@@ -42,7 +42,6 @@ export default defineConfig({
       'react-dom/client',
       'react/jsx-runtime',
       '@radix-ui/react-tabs',
-      '@radix-ui/react-slot',
     ],
   },
 })

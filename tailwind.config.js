@@ -2,9 +2,9 @@ import animate from 'tailwindcss-animate'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  // Light-only theme post-Shares revamp. The dark `data-theme="dark"`
-  // selector still resolves to a no-op (no dark :root block exists);
-  // any `dark:` utility in the codebase is dead code and harmless.
+  // Dark theme is opt-in via [data-theme="dark"], applied by ThemeToggle
+  // (and the pre-paint script in index.html). Both `dark:` utilities and
+  // the dark token block in index.css are live.
   darkMode: ['selector', '[data-theme="dark"]'],
 
   content: ['./index.html', './src/**/*.{ts,tsx}'],

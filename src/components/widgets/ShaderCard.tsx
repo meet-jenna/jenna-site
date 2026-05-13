@@ -1,4 +1,5 @@
 import * as React from 'react'
+import type { ComponentProps } from 'react'
 import { ColorPanels } from '@paper-design/shaders-react'
 
 // "Caller memory" shader visual on the bento memory card.
@@ -16,7 +17,7 @@ import { ColorPanels } from '@paper-design/shaders-react'
 //     regardless of its aspect ratio.
 const MemoColorPanels = React.memo(ColorPanels)
 
-const SHADER_PROPS = {
+const SHADER_PROPS: Partial<ComponentProps<typeof ColorPanels>> = {
   colors: ['#ed40b3', '#6ef7cc', '#adfa1e', '#b054de'],
   colorBack: '#ffffff00',
   density: 5.03,
@@ -32,7 +33,7 @@ const SHADER_PROPS = {
   scale: 0.96,
   rotation: 180,
   fit: 'contain',
-} as const
+}
 
 export function ShaderCard() {
   return (
