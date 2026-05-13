@@ -4424,9 +4424,15 @@
   .memory-split {
     grid-template-columns: 1fr;
   }
+  /* iOS Safari/Chrome doesn't reliably enforce `aspect-ratio` on a
+     grid item whose row is auto-sized and whose content height is 0
+     (all of .memory-visual's children are position:absolute). The
+     row collapses to 0px and the visual disappears entirely. Pin a
+     real min-height so the aspect-ratio always has something to
+     lean on. */
   .memory-visual {
     aspect-ratio: 16 / 9;
-    min-height: 0;
+    min-height: 200px;
   }
 }
 
