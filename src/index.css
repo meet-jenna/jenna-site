@@ -342,11 +342,6 @@
   50%, 100% { opacity: 0; }
 }
 
-@keyframes memory-fallback-spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 @keyframes memory-pulse {
   0%, 100% { opacity: 0.5; transform: scale(0.85); }
   50%      { opacity: 1;   transform: scale(1.1); }
@@ -1349,39 +1344,14 @@
       linear-gradient(135deg, #1a0033 0%, #060611 100%);
   }
 
+  /* Shader wrapper — fills the .memory-visual parent. The
+     <ColorPanels> canvas inside uses inline `width: 100%; height:
+     100%` so it tracks this box on every device (iOS Safari/Chrome
+     included). */
   .memory-shader {
     position: absolute;
     inset: 0;
     z-index: 1;
-  }
-
-  .memory-visual-fallback {
-    position: absolute;
-    inset: -10%;
-    z-index: 0;
-    background:
-      conic-gradient(from 200deg at 50% 50%,
-        #ed40b3 0deg,
-        #b054de 90deg,
-        #6ef7cc 180deg,
-        #adfa1e 260deg,
-        #ed40b3 360deg);
-    filter: blur(28px) saturate(1.1);
-    opacity: 1;
-    transition: opacity 0.4s var(--ease);
-    animation: memory-fallback-spin 18s linear infinite;
-  }
-
-  /* Once the shader mounts, fade the fallback out — but only on
-     viewports where WebGL is reliable. On mobile (especially iOS
-     Chrome / WKWebView) the canvas mounts and flips data-mounted,
-     yet the WebGL2 context can throttle / fail to render, leaving
-     the visual blank. Keeping the conic-gradient fallback visible
-     on small screens guarantees the brand graphic still shows. */
-  @media (min-width: 721px) {
-    .memory-shader[data-mounted="true"] ~ .memory-visual-fallback {
-      opacity: 0;
-    }
   }
 
   .memory-visual-vignette {
@@ -4818,7 +4788,6 @@
   .nav-links a {
     transition-duration: 0.01ms;
   }
-  .memory-visual-fallback,
   .memory-visual-dot,
   .memory-profile-pulse,
   .handoff-route-line::after,

@@ -230,10 +230,6 @@ export default {
           '0%, 49%': { opacity: '1' },
           '50%, 100%': { opacity: '0' },
         },
-        'memory-fallback-spin': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
         'memory-pulse': {
           '0%, 100%': { transform: 'scale(1)', opacity: '0.9' },
           '50%': { transform: 'scale(1.15)', opacity: '0.4' },
@@ -257,7 +253,6 @@ export default {
         'wave-mini': 'wave-mini 1.4s ease-in-out infinite',
         rainbow: 'rainbow var(--rainbow-speed, 2s) infinite linear',
         blink: 'blink 1s steps(2, start) infinite',
-        'memory-fallback-spin': 'memory-fallback-spin 18s linear infinite',
         'memory-pulse': 'memory-pulse 2s ease-in-out infinite',
         'playhead-glow': 'playhead-glow 0.9s ease-in-out infinite',
         'fade-in': 'fade-in 0.4s var(--ease) both',

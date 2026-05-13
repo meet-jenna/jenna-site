@@ -2,10 +2,11 @@ import { PosIntegrationDiagram } from '@/components/widgets/PosIntegrationDiagra
 import { ShaderCard } from '@/components/widgets/ShaderCard'
 import { SmsAnimatedList } from '@/components/widgets/SmsAnimatedList'
 
-// Section 2 — "What Jenna does" bento grid. Markup mirrors
-// /index.html lines 206–420. The memory card's WebGL shader mounts
-// via <ShaderCard /> (Phase 2.10); the CSS conic-gradient fallback
-// shows briefly before the shader's `data-mounted="true"` fades it.
+// Section 2 — "What Jenna does" bento grid. The memory card's
+// WebGL shader mounts via <ShaderCard /> (Phase 2.10), wired with
+// the cult-ui hero-color-panel shader configuration so the canvas
+// fills its bento parent on every device (iOS Safari/Chrome
+// included).
 
 export function BentoGrid() {
   return (
@@ -108,7 +109,6 @@ export function BentoGrid() {
           <div className="memory-split">
             <div className="memory-visual" aria-hidden="true">
               <ShaderCard />
-              <div className="memory-visual-fallback" />
               <div className="memory-visual-vignette" />
               <div className="memory-visual-label">
                 <span className="memory-visual-dot" />
