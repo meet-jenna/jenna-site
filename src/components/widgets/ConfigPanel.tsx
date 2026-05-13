@@ -57,10 +57,10 @@ export function ConfigPanel() {
     setRings((r) => Math.min(6, Math.max(1, r + delta)))
 
   return (
-    <div className="config" id="config">
-      <div className="config-glow" aria-hidden="true" />
+    <Tabs.Root asChild defaultValue="schedule" orientation="vertical">
+      <div className="config" id="config">
+        <div className="config-glow" aria-hidden="true" />
 
-      <Tabs.Root defaultValue="schedule" orientation="vertical">
         <Tabs.List className="config-tabs" aria-label="Jenna configuration">
           <div className="config-rail-head">
             <span className="config-rail-dot" aria-hidden="true" />
@@ -276,7 +276,7 @@ export function ConfigPanel() {
             </div>
           </Tabs.Content>
         </div>
-      </Tabs.Root>
-    </div>
+      </div>
+    </Tabs.Root>
   )
 }

@@ -1,25 +1,87 @@
-import { motion } from 'framer-motion'
-import { Mic } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
-const BUBBLES = [
-  { who: 'Caller', text: 'Hi, can I place an order?',                                       delay:   300, side: 'caller' as const },
-  { who: 'Jenna',  text: 'Sure! Can I get a name? And is it pickup or delivery?',           delay:  1700, side: 'jenna'  as const },
-  { who: 'Caller', text: 'Mike. Pickup, please.',                                           delay:  3100, side: 'caller' as const },
-  { who: 'Jenna',  text: 'Got it, Mike. What can I get started for you?',                   delay:  4400, side: 'jenna'  as const },
-  { who: 'Caller', text: 'Large pepperoni and a Caesar salad.',                             delay:  5700, side: 'caller' as const },
-  { who: 'Jenna',  text: 'Anything to drink with that?',                                    delay:  7000, side: 'jenna'  as const },
-  { who: 'Caller', text: 'Just water, thanks.',                                             delay:  8200, side: 'caller' as const },
-  { who: 'Jenna',  text: "Perfect. $28.40 — ready in 20. I'll text your receipt now.",      delay:  9500, side: 'jenna'  as const },
+// Hero phone demo — a single restaurant call playing out inside the
+// iPhone mockup. Three acts, all visible together once each appears:
+//
+//   ACT 1 · Call (0–6s)
+//     Active-call strip + iMessage-style back-and-forth between
+//     caller and Jenna. Bubbles drop in sequentially and STAY visible
+//     for the rest of the cycle.
+//
+//   ACT 2 · Order (6.5–8.4s)
+//     Order receipt card fades in BELOW the transcript. Items drop
+//     in one by one, total writes in. The transcript stays in view
+//     above — owners can see the request AND the result side by side.
+//
+//   ACT 3 · Handoff (9.3s onward)
+//     Toast logo POPS into existence at the bottom (it wasn't there
+//     before). A violet packet detaches from the bottom of the
+//     receipt and flies down INTO the Toast tile, which lights up.
+//     "✓ SENT TO TOAST" pill confirms.
+//
+// The cycle loops while the phone is in view. We pause off-screen so
+// we're not burning frames the user can't see.
+//
+// TODO(retell): swap this scripted cycle for a real Retell Web Call
+//   SDK session — see git history for the previous mic-button entrypoint.
+
+type Bubble = {
+  side: 'caller' | 'jenna'
+  text: string
+}
+
+type Item = {
+  emoji: string
+  name: string
+  price: string
+}
+
+const CALLER_NAME = 'Mike'
+const ORDER_NUMBER = '#1247'
+const ORDER_TOTAL = '$28.40'
+
+const BUBBLES: Bubble[] = [
+  { side: 'caller', text: 'Hi, can I place a pickup order?' },
+  { side: 'jenna',  text: 'Of course — can I get a name?' },
+  { side: 'caller', text: 'Mike. Pepperoni pie, Caesar, and a water.' },
+  { side: 'jenna',  text: 'Got it, Mike. $28.40, ready in 20.' },
 ]
 
-const EVENTS = [
-  { text: 'Order sent to POS', delay: 11000 },
+const ITEMS: Item[] = [
+  { emoji: '🍕', name: 'Large Pepperoni', price: '$18.00' },
+  { emoji: '🥗', name: 'Caesar Salad',    price: '$ 9.50' },
+  { emoji: '💧', name: 'Water',           price: '$ 0.00' },
 ]
 
-const STOP_AFTER_MS = 12500
+// Timeline (ms) — every milestone of one cycle. Total cycle = LOOP_AT.
+//
+// PACKET starts the 1.1s order-packet-deliver CSS animation; the
+// packet visually lands on the tile at ~82% of that animation
+// (~PACKET + 900ms = LAND), when we light the destination and ~200ms
+// later show the SENT pill.
+const T = {
+  STRIP_IN:    150,
+  // ACT 1 — conversation
+  BUBBLE_1:    700,    // Caller: "Hi, can I place a pickup order?"
+  BUBBLE_2:   2000,    // Jenna:  "Of course — can I get a name?"
+  BUBBLE_3:   3300,    // Caller: "Mike. Pepperoni pie, Caesar, and a water."
+  BUBBLE_4:   5400,    // Jenna:  "Got it, Mike. $28.40, ready in 20."
+  // ACT 2 — order draws up below the transcript
+  CARD:       6700,
+  ITEM_1:     7200,
+  ITEM_2:     7600,
+  ITEM_3:     8000,
+  TOTAL:      8600,
+  // ACT 3 — handoff
+  DEST_IN:    9500,    // Toast tile pops into existence
+  PACKET:    10100,    // packet flies card → tile
+  LAND:      11000,    // tile lights up
+  SENT:      11200,    // sent pill appears
+  // Loop
+  LOOP_AT:   13500,
+} as const
 
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -33,213 +95,248 @@ const CheckIcon = () => (
   </svg>
 )
 
-// Bell-curve voice wave — taller in the middle, shorter at the edges,
-// matching the iOS Siri/voice-assistant convention. Driven by
-// framer-motion so each bar gets its own slightly randomised
-// oscillation, which reads as a "live voice" rather than a fixed pulse.
-const WAVE_BAR_COUNT = 13
-
-function VoiceWave({ active }: { active: boolean }) {
-  return (
-    <div className="phone-voice-wave" aria-hidden="true">
-      {Array.from({ length: WAVE_BAR_COUNT }).map((_, i) => {
-        const center = (WAVE_BAR_COUNT - 1) / 2
-        const distance = Math.abs(i - center)
-        // Bell envelope — outer bars stay shorter so the wave reads
-        // as a centered pulse rather than a flat block.
-        const envelope = 1 - distance * 0.09
-        return (
-          <motion.span
-            key={i}
-            animate={
-              active
-                ? {
-                    scaleY: [
-                      0.3 * envelope,
-                      1.0 * envelope,
-                      0.45 * envelope,
-                      0.85 * envelope,
-                      0.3 * envelope,
-                    ],
-                  }
-                : { scaleY: 0.25 * envelope }
-            }
-            transition={{
-              duration: 1.1 + (i % 3) * 0.18,
-              repeat: active ? Infinity : 0,
-              ease: 'easeInOut',
-              delay: (i * 0.05) % 0.35,
-            }}
-          />
-        )
-      })}
-    </div>
-  )
+function formatTimer(seconds: number) {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return `${m}:${s.toString().padStart(2, '0')}`
 }
 
-// Live-call demo rendered inside the iPhone mockup.
-//
-// Layout: BIG centered mic at the top → tight bell-curve voice wave directly
-// under the mic → iMessage-style transcript that fills the remaining screen
-// height. The transcript auto-scrolls to keep the newest bubble in view as
-// the scripted timeline plays.
-//
-// Behavior: auto-plays once on viewport entry; clicking the mic replays the
-// scripted timeline. The mic is a placeholder for the real-time voice
-// integration we'll wire up later — see TODO in handleMicClick.
 export function PhoneScreen() {
   const screenRef = useRef<HTMLDivElement>(null)
-  const transcriptRef = useRef<HTMLDivElement>(null)
   const timersRef = useRef<number[]>([])
-  const autoplayedRef = useRef(false)
+  const timerIntervalRef = useRef<number | null>(null)
+  const inViewRef = useRef(false)
 
-  const [state, setState] = useState<'idle' | 'playing'>('idle')
+  // cycleKey re-keys the animated children so their CSS entrance
+  // animations re-fire on each loop instead of us imperatively
+  // resetting every transform/opacity.
+  const [cycleKey, setCycleKey] = useState(0)
+  const [stripShown,   setStripShown]   = useState(false)
   const [shownBubbles, setShownBubbles] = useState<Set<number>>(new Set())
-  const [shownEvents, setShownEvents] = useState<Set<number>>(new Set())
+  const [cardShown,    setCardShown]    = useState(false)
+  const [shownItems,   setShownItems]   = useState<Set<number>>(new Set())
+  const [totalShown,   setTotalShown]   = useState(false)
+  const [destShown,    setDestShown]    = useState(false)
+  const [packetFiring, setPacketFiring] = useState(false)
+  const [destLit,      setDestLit]      = useState(false)
+  const [sentShown,    setSentShown]    = useState(false)
+  const [timerSec,     setTimerSec]     = useState(0)
 
-  const reset = useCallback(() => {
+  const clearAll = useCallback(() => {
     timersRef.current.forEach((t) => clearTimeout(t))
     timersRef.current = []
-    setShownBubbles(new Set())
-    setShownEvents(new Set())
+    if (timerIntervalRef.current !== null) {
+      clearInterval(timerIntervalRef.current)
+      timerIntervalRef.current = null
+    }
   }, [])
 
-  const stop = useCallback(() => {
-    setState('idle')
+  const reset = useCallback(() => {
+    clearAll()
+    setStripShown(false)
+    setShownBubbles(new Set())
+    setCardShown(false)
+    setShownItems(new Set())
+    setTotalShown(false)
+    setDestShown(false)
+    setPacketFiring(false)
+    setDestLit(false)
+    setSentShown(false)
+    setTimerSec(0)
+  }, [clearAll])
+
+  const schedule = useCallback((delay: number, fn: () => void) => {
+    const id = window.setTimeout(fn, delay)
+    timersRef.current.push(id)
   }, [])
 
   const play = useCallback(() => {
     reset()
-    setState('playing')
+    setCycleKey((k) => k + 1)
 
+    // ACT 1 — call strip + conversation
+    schedule(T.STRIP_IN, () => {
+      setStripShown(true)
+      timerIntervalRef.current = window.setInterval(() => {
+        setTimerSec((s) => s + 1)
+      }, 1000)
+    })
+
+    const bubbleTimes = [T.BUBBLE_1, T.BUBBLE_2, T.BUBBLE_3, T.BUBBLE_4]
     BUBBLES.forEach((_, idx) => {
-      const t = window.setTimeout(() => {
-        setShownBubbles((prev) => new Set(prev).add(idx))
-      }, BUBBLES[idx].delay)
-      timersRef.current.push(t)
+      schedule(bubbleTimes[idx], () => {
+        setShownBubbles((prev) => {
+          const next = new Set(prev)
+          next.add(idx)
+          return next
+        })
+      })
     })
 
-    EVENTS.forEach((_, idx) => {
-      const t = window.setTimeout(() => {
-        setShownEvents((prev) => new Set(prev).add(idx))
-      }, EVENTS[idx].delay)
-      timersRef.current.push(t)
+    // ACT 2 — order composes below the transcript
+    schedule(T.CARD, () => setCardShown(true))
+
+    const itemTimes = [T.ITEM_1, T.ITEM_2, T.ITEM_3]
+    ITEMS.forEach((_, idx) => {
+      schedule(itemTimes[idx], () => {
+        setShownItems((prev) => {
+          const next = new Set(prev)
+          next.add(idx)
+          return next
+        })
+      })
     })
 
-    const stopT = window.setTimeout(stop, STOP_AFTER_MS)
-    timersRef.current.push(stopT)
-  }, [reset, stop])
+    schedule(T.TOTAL, () => setTotalShown(true))
+
+    // ACT 3 — handoff
+    schedule(T.DEST_IN, () => setDestShown(true))
+    schedule(T.PACKET,  () => setPacketFiring(true))
+    schedule(T.LAND,    () => setDestLit(true))
+    schedule(T.SENT,    () => setSentShown(true))
+
+    // Loop
+    schedule(T.LOOP_AT, () => {
+      if (inViewRef.current) play()
+    })
+  }, [reset, schedule])
 
   useEffect(() => {
     const node = screenRef.current
     if (!node) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting && !autoplayedRef.current) {
-            autoplayedRef.current = true
-            play()
-            observer.disconnect()
-            break
+          if (entry.isIntersecting) {
+            if (!inViewRef.current) {
+              inViewRef.current = true
+              play()
+            }
+          } else {
+            inViewRef.current = false
+            clearAll()
           }
         }
       },
       { threshold: 0.3 },
     )
     observer.observe(node)
-    return () => observer.disconnect()
-  }, [play])
+    return () => {
+      observer.disconnect()
+      clearAll()
+    }
+  }, [play, clearAll])
 
-  // Keep the latest bubble in view as the timeline drops messages in.
-  useEffect(() => {
-    const el = transcriptRef.current
-    if (!el) return
-    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
-  }, [shownBubbles, shownEvents])
-
-  useEffect(() => () => {
-    timersRef.current.forEach((t) => clearTimeout(t))
-  }, [])
-
-  // TODO(retell): Replace this handler with a Retell Web Call SDK session.
-  //   const client = new RetellWebClient()
-  //   const { accessToken } = await fetch('/api/retell/token').then(r => r.json())
-  //   await client.startCall({ accessToken })
-  // For now, clicking the mic just replays the scripted demo so the UX
-  // matches what the live integration will feel like.
-  const handleMicClick = () => {
-    play()
-  }
-
-  const isPlaying = state === 'playing'
+  useEffect(() => () => clearAll(), [clearAll])
 
   return (
     <div
       ref={screenRef}
       className="phone-screen"
-      data-state={state}
       role="region"
-      aria-label="Live call demo"
+      aria-label="Live call demo — Jenna takes a pickup order and sends it to Toast"
     >
-      <span className="phone-screen-mark" aria-label="Jenna">
-        <img
-          className="phone-screen-mark-img phone-screen-mark-light"
-          src="/assets/logos/jenna-logo-blue.png"
-          alt="Jenna"
-          width={1024}
-          height={300}
-        />
-        <img
-          className="phone-screen-mark-img phone-screen-mark-dark"
-          src="/assets/logos/jenna-logo-white.png"
-          alt=""
-          aria-hidden="true"
-          width={1024}
-          height={300}
-        />
-      </span>
-
-      <div className="phone-screen-stage">
-        <button
-          type="button"
-          className="phone-screen-mic"
-          aria-label="Tap to speak with Jenna"
-          aria-pressed={isPlaying}
-          onClick={handleMicClick}
-        >
-          <Mic aria-hidden="true" />
-        </button>
-
-        <VoiceWave active={isPlaying} />
+      {/* Active call strip */}
+      <div
+        key={`strip-${cycleKey}`}
+        className={cn('call-strip', !stripShown && 'opacity-0')}
+        aria-hidden="true"
+      >
+        <span className="call-strip-dot" />
+        <span className="call-strip-label">Pickup Order</span>
+        <span className="call-strip-sep">·</span>
+        <span className="call-strip-name">{CALLER_NAME}</span>
+        <span className="call-strip-timer">{formatTimer(timerSec)}</span>
       </div>
 
+      {/* ACT 1 — conversation transcript. Stays visible for the rest
+          of the cycle so owners can read the request alongside the
+          order receipt below. */}
       <div
-        ref={transcriptRef}
-        className="phone-screen-transcript"
-        aria-live="polite"
+        key={`transcript-${cycleKey}`}
+        className="call-transcript"
       >
         {BUBBLES.map((b, idx) => (
-          shownBubbles.has(idx) ? (
-            <div
-              key={idx}
-              className={cn('phone-bubble', b.side, 'show')}
-            >
-              <span className="phone-bubble-text">{b.text}</span>
-            </div>
-          ) : null
+          <div
+            key={`bubble-${cycleKey}-${idx}`}
+            className={cn('call-bubble', b.side, shownBubbles.has(idx) && 'show')}
+          >
+            {b.text}
+          </div>
         ))}
+      </div>
 
-        {EVENTS.map((e, idx) => (
-          shownEvents.has(idx) ? (
+      {/* ACT 2 — order receipt card. Fades in BELOW the transcript
+          after the convo wraps. Both stay on screen together. */}
+      <div
+        key={`card-${cycleKey}`}
+        className={cn('order-card', cardShown && 'show')}
+      >
+        <div className="order-card-header">
+          <span className="order-card-title">Order</span>
+          <span className="order-card-number">{ORDER_NUMBER}</span>
+        </div>
+
+        <div className="order-card-rows">
+          {ITEMS.map((item, idx) => (
             <div
-              key={idx}
-              className="phone-event show"
+              key={`item-${cycleKey}-${idx}`}
+              className={cn('order-row', shownItems.has(idx) && 'show')}
             >
-              <CheckIcon />
-              {e.text}
+              <span className="order-row-emoji" aria-hidden="true">{item.emoji}</span>
+              <span className="order-row-name">{item.name}</span>
+              <span className="order-row-price">{item.price}</span>
             </div>
-          ) : null
-        ))}
+          ))}
+        </div>
+
+        <div className={cn('order-total', totalShown && 'show')}>
+          <span className="order-total-label">Total</span>
+          <span className="order-total-amount">{ORDER_TOTAL}</span>
+        </div>
+      </div>
+
+      {/* ACT 3 — flying packet. The order-packet-deliver CSS keyframe
+          handles fade-in → travel down → scale-down → fade-out. We
+          only toggle the .fire class to trigger it. */}
+      <div
+        key={`packet-${cycleKey}`}
+        className={cn('order-packet', packetFiring && 'fire')}
+        aria-hidden="true"
+      >
+        <CheckIcon />
+        Order {ORDER_NUMBER}
+      </div>
+
+      {/* ACT 3 — destination. Toast tile + sent pill, both hidden
+          until DEST_IN (after the receipt is complete). The tile
+          pops in with a spring overshoot, then lights up when the
+          packet arrives. */}
+      <div className="destination">
+        <div
+          key={`tile-${cycleKey}`}
+          className={cn(
+            'destination-tile',
+            destShown && 'appeared',
+            destLit && 'lit',
+          )}
+        >
+          <img
+            src="/assets/logos/pos/toast.png"
+            alt=""
+            aria-hidden="true"
+            width={256}
+            height={256}
+          />
+        </div>
+        <div
+          key={`sent-${cycleKey}`}
+          className={cn('destination-pill', sentShown && 'show')}
+        >
+          <CheckIcon />
+          Sent to Toast
+        </div>
       </div>
     </div>
   )
