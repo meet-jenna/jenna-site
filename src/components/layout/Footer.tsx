@@ -1,6 +1,5 @@
-// Footer. Markup mirrors /index.html lines 1272–1311.
-// The vanilla site renders a small brand "mark + dot" hover-glyph
-// alongside the wordmark; we keep it.
+// Footer. The footer surface is always dark (var(--fg) — Ink Black),
+// so the brand uses the white Jenna logo regardless of active theme.
 
 export function Footer() {
   return (
@@ -8,11 +7,14 @@ export function Footer() {
       <div className="footer-glow" aria-hidden="true" />
 
       <div className="footer-inner">
-        <a className="brand footer-brand" href="#" aria-label="Jenna home">
-          <span className="brand-mark" aria-hidden="true">
-            <span className="brand-dot" />
-          </span>
-          <span className="brand-name">Jenna</span>
+        <a className="footer-brand" href="#" aria-label="Jenna home">
+          <img
+            className="footer-logo"
+            src="/assets/logos/jenna-logo-white.png"
+            alt="Jenna"
+            width={1024}
+            height={300}
+          />
         </a>
 
         <p className="footer-tag">
@@ -22,26 +24,18 @@ export function Footer() {
         <nav className="footer-links" aria-label="Footer navigation">
           <a href="#how">How it works</a>
           <span className="footer-sep" aria-hidden="true">·</span>
-          <a href="#pricing">Pricing</a>
-          <span className="footer-sep" aria-hidden="true">·</span>
           <a href="#book">Book a demo</a>
           <span className="footer-sep" aria-hidden="true">·</span>
           <a href="mailto:hello@jenna.ai">Contact</a>
         </nav>
 
         <p className="footer-contact">
-          <a href="mailto:hello@jenna.ai">hello@jenna.ai</a>
-          <span className="footer-sep" aria-hidden="true">·</span>
-          <a href="tel:+18005553662">(800) 555-JENNA</a>
+          <a href="mailto:mail@meetjenna.ai">mail@meetjenna.ai</a>
         </p>
       </div>
 
       <div className="footer-base">
         <span className="footer-copy">© 2026 Jenna AI</span>
-        <span className="footer-ping">
-          <span className="status-dot status-dot-live" aria-hidden="true" />
-          All systems on call
-        </span>
       </div>
     </footer>
   )

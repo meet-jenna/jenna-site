@@ -35,7 +35,6 @@ export function Nav() {
 
         <nav className="nav-links" aria-label="Primary">
           <a href="#how">How it works</a>
-          <a href="#pricing">Pricing</a>
           <a href="#demo">Hear Jenna</a>
         </nav>
 

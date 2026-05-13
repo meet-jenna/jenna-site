@@ -43,7 +43,7 @@ const items: SmsItem[] = [
     color: '#1E86FF',
   },
   {
-    name: 'Confirmation sent',
+    name: 'Coupon Code',
     description: 'Jenna AI',
     time: '8m ago',
     icon: MessageSquareText,
@@ -55,26 +55,26 @@ const Notification = ({ name, description, time, icon: Icon, color }: SmsItem) =
   return (
     <figure
       className={cn(
-        'relative mx-auto min-h-fit w-full max-w-[400px] overflow-hidden rounded-[8px] p-4',
+        'relative mx-auto min-h-fit w-full max-w-[400px] overflow-hidden rounded-[var(--r-md)] px-[14px] py-[12px]',
         'transition-all duration-200 ease-in-out hover:scale-[103%]',
         'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
       )}
     >
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center gap-[0.7rem]">
         <div
-          className="flex size-10 items-center justify-center rounded-2xl"
+          className="flex size-8 shrink-0 items-center justify-center rounded-full"
           style={{ backgroundColor: color }}
           aria-hidden="true"
         >
-          <Icon className="h-5 w-5 text-white" strokeWidth={2.25} />
+          <Icon className="h-4 w-4 text-white" strokeWidth={2.25} />
         </div>
-        <div className="flex flex-col overflow-hidden">
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           <figcaption className="flex flex-row items-center whitespace-pre text-[var(--fg)]">
-            <span className="text-base font-bold leading-none sm:text-lg">{name}</span>
+            <span className="text-[14px] font-bold leading-[1.2] tracking-[0.02em]">{name}</span>
             <span className="mx-1 text-[var(--fg-muted)]">·</span>
-            <span className="text-xs text-[var(--fg-muted)]">{time}</span>
+            <span className="text-[12px] leading-[1.2] text-[var(--fg-muted)]">{time}</span>
           </figcaption>
-          <p className="mt-1 text-sm font-medium text-[var(--fg-soft)]">
+          <p className="mt-px text-[12px] font-medium leading-[1.3] tracking-[0.02em] text-[var(--fg-soft)]">
             {description}
           </p>
         </div>

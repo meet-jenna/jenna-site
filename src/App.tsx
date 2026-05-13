@@ -4,7 +4,6 @@ import { Hero } from '@/components/sections/Hero'
 import { BentoGrid } from '@/components/sections/BentoGrid'
 import { Customize } from '@/components/sections/Customize'
 import { Savings } from '@/components/sections/Savings'
-import { Pricing } from '@/components/sections/Pricing'
 import { Finale } from '@/components/sections/Finale'
 
 export default function App() {
@@ -15,7 +14,6 @@ export default function App() {
       <BentoGrid />
       <Customize />
       <Savings />
-      <Pricing />
       <Finale />
       <Footer />
     </>

@@ -34,7 +34,7 @@
   /* Section rotation — strict canvas ↔ cloud alternation.
      Sections call --bg / --bg-contrast / --bg-paper directly:
        Hero, Proof, Savings, Finale → --bg / --bg-paper (canvas)
-       Bento, Customize, Pricing     → --bg-contrast (cloud) */
+       Bento, Customize              → --bg-contrast (cloud) */
   --bg-contrast: #f6f6f6;
   --bg-paper: #ffffff;
 
@@ -110,12 +110,13 @@
   --r-xl: 36px;       /* cards (default) */
   --r-2xl: 60px;      /* large feature surfaces */
   --r-pill: 99px;     /* buttons, pills */
-  /* Nav radii — the floating header is a "chip-inside-pill" island.
-     The outer container sweeps with --r-nav, and every chip inside
-     (brand, theme toggle, ghost CTA, link hover) shares --r-nav-chip
-     so the bar reads as one nested-radius system. The two are tuned
-     as a pair (~2:1 outer:inner) — change them together. */
-  --r-nav: 38px;
+  /* Nav radii — the floating header and every chip inside it
+     (brand, theme toggle, ghost CTA, link hover) share a single
+     20px radius so the bar reads as one flush-radius system that
+     matches the hero "Book a demo" CTA. Keep the two tokens equal
+     unless you want to reintroduce the nested chip-inside-pill
+     look (outer ~2× inner). */
+  --r-nav: 20px;
   --r-nav-chip: 20px;
 
   /* ─── Type — Quicksand ────────────────────────────────────────
@@ -561,14 +562,15 @@
        .nav-bar   — fixed full-width gutter wrapper (pointer-events
                     pass through the side gutters)
        .nav-inner — the actual island: translucent white surface,
-                    --r-nav radius (28px), hairline border, soft shadow
+                    --r-nav radius (20px), hairline border, soft shadow
 
-     Inside the island the pattern is "small chip inside larger pill":
+     Inside the island every slot shares --r-nav-chip (20px) so
+     the bar reads as one flush-radius system matching the hero
+     "Book a demo" CTA:
        .brand         — naked logo on the left
        .nav-links     — plain text in the middle
        .theme-toggle  — square --r-nav-chip chip
        .nav-cta       — ghost outline button at --r-nav-chip
-     The 20/38 nested radii are the signature of the reference.
      ---------------------------------------------------------- */
   .nav-bar {
     position: fixed;
@@ -1722,233 +1724,6 @@
   }
 
   /* ----------------------------------------------------------
-     Section 6 — Pricing (Receipt) — ported verbatim
-     ---------------------------------------------------------- */
-  /* Pricing — Canvas White section; receipt card is Cloud Gray. */
-  .pricing {
-    position: relative;
-    padding: 7rem 1.5rem 8rem;
-    isolation: isolate;
-    overflow: hidden;
-    background: var(--bg);
-  }
-
-  .pricing-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  .pricing-glow {
-    position: absolute;
-    bottom: 5%;
-    right: 50%;
-    transform: translateX(50%);
-    width: 800px;
-    height: 600px;
-    border-radius: 50%;
-    filter: blur(160px);
-    opacity: 0.32;
-    background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
-  }
-
-  /* Receipt — Cloud Gray card on Canvas White section, 36px Shares
-     card radius, 32px padding. */
-  .receipt {
-    position: relative;
-    max-width: 620px;
-    margin: 0 auto 3.5rem;
-    padding: 32px;
-    background: var(--surface-2);
-    border: none;
-    border-radius: var(--r-xl);
-    isolation: isolate;
-    box-shadow: var(--shadow-xl);
-  }
-
-  .receipt-glow {
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: -1;
-    background: radial-gradient(700px 200px at 50% 0%, var(--accent-glow), transparent 65%);
-    opacity: 0.55;
-  }
-
-  .receipt-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1.4rem;
-    border-bottom: 1px dashed var(--hairline);
-    flex-wrap: wrap;
-  }
-
-  .receipt-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-muted);
-  }
-
-  .receipt-tag-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent-glow);
-  }
-
-  .receipt-meta {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--fg-soft);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-
-  .receipt-lines {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .receipt-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--hairline);
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .receipt-line:last-child {
-    border-bottom: 0;
-  }
-
-  .receipt-label {
-    color: var(--fg-soft);
-  }
-
-  .receipt-value {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.4rem;
-    color: var(--fg);
-    white-space: nowrap;
-  }
-
-  /* Receipt amount — was huge serif italic violet; now bold sans violet
-     tabular. The dollar amounts are the receipt's anchor. */
-  .receipt-value em {
-    font-family: inherit;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 22px;
-    letter-spacing: 0;
-    color: var(--accent);
-    line-height: 1;
-  }
-
-  .receipt-unit {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--fg-soft);
-    font-style: normal;
-    letter-spacing: 0.02em;
-  }
-
-  .receipt-line-charge .receipt-label {
-    color: var(--fg);
-    font-weight: 700;
-  }
-
-  .receipt-line-zero .receipt-label {
-    color: var(--fg-faint);
-    text-decoration: line-through;
-    text-decoration-color: var(--hairline);
-    text-decoration-thickness: 1px;
-  }
-
-  /* "Free" zero-line label — was serif italic; now bold sans faint. */
-  .receipt-zero {
-    font-family: inherit;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--fg-faint);
-    letter-spacing: 0.02em;
-  }
-
-  .receipt-line-total {
-    margin-top: 0.5rem;
-    padding-top: 1.3rem;
-    border-top: 1px dashed var(--hairline);
-    border-bottom: 0 !important;
-  }
-
-  .receipt-line-total .receipt-label {
-    color: var(--fg);
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: 0.02em;
-  }
-
-  .receipt-line-total .receipt-value em {
-    font-size: 36px;
-  }
-
-  .receipt-line-total .receipt-unit {
-    font-size: 14px;
-    color: var(--fg-soft);
-  }
-
-  .receipt-foot {
-    margin: 1.6rem 0 0;
-    padding-top: 1.4rem;
-    border-top: 1px dashed var(--hairline);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-soft);
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  .receipt-foot strong {
-    color: var(--fg);
-    font-weight: 700;
-  }
-
-  .pricing-cta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.85rem;
-    text-align: center;
-  }
-
-  .pricing-cta-note {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-soft);
-  }
-
-  /* ----------------------------------------------------------
      Section 7 — Final CTA (Finale) — ported verbatim
      ---------------------------------------------------------- */
   .finale {
@@ -2158,16 +1933,28 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.4rem;
+    gap: 1.75rem;
     padding-bottom: 2.5rem;
     border-bottom: 1px solid var(--footer-divider);
   }
 
-  /* .footer-brand — uses var(--ink) so it stays high-contrast against
-     the footer surface in both themes (white in light, near-black in dark). */
+  /* .footer-brand — wraps the white Jenna wordmark logo. The footer
+     surface is always dark, so we pin the white variant directly here
+     (no theme flip needed). Vertical padding gives the wordmark room
+     so descenders/ascenders don't touch the rows above or below. */
   .footer-brand {
-    font-size: 18px;
-    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    padding: 1.5rem 0 0.5rem;
+  }
+
+  .footer-logo {
+    display: block;
+    height: 44px;
+    width: auto;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
   .footer-tag {
@@ -2233,7 +2020,7 @@
     max-width: var(--page-max-width);
     margin: 1.4rem auto 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     font-size: 12px;
@@ -2288,8 +2075,9 @@
     background: radial-gradient(closest-side, var(--accent-glow), transparent 70%);
   }
 
-  /* ROI calculator card — Cloud Gray on Canvas, 36px Shares card radius,
-     32px padding, single elevation token. */
+  /* ROI calculator card — flat Cloud Gray on Canvas, 36px Shares card
+     radius, 32px padding. Matches the bento card surface treatment
+     (no shadow, no halo glow) so it reads as part of the same family. */
   .calc {
     position: relative;
     max-width: 880px;
@@ -2301,18 +2089,11 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    box-shadow: var(--shadow-xl);
     isolation: isolate;
   }
 
   .calc-glow {
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: -1;
-    background: radial-gradient(700px 250px at 50% 0%, rgba(31, 31, 31, 0.06), transparent 65%);
-    opacity: 0.6;
+    display: none;
   }
 
   .calc-result {
@@ -2651,7 +2432,8 @@
      selector switched from aria-selected="true" to
      data-state="active" to match Radix's contract.
      ---------------------------------------------------------- */
-  /* Customize — Canvas White section; config + promise cards are Cloud Gray.
+  /* Customize — Cloud Gray section per Shares canvas ↔ cloud rotation;
+     config card flips to Canvas White inside (see .config below).
      Vertical padding ramps smoothly across viewports via clamp so we
      don't get an abrupt jump from desktop (7rem) to mobile (5rem). */
   .customize {
@@ -2659,7 +2441,7 @@
     padding: clamp(4.5rem, 8vw, 7rem) 1.5rem;
     isolation: isolate;
     overflow: hidden;
-    background: var(--bg);
+    background: var(--bg-contrast);
   }
 
   .customize-bg {
@@ -4411,7 +4193,7 @@
      block to restore the full set.
 
      Small functional dot/avatar box-shadow halos (.brand-mark,
-     .card-tag-dot, .receipt-tag-dot, .config-rail-dot,
+     .card-tag-dot, .config-rail-dot,
      .timeline-dot, .memory-profile-avatar, .rule-avatar,
      .forward-jenna-avatar, .audio-avatar, .audio-waveform .bar.playhead)
      are NOT affected — those are inline brand accents on dots,
@@ -4428,8 +4210,6 @@
   .calc-glow,
   .customize-glow,
   .config-glow,
-  .pricing-glow,
-  .receipt-glow,
   .finale-glow,
   .finale-glow-a,
   .finale-glow-b,
@@ -4582,23 +4362,6 @@
   .handoff-route-line {
     width: 100%;
   }
-}
-
-/* Pricing responsive */
-@media (max-width: 540px) {
-  .pricing {
-    padding: 5rem 1.5rem 6rem;
-  }
-  .receipt {
-    padding: 1.85rem 1.6rem 2rem;
-    border-radius: var(--r-lg);
-  }
-  .receipt-line {
-    font-size: 0.9rem;
-    padding: 0.8rem 0;
-  }
-  .receipt-value em { font-size: 1.4rem; }
-  .receipt-line-total .receipt-value em { font-size: 1.8rem; }
 }
 
 /* Finale + Footer responsive */

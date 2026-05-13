@@ -51,27 +51,32 @@ const ToastMark = () => (
   />
 )
 
-// Source PNG has a square black canvas around the green circle. Scaling
-// up + object-cover crops the black border out so the green fills the
-// rounded tile cleanly. Swap to a transparent-canvas PNG later if needed.
 const CloverMark = () => (
   <img
     src="/assets/logos/pos/clover.png"
     alt=""
     aria-hidden="true"
-    className="h-full w-full origin-center scale-[1.22] select-none object-cover"
+    className="h-full w-full select-none object-cover"
     draggable={false}
   />
 )
 
+// Inline SVG instead of a PNG — the Square mark is three nested
+// rounded-squares, trivial to author cleanly. This keeps the mark
+// pixel-perfect at any tile size and matches the edge-to-edge "app
+// icon" feel of toast.png and the new clover.png.
 const SquareMark = () => (
-  <img
-    src="/assets/logos/pos/square.png"
-    alt=""
+  <svg
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-full w-full select-none"
     aria-hidden="true"
-    className="h-full w-full select-none object-cover"
-    draggable={false}
-  />
+  >
+    <rect width="100" height="100" fill="#000" />
+    <rect x="12.5" y="12.5" width="75" height="75" rx="11" fill="#fff" />
+    <rect x="22.5" y="22.5" width="55" height="55" rx="7" fill="#000" />
+    <rect x="36" y="36" width="28" height="28" rx="3.5" fill="#fff" />
+  </svg>
 )
 
 const JennaMark = () => (
