@@ -1,5 +1,3 @@
-import animate from 'tailwindcss-animate'
-
 /** @type {import('tailwindcss').Config} */
 export default {
   // Dark theme is opt-in via [data-theme="dark"], applied by ThemeToggle
@@ -261,6 +259,6 @@ export default {
     },
   },
 
-  plugins: [animate],
+  plugins: [],
 }
 

@@ -445,10 +445,6 @@
     will-change: transform;
   }
 
-  .btn-lg {
-    padding: 18px 28px;
-    font-size: 17px;
-  }
 
   /* .btn-primary — Shares Primary Violet Button. Filled brand violet
      (#1c00ff), white text, 99px pill, no shadow by default (Shares
@@ -466,37 +462,6 @@
     border-color: var(--accent-bright);
   }
 
-  /* .btn-soft — Shares Light Ghost Button. Transparent background,
-     Carbon Gray text + Stone Gray border. Used for secondary actions
-     on light backgrounds. Padding matches Shares ghost spec
-     (12px vertical / 32px horizontal). */
-  .btn-soft {
-    padding: 12px 32px;
-    background: transparent;
-    color: var(--fg-muted);
-    border: 1px solid var(--hairline-strong);
-  }
-
-  .btn-soft:hover {
-    transform: translateY(-1px);
-    color: var(--fg);
-    border-color: var(--fg-muted);
-  }
-
-  /* .btn-ghost — Shares Text Link Button. No background, no radius
-     specified by spec (effectively square). Color in Carbon Gray /
-     Slate Gray, used for "learn more"-style inline actions. */
-  .btn-ghost {
-    color: var(--fg-muted);
-    background: transparent;
-    border: 1px solid transparent;
-  }
-
-  .btn-ghost:hover {
-    color: var(--fg);
-    background: var(--overlay-2);
-    transform: translateY(-1px);
-  }
 
   .btn-arrow {
     width: 16px;
@@ -504,49 +469,10 @@
     transition: transform 0.18s var(--ease);
   }
 
-  .btn:hover .btn-arrow,
-  .border-beam-btn:hover .btn-arrow {
+  .btn:hover .btn-arrow{
     transform: translateX(2px);
   }
 
-  /* Hero "Book a demo" CTA — Shares Primary Violet Button.
-     Visually identical to .btn-primary (filled violet pill); kept as
-     a separate class so the Hero can swap aesthetics later without
-     renaming. Padding matches Shares' main CTA: 16/24px. */
-  .border-beam-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55em;
-    padding: 16px 24px;
-    border-radius: var(--r-pill);
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    background: var(--accent);
-    color: var(--ink-on-accent);
-    border: 1px solid var(--accent);
-    transition:
-      transform 0.18s var(--ease),
-      background 0.18s var(--ease),
-      border-color 0.18s var(--ease);
-  }
-
-  .border-beam-btn:hover {
-    transform: translateY(-1px);
-    background: var(--accent-bright);
-    border-color: var(--accent-bright);
-  }
-
-  .border-beam-btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
 
   /* ----------------------------------------------------------
      Nav — always-floating, General-Intelligence-style island.
@@ -665,39 +591,6 @@
     gap: 3.5rem;
   }
 
-  /* Live pill — Canvas White chip on the Cloud Gray hero wallpaper. */
-  .live-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 8px 14px 8px 12px;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-muted);
-    background: var(--bg);
-    border: none;
-    border-radius: var(--r-pill);
-    margin-bottom: 1.6rem;
-    transition:
-      border-color 0.2s var(--ease),
-      color 0.2s var(--ease);
-  }
-
-  .live-pill:hover {
-    border-color: var(--hairline-strong);
-    color: var(--fg);
-  }
-
-  .live-dot {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--live);
-    box-shadow: 0 0 0 0 var(--live-glow);
-    animation: live-dot-pulse 1.8s var(--ease) infinite;
-  }
 
   /* Hero title — Quicksand display scale, weight 700.
      Quicksand at 42–72px wants slightly negative tracking to feel
@@ -764,24 +657,6 @@
     letter-spacing: 0.02em;
   }
 
-  /* Brand mark — uses the violet bright→deep gradient. Drives every
-     "Jenna" avatar / brand-mark on the page. */
-  .brand-mark {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
-    display: grid;
-    place-items: center;
-    box-shadow: 0 0 22px var(--accent-glow);
-  }
-
-  .brand-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--ink-on-accent);
-  }
 
   .brand-logo {
     display: block;
@@ -996,9 +871,8 @@
     margin: 0 auto;
   }
 
-  .bento-1x { grid-column: span 1; }
   .bento-2x { grid-column: span 2; }
-  .bento-3x { grid-column: span 3; }
+
   .bento-4x { grid-column: span 4; }
 
   /* Bento card — Cloud Gray on Canvas White section, 36px Shares
@@ -1060,26 +934,6 @@
     height: 18px;
   }
 
-  /* Eyebrow tag inside cards — uppercase caption, slate text, violet dot. */
-  .card-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-    align-self: flex-start;
-  }
-
-  .card-tag-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent-glow);
-  }
 
   /* Card title — Shares subheading scale (20px) for 1x cards,
      heading-sm (26px) for feature cards. Weight 700, +0.02em. */
@@ -1111,109 +965,6 @@
     max-width: 38ch;
   }
 
-  /* 24/7 clock — was serif italic; now bold Quicksand in violet so the
-     numerals still read as the visual anchor. Tracking neutralized
-     since wide tracking looks awkward on stand-alone digits. */
-  .card-clock {
-    margin-top: auto;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.3rem;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 3rem;
-    letter-spacing: 0;
-    line-height: 1;
-    color: var(--accent);
-  }
-
-  .card-clock-divider {
-    color: var(--accent);
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  /* POS ticket — Canvas White inner panel on the Cloud Gray bento
-     card. Tabular content keeps its own micro-typography (no body
-     tracking on numerics). */
-  .pos-ticket {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    padding: 16px 18px;
-    background: var(--bg);
-    border: none;
-    border-radius: var(--r-md);
-    font-size: 14px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .pos-head {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
-
-  .pos-items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .pos-items li {
-    display: grid;
-    grid-template-columns: 32px 1fr auto;
-    gap: 0.6rem;
-    color: var(--fg);
-    align-items: baseline;
-  }
-
-  .pos-items li > span:first-child {
-    color: var(--fg-soft);
-  }
-
-  .pos-typing {
-    color: var(--fg-muted) !important;
-  }
-
-  .cursor-blink {
-    display: inline-block;
-    width: 6px;
-    height: 0.9em;
-    background: var(--accent);
-    vertical-align: -2px;
-    margin-left: 2px;
-    animation: blink 1s steps(2) infinite;
-  }
-
-  .pos-pending {
-    color: var(--fg-soft);
-  }
-
-  .pos-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.55rem;
-    border-top: 1px dashed var(--hairline);
-    font-size: 14px;
-  }
-
-  .pos-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--live);
-    font-weight: 500;
-  }
 
   /* Shared status-dot — neutral resting state, --status-dot-live for active. */
   .status-dot {
@@ -1231,16 +982,6 @@
     background: var(--live);
     box-shadow: 0 0 8px var(--live-glow);
     animation: live-dot-pulse 1.8s var(--ease) infinite;
-  }
-
-  /* POS total — was serif italic violet; now bold sans violet so the
-     dollar amount still anchors the receipt visually. */
-  .pos-total {
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0;
-    color: var(--accent);
   }
 
   /* Multi-line lanes — Canvas White inner panel on bento cloud card. */
@@ -1503,62 +1244,6 @@
     animation: memory-pulse 1.8s ease-in-out infinite;
   }
 
-  /* SMS screenshot — graphic, exempt. Drop-shadow uses Shares' single
-     elevation token (rgba(0,0,0,0.12)) for the lifted-image feel. */
-  .sms-screenshot {
-    margin: auto 0 0;
-    padding: 0;
-    align-self: flex-start;
-    max-width: 100%;
-  }
-
-  .sms-screenshot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.12));
-  }
-
-  /* Payment card */
-  .pay-row {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  /* Pay card — Canvas White inner panel on cloud bento card. */
-  .pay-card {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 14px;
-    background: var(--bg);
-    border: none;
-    border-radius: var(--r-md);
-    font-size: 14px;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-
-  .pay-card-tag {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--fg-soft);
-    letter-spacing: 0.12em;
-  }
-
-  .pay-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--live);
-  }
 
   /* Smart handoff card — a small live call summary before transfer. */
   .handoff-card {
@@ -2009,15 +1694,6 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .footer-ping {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--fg-faint);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
 
   /* ----------------------------------------------------------
      Section 5 — Savings (ROI calculator) — ported verbatim
@@ -2341,65 +2017,6 @@
     max-width: 60ch;
   }
 
-  /* Benefits — Cloud Gray cards on Canvas section, 36px Shares card radius. */
-  .benefits {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--element-gap);
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-  }
-
-  .benefit {
-    padding: 32px;
-    background: var(--surface-2);
-    border: none;
-    border-radius: var(--r-xl);
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
-  }
-
-  .benefit:hover {
-    border-color: var(--hairline-strong);
-    transform: translateY(-2px);
-  }
-
-  .benefit-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--r-md);
-    display: grid;
-    place-items: center;
-    background: var(--bg);
-    border: none;
-    color: var(--fg-muted);
-    margin-bottom: 0.3rem;
-  }
-
-  .benefit-icon svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .benefit-title {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin: 0;
-    color: var(--fg);
-    line-height: 1.43;
-  }
-
-  .benefit-body {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-soft);
-    margin: 0;
-    line-height: 1.5;
-  }
 
   /* ----------------------------------------------------------
      Section 4 — Customize (Config panel + Promises) — ported
@@ -3099,646 +2716,10 @@
   .voice-card:nth-child(4) .voice-wave span:nth-child(11) { height: 40%; }
   .voice-card:nth-child(4) .voice-wave span:nth-child(12) { height: 30%; }
 
-  /* Promise cards — Cloud Gray on Canvas White section, 36px Shares
-     card radius, 32px padding. */
-  .promises {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--element-gap);
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-  }
-
-  .promise {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 32px;
-    background: var(--surface-2);
-    border: none;
-    border-radius: var(--r-xl);
-    overflow: hidden;
-    min-height: 280px;
-  }
-
-  .promise-head {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .promise-eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
-
-  .promise-title {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.33;
-    color: var(--fg);
-    margin: 0;
-  }
-
-  /* <em> in promise titles — bold violet sans, no italic. */
-  .promise-title em {
-    font-family: inherit;
-    font-style: normal;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .promise-note {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-soft);
-    line-height: 1.5;
-    margin: 0;
-    margin-top: auto;
-  }
-
-  /* Timeline */
-  .timeline {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
-    position: relative;
-    margin-top: auto;
-  }
-
-  .timeline::before {
-    content: "";
-    position: absolute;
-    top: 11px;
-    left: 12px;
-    right: 12px;
-    height: 1px;
-    background: var(--hairline);
-    z-index: 0;
-  }
-
-  .timeline-step {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-    z-index: 1;
-  }
-
-  .timeline-dot {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--hairline-strong);
-    display: grid;
-    place-items: center;
-    position: relative;
-  }
-
-  .timeline-step.is-done .timeline-dot {
-    background: var(--accent);
-    border-color: transparent;
-    box-shadow: 0 0 12px -2px var(--accent-glow);
-  }
-
-  .timeline-step.is-done .timeline-dot::after {
-    content: "";
-    width: 8px;
-    height: 4px;
-    border-left: 2px solid var(--ink-on-accent);
-    border-bottom: 2px solid var(--ink-on-accent);
-    transform: rotate(-45deg) translate(1px, -1px);
-  }
-
-  .timeline-step.is-current .timeline-dot {
-    background: var(--bg);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px var(--card-tint), 0 0 16px var(--accent-glow);
-    animation: pulse-current 2s var(--ease) infinite;
-  }
-
-  .timeline-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .timeline-day {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
-
-  .timeline-step.is-current .timeline-day {
-    color: var(--accent);
-  }
-
-  .timeline-text {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg);
-    line-height: 1.5;
-  }
-
-  /* Forwarding flow */
-  .forward-flow {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 0.65rem;
-    align-items: center;
-  }
-
-  /* Forward card — Canvas White on cloud config card. */
-  .forward-card {
-    padding: 14px 16px;
-    background: var(--bg);
-    border: none;
-    border-radius: var(--r-md);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-  }
-
-  .forward-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
-
-  /* Forward number — was serif italic; now bold sans tabular. */
-  .forward-number {
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: 0;
-    color: var(--fg);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* Jenna's forwarding card — Canvas White with a violet wash. */
-  .forward-card-jenna {
-    background:
-      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 65%),
-      var(--bg);
-    border-color: var(--accent);
-  }
-
-  .forward-jenna {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--fg);
-  }
-
-  .forward-jenna-avatar {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
-    display: grid;
-    place-items: center;
-    box-shadow: 0 0 14px -4px var(--accent-glow);
-  }
-
-  .forward-jenna-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--ink-on-accent);
-  }
-
-  .forward-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: var(--accent);
-    position: relative;
-  }
-
-  .forward-arrow svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .forward-arrow span {
-    position: absolute;
-    inset: -8px -4px;
-    border-radius: 12px;
-    background: radial-gradient(closest-side, var(--accent-glow), transparent);
-    opacity: 0.4;
-    z-index: -1;
-    filter: blur(4px);
-  }
-
-  .forward-arrow small {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
-
-  /* ----------------------------------------------------------
-     Section 3 — Proof (Audio demo + Stats + Manifesto) — verbatim
-     ---------------------------------------------------------- */
-  .proof {
-    position: relative;
-    padding: 7rem 1.5rem 8rem;
-    isolation: isolate;
-    overflow: hidden;
-    background: var(--bg-paper);
-  }
-
-  .proof-bg {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  .proof-glow {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1100px;
-    height: 700px;
-    border-radius: 50%;
-    filter: blur(160px);
-    opacity: 0.25;
-    background: radial-gradient(closest-side, var(--accent-glow) 0%, transparent 70%);
-  }
-
-  /* Audio demo card — Cloud Gray on Canvas section, 36px Shares card
-     radius, 32px padding, single elevation token (no layered shadows). */
-  .audio-demo {
-    position: relative;
-    margin: 0 auto 5rem;
-    max-width: 760px;
-    padding: 32px;
-    background: var(--surface-2);
-    border: none;
-    border-radius: var(--r-xl);
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-    isolation: isolate;
-    box-shadow: var(--shadow-xl);
-  }
-
-  .audio-glow {
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.6s var(--ease);
-    background: radial-gradient(700px 250px at 50% 0%, var(--accent-glow), transparent 70%);
-  }
-
-  .audio-demo[data-state="playing"] .audio-glow {
-    opacity: 1;
-  }
-
-  .audio-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .audio-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    text-align: left;
-  }
-
-  /* Audio avatar — brand-mark gradient (violet bright→deep), no inset
-     highlight (Shares: minimal depth). */
-  .audio-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
-    display: grid;
-    place-items: center;
-    box-shadow: 0 0 22px var(--accent-glow);
-    flex-shrink: 0;
-  }
-
-  .avatar-mark {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--ink-on-accent);
-  }
-
-  .audio-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-    margin-bottom: 0.25rem;
-  }
-
-  .audio-title {
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--fg);
-  }
-
-  /* Audio time — was serif italic; now bold sans tabular. */
-  .audio-time {
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 17px;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0;
-    color: var(--fg-muted);
-    white-space: nowrap;
-  }
-
-  .audio-time-divider {
-    color: var(--fg-faint);
-    margin: 0 0.25rem;
-  }
 
   #audioCurrent {
     color: var(--accent);
   }
-
-  .audio-waveform {
-    position: relative;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    cursor: pointer;
-    user-select: none;
-    padding: 0 2px;
-  }
-
-  /* Unplayed bar — Canvas White on the Cloud Gray audio-demo card so
-     the waveform reads at low intensity but stays visible. Played
-     bars override to violet, playhead bar to ink. */
-  .audio-waveform .bar {
-    flex: 1;
-    min-width: 2px;
-    height: 30%;
-    background: var(--bg);
-    border-radius: 2px;
-    transition: background 0.05s linear, transform 0.15s var(--ease);
-  }
-
-  .audio-waveform .bar.played {
-    background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
-  }
-
-  .audio-waveform .bar.playhead {
-    background: var(--fg);
-    transform: scaleY(1.08);
-    box-shadow: 0 0 12px var(--accent-glow);
-  }
-
-  .audio-demo[data-state="playing"] .audio-waveform .bar.playhead {
-    animation: playhead-glow 0.9s var(--ease) infinite alternate;
-  }
-
-  .audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  /* Play button — Shares Primary Violet pill, 99px radius. Inherits
-     button proportions from the spec: 12/16 padding works at this size. */
-  .audio-play {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 12px 20px 12px 14px;
-    background: var(--accent);
-    color: var(--ink-on-accent);
-    border-radius: var(--r-pill);
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 0.02em;
-    transition: transform 0.18s var(--ease), background 0.18s var(--ease);
-  }
-
-  .audio-play:hover {
-    background: var(--accent-bright);
-    transform: translateY(-1px);
-  }
-
-  .audio-play .ctrl-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .audio-play .ctrl-icon-pause { display: none; }
-  .audio-demo[data-state="playing"] .audio-play .ctrl-icon-play { display: none; }
-  .audio-demo[data-state="playing"] .audio-play .ctrl-icon-pause { display: block; }
-
-  .audio-hint {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--fg-soft);
-    line-height: 1.5;
-  }
-
-  .audio-transcript {
-    list-style: none;
-    margin: 0.6rem 0 0;
-    padding: 1.1rem 0 0;
-    border-top: 1px dashed var(--hairline);
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    text-align: left;
-  }
-
-  .audio-transcript li {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: 0.85rem;
-    align-items: baseline;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-    color: var(--fg-faint);
-    transition: color 0.3s var(--ease);
-  }
-
-  .audio-transcript li .who {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg-faint);
-    font-weight: 700;
-    transition: color 0.3s var(--ease);
-  }
-
-  .audio-transcript li.read {
-    color: var(--fg-muted);
-  }
-
-  .audio-transcript li.active {
-    color: var(--fg);
-  }
-
-  .audio-transcript li.active .who {
-    color: var(--accent);
-  }
-
-  /* Stats row — page-max-width container, 24px element gap. */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--element-gap);
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-  }
-
-  /* Stat card — Cloud Gray on Canvas section, 36px Shares card radius,
-     32px padding. Hairline border replaces the gradient depth. */
-  .stat {
-    position: relative;
-    padding: 32px;
-    background: var(--surface-2);
-    border: none;
-    border-radius: var(--r-xl);
-    text-align: left;
-    transition: border-color 0.3s var(--ease);
-  }
-
-  .stat:hover {
-    border-color: var(--hairline-strong);
-  }
-
-  .stat-feature {
-    background:
-      radial-gradient(circle at 100% 0%, var(--card-tint), transparent 55%),
-      var(--surface-2);
-  }
-
-  .stat-feature::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: var(--card-edge);
-    opacity: 0.6;
-  }
-
-  /* Stat number — was serif italic; now bold sans, with the
-     emphasized digit picking up brand violet. */
-  .stat-num {
-    display: flex;
-    align-items: baseline;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: clamp(4rem, 9vw, 6rem);
-    line-height: 1;
-    letter-spacing: 0;
-    color: var(--fg);
-    margin-bottom: 0.7rem;
-  }
-
-  .stat-num em {
-    font-style: normal;
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  .stat-unit {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 0.5em;
-    letter-spacing: 0;
-    color: var(--fg-muted);
-    margin-left: 0.05em;
-    align-self: center;
-  }
-
-  .stat-label {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--fg);
-    margin-bottom: 0.65rem;
-  }
-
-  .stat-detail {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-    color: var(--fg-soft);
-    margin: 0;
-    max-width: 32ch;
-  }
-
-  /* Manifesto — bold Quicksand display. */
-  .manifesto {
-    margin: 6rem auto 0;
-    max-width: 22ch;
-    text-align: center;
-    font-family: inherit;
-    font-size: clamp(2rem, 5.5vw, 4rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: var(--tracking-display);
-    color: var(--fg);
-  }
-
-  .manifesto em {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  /* ----------------------------------------------------------
-     Hero split layout
-       Desktop (≥960px): two columns — copy left, iPhone right.
-       Below 960px the layout collapses to a single centered column
-       so the iPhone sits beneath the hero copy.
-     ---------------------------------------------------------- */
-  .hero-inner.hero-inner--legacy { /* placeholder — kept for selector specificity, no-op */ }
 
   /* Hero copy column — stacks the title, sub, CTA, and trust row.
      On mobile the parent `.hero-inner` centers everything; on desktop
@@ -3751,42 +2732,6 @@
     max-width: 720px;
   }
 
-  /* Trust row — three highlight stats under the CTA. Styles re-added
-     here (the original `.trust-row` block was lost in the migration).
-     Centers on mobile; aligns left under the desktop split layout. */
-  .trust-row {
-    list-style: none;
-    margin: 3rem 0 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem 2.5rem;
-  }
-
-  .trust-row li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-  }
-
-  .trust-num {
-    font-family: var(--font-sans);
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: var(--tracking-display);
-    color: var(--fg);
-  }
-
-  .trust-label {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--fg-soft);
-  }
 
   /* iPhone column — locks the mockup width on desktop and centers it
      in the column on smaller breakpoints. The iPhone component itself
@@ -4170,91 +3115,6 @@
     stroke-width: 2.4;
   }
 
-  /* Tap-to-Call rainbow CTA — Magic UI port (1:1 with vanilla styles.css).
-     Used by .phone-screen-btn inside the iPhone mockup. */
-  .rainbow-btn {
-    position: relative;
-    isolation: isolate;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    gap: 0.5rem;
-    height: 44px;
-    padding: 0 2rem;
-    font-size: 0.95rem;
-    font-weight: 500;
-    white-space: nowrap;
-    text-decoration: none;
-    cursor: pointer;
-    color: var(--rainbow-fg);
-    border: 0.125rem solid transparent;
-    border-radius: 0.75rem;
-    outline: none;
-    background:
-      linear-gradient(var(--rainbow-fill), var(--rainbow-fill)),
-      linear-gradient(
-        var(--rainbow-fill) 50%,
-        var(--rainbow-fill-fade) 80%,
-        transparent
-      ),
-      linear-gradient(
-        90deg,
-        var(--rainbow-color-1),
-        var(--rainbow-color-5),
-        var(--rainbow-color-3),
-        var(--rainbow-color-4),
-        var(--rainbow-color-2)
-      );
-    background-size: 200%;
-    background-clip: padding-box, border-box, border-box;
-    background-origin: border-box;
-    animation: rainbow 2s infinite linear;
-    transition: transform 0.18s var(--ease);
-  }
-
-  .rainbow-btn::before {
-    content: "";
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    z-index: -1;
-    width: 60%;
-    height: 20%;
-    transform: translateX(-50%);
-    background: linear-gradient(
-      90deg,
-      var(--rainbow-color-1),
-      var(--rainbow-color-5),
-      var(--rainbow-color-3),
-      var(--rainbow-color-4),
-      var(--rainbow-color-2)
-    );
-    background-size: 200%;
-    filter: blur(0.75rem);
-    animation: rainbow 2s infinite linear;
-  }
-
-  .rainbow-btn:hover  { color: var(--rainbow-fg); transform: translateY(-1px); }
-  .rainbow-btn:active { transform: translateY(0); }
-
-  .rainbow-btn:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--rainbow-color-3) 60%, transparent);
-  }
-
-  .rainbow-btn-icon {
-    display: inline-grid;
-    place-items: center;
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    pointer-events: none;
-  }
-
-  .rainbow-btn-icon svg {
-    width: 16px;
-    height: 16px;
-  }
 
   /* ----------------------------------------------------------
      Atmospheric violet glows — disabled.
@@ -4278,8 +3138,6 @@
   .glow-a,
   .glow-b,
   .features-glow,
-  .proof-glow,
-  .audio-glow,
   .savings-glow,
   .calc-glow,
   .customize-glow,
@@ -4287,8 +3145,7 @@
   .finale-glow,
   .finale-glow-a,
   .finale-glow-b,
-  .footer-glow,
-  .forward-arrow > span {
+  .footer-glow{
     display: none !important;
   }
 }
@@ -4375,15 +3232,12 @@
   .bento {
     grid-template-columns: repeat(2, 1fr);
   }
-  .bento-1x,
+  
   .bento-2x,
-  .bento-3x,
   .bento-4x {
     grid-column: span 2;
   }
-  .bento-1x:not(.bento-feature) {
-    grid-column: span 1;
-  }
+
   .bento-feature .card-title {
     font-size: 1.3rem;
   }
@@ -4416,11 +3270,9 @@
     grid-template-columns: 1fr;
     gap: 0.85rem;
   }
-  .bento-1x,
+  
   .bento-2x,
-  .bento-3x,
-  .bento-4x,
-  .bento-1x:not(.bento-feature) {
+  .bento-4x{
     grid-column: span 1;
   }
   .bento-card {
@@ -4472,13 +3324,6 @@
     flex-direction: column;
     gap: 0.6rem;
     text-align: center;
-  }
-}
-
-/* Savings (ROI) responsive */
-@media (max-width: 880px) {
-  .benefits {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -4564,9 +3409,7 @@
   .voice-grid {
     grid-template-columns: 1fr;
   }
-  .promises {
-    grid-template-columns: 1fr;
-  }
+
   .config-panel {
     gap: 1.3rem;
   }
@@ -4648,22 +3491,6 @@
     gap: 0.7rem;
   }
 
-  /* Promise timeline keeps its existing 2-up + no-rail treatment. */
-  .timeline {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  .timeline::before {
-    display: none;
-  }
-  .forward-flow {
-    grid-template-columns: 1fr;
-  }
-  .forward-arrow {
-    flex-direction: row;
-    transform: rotate(90deg);
-    justify-self: center;
-  }
 }
 
 @media (max-width: 420px) {
@@ -4686,39 +3513,6 @@
   }
 }
 
-/* Proof / audio-demo / stats responsive */
-@media (max-width: 880px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-  .stat {
-    padding: 1.85rem 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .audio-demo {
-    padding: 1.4rem;
-    border-radius: var(--r-lg);
-  }
-  .audio-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-  .audio-title { font-size: 1rem; }
-  .audio-transcript li {
-    grid-template-columns: 56px 1fr;
-    gap: 0.6rem;
-    font-size: 0.88rem;
-  }
-}
-
-@media (max-width: 540px) {
-  .proof {
-    padding: 5rem 1.25rem 6rem;
-  }
-}
 
 /* Hero split layout — desktop (≥960) puts the iPhone next to the copy.
    Below this, everything stacks centered (the default `.hero-inner`
@@ -4754,13 +3548,6 @@
     font-size: 18px;
   }
 
-  .trust-row {
-    justify-content: flex-start;
-  }
-
-  .trust-row li {
-    align-items: flex-start;
-  }
 
   .hero-phone {
     flex: 0 0 auto;
@@ -4777,12 +3564,6 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .rainbow-btn,
-  .rainbow-btn::before {
-    animation: none;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .nav-bar,
