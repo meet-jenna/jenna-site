@@ -1598,10 +1598,12 @@
     border-bottom: 1px solid var(--footer-divider);
   }
 
-  /* .footer-brand — wraps the white Jenna wordmark logo. The footer
-     surface is always dark, so we pin the white variant directly here
-     (no theme flip needed). Vertical padding gives the wordmark room
-     so descenders/ascenders don't touch the rows above or below. */
+  /* .footer-brand — wraps the Jenna wordmark logo. The footer surface
+     inverts with the theme (dark in light theme, light in dark theme),
+     so the logo variant flips opposite to the Nav: white logo on the
+     light-theme dark footer, blue logo on the dark-theme light footer.
+     Vertical padding gives the wordmark room so descenders/ascenders
+     don't touch the rows above or below. */
   .footer-brand {
     display: inline-flex;
     align-items: center;
@@ -1616,6 +1618,13 @@
     user-select: none;
     -webkit-user-drag: none;
   }
+
+  /* Footer logo variants are inverted relative to the Nav: light theme
+     shows the white logo (dark footer); dark theme shows the blue logo
+     (light footer). */
+  .footer-logo-dark { display: none; }
+  [data-theme="dark"] .footer-logo-light { display: none; }
+  [data-theme="dark"] .footer-logo-dark  { display: block; }
 
   .footer-tag {
     font-size: 16px;
@@ -3319,6 +3328,11 @@
   .footer-inner {
     gap: 1.1rem;
     padding-bottom: 2rem;
+  }
+  /* Extra breathing room above the wordmark on mobile so the logo
+     doesn't crowd the white notch directly above it. */
+  .footer-brand {
+    padding: 5rem 0 0.5rem;
   }
   .footer-base {
     flex-direction: column;

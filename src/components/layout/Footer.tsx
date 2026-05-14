@@ -1,5 +1,8 @@
-// Footer. The footer surface is always dark (var(--fg) — Ink Black),
-// so the brand uses the white Jenna logo regardless of active theme.
+// Footer. The footer surface is bound to var(--fg), so it auto-inverts
+// with the theme: dark footer in light theme → light footer in dark theme.
+// Both logo variants stay in markup; CSS toggles which is visible based on
+// the active [data-theme] on <html>. Note the variants are inverted vs the
+// Nav because the footer background inverts.
 
 export function Footer() {
   return (
@@ -9,9 +12,17 @@ export function Footer() {
       <div className="footer-inner">
         <a className="footer-brand" href="#" aria-label="Jenna home">
           <img
-            className="footer-logo"
+            className="footer-logo footer-logo-light"
             src="/assets/logos/jenna-logo-white.png"
             alt="Jenna"
+            width={1024}
+            height={300}
+          />
+          <img
+            className="footer-logo footer-logo-dark"
+            src="/assets/logos/jenna-logo-blue.png"
+            alt=""
+            aria-hidden="true"
             width={1024}
             height={300}
           />
