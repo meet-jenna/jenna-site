@@ -1054,6 +1054,47 @@
     color: var(--fg-muted);
   }
 
+  /* POS card — text on the left, diagram on the right. The bento-pos
+     card opts out of the default .bento-card column flow (icon → title
+     → body → diagram stacked) so the wide 4x card uses its horizontal
+     space instead of letting body text wrap narrow at top-left while
+     the right half sits empty. Mirrors the .memory-split pattern. */
+  .bento-pos {
+    gap: 0;
+  }
+
+  .pos-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 2rem;
+    align-items: stretch;
+    height: 100%;
+  }
+
+  .pos-split-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .pos-split-visual {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+  }
+
+  /* Diagram fills the right column instead of pinning to a fixed
+     260px height — lets the card stay visually balanced regardless
+     of how the text column flows. */
+  .pos-split-visual .pos-diagram {
+    margin-top: 0;
+    height: auto;
+    min-height: 260px;
+    flex: 1;
+  }
+
   /* Memory card — folder icon, shader visual + profile list */
   .memory-folder-icon svg {
     width: 20px;
@@ -3253,6 +3294,19 @@
 }
 
 @media (max-width: 720px) {
+  /* POS card stacks text + diagram vertically once the bento card is
+     too narrow to keep the diagram beside the copy. */
+  .pos-split {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .bento-pos {
+    gap: 16px;
+  }
+  .pos-split-visual .pos-diagram {
+    min-height: 220px;
+  }
+
   /* Memory card stacks visual + profiles vertically */
   .memory-split {
     grid-template-columns: 1fr;
@@ -3388,6 +3442,7 @@
     grid-template-columns: 1fr;
   }
   .config-tabs {
+    position: relative;
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -3400,6 +3455,46 @@
   }
   .config-tabs::-webkit-scrollbar {
     display: none;
+  }
+  /* Edge-fade affordance — the strip is wrapped (see ConfigPanel.tsx)
+     in a .config-tabs-shell so the gradients can sit above the
+     scrolling content without scrolling with it. */
+  .config-tabs-shell {
+    position: relative;
+    min-width: 0; /* let the wrapper shrink inside its grid track */
+    overflow: hidden; /* clip the fade pseudos to the strip's box */
+    border-bottom: 1px solid var(--hairline);
+  }
+  .config-tabs-shell .config-tabs {
+    border-bottom: 0;
+  }
+  .config-tabs-shell::before,
+  .config-tabs-shell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.18s var(--ease);
+  }
+  .config-tabs-shell::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg), rgba(255, 255, 255, 0));
+  }
+  .config-tabs-shell::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--bg), rgba(255, 255, 255, 0));
+  }
+  .config-tabs-shell[data-scroll="start"]::after,
+  .config-tabs-shell[data-scroll="middle"]::after {
+    opacity: 1;
+  }
+  .config-tabs-shell[data-scroll="middle"]::before,
+  .config-tabs-shell[data-scroll="end"]::before {
+    opacity: 1;
   }
   .config-rail-head {
     display: none;

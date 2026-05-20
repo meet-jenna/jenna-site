@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 
 import { cn } from '@/lib/utils'
@@ -25,6 +25,8 @@ const VOICES = [
 
 type VoiceId = (typeof VOICES)[number]['id']
 
+type TabId = 'schedule' | 'upsells' | 'transfers' | 'voice'
+
 const VoiceCheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none">
     <path d="M3 8.5l3 3 7-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -32,6 +34,7 @@ const VoiceCheckIcon = () => (
 )
 
 export function ConfigPanel() {
+  const [activeTab, setActiveTab] = useState<TabId>('schedule')
   const [activeDays, setActiveDays] = useState<Set<DayName>>(
     new Set<DayName>(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']),
   )
@@ -44,6 +47,57 @@ export function ConfigPanel() {
     loyalty: false,
   })
   const [voice, setVoice] = useState<VoiceId>('warm')
+  const tabListRef = useRef<HTMLDivElement | null>(null)
+  const tabShellRef = useRef<HTMLDivElement | null>(null)
+
+  // On mobile the tab strip turns into a horizontal scroller. When the
+  // user activates a tab, center it inside the strip so labels like
+  // "Transfer rules" / "Voice & personality" aren't clipped at the
+  // right edge. Scroll the tab list directly instead of using
+  // scrollIntoView so the page's vertical scroll position isn't
+  // affected.
+  useEffect(() => {
+    const list = tabListRef.current
+    if (!list) return
+    if (list.scrollWidth <= list.clientWidth) return
+    const active = list.querySelector<HTMLElement>('[data-state="active"]')
+    if (!active) return
+    const listRect = list.getBoundingClientRect()
+    const activeRect = active.getBoundingClientRect()
+    const delta =
+      activeRect.left - listRect.left - (listRect.width - activeRect.width) / 2
+    list.scrollTo({ left: list.scrollLeft + delta, behavior: 'smooth' })
+  }, [activeTab])
+
+  // Track the scroll position of the mobile tab strip so the CSS edge
+  // fade only appears where there's actually more content. This makes
+  // the clipped tab labels read as an intentional "scroll for more"
+  // affordance instead of a layout bug on first paint.
+  useEffect(() => {
+    const list = tabListRef.current
+    const shell = tabShellRef.current
+    if (!list || !shell) return
+
+    const update = () => {
+      const max = list.scrollWidth - list.clientWidth
+      if (max <= 1) {
+        shell.dataset.scroll = 'none'
+        return
+      }
+      const x = list.scrollLeft
+      if (x <= 1) shell.dataset.scroll = 'start'
+      else if (x >= max - 1) shell.dataset.scroll = 'end'
+      else shell.dataset.scroll = 'middle'
+    }
+
+    update()
+    list.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      list.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
 
   const toggleDay = (day: DayName) =>
     setActiveDays((prev) => {
@@ -57,44 +111,55 @@ export function ConfigPanel() {
     setRings((r) => Math.min(6, Math.max(1, r + delta)))
 
   return (
-    <Tabs.Root asChild defaultValue="schedule" orientation="vertical">
+    <Tabs.Root
+      asChild
+      value={activeTab}
+      onValueChange={(v) => setActiveTab(v as TabId)}
+      orientation="vertical"
+    >
       <div className="config" id="config">
         <div className="config-glow" aria-hidden="true" />
 
-        <Tabs.List className="config-tabs" aria-label="Jenna configuration">
-          <div className="config-rail-head">
-            <span className="config-rail-dot" aria-hidden="true" />
-            Configure Jenna
-          </div>
-          <Tabs.Trigger className="config-tab" value="schedule">
-            <span className="tab-num">01</span>
-            <span className="tab-meta">
-              <span className="tab-name">Schedule</span>
-              <span className="tab-hint">When Jenna picks up</span>
-            </span>
-          </Tabs.Trigger>
-          <Tabs.Trigger className="config-tab" value="upsells">
-            <span className="tab-num">02</span>
-            <span className="tab-meta">
-              <span className="tab-name">Upsells</span>
-              <span className="tab-hint">Specials, add-ons, promos</span>
-            </span>
-          </Tabs.Trigger>
-          <Tabs.Trigger className="config-tab" value="transfers">
-            <span className="tab-num">03</span>
-            <span className="tab-meta">
-              <span className="tab-name">Transfer rules</span>
-              <span className="tab-hint">When, why, to who</span>
-            </span>
-          </Tabs.Trigger>
-          <Tabs.Trigger className="config-tab" value="voice">
-            <span className="tab-num">04</span>
-            <span className="tab-meta">
-              <span className="tab-name">Voice &amp; personality</span>
-              <span className="tab-hint">Match your brand</span>
-            </span>
-          </Tabs.Trigger>
-        </Tabs.List>
+        <div className="config-tabs-shell" ref={tabShellRef}>
+          <Tabs.List
+            ref={tabListRef}
+            className="config-tabs"
+            aria-label="Jenna configuration"
+          >
+            <div className="config-rail-head">
+              <span className="config-rail-dot" aria-hidden="true" />
+              Configure Jenna
+            </div>
+            <Tabs.Trigger className="config-tab" value="schedule">
+              <span className="tab-num">01</span>
+              <span className="tab-meta">
+                <span className="tab-name">Schedule</span>
+                <span className="tab-hint">When Jenna picks up</span>
+              </span>
+            </Tabs.Trigger>
+            <Tabs.Trigger className="config-tab" value="upsells">
+              <span className="tab-num">02</span>
+              <span className="tab-meta">
+                <span className="tab-name">Upsells</span>
+                <span className="tab-hint">Specials, add-ons, promos</span>
+              </span>
+            </Tabs.Trigger>
+            <Tabs.Trigger className="config-tab" value="transfers">
+              <span className="tab-num">03</span>
+              <span className="tab-meta">
+                <span className="tab-name">Transfer rules</span>
+                <span className="tab-hint">When, why, to who</span>
+              </span>
+            </Tabs.Trigger>
+            <Tabs.Trigger className="config-tab" value="voice">
+              <span className="tab-num">04</span>
+              <span className="tab-meta">
+                <span className="tab-name">Voice &amp; personality</span>
+                <span className="tab-hint">Match your brand</span>
+              </span>
+            </Tabs.Trigger>
+          </Tabs.List>
+        </div>
 
         <div className="config-panels">
           <Tabs.Content className="config-panel" value="schedule">

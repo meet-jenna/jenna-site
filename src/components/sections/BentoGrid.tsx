@@ -1,3 +1,4 @@
+import { CallLines } from '@/components/widgets/CallLines'
 import { PosIntegrationDiagram } from '@/components/widgets/PosIntegrationDiagram'
 import { ShaderCard } from '@/components/widgets/ShaderCard'
 import { SmsAnimatedList } from '@/components/widgets/SmsAnimatedList'
@@ -28,18 +29,24 @@ export function BentoGrid() {
 
       <div className="bento" role="list">
         {/* Row 1 */}
-        <article className="bento-card bento-4x bento-feature" role="listitem">
-          <div className="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
-              <rect x="8" y="6" width="8" height="5" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M8 14.5h8M8 17.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </div>
-          <h3 className="card-title">Takes orders straight into your POS.</h3>
-          <p className="card-body">No manual entry. No missed tickets. Orders land hot and ready, the moment Jenna hangs up.</p>
+        <article className="bento-card bento-4x bento-feature bento-pos" role="listitem">
+          <div className="pos-split">
+            <div className="pos-split-text">
+              <div className="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                  <rect x="8" y="6" width="8" height="5" rx="0.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M8 14.5h8M8 17.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </div>
+              <h3 className="card-title">Takes orders straight into your POS.</h3>
+              <p className="card-body">No manual entry. No missed tickets. Orders land hot and ready, the moment Jenna hangs up.</p>
+            </div>
 
-          <PosIntegrationDiagram />
+            <div className="pos-split-visual">
+              <PosIntegrationDiagram />
+            </div>
+          </div>
         </article>
 
         {/* Row 2 */}
@@ -57,37 +64,8 @@ export function BentoGrid() {
           <h3 className="card-title">Handles unlimited calls at once.</h3>
           <p className="card-body">Friday rush, holiday weekend, brunch. Every line is Jenna. Every caller gets answered.</p>
 
-          {/* Multi-line visualization */}
-          <div className="lines" aria-hidden="true">
-            <div className="line">
-              <div className="line-name">Line 01</div>
-              <div className="line-wave">
-                <span /><span /><span /><span /><span /><span /><span /><span />
-              </div>
-              <div className="line-time">0:42</div>
-            </div>
-            <div className="line">
-              <div className="line-name">Line 02</div>
-              <div className="line-wave">
-                <span /><span /><span /><span /><span /><span /><span /><span />
-              </div>
-              <div className="line-time">1:18</div>
-            </div>
-            <div className="line">
-              <div className="line-name">Line 03</div>
-              <div className="line-wave">
-                <span /><span /><span /><span /><span /><span /><span /><span />
-              </div>
-              <div className="line-time">0:09</div>
-            </div>
-            <div className="line line-more">
-              <div className="line-name">Line 04 — 12</div>
-              <div className="line-wave">
-                <span /><span /><span /><span /><span /><span /><span /><span />
-              </div>
-              <div className="line-time">+9</div>
-            </div>
-          </div>
+          {/* Multi-line visualization — real ticking timers per line */}
+          <CallLines />
         </article>
 
         {/* Row 3 — Memory card (shader stubbed; real mount lands in 2.10) */}

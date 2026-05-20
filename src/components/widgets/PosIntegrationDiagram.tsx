@@ -61,22 +61,14 @@ const CloverMark = () => (
   />
 )
 
-// Inline SVG instead of a PNG — the Square mark is three nested
-// rounded-squares, trivial to author cleanly. This keeps the mark
-// pixel-perfect at any tile size and matches the edge-to-edge "app
-// icon" feel of toast.png and the new clover.png.
 const SquareMark = () => (
-  <svg
-    viewBox="0 0 100 100"
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-full w-full select-none"
+  <img
+    src="/assets/logos/pos/square.png"
+    alt=""
     aria-hidden="true"
-  >
-    <rect width="100" height="100" fill="#000" />
-    <rect x="12.5" y="12.5" width="75" height="75" rx="11" fill="#fff" />
-    <rect x="22.5" y="22.5" width="55" height="55" rx="7" fill="#000" />
-    <rect x="36" y="36" width="28" height="28" rx="3.5" fill="#fff" />
-  </svg>
+    className="h-full w-full select-none object-cover"
+    draggable={false}
+  />
 )
 
 const JennaMark = () => (
