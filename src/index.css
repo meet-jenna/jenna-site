@@ -744,6 +744,32 @@
     gap: 0.75rem;
   }
 
+  /* .nav-signin — small text link that mirrors .nav-links a, but lives in
+     .nav-actions so it remains visible on mobile (where .nav-links hides).
+     Points at the customer portal subdomain (app.meetjenna.com). */
+  .nav-signin {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-soft);
+    padding: 7px 10px;
+    margin: -7px 0;
+    border-radius: var(--r-nav-chip);
+    transition:
+      color 0.18s var(--ease),
+      background-color 0.18s var(--ease);
+  }
+
+  .nav-signin:hover {
+    color: var(--fg);
+    background-color: var(--overlay-2);
+  }
+
+  .nav-signin:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   /* Theme toggle — light/dark switcher in the nav. Square chip at
      --r-nav-chip so it visually reads as a sibling of the brand
      chip and ghost CTA across the bar. */

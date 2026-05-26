@@ -39,6 +39,13 @@ export function Nav() {
         </nav>
 
         <div className="nav-actions">
+          <a
+            className="nav-signin"
+            href="https://app.meetjenna.com"
+            rel="noopener"
+          >
+            Sign in
+          </a>
           <ThemeToggle />
           <a className="btn nav-cta" href="#book">
             Book a demo
