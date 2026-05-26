@@ -11,6 +11,14 @@ import { ThemeToggle } from '@/components/widgets/ThemeToggle'
 //
 // Both brand-logo variants stay in markup; CSS toggles which is visible
 // based on the active [data-theme] on <html>.
+
+// Where the Sign-in button takes operators. The portal lives in a
+// separate Vite app (`packages/portal-web` in meet-jenna-portal). For
+// local development the dev server runs on :5174; in production set
+// `VITE_PORTAL_URL` at build time to the deployed portal origin.
+const PORTAL_URL =
+  (import.meta.env.VITE_PORTAL_URL as string | undefined) ?? 'http://localhost:5174'
+
 export function Nav() {
   return (
     <header className="nav-bar">
@@ -41,7 +49,7 @@ export function Nav() {
         <div className="nav-actions">
           <a
             className="nav-signin"
-            href="https://app.meetjenna.com"
+            href={PORTAL_URL}
             rel="noopener"
           >
             Sign in
