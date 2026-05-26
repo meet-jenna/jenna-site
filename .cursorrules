@@ -13,12 +13,6 @@ NEVER install: MUI, Chakra, Bootstrap, styled-components, emotion, Sass, or any 
 
 If the project already has a different stack, respect it — do not migrate without explicit approval.
 
-## DESIGN RESEARCH (REFERO MCP)
-Before designing or building any UI section:
-1. Query Refero for 3–5 references from products in the same category.
-2. Show me the references and your interpretation.
-3. Wait for my approval before writing code.
-
 If I name a specific site to replicate, query Refero for that site AND similar ones in its category — give me a richer reference set than I asked for.
 
 ## COMPONENT SOURCING (in order of priority)
