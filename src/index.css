@@ -529,12 +529,12 @@
      stage on which the white call-card lifts via shadow + radius. */
   .hero {
     position: relative;
-    min-height: 100vh;
-    padding: 12rem 1.5rem 6rem;
+    min-height: 0;
+    padding: 12rem 1.5rem 0;
     display: flex;
     justify-content: center;
     isolation: isolate;
-    overflow: hidden;
+    overflow: visible;
     background: var(--bg-contrast);
   }
 
@@ -543,6 +543,7 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
+    overflow: hidden;
   }
 
   .glow {
@@ -809,12 +810,14 @@
   /* ----------------------------------------------------------
      Section 2 — What Jenna Does (Bento) — ported verbatim
      ---------------------------------------------------------- */
-  /* Bento — Canvas White section; cards inside are Cloud Gray. */
+  /* Bento — very light gray section; cards inside are Cloud Gray. */
   .features {
     position: relative;
+    z-index: 2;
+    margin-top: -16rem;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
-    background: var(--bg);
+    background: color-mix(in srgb, var(--bg-contrast) 45%, var(--bg));
   }
 
   .features-bg {
@@ -2809,19 +2812,22 @@
   }
 
 
-  /* iPhone column — locks the mockup width on desktop and centers it
-     in the column on smaller breakpoints. The iPhone component itself
-     handles aspect ratio via `aspect-ratio: 433/882`. */
+  /* iPhone column — the wrapper contributes only the top 60% of the
+     mockup to layout. The full phone overflows downward, where the
+     following section covers it for the cropped-at-boundary effect. */
   .hero-phone {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    width: min(100%, 380px);
+    aspect-ratio: 433 / 529.2;
+    margin-inline: auto;
+    overflow: visible;
   }
 
   .hero-phone-iphone {
+    position: absolute;
+    inset: 0 auto auto 0;
     width: 100%;
-    max-width: 380px;
+    max-width: none;
     filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
   }
 
@@ -3255,9 +3261,15 @@
   .hero {
     /* Bump side padding on phones so the hero copy doesn't crowd
        the viewport edges. */
-    min-height: 100svh;
-    padding: 10rem 1.75rem 6rem;
+    min-height: 0;
+    padding: 10rem 1.75rem 0;
   }
+
+  .features {
+    margin-top: -20rem;
+    padding-top: 6rem;
+  }
+
   /* Tighten the column-stack spacing on phones so the iPhone mockup
      sits closer to the hero copy while leaving room for the CTA. */
   .hero-inner {
@@ -3278,8 +3290,14 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 9rem 1.75rem 6rem;
+    padding: 9rem 1.75rem 0;
   }
+
+  .features {
+    margin-top: -18rem;
+    padding-top: 5.5rem;
+  }
+
   .hero-cta {
     flex-direction: column;
     align-items: center;
@@ -3384,6 +3402,22 @@
 
   .handoff-route-line {
     width: 100%;
+  }
+}
+
+/* Hero phone crop — keep this after the general mobile `.features`
+   padding so the overlapping section stays in control of the mask. */
+@media (max-width: 720px) {
+  .features {
+    margin-top: -20rem;
+    padding-top: 6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .features {
+    margin-top: -18rem;
+    padding-top: 5.5rem;
   }
 }
 
@@ -3655,7 +3689,16 @@
 @media (min-width: 960px) {
   .hero {
     padding-top: 8rem;
-    padding-bottom: 4rem;
+    padding-bottom: 0;
+  }
+
+  .features {
+    /* Compensates the shorter `.hero-phone` wrapper below so the
+       phone visual still crops at roughly the same on-screen point
+       (around the iPhone home indicator). Original was -21rem when
+       the wrapper was the full 635px mockup height. */
+    margin-top: -10rem;
+    padding-top: 8rem;
   }
 
   .hero-inner {
@@ -3668,9 +3711,48 @@
 
   .hero-copy {
     flex: 1 1 0;
-    max-width: 580px;
+    /* 640px copy + 4rem gap + 520px phone = 1224px, the page grid.
+       Bumped from 580px so the headline has enough room for the
+       intended two-line break (`The AI Hostess` / `for Every
+       Restaurant.`) without the third line wrapping under it. */
+    max-width: 640px;
     text-align: left;
     align-items: flex-start;
+  }
+
+  /* Phone wrapper — shrink the layout-contributing height to roughly
+     the VISIBLE portion of the mockup (the bottom ~45% is covered by
+     the next section anyway). The iphone <img> inside is absolutely
+     positioned with `overflow: visible`, so it still renders at full
+     intrinsic size and bleeds below the wrapper as before. Without
+     this, `align-items: center` on `.hero-inner` would center the
+     copy column against the full ~635px wrapper and the headline
+     would drop well below the phone's call strip / messages.
+     `.features` margin-top above is compensated to match. */
+  .hero-phone {
+    aspect-ratio: 433 / 360;
+  }
+
+  /* Title — the base scale (clamp up to 4.5rem) was tuned for a
+     centered single-column hero where the headline can span the full
+     page width. In the split layout the copy column caps at 640px and
+     shrinks proportionally on narrower desktops (down to ~440px around
+     1024), so we need both a lower max and a gentler vw factor — the
+     longest line "for Every Restaurant." has to fit at every desktop
+     width so the explicit <br/> drives a clean two-line composition.
+     Drop the 18ch cap for the same reason — the <br/> already controls
+     line breaks here, and 18ch would otherwise force a third wrap. */
+  .hero-title {
+    font-size: clamp(2.25rem, 3.6vw, 3.25rem);
+    max-width: none;
+    margin-bottom: 1.1rem;
+  }
+
+  .hero-sub {
+    /* Constrain so the sub breaks at a deliberate, balanced point
+       instead of stretching the full 640px column. */
+    max-width: 460px;
+    margin-bottom: 1.75rem;
   }
 
   .hero-cta {
@@ -3686,15 +3768,13 @@
 
   .hero-phone {
     flex: 0 0 auto;
-    /* Cap by available hero height so the full iPhone stays on screen
-       in the side-by-side desktop layout. */
-    width: auto;
+    width: min(44vw, 520px);
     margin: 0;
   }
 
   .hero-phone-iphone {
-    width: auto;
-    height: min(760px, calc(100svh - 12rem));
+    width: 100%;
+    height: auto;
     max-width: 100%;
   }
 }
