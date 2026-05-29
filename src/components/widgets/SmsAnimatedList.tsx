@@ -23,28 +23,28 @@ interface SmsItem {
 const items: SmsItem[] = [
   {
     name: 'Order placed',
-    description: 'Jenna AI',
+    description: 'Jenna',
     time: 'just now',
     icon: ReceiptText,
     color: '#00C9A7',
   },
   {
     name: 'Review order',
-    description: 'Jenna AI',
+    description: 'Jenna',
     time: '2m ago',
     icon: Star,
     color: '#FFB800',
   },
   {
     name: 'Book reservation',
-    description: 'Jenna AI',
+    description: 'Jenna',
     time: '5m ago',
     icon: CalendarCheck,
     color: '#1E86FF',
   },
   {
     name: 'Coupon Code',
-    description: 'Jenna AI',
+    description: 'Jenna',
     time: '8m ago',
     icon: MessageSquareText,
     color: '#1c00ff',

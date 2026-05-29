@@ -165,11 +165,6 @@ export function PosIntegrationDiagram({ className }: { className?: string }) {
         curvature={-75}
         duration={BEAM_DURATION}
       />
-
-      {/* "And many more" hint — communicates we support beyond those shown */}
-      <span className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--fg-faint)]">
-        20+ integrations
-      </span>
     </div>
   )
 }

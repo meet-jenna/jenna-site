@@ -38,11 +38,9 @@ export function Hero() {
             className="hero-sub animate-fade-in motion-reduce:animate-none"
             style={{ animationDelay: '80ms' }}
           >
-            Jenna connects to your phone.
+            Jenna connects to your phone and
             <br />
-            Handles every call start to finish —
-            <br />
-            orders, reservations, payments, and more.
+            handles every call, start to finish.
           </p>
 
           <div

@@ -1274,24 +1274,15 @@
 
   .line-wave span {
     flex: 1;
-    height: 30%;
+    min-width: 2px;
+    height: 100%;
+    transform: scaleY(0.12);
+    transform-origin: center;
+    will-change: transform;
     background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
     border-radius: 1px;
     opacity: 0.85;
-    animation: wave-mini 1.2s var(--ease) infinite;
   }
-
-  .line-wave span:nth-child(1) { animation-delay: 0.0s; }
-  .line-wave span:nth-child(2) { animation-delay: 0.1s; }
-  .line-wave span:nth-child(3) { animation-delay: 0.2s; }
-  .line-wave span:nth-child(4) { animation-delay: 0.3s; }
-  .line-wave span:nth-child(5) { animation-delay: 0.15s; }
-  .line-wave span:nth-child(6) { animation-delay: 0.25s; }
-  .line-wave span:nth-child(7) { animation-delay: 0.05s; }
-  .line-wave span:nth-child(8) { animation-delay: 0.35s; }
-
-  .line:nth-child(2) .line-wave span { animation-duration: 1s; }
-  .line:nth-child(3) .line-wave span { animation-duration: 1.4s; }
 
   .line-more {
     color: var(--fg-soft);
@@ -3575,9 +3566,11 @@
 @media (max-width: 720px) {
   .hero {
     /* Bump side padding on phones so the hero copy doesn't crowd
-       the viewport edges. */
+       the viewport edges. The top padding is viewport-relative so the
+       title drops to a comfortable position below the nav (instead of
+       hugging it) and scales down on shorter devices. */
     min-height: clamp(600px, 90svh, 860px);
-    padding: 6rem 1.75rem 2rem;
+    padding: clamp(8rem, 16svh, 11rem) 1.75rem 2rem;
   }
 
   .features {
@@ -3591,11 +3584,12 @@
     gap: 1.5rem;
   }
   .hero-sub {
-    /* Slightly smaller than desktop so each of the three explicit
-       lines stays single-line down to ~320px viewports. */
-    font-size: clamp(14px, 3.75vw, 17px);
+    /* Smaller, lighter sub on phones — the copy is two explicit lines
+       that each stay single-line down to ~320px viewports, so the
+       title can sit lower without the hero growing too tall. */
+    font-size: clamp(13px, 3.3vw, 15px);
     max-width: 100%;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.6rem;
     text-wrap: pretty;
   }
 
@@ -3607,7 +3601,7 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 5.5rem 1.75rem 2rem;
+    padding: clamp(7.5rem, 15svh, 10rem) 1.75rem 2rem;
   }
 
   .features {
@@ -3627,7 +3621,7 @@
 
 /* Narrowest phones (≤360px, e.g. iPhone SE 1st gen) — force the
    hero title down one more step so "for Every Restaurant." stays
-   on a single line; subtitle scales down so each of the three
+   on a single line; subtitle scales down so each of its two
    explicit lines does not wrap. */
 @media (max-width: 360px) {
   .hero {
@@ -3640,7 +3634,7 @@
   }
 
   .hero-sub {
-    font-size: 13px;
+    font-size: 12.5px;
     letter-spacing: 0.01em;
   }
 }
@@ -4012,16 +4006,21 @@
    layout above already handles that). */
 @media (min-width: 960px) {
   .hero {
-    min-height: clamp(720px, 94vh, 980px);
-    padding: 5rem 1.5rem 3rem;
+    /* padding-top is 0 so the copy-centering band spans from the hero top
+       down to the crop line; the centered copy still clears the floating
+       nav because it sits well below the top. padding-bottom is matched
+       by the negative `.features` margin so the crop line lands exactly at
+       the band bottom, keeping the copy centered in the visible blue area. */
+    min-height: clamp(820px, 100vh, 1040px);
+    padding: 0 1.5rem 8rem;
   }
 
   .features {
-    /* Pull section 2 up over the phone bottom — the negative margin
-       sets how much of the mockup is hidden behind the bento section.
-       Paired with the shorter `.hero-phone` aspect-ratio below. */
-    margin-top: -26rem;
-    padding-top: 9rem;
+    /* Pull section 2 up to crop the overflowing phone. Kept equal to the
+       hero's padding-bottom so the bento edge lands at the bottom of the
+       centered copy band. Increase both (in lockstep) to crop more phone. */
+    margin-top: -8rem;
+    padding-top: 8rem;
   }
 
   .hero-inner {
@@ -4086,12 +4085,20 @@
 
   .hero-phone {
     width: min(42vw, 480px);
-    margin: 3.5rem 0 0;
+    margin: 8rem 0 0;
     align-self: start;
     justify-self: end;
   }
 
   .hero-phone-iphone {
+    /* Force out of flow so the full-height phone SVG (aspect 433/882)
+       doesn't inflate the hero — it overflows downward from the top of
+       its wrapper and the bottom is cropped by the overlapping
+       `.features` section. Wins over the component's Tailwind `relative`
+       + inline aspect-ratio because this rule is unlayered. */
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: auto;
     max-width: 100%;
