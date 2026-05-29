@@ -1,8 +1,7 @@
 import { useTheme } from '@/hooks/useTheme'
 
-// Pill icon button. Sun/moon are both rendered; CSS in index.css shows
-// the correct one based on [data-theme]. Inline SVGs match the site's
-// stroke-based icon vocabulary.
+// Sun/moon icon button — nested glass chip matching the nav CTA.
+// Both icons stay in markup; CSS toggles visibility by [data-theme].
 export function ThemeToggle() {
   const { theme, toggle } = useTheme()
   const label = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
@@ -11,7 +10,7 @@ export function ThemeToggle() {
     <button
       id="themeToggle"
       type="button"
-      className="theme-toggle"
+      className="glass glass-button theme-toggle"
       aria-label={label}
       title={label}
       onClick={toggle}

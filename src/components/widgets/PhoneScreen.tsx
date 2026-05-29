@@ -42,6 +42,8 @@ const CALLER_NAME = 'Mike'
 const ORDER_NUMBER = '#1247'
 const ORDER_TOTAL = '$28.40'
 
+const CALLER_AVATAR = '/assets/avatars/caller-avatar.png'
+
 const BUBBLES: Bubble[] = [
   { side: 'caller', text: 'Hi, can I place a pickup order?' },
   { side: 'jenna',  text: 'Of course — can I get a name?' },
@@ -260,9 +262,23 @@ export function PhoneScreen() {
         {BUBBLES.map((b, idx) => (
           <div
             key={`bubble-${cycleKey}-${idx}`}
-            className={cn('call-bubble', b.side, shownBubbles.has(idx) && 'show')}
+            className={cn('call-row', b.side, shownBubbles.has(idx) && 'show')}
           >
-            {b.text}
+            {b.side === 'caller' ? (
+              <img
+                className="call-avatar"
+                src={CALLER_AVATAR}
+                alt=""
+                aria-hidden="true"
+                width={64}
+                height={64}
+              />
+            ) : (
+              <div className="call-avatar call-avatar-jenna" aria-hidden="true">
+                <span className="call-avatar-j">J</span>
+              </div>
+            )}
+            <div className={cn('call-bubble', b.side)}>{b.text}</div>
           </div>
         ))}
       </div>

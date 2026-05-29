@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
+import { Glass } from '@/components/ui/glass'
 import { Iphone } from '@/components/ui/iphone'
 import { BackgroundPaths } from '@/components/widgets/BackgroundPaths'
 import { PhoneScreen } from '@/components/widgets/PhoneScreen'
@@ -37,17 +38,21 @@ export function Hero() {
             className="hero-sub animate-fade-in motion-reduce:animate-none"
             style={{ animationDelay: '80ms' }}
           >
-            Jenna connects to your phone. Handles every call start to finish — orders, reservations, payments, and more.
+            Jenna connects to your phone.
+            <br />
+            Handles every call start to finish —
+            <br />
+            orders, reservations, payments, and more.
           </p>
 
           <div
             className="hero-cta animate-fade-in motion-reduce:animate-none"
             style={{ animationDelay: '160ms' }}
           >
-            <a className="btn nav-cta hero-demo-cta" href="#book">
+            <Glass as="a" variant="button" className="btn nav-cta" href="#book">
               Book a demo
               <ArrowUpRight className="nav-cta-icon" aria-hidden="true" />
-            </a>
+            </Glass>
           </div>
         </div>
 

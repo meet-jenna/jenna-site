@@ -1,9 +1,8 @@
 /* ============================================================
-   Jenna AI · Design Tokens — Shares-inspired refresh
+   Jenna AI · Design Tokens — Blue Mist
    ============================================================
-   White-canvas / brand-violet system adapted from Refero's
-   "Shares" reference (https://styles.refero.design/style/cd293b92).
-   Substitutes our brand violet (#1c00ff) for Shares Violet and
+   Minimal light palette with a cool blue atmosphere. Jenna violet
+   (#1c00ff) is the sole chromatic pop — CTAs, emphasis, glows.
    Quicksand for the runtime typeface (rounded geometric sans).
 
    Source of truth for all colors, surfaces, type, motion, radii.
@@ -14,44 +13,43 @@
 @tailwind utilities;
 
 /* ------------------------------------------------------------
-   :root — Canvas White / Brand Violet (light, only theme)
+   :root — Blue Mist / Brand Violet (light, only theme)
    ------------------------------------------------------------
-   Two-surface system: Canvas White (#ffffff) for the page +
-   Cloud Gray (#f6f6f6) for cards and alternating section bands.
+   Two-surface system: barely-blue canvas (#fafbff) for the page +
+   soft periwinkle cloud (#eff3fa) for cards and alternating bands.
+   Hero uses a deeper blue stage (#e4ebf8) for phone contrast.
    Single chromatic accent: Jenna Violet (#1c00ff).
    ------------------------------------------------------------ */
 :root {
   color-scheme: light;
 
   /* ─── Surfaces ────────────────────────────────────────────── */
-  --bg: #ffffff;
-  --bg-elev: #f6f6f6;
-  --bg-elev-2: #f6f6f6;
-  --surface: #ffffff;
-  --surface-2: #f6f6f6;
-  --surface-translucent: rgba(255, 255, 255, 0.78);
+  --bg: #fafbff;
+  --bg-elev: #eff3fa;
+  --bg-elev-2: #eff3fa;
+  --surface: #fdfdff;
+  --surface-2: #eff3fa;
+  --surface-translucent: rgba(250, 251, 255, 0.82);
 
-  /* Section rotation — strict canvas ↔ cloud alternation.
-     Sections call --bg / --bg-contrast / --bg-paper directly:
-       Hero, Proof, Savings, Finale → --bg / --bg-paper (canvas)
-       Bento, Customize              → --bg-contrast (cloud) */
-  --bg-contrast: #f6f6f6;
-  --bg-paper: #ffffff;
+  /* Section rotation — canvas ↔ cloud alternation.
+     Hero uses --hero-bg (deeper blue stage) for phone contrast. */
+  --bg-contrast: #eff3fa;
+  --bg-paper: #fdfdff;
+  --hero-bg: #e4ebf8;
 
-  /* Hairlines — Silver Mist for default, Stone Gray for emphasis */
-  --hairline: #e7e7e7;
-  --hairline-strong: #b0b0b0;
+  /* Hairlines — cool blue grays */
+  --hairline: #d8e0ef;
+  --hairline-strong: #aebbd4;
 
-  /* ─── Text — Shares ink stack ─────────────────────────────── */
-  --fg: #1f1f1f;          /* Ink Black — headings, strong body */
-  --fg-muted: #333333;    /* Carbon Gray — secondary text, icons */
-  --fg-soft: #5d5d5d;     /* Slate Gray — muted body, helper */
-  --fg-faint: #888888;    /* Steel Gray — Shares' "do not go lighter" floor */
+  /* ─── Text — cool ink stack ───────────────────────────────── */
+  --fg: #151a24;
+  --fg-muted: #2c3344;
+  --fg-soft: #4e596e;
+  --fg-faint: #7a869c;
 
   /* ─── Brand — single chromatic accent ─────────────────────────
-     Jenna brand violet (#1c00ff) takes the slot Shares fills with
-     #594ff4. Used exclusively for primary CTAs, interactive cues,
-     brand gradients (avatars, waveforms, brand-mark).
+     Jenna brand violet (#1c00ff). Used exclusively for primary CTAs,
+     interactive cues, brand gradients (avatars, waveforms, brand-mark).
      Exemptions documented in the .cursorrules notes:
        - .rainbow-btn keeps its multi-color stack
        - memory-profile avatars keep tone-coded (pink/teal/lime)
@@ -59,47 +57,74 @@
   --accent: #1c00ff;
   --accent-bright: #4d3aff;
   --accent-deep: #1200a3;
-  --accent-glow: rgba(28, 0, 255, 0.18);
+  --accent-glow: rgba(28, 0, 255, 0.14);
 
   /* Status — kept as semantic system extension (live-call cue) */
   --live: #0fa674;
-  --live-glow: rgba(15, 166, 116, 0.28);
+  --live-glow: rgba(15, 166, 116, 0.24);
 
   /* Theme-aware atoms */
   --ink: #ffffff;
   --ink-on-accent: #ffffff;
 
-  /* Overlays — derived from Ink Black at low alpha so they read
-     as subtle veils on Canvas White / Cloud Gray. */
-  --overlay-1: rgba(31, 31, 31, 0.025);
-  --overlay-2: rgba(31, 31, 31, 0.035);
-  --overlay-3: rgba(31, 31, 31, 0.045);
-  --overlay-4: rgba(31, 31, 31, 0.055);
-  --overlay-5: rgba(31, 31, 31, 0.07);
-  --overlay-border: rgba(31, 31, 31, 0.14);
+  /* Overlays — cool blue-black veils */
+  --overlay-1: rgba(21, 26, 36, 0.022);
+  --overlay-2: rgba(21, 26, 36, 0.034);
+  --overlay-3: rgba(21, 26, 36, 0.044);
+  --overlay-4: rgba(21, 26, 36, 0.054);
+  --overlay-5: rgba(21, 26, 36, 0.068);
+  --overlay-border: rgba(21, 26, 36, 0.12);
 
   --inset-card: transparent;
   --inset-card-2: transparent;
 
-  --grid-stroke: rgba(31, 31, 31, 0.05);
+  --grid-stroke: rgba(28, 0, 255, 0.035);
 
-  /* Single shadow per Shares spec — kept under both legacy aliases
-     so existing component CSS doesn't break before the sweep. */
-  --shadow-soft: rgba(0, 0, 0, 0.12);
-  --shadow-strong: rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.12);
+  /* Shadows — subtle blue cast */
+  --shadow-soft: rgba(15, 25, 60, 0.08);
+  --shadow-strong: rgba(15, 25, 60, 0.1);
+  --shadow-xl: 0px 0px 60px -13px rgba(15, 25, 60, 0.1);
 
-  /* Nav — translucent canvas surface */
-  --nav-bg-1: rgba(255, 255, 255, 0.85);
-  --nav-bg-2: rgba(255, 255, 255, 0.5);
+  /* Nav — cool blue-white glass (tinted to hero/canvas, not neutral white) */
+  --nav-bg-1: rgba(248, 250, 255, 0.64);
+  --nav-bg-2: rgba(228, 235, 248, 0.36);
 
-  --btn-primary-glow: rgba(28, 0, 255, 0.18);
-  --btn-primary-glow-strong: rgba(28, 0, 255, 0.26);
+  /* Glass surface — shared by nav island + reusable Glass primitive */
+  --glass-bg: linear-gradient(
+    180deg,
+    var(--nav-bg-1) 0%,
+    var(--nav-bg-2) 100%
+  );
+  --glass-blur: 44px;
+  /* Keep saturation neutral — high saturate() shifts cool blues green/cyan */
+  --glass-saturate: 100%;
+  --glass-brightness: 1;
+  --glass-border: rgba(255, 255, 255, 0.88);
+  --glass-highlight: rgba(255, 255, 255, 0.82);
+  --glass-rim: rgba(255, 255, 255, 0.42);
+  --glass-shadow:
+    0 18px 52px -18px rgba(15, 25, 60, 0.26),
+    0 6px 16px -6px rgba(15, 25, 60, 0.14);
+  --glass-inset:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.28);
 
-  --card-tint: rgba(28, 0, 255, 0.03);
-  --card-edge: linear-gradient(180deg, rgba(31, 31, 31, 0.08), transparent 1px);
+  /* Nested glass button — denser/opaque vs nav bar (Raycast Download pattern) */
+  --glass-button-bg-1: rgba(255, 255, 255, 0.84);
+  --glass-button-bg-2: rgba(255, 255, 255, 0.58);
+  --glass-button-blur: 18px;
+  --glass-button-shadow: 0 4px 14px -4px rgba(15, 25, 60, 0.18);
+  --glass-button-inset: inset 0 1px 0 rgba(255, 255, 255, 0.98);
+  --glass-button-hover-bg-1: rgba(255, 255, 255, 0.94);
+  --glass-button-hover-bg-2: rgba(255, 255, 255, 0.68);
 
-  --glow-opacity: 0.35;
+  --btn-primary-glow: rgba(28, 0, 255, 0.16);
+  --btn-primary-glow-strong: rgba(28, 0, 255, 0.24);
+
+  --card-tint: rgba(28, 0, 255, 0.045);
+  --card-edge: linear-gradient(180deg, rgba(21, 26, 36, 0.06), transparent 1px);
+
+  --glow-opacity: 0.38;
 
   /* ─── Shape — Shares radius scale ─────────────────────────────
      small=4 / inputs=16 / accordion=24 / cards=36 / largeFeatures=60 / pill=99
@@ -110,14 +135,9 @@
   --r-xl: 36px;       /* cards (default) */
   --r-2xl: 60px;      /* large feature surfaces */
   --r-pill: 99px;     /* buttons, pills */
-  /* Nav radii — the floating header and every chip inside it
-     (brand, theme toggle, ghost CTA, link hover) share a single
-     20px radius so the bar reads as one flush-radius system that
-     matches the hero "Book a demo" CTA. Keep the two tokens equal
-     unless you want to reintroduce the nested chip-inside-pill
-     look (outer ~2× inner). */
-  --r-nav: 20px;
-  --r-nav-chip: 20px;
+  /* Nav radii — squarish island with a slight bend; inner chips match. */
+  --r-nav: 8px;
+  --r-nav-chip: 8px;
 
   /* ─── Type — Quicksand ────────────────────────────────────────
      Rounded geometric sans, weights 500 (body) + 700 (headlines).
@@ -161,9 +181,9 @@
   --rainbow-color-3: hsl(210 100% 63%);
   --rainbow-color-4: hsl(195 100% 63%);
   --rainbow-color-5: hsl(90 100% 63%);
-  --rainbow-fill: #f6f6f6;
-  --rainbow-fill-fade: rgba(246, 246, 246, 0.6);
-  --rainbow-fg: #1f1f1f;
+  --rainbow-fill: #eff3fa;
+  --rainbow-fill-fade: rgba(239, 243, 250, 0.62);
+  --rainbow-fg: #151a24;
 
   /* Footer divider — flips per theme so it stays subtle on whichever
      surface (dark in light theme, light in dark theme). */
@@ -183,42 +203,39 @@
 }
 
 /* ------------------------------------------------------------
-   [data-theme="dark"] — Inverse Shares
+   [data-theme="dark"] — Blue Mist Dark
    ------------------------------------------------------------
-   Simple inversion of the light token set. Brand violet stays
-   identical in both themes (single accent rule). Status green
-   brightens slightly for legibility on dark.
-
-   The footer is bound to var(--fg) for its background and
-   var(--bg) for the notch, so it auto-inverts: dark footer in
-   light theme → light footer in dark theme. The notch follows.
+   Cool navy canvas with blue-charcoal elevation bands. Brand
+   violet stays identical (single accent rule). Hero uses a lifted
+   blue stage; the iPhone demo keeps its light UI via .phone-screen
+   scoped tokens. Footer auto-inverts via --fg / --bg binding.
    ------------------------------------------------------------ */
 [data-theme="dark"] {
   color-scheme: dark;
 
   /* ─── Surfaces ────────────────────────────────────────────── */
-  --bg: #0a0a0a;
-  --bg-elev: #1a1a1a;
-  --bg-elev-2: #1a1a1a;
-  --surface: #0a0a0a;
-  --surface-2: #1a1a1a;
-  --surface-translucent: rgba(10, 10, 10, 0.78);
-  --bg-contrast: #1a1a1a;
-  --bg-paper: #0a0a0a;
+  --bg: #070b14;
+  --bg-elev: #0f1524;
+  --bg-elev-2: #0f1524;
+  --surface: #0c101c;
+  --surface-2: #121926;
+  --surface-translucent: rgba(7, 11, 20, 0.82);
+  --bg-contrast: #121926;
+  --bg-paper: #0c101c;
+  --hero-bg: #151d30;
 
-  /* Hairlines — Stone Gray inverts to a low-light neutral */
-  --hairline: #2a2a2a;
-  --hairline-strong: #4a4a4a;
+  /* Hairlines — blue slate */
+  --hairline: #1e2a42;
+  --hairline-strong: #2d3f5c;
 
-  /* ─── Text ─────────────────────────────────────────────────── */
-  --fg: #f5f5f5;
-  --fg-muted: #d0d0d0;
-  --fg-soft: #a0a0a0;
-  --fg-faint: #6e6e6e;
+  /* ─── Text — cool moonlight stack ─────────────────────────── */
+  --fg: #eef2fa;
+  --fg-muted: #c5cde0;
+  --fg-soft: #8b97b0;
+  --fg-faint: #5c6880;
 
   /* ─── Brand — single chromatic accent (unchanged) ────────────
-     Violet stays #1c00ff for primary CTAs. Glow strengthens on
-     dark for better visibility. */
+     Violet stays #1c00ff. Glow strengthens on dark. */
   --accent-glow: rgba(28, 0, 255, 0.35);
 
   /* Status — brighter green on dark for legibility */
@@ -226,35 +243,68 @@
   --live-glow: rgba(34, 211, 164, 0.45);
 
   /* Theme-aware atoms */
-  --ink: #0a0a0a;
+  --ink: #070b14;
 
-  /* Overlays flip from black-tinted to white-tinted */
-  --overlay-1: rgba(255, 255, 255, 0.025);
-  --overlay-2: rgba(255, 255, 255, 0.035);
-  --overlay-3: rgba(255, 255, 255, 0.045);
-  --overlay-4: rgba(255, 255, 255, 0.055);
-  --overlay-5: rgba(255, 255, 255, 0.07);
-  --overlay-border: rgba(255, 255, 255, 0.14);
+  /* Overlays — cool white veils on navy */
+  --overlay-1: rgba(238, 242, 250, 0.025);
+  --overlay-2: rgba(238, 242, 250, 0.035);
+  --overlay-3: rgba(238, 242, 250, 0.045);
+  --overlay-4: rgba(238, 242, 250, 0.055);
+  --overlay-5: rgba(238, 242, 250, 0.07);
+  --overlay-border: rgba(238, 242, 250, 0.14);
 
-  --grid-stroke: rgba(255, 255, 255, 0.05);
+  --grid-stroke: rgba(28, 0, 255, 0.08);
 
-  /* Shadow deepens on dark */
-  --shadow-soft: rgba(0, 0, 0, 0.5);
+  /* Shadows — deep navy cast */
+  --shadow-soft: rgba(0, 0, 0, 0.45);
   --shadow-strong: rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.55);
 
-  --nav-bg-1: rgba(10, 10, 10, 0.85);
-  --nav-bg-2: rgba(10, 10, 10, 0.5);
+  /* Nav — blue-tinted glass */
+  --nav-bg-1: rgba(18, 26, 44, 0.88);
+  --nav-bg-2: rgba(7, 11, 20, 0.6);
+
+  --glass-bg: linear-gradient(
+    180deg,
+    var(--nav-bg-1) 0%,
+    var(--nav-bg-2) 100%
+  );
+  --glass-blur: 44px;
+  --glass-saturate: 180%;
+  --glass-brightness: 1.02;
+  --glass-border: rgba(174, 187, 212, 0.18);
+  --glass-highlight: rgba(238, 242, 250, 0.1);
+  --glass-rim: rgba(174, 187, 212, 0.08);
+  --glass-shadow:
+    0 18px 56px -18px rgba(0, 0, 0, 0.62),
+    0 6px 18px -6px rgba(0, 0, 0, 0.42);
+  --glass-inset:
+    inset 0 1px 0 rgba(238, 242, 250, 0.12),
+    inset 0 -1px 0 rgba(238, 242, 250, 0.04),
+    inset 0 0 0 1px rgba(174, 187, 212, 0.06);
+
+  --glass-button-bg-1: rgba(72, 74, 86, 0.88);
+  --glass-button-bg-2: rgba(48, 50, 60, 0.62);
+  --glass-button-blur: 18px;
+  --glass-button-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.48);
+  --glass-button-inset: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  --glass-button-hover-bg-1: rgba(88, 90, 102, 0.94);
+  --glass-button-hover-bg-2: rgba(58, 60, 72, 0.72);
 
   --btn-primary-glow: rgba(28, 0, 255, 0.3);
   --btn-primary-glow-strong: rgba(28, 0, 255, 0.4);
 
-  --card-tint: rgba(28, 0, 255, 0.06);
-  --card-edge: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 1px);
+  --card-tint: rgba(28, 0, 255, 0.08);
+  --card-edge: linear-gradient(180deg, rgba(238, 242, 250, 0.08), transparent 1px);
 
   --glow-opacity: 0.55;
 
-  /* Footer divider — flips to dark-tinted on light footer. */
+  /* Rainbow CTA — fill matches dark cloud surface */
+  --rainbow-fill: #121926;
+  --rainbow-fill-fade: rgba(18, 25, 38, 0.62);
+  --rainbow-fg: #eef2fa;
+
+  /* Footer divider — dark-tinted on light footer. */
   --footer-divider: rgba(0, 0, 0, 0.08);
 }
 
@@ -475,17 +525,142 @@
 
 
   /* ----------------------------------------------------------
+     Glass — reusable frosted surface (Magic UI dock pattern +
+     Raycast-style specular edge). Used by Nav and available for
+     cards, modals, floating panels.
+
+     .glass      — base blur, border, highlight sheen
+     .glass-nav  — nav island radius
+     .nav-inner  — layout only (flex, sizing, padding)
+     ---------------------------------------------------------- */
+  .glass {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter:
+      blur(var(--glass-blur))
+      saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    -webkit-backdrop-filter:
+      blur(var(--glass-blur))
+      saturate(var(--glass-saturate))
+      brightness(var(--glass-brightness));
+    border: none;
+    box-shadow: var(--glass-shadow), var(--glass-inset);
+  }
+
+  /* Specular top edge — reads as light catching frosted glass */
+  .glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      var(--glass-highlight) 0%,
+      rgba(255, 255, 255, 0.08) 24%,
+      transparent 58%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Bottom edge depth — keeps the island from reading flat */
+  .glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      0deg,
+      rgba(15, 25, 60, 0.1) 0%,
+      transparent 42%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="dark"] .glass::after {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      transparent 42%
+    );
+  }
+
+  .glass > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .glass-nav {
+    border-radius: var(--r-nav);
+    background: linear-gradient(
+      180deg,
+      var(--nav-bg-1) 0%,
+      var(--nav-bg-2) 100%
+    );
+  }
+
+  /* Nested glass CTA — denser fill + lift shadow for contrast on glass nav */
+  .glass-button {
+    border-radius: var(--r-nav-chip);
+    background: linear-gradient(
+      180deg,
+      var(--glass-button-bg-1) 0%,
+      var(--glass-button-bg-2) 100%
+    );
+    backdrop-filter: blur(var(--glass-button-blur)) saturate(100%);
+    -webkit-backdrop-filter: blur(var(--glass-button-blur)) saturate(100%);
+    box-shadow: var(--glass-button-shadow), var(--glass-button-inset);
+  }
+
+  .glass-button::before {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.12) 28%,
+      transparent 52%
+    );
+  }
+
+  [data-theme="dark"] .glass-button::before {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.04) 28%,
+      transparent 52%
+    );
+  }
+
+  .glass-button:hover {
+    background: linear-gradient(
+      180deg,
+      var(--glass-button-hover-bg-1) 0%,
+      var(--glass-button-hover-bg-2) 100%
+    );
+    transform: translateY(-1px);
+    box-shadow:
+      0 6px 18px -4px rgba(15, 25, 60, 0.22),
+      var(--glass-button-inset);
+  }
+
+  [data-theme="dark"] .glass-button:hover {
+    box-shadow:
+      0 6px 20px -4px rgba(0, 0, 0, 0.55),
+      var(--glass-button-inset);
+  }
+
+  /* ----------------------------------------------------------
      Nav — always-floating, General-Intelligence-style island.
 
      Anatomy:
        .nav-bar   — fixed full-width gutter wrapper (pointer-events
                     pass through the side gutters)
-       .nav-inner — the actual island: translucent white surface,
-                    --r-nav radius (20px), hairline border, soft shadow
+       .nav-inner — flex layout inside the Glass island
 
-     Inside the island every slot shares --r-nav-chip (20px) so
-     the bar reads as one flush-radius system matching the hero
-     "Book a demo" CTA:
+     Inside the island every slot shares --r-nav-chip (8px) so
+     the bar reads as one flush-radius system:
        .brand         — naked logo on the left
        .nav-links     — plain text in the middle
        .theme-toggle  — square --r-nav-chip chip
@@ -510,11 +685,6 @@
     justify-content: space-between;
     gap: 0.85rem;
     padding: 8px;
-    background: var(--surface-translucent);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border-radius: var(--r-nav);
-    box-shadow: var(--shadow-xl);
   }
 
   /* ----------------------------------------------------------
@@ -524,9 +694,8 @@
        Title: 56–72px Quicksand 700, -0.01em display tracking.
        <em> emphasis renders as bold violet Quicksand (no italic).
      ---------------------------------------------------------- */
-  /* Hero — Cloud Gray wallpaper. The landing surface is the only
-     section that's NOT canvas white; it sits like a soft gray
-     stage on which the white call-card lifts via shadow + radius. */
+  /* Hero — deeper blue stage. The white iPhone demo lifts against
+     this surface; decorative paths stay subtle so the phone reads first. */
   .hero {
     position: relative;
     min-height: 0;
@@ -535,7 +704,29 @@
     justify-content: center;
     isolation: isolate;
     overflow: visible;
-    background: var(--bg-contrast);
+    background: var(--hero-bg);
+  }
+
+  .hero-bg svg {
+    opacity: 0.22;
+  }
+
+  .hero .glow-a,
+  .hero .glow-b {
+    opacity: 0.14;
+  }
+
+  [data-theme="dark"] .hero-bg svg {
+    opacity: 0.16;
+  }
+
+  [data-theme="dark"] .hero .glow-a,
+  [data-theme="dark"] .hero .glow-b {
+    opacity: 0.24;
+  }
+
+  [data-theme="dark"] .hero-phone-iphone {
+    filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.55));
   }
 
   .hero-bg {
@@ -638,13 +829,15 @@
     margin-bottom: 0;
   }
 
-  .nav-cta.hero-demo-cta {
+  /* Hero CTA — same glass .nav-cta as the header, scaled up for
+     the hero's larger type scale. */
+  .hero-cta .nav-cta {
     min-height: 56px;
     padding: 15px 24px;
     font-size: 16px;
   }
 
-  .hero-demo-cta .nav-cta-icon {
+  .hero-cta .nav-cta-icon {
     width: 18px;
     height: 18px;
   }
@@ -703,16 +896,18 @@
     background-color: var(--overlay-2);
   }
 
-  /* .nav-cta — ghost outline button. White surface, hairline border,
-     dark text. Radius matches the brand chip + theme toggle
-     (--r-nav-chip), deliberately NOT the pill from .btn. */
+  /* .nav-cta — nav CTA typography/layout; glass surface via .glass-button */
   .nav-cta {
     font-size: 13px;
     padding: 9px 16px;
     color: var(--fg);
+    border-radius: var(--r-nav-chip);
+  }
+
+  /* Fallback for plain .nav-cta without .glass-button (unused in app). */
+  .nav-cta:not(.glass-button) {
     background: var(--bg);
     border: 1px solid var(--hairline);
-    border-radius: var(--r-nav-chip);
   }
 
   .nav-cta-icon {
@@ -723,9 +918,12 @@
   }
 
   .nav-cta:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-cta:not(.glass-button):hover {
     background: var(--overlay-2);
     border-color: var(--hairline-strong);
-    transform: translateY(-1px);
   }
 
   /* Nudge the arrow further up-right on hover — accentuates its
@@ -771,28 +969,21 @@
     outline-offset: 3px;
   }
 
-  /* Theme toggle — light/dark switcher in the nav. Square chip at
-     --r-nav-chip so it visually reads as a sibling of the brand
-     chip and ghost CTA across the bar. */
+  /* Theme toggle — square glass chip, sibling to Book a demo CTA */
   .theme-toggle {
     width: 36px;
     height: 36px;
     display: inline-grid;
     place-items: center;
+    padding: 0;
     border-radius: var(--r-nav-chip);
     color: var(--fg-muted);
-    background: var(--overlay-2);
-    border: 1px solid var(--hairline);
-    transition:
-      color 0.2s var(--ease),
-      background 0.2s var(--ease),
-      transform 0.2s var(--ease);
+    cursor: pointer;
+    transition: color 0.2s var(--ease);
   }
 
   .theme-toggle:hover {
     color: var(--fg);
-    background: var(--overlay-3);
-    transform: translateY(-1px);
   }
 
   .theme-icon {
@@ -919,6 +1110,31 @@
     overflow: hidden;
     min-height: 240px;
     transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+
+  /* Hardcoded bg-white in bento widgets — map to theme surface */
+  .pos-diagram,
+  .bento-card .bg-white {
+    background-color: var(--surface) !important;
+  }
+
+  .bento-card .bg-white {
+    box-shadow:
+      0 0 0 1px rgba(21, 26, 36, 0.04),
+      0 2px 4px rgba(15, 25, 60, 0.04),
+      0 12px 24px rgba(15, 25, 60, 0.05) !important;
+  }
+
+  [data-theme="dark"] .bento-card .bg-white {
+    box-shadow:
+      0 0 0 1px rgba(238, 242, 250, 0.06),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      0 12px 24px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  [data-theme="dark"] .pos-diagram .z-10 {
+    border-color: var(--hairline) !important;
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.35) !important;
   }
 
   .bento-card:hover {
@@ -2828,7 +3044,7 @@
     inset: 0 auto auto 0;
     width: 100%;
     max-width: none;
-    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
+    filter: drop-shadow(0 14px 28px rgba(15, 25, 60, 0.16));
   }
 
   .iphone-screen-slot {
@@ -2850,8 +3066,21 @@
          CALLER REQUEST  (familiar restaurant request)
          ORDER CARD   (Jenna composes order in real time)
          DESTINATION  (Toast tile lights up + sent pill)
+
+       Light theme keeps a neutral iOS-style white UI; dark theme
+       switches to blue-charcoal surfaces that match Blue Mist Dark.
      ---------------------------------------------------------- */
   .phone-screen {
+    --bg: #ffffff;
+    --bg-paper: #ffffff;
+    --hairline: #e7e7e7;
+    --fg: #1f1f1f;
+    --fg-muted: #333333;
+    --fg-soft: #5d5d5d;
+    --fg-faint: #888888;
+    --card-tint: rgba(28, 0, 255, 0.03);
+    --live-glow: rgba(15, 166, 116, 0.28);
+
     position: relative;
     width: 100%;
     height: 100%;
@@ -2865,6 +3094,44 @@
     color: var(--fg);
     text-align: left;
     overflow: hidden;
+  }
+
+  /* Dark theme — iOS-style blue-charcoal screen inside the mockup */
+  [data-theme="dark"] .phone-screen {
+    --bg: #121926;
+    --bg-paper: #151d30;
+    --hairline: #1e2a42;
+    --fg: #eef2fa;
+    --fg-muted: #c5cde0;
+    --fg-soft: #8b97b0;
+    --fg-faint: #5c6880;
+    --card-tint: rgba(28, 0, 255, 0.12);
+    --live: #22d3a4;
+    --live-glow: rgba(34, 211, 164, 0.45);
+
+    background:
+      radial-gradient(circle at 50% 0%, var(--card-tint), transparent 55%),
+      var(--bg);
+    color: var(--fg);
+  }
+
+  [data-theme="dark"] .phone-screen .call-bubble.caller {
+    background: #243048;
+    color: var(--fg);
+  }
+
+  [data-theme="dark"] .phone-screen .call-avatar:not(.call-avatar-jenna) {
+    background: #243048;
+    box-shadow: 0 0 0 1px #1e2a42 inset;
+  }
+
+  [data-theme="dark"] .phone-screen .order-card {
+    box-shadow: 0 4cqw 8cqw -4cqw rgba(0, 0, 0, 0.35);
+  }
+
+  [data-theme="dark"] .phone-screen .destination-tile {
+    border-color: rgba(238, 242, 250, 0.08);
+    box-shadow: 0 4cqw 10cqw -4cqw rgba(0, 0, 0, 0.45);
   }
 
   /* ─── Active call strip ────────────────────────────────────────
@@ -2927,35 +3194,79 @@
   .call-transcript {
     display: flex;
     flex-direction: column;
-    gap: 1.4cqw;
+    gap: 2.2cqw;
     width: 100%;
   }
 
+  /* Each turn is an avatar + bubble row. Caller sits on the left with
+     their headshot leading; Jenna mirrors to the right with the J mark.
+     The whole row fades up together so the avatar and bubble arrive as
+     one beat. */
+  .call-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.8cqw;
+    max-width: 92%;
+    opacity: 0;
+    transform: translateY(1.5cqw);
+  }
+
+  .call-row.show {
+    animation: phone-fade-up 0.4s var(--ease) both;
+  }
+
+  .call-row.caller {
+    align-self: flex-start;
+  }
+
+  .call-row.jenna {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .call-avatar {
+    flex: 0 0 auto;
+    width: clamp(26px, 8.4cqw, 36px);
+    height: clamp(26px, 8.4cqw, 36px);
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f0f0f2;
+    box-shadow: 0 0 0 1px var(--hairline) inset;
+  }
+
+  .call-avatar-jenna {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    box-shadow: none;
+  }
+
+  .call-avatar-j {
+    font-family: var(--font-sans);
+    font-size: clamp(14px, 4.8cqw, 20px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-on-accent);
+  }
+
   .call-bubble {
-    max-width: 84%;
+    min-width: 0;
     padding: clamp(8px, 2.6cqw, 12px) clamp(12px, 3.4cqw, 15px);
     border-radius: 5cqw;
     font-size: clamp(13px, 3.7cqw, 15.5px);
     font-weight: 500;
     line-height: 1.32;
     letter-spacing: 0.005em;
-    opacity: 0;
-    transform: translateY(1.5cqw);
-  }
-
-  .call-bubble.show {
-    animation: phone-fade-up 0.4s var(--ease) both;
   }
 
   .call-bubble.caller {
-    align-self: flex-start;
     background: #f0f0f2;
     color: var(--fg);
     border-bottom-left-radius: 1.4cqw;
   }
 
   .call-bubble.jenna {
-    align-self: flex-end;
     background: var(--accent);
     color: var(--ink-on-accent);
     border-bottom-right-radius: 1.4cqw;
@@ -3276,15 +3587,17 @@
     gap: 1.5rem;
   }
   .hero-sub {
-    font-size: clamp(17px, 4.2vw, 18px);
-    max-width: 21rem;
+    /* Slightly smaller than desktop so each of the three explicit
+       lines stays single-line down to ~320px viewports. */
+    font-size: clamp(14px, 3.75vw, 17px);
+    max-width: 100%;
     margin: 0 auto 1.5rem;
+    text-wrap: pretty;
   }
 
-  .nav-cta.hero-demo-cta {
+  .hero-cta .nav-cta {
     min-height: 52px;
     padding: 14px 22px;
-    font-size: 16px;
   }
 }
 
@@ -3303,21 +3616,28 @@
     align-items: center;
   }
 
-  .hero-sub {
-    max-width: 18rem;
-  }
-
-  .nav-cta.hero-demo-cta {
-    width: min(100%, 260px);
+  .hero-cta .nav-cta {
+    width: min(100%, 280px);
   }
 }
 
 /* Narrowest phones (≤360px, e.g. iPhone SE 1st gen) — force the
    hero title down one more step so "for Every Restaurant." stays
-   on a single line. */
+   on a single line; subtitle scales down so each of the three
+   explicit lines does not wrap. */
 @media (max-width: 360px) {
+  .hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .hero-title {
     font-size: 1.7rem;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 0.01em;
   }
 }
 
@@ -3348,7 +3668,7 @@
     gap: 16px;
   }
   .pos-split-visual .pos-diagram {
-    min-height: 220px;
+    min-height: 240px;
   }
 
   /* Memory card stacks visual + profiles vertically */
@@ -3542,11 +3862,11 @@
   }
   .config-tabs-shell::before {
     left: 0;
-    background: linear-gradient(90deg, var(--bg), rgba(255, 255, 255, 0));
+    background: linear-gradient(90deg, var(--bg), transparent);
   }
   .config-tabs-shell::after {
     right: 0;
-    background: linear-gradient(270deg, var(--bg), rgba(255, 255, 255, 0));
+    background: linear-gradient(270deg, var(--bg), transparent);
   }
   .config-tabs-shell[data-scroll="start"]::after,
   .config-tabs-shell[data-scroll="middle"]::after {
@@ -3688,49 +4008,43 @@
    layout above already handles that). */
 @media (min-width: 960px) {
   .hero {
-    padding-top: 8rem;
+    padding-top: 4.75rem;
     padding-bottom: 0;
   }
 
   .features {
-    /* Compensates the shorter `.hero-phone` wrapper below so the
-       phone visual still crops at roughly the same on-screen point
-       (around the iPhone home indicator). Original was -21rem when
-       the wrapper was the full 635px mockup height. */
-    margin-top: -10rem;
-    padding-top: 8rem;
+    /* Pull section 2 up over the phone bottom — the negative margin
+       sets how much of the mockup is hidden behind the bento section.
+       Paired with the shorter `.hero-phone` aspect-ratio below. */
+    margin-top: -18rem;
+    padding-top: 8.5rem;
   }
 
   .hero-inner {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    /* Tall row so copy can sit in the vertical middle of the hero
+       band while the phone stays pinned to the top of its column. */
     align-items: center;
+    min-height: clamp(560px, 72vh, 780px);
     justify-content: space-between;
-    gap: 4rem;
+    gap: 3.5rem;
     text-align: left;
   }
 
   .hero-copy {
-    flex: 1 1 0;
-    /* 640px copy + 4rem gap + 520px phone = 1224px, the page grid.
-       Bumped from 580px so the headline has enough room for the
-       intended two-line break (`The AI Hostess` / `for Every
-       Restaurant.`) without the third line wrapping under it. */
     max-width: 640px;
+    align-self: center;
     text-align: left;
     align-items: flex-start;
   }
 
-  /* Phone wrapper — shrink the layout-contributing height to roughly
-     the VISIBLE portion of the mockup (the bottom ~45% is covered by
-     the next section anyway). The iphone <img> inside is absolutely
-     positioned with `overflow: visible`, so it still renders at full
-     intrinsic size and bleeds below the wrapper as before. Without
-     this, `align-items: center` on `.hero-inner` would center the
-     copy column against the full ~635px wrapper and the headline
-     would drop well below the phone's call strip / messages.
-     `.features` margin-top above is compensated to match. */
+  /* Phone wrapper — only the top ~36% of the mockup contributes to
+     layout height; the rest overflows downward and is masked by the
+     overlapping `.features` section. The full iPhone still renders
+     inside via absolute positioning + overflow: visible. */
   .hero-phone {
-    aspect-ratio: 433 / 360;
+    aspect-ratio: 433 / 320;
   }
 
   /* Title — the base scale (clamp up to 4.5rem) was tuned for a
@@ -3759,17 +4073,17 @@
     justify-content: flex-start;
   }
 
-  .nav-cta.hero-demo-cta {
+  .hero-cta .nav-cta {
     min-height: 60px;
     padding: 17px 30px;
     font-size: 18px;
   }
 
-
   .hero-phone {
-    flex: 0 0 auto;
-    width: min(44vw, 520px);
+    width: min(42vw, 480px);
     margin: 0;
+    align-self: start;
+    justify-self: end;
   }
 
   .hero-phone-iphone {
@@ -3782,6 +4096,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .nav-bar,
+  .glass,
   .nav-inner,
   .nav-links a {
     transition-duration: 0.01ms;

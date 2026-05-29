@@ -22,14 +22,14 @@ export default {
         'surface-translucent': 'var(--surface-translucent)',
 
         // Direct Shares-named utilities for new markup
-        'canvas-white': '#ffffff',
-        'cloud-gray': '#f6f6f6',
-        'silver-mist': '#e7e7e7',
-        'stone-gray': '#b0b0b0',
-        'slate-gray': '#5d5d5d',
-        'steel-gray': '#888888',
-        'carbon-gray': '#333333',
-        'ink-black': '#1f1f1f',
+        'canvas-white': '#fafbff',
+        'cloud-gray': '#eff3fa',
+        'silver-mist': '#d8e0ef',
+        'stone-gray': '#aebbd4',
+        'slate-gray': '#4e596e',
+        'steel-gray': '#7a869c',
+        'carbon-gray': '#2c3344',
+        'ink-black': '#151a24',
         'shares-violet': '#1c00ff',
 
         // Hairlines

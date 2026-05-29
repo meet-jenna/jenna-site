@@ -39,8 +39,8 @@ export function BentoGrid() {
                   <path d="M8 14.5h8M8 17.5h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
-              <h3 className="card-title">Takes orders straight into your POS.</h3>
-              <p className="card-body">No manual entry. No missed tickets. Orders land hot and ready, the moment Jenna hangs up.</p>
+              <h3 className="card-title">Jenna connects to your POS.</h3>
+              <p className="card-body">Jenna pulls and sends data just like a human in store tapping on your tablet. Faster, more effective — nothing changes.</p>
             </div>
 
             <div className="pos-split-visual">

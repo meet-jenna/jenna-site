@@ -1,10 +1,10 @@
 import { ArrowUpRight } from 'lucide-react'
+import { Glass } from '@/components/ui/glass'
 import { ThemeToggle } from '@/components/widgets/ThemeToggle'
 
 // Always-floating header. A single translucent rounded rectangle hovers
-// at the top of the page with three slots:
+// at the top of the page with two slots:
 //   - Left:  brand chip wrapping the Jenna logo (small inner radius)
-//   - Mid:   plain-text nav links
 //   - Right: theme toggle + ghost CTA (matching small inner radius)
 // The "chip-inside-pill" pattern (small radius nested in larger radius)
 // is the signature of the General Intelligence Co. nav this is based on.
@@ -22,7 +22,7 @@ const PORTAL_URL =
 export function Nav() {
   return (
     <header className="nav-bar">
-      <div className="nav-inner">
+      <Glass variant="nav" className="nav-inner">
         <a className="brand" href="#" aria-label="Jenna home">
           <img
             className="brand-logo brand-logo-light"
@@ -41,11 +41,6 @@ export function Nav() {
           />
         </a>
 
-        <nav className="nav-links" aria-label="Primary">
-          <a href="#how">How it works</a>
-          <a href="#demo">Hear Jenna</a>
-        </nav>
-
         <div className="nav-actions">
           <a
             className="nav-signin"
@@ -55,12 +50,12 @@ export function Nav() {
             Sign in
           </a>
           <ThemeToggle />
-          <a className="btn nav-cta" href="#book">
+          <Glass as="a" variant="button" className="btn nav-cta" href="#book">
             Book a demo
             <ArrowUpRight className="nav-cta-icon" aria-hidden="true" />
-          </a>
+          </Glass>
         </div>
-      </div>
+      </Glass>
     </header>
   )
 }
