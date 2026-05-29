@@ -698,10 +698,11 @@
      this surface; decorative paths stay subtle so the phone reads first. */
   .hero {
     position: relative;
-    min-height: 0;
-    padding: 12rem 1.5rem 0;
+    min-height: clamp(640px, 92svh, 920px);
+    padding: 6.5rem 1.5rem 2.5rem;
     display: flex;
     justify-content: center;
+    align-items: stretch;
     isolation: isolate;
     overflow: visible;
     background: var(--hero-bg);
@@ -776,9 +777,11 @@
   .hero-inner {
     width: 100%;
     max-width: var(--page-max-width);
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     gap: 3.5rem;
   }
@@ -1005,7 +1008,7 @@
   .features {
     position: relative;
     z-index: 2;
-    margin-top: -16rem;
+    margin-top: -22rem;
     padding: 7rem 1.5rem 8rem;
     isolation: isolate;
     background: color-mix(in srgb, var(--bg-contrast) 45%, var(--bg));
@@ -3028,13 +3031,14 @@
   }
 
 
-  /* iPhone column — the wrapper contributes only the top 60% of the
+  /* iPhone column — the wrapper contributes only the top portion of the
      mockup to layout. The full phone overflows downward, where the
      following section covers it for the cropped-at-boundary effect. */
   .hero-phone {
     position: relative;
     width: min(100%, 380px);
-    aspect-ratio: 433 / 529.2;
+    aspect-ratio: 433 / 400;
+    margin-top: 2rem;
     margin-inline: auto;
     overflow: visible;
   }
@@ -3572,12 +3576,12 @@
   .hero {
     /* Bump side padding on phones so the hero copy doesn't crowd
        the viewport edges. */
-    min-height: 0;
-    padding: 10rem 1.75rem 0;
+    min-height: clamp(600px, 90svh, 860px);
+    padding: 6rem 1.75rem 2rem;
   }
 
   .features {
-    margin-top: -20rem;
+    margin-top: -26rem;
     padding-top: 6rem;
   }
 
@@ -3603,11 +3607,11 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 9rem 1.75rem 0;
+    padding: 5.5rem 1.75rem 2rem;
   }
 
   .features {
-    margin-top: -18rem;
+    margin-top: -24rem;
     padding-top: 5.5rem;
   }
 
@@ -3729,14 +3733,14 @@
    padding so the overlapping section stays in control of the mask. */
 @media (max-width: 720px) {
   .features {
-    margin-top: -20rem;
+    margin-top: -26rem;
     padding-top: 6rem;
   }
 }
 
 @media (max-width: 480px) {
   .features {
-    margin-top: -18rem;
+    margin-top: -24rem;
     padding-top: 5.5rem;
   }
 }
@@ -4008,25 +4012,26 @@
    layout above already handles that). */
 @media (min-width: 960px) {
   .hero {
-    padding-top: 4.75rem;
-    padding-bottom: 0;
+    min-height: clamp(720px, 94vh, 980px);
+    padding: 5rem 1.5rem 3rem;
   }
 
   .features {
     /* Pull section 2 up over the phone bottom — the negative margin
        sets how much of the mockup is hidden behind the bento section.
        Paired with the shorter `.hero-phone` aspect-ratio below. */
-    margin-top: -18rem;
-    padding-top: 8.5rem;
+    margin-top: -26rem;
+    padding-top: 9rem;
   }
 
   .hero-inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
-    /* Tall row so copy can sit in the vertical middle of the hero
+    grid-template-rows: 1fr;
+    /* Full-height row so copy can sit in the vertical middle of the hero
        band while the phone stays pinned to the top of its column. */
     align-items: center;
-    min-height: clamp(560px, 72vh, 780px);
+    min-height: 0;
     justify-content: space-between;
     gap: 3.5rem;
     text-align: left;
@@ -4039,12 +4044,12 @@
     align-items: flex-start;
   }
 
-  /* Phone wrapper — only the top ~36% of the mockup contributes to
+  /* Phone wrapper — only the top ~30% of the mockup contributes to
      layout height; the rest overflows downward and is masked by the
      overlapping `.features` section. The full iPhone still renders
      inside via absolute positioning + overflow: visible. */
   .hero-phone {
-    aspect-ratio: 433 / 320;
+    aspect-ratio: 433 / 240;
   }
 
   /* Title — the base scale (clamp up to 4.5rem) was tuned for a
@@ -4081,7 +4086,7 @@
 
   .hero-phone {
     width: min(42vw, 480px);
-    margin: 0;
+    margin: 3.5rem 0 0;
     align-self: start;
     justify-self: end;
   }
