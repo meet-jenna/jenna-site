@@ -10,12 +10,12 @@ export function Savings() {
       </div>
 
       <header className="section-head">
-        <span className="eyebrow">What you save</span>
+        <span className="eyebrow">Increase Revenue</span>
         <h2 id="savings-title" className="section-title">
           The Math <em>Works.</em>
         </h2>
         <p className="section-sub">
-          Jenna pays for herself in the calls your team is already missing. Plug in your numbers — watch the math work.
+          In an industry with tight margins, this is one optimization you can't go without.
         </p>
       </header>
 

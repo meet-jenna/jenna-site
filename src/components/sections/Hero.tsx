@@ -30,8 +30,8 @@ export function Hero() {
             className="hero-title animate-fade-in motion-reduce:animate-none"
             style={{ animationDelay: '0ms' }}
           >
-            The AI Hostess<br />
-            for <em>Every Restaurant.</em>
+            The <em>AI Hostess</em><br />
+            for Every Restaurant.
           </h1>
 
           <p
