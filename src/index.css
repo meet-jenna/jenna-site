@@ -1265,20 +1265,12 @@
     color: var(--fg-muted);
   }
 
-  /* POS card — text on the left, diagram on the right. The bento-pos
-     card opts out of the default .bento-card column flow (icon → title
-     → body → diagram stacked) so the wide 4x card uses its horizontal
-     space instead of letting body text wrap narrow at top-left while
-     the right half sits empty. Mirrors the .memory-split pattern. */
-  .bento-pos {
-    gap: 0;
-  }
-
+  /* POS card — stacked icon/title/body over the integration diagram,
+     matching the other half-width (2x) bento cards. */
   .pos-split {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: 2rem;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     height: 100%;
   }
 
@@ -1286,7 +1278,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    justify-content: center;
     min-width: 0;
   }
 
@@ -1294,16 +1285,61 @@
     display: flex;
     align-items: stretch;
     min-width: 0;
+    margin-top: auto;
   }
 
-  /* Diagram fills the right column instead of pinning to a fixed
-     260px height — lets the card stay visually balanced regardless
-     of how the text column flows. */
   .pos-split-visual .pos-diagram {
     margin-top: 0;
-    height: auto;
     min-height: 260px;
     flex: 1;
+  }
+
+  /* Multilingual card — flag grid sits at the bottom of the 2x card
+     (mirrors the lines/handoff/SMS visuals). Round flag chips on a
+     Canvas White inner panel, 5 columns like the reference layout. */
+  .lang-grid {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    padding: 18px;
+    background: var(--bg);
+    border-radius: var(--r-md);
+  }
+
+  .lang-chip {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface-2);
+    box-shadow:
+      0 0 0 1px var(--hairline),
+      0 2px 6px rgba(15, 25, 60, 0.06);
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1;
+    user-select: none;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+
+  .lang-chip:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px var(--hairline-strong),
+      0 6px 14px rgba(15, 25, 60, 0.1);
+  }
+
+  .lang-chip-more {
+    font-size: clamp(12px, 1.1vw, 14px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--ink-on-accent);
+    background: linear-gradient(140deg, var(--accent-bright), var(--accent-deep));
+    box-shadow: 0 0 14px -3px var(--accent-glow);
+  }
+
+  .lang-chip-more:hover {
+    box-shadow: 0 6px 16px -4px var(--accent-glow);
   }
 
   /* Memory card — folder icon, shader visual + profile list */
@@ -3509,15 +3545,6 @@
 }
 
 @media (max-width: 720px) {
-  /* POS card stacks text + diagram vertically once the bento card is
-     too narrow to keep the diagram beside the copy. */
-  .pos-split {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  .bento-pos {
-    gap: 16px;
-  }
   .pos-split-visual .pos-diagram {
     min-height: 240px;
   }
@@ -3555,6 +3582,12 @@
   }
   .bento-card {
     min-height: 0;
+  }
+
+  .lang-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 16px;
   }
 
   .handoff-call {

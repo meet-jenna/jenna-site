@@ -1,4 +1,5 @@
 import { CallLines } from '@/components/widgets/CallLines'
+import { LanguageGrid } from '@/components/widgets/LanguageGrid'
 import { PosIntegrationDiagram } from '@/components/widgets/PosIntegrationDiagram'
 import { ShaderCard } from '@/components/widgets/ShaderCard'
 import { SmsAnimatedList } from '@/components/widgets/SmsAnimatedList'
@@ -28,8 +29,8 @@ export function BentoGrid() {
       </header>
 
       <div className="bento" role="list">
-        {/* Row 1 */}
-        <article className="bento-card bento-4x bento-feature bento-pos" role="listitem">
+        {/* Row 1 — POS */}
+        <article className="bento-card bento-2x bento-feature bento-pos" role="listitem">
           <div className="pos-split">
             <div className="pos-split-text">
               <div className="card-icon" aria-hidden="true">
@@ -49,7 +50,7 @@ export function BentoGrid() {
           </div>
         </article>
 
-        {/* Row 2 */}
+        {/* Row 2 — Unlimited calls */}
         <article className="bento-card bento-2x bento-feature" role="listitem">
           <div className="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -68,7 +69,90 @@ export function BentoGrid() {
           <CallLines />
         </article>
 
-        {/* Row 3 — Memory card (shader stubbed; real mount lands in 2.10) */}
+        {/* Row 2 — Multilingual */}
+        <article className="bento-card bento-2x bento-feature bento-lang" role="listitem">
+          <div className="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+              <path
+                d="M3 12h18M12 3c2.5 2.4 3.9 5.6 4 9-.1 3.4-1.5 6.6-4 9-2.5-2.4-3.9-5.6-4-9 .1-3.4 1.5-6.6 4-9Z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <h3 className="card-title">50+ languages.</h3>
+          <p className="card-body">
+            Jenna can be tuned to speak almost any language — she detects each caller's language
+            automatically and replies in kind.
+          </p>
+
+          <LanguageGrid />
+        </article>
+
+        {/* Row 3 — Texts */}
+        <article className="bento-card bento-2x bento-feature" role="listitem">
+          <div className="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3.5" y="5" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M7 10h7M7 14h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </div>
+          <h3 className="card-title">Sends automated texts.</h3>
+          <p className="card-body">Order review, confirmations, reservations and more.</p>
+
+          <SmsAnimatedList />
+        </article>
+
+        {/* Row 3 — Transfers */}
+        <article className="bento-card bento-2x bento-feature" role="listitem">
+          <div className="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M4 12h12m0 0l-4-4m4 4l-4 4M16 6h4v12h-4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <h3 className="card-title">Transfers calls the right way.</h3>
+          <p className="card-body">She tells you who's calling and why before handing it over.</p>
+
+          <div className="handoff-card" aria-hidden="true">
+            <div className="handoff-call">
+              <div className="handoff-avatar">V</div>
+              <div className="handoff-meta">
+                <div className="handoff-label">Incoming call</div>
+                <div className="handoff-name">Vendor: Friday delivery</div>
+              </div>
+              <div className="handoff-status">
+                <span className="status-dot status-dot-live" />
+                Screened
+              </div>
+            </div>
+
+            <div className="handoff-summary">
+              <div className="handoff-summary-label">Jenna brief</div>
+              <p>"Asking if the manager can confirm tomorrow's produce drop."</p>
+              <div className="handoff-tags">
+                <span>Vendor</span>
+                <span>Delivery</span>
+                <span>Needs manager</span>
+              </div>
+            </div>
+
+            <div className="handoff-route">
+              <span className="handoff-route-from">Jenna</span>
+              <span className="handoff-route-line" />
+              <span className="handoff-route-to">Manager ready</span>
+            </div>
+          </div>
+        </article>
+
+        {/* Row 3 — Remembers */}
         <article className="bento-card bento-2x bento-memory bento-feature" role="listitem">
           <div className="card-icon memory-folder-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
@@ -118,65 +202,6 @@ export function BentoGrid() {
                 </div>
               </li>
             </ul>
-          </div>
-        </article>
-
-        <article className="bento-card bento-2x" role="listitem">
-          <div className="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3.5" y="5" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M7 10h7M7 14h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </div>
-          <h3 className="card-title">Sends automated texts.</h3>
-          <p className="card-body">Order review, confirmations, reservations and more.</p>
-
-          <SmsAnimatedList />
-        </article>
-
-        <article className="bento-card bento-2x" role="listitem">
-          <div className="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path
-                d="M4 12h12m0 0l-4-4m4 4l-4 4M16 6h4v12h-4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <h3 className="card-title">Transfers calls the right way.</h3>
-          <p className="card-body">She tells you who's calling and why before handing it over.</p>
-
-          <div className="handoff-card" aria-hidden="true">
-            <div className="handoff-call">
-              <div className="handoff-avatar">V</div>
-              <div className="handoff-meta">
-                <div className="handoff-label">Incoming call</div>
-                <div className="handoff-name">Vendor: Friday delivery</div>
-              </div>
-              <div className="handoff-status">
-                <span className="status-dot status-dot-live" />
-                Screened
-              </div>
-            </div>
-
-            <div className="handoff-summary">
-              <div className="handoff-summary-label">Jenna brief</div>
-              <p>"Asking if the manager can confirm tomorrow's produce drop."</p>
-              <div className="handoff-tags">
-                <span>Vendor</span>
-                <span>Delivery</span>
-                <span>Needs manager</span>
-              </div>
-            </div>
-
-            <div className="handoff-route">
-              <span className="handoff-route-from">Jenna</span>
-              <span className="handoff-route-line" />
-              <span className="handoff-route-to">Manager ready</span>
-            </div>
           </div>
         </article>
       </div>
