@@ -429,6 +429,25 @@
   100% { box-shadow: 0 0 0 0   rgba(34, 211, 164, 0); }
 }
 
+/* Hero orbit — ambient drift for the floating call-story cards. Three
+   variants with slightly different paths/timing so the satellites never
+   bob in lockstep. Applied to an inner wrapper so this transform never
+   collides with the framer-motion reveal transform on the outer node. */
+@keyframes orbit-float-a {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(0, -8px, 0) rotate(-0.6deg); }
+}
+
+@keyframes orbit-float-b {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50%      { transform: translate3d(0, 7px, 0) rotate(0.6deg); }
+}
+
+@keyframes orbit-float-c {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -6px, 0); }
+}
+
 /* ============================================================
    Component classes (ported verbatim from /styles.css)
    ============================================================
@@ -3035,7 +3054,10 @@
      following section covers it for the cropped-at-boundary effect. */
   .hero-phone {
     position: relative;
-    width: min(100%, 380px);
+    /* Narrowed from 380px so the floating orbit cards (HeroOrbit) have a
+       side gutter to peek into without forcing horizontal scroll on
+       phones. Desktop width is overridden in the ≥960 split layout. */
+    width: min(88%, 340px);
     aspect-ratio: 433 / 400;
     margin-top: 2rem;
     margin-inline: auto;
@@ -3053,6 +3075,181 @@
   .iphone-screen-slot {
     container-type: inline-size;
     container-name: phone-screen;
+  }
+
+  /* ----------------------------------------------------------
+     Hero orbit — floating call conversation (HeroOrbit widget).
+       Decorative layer pinned over the iPhone column. Two large
+       chat bubbles (caller + Jenna) play out one order call, with
+       a Toast POS badge and stat chips orbiting around them. Items
+       are absolutely placed in the negative space around the phone;
+       all positions stay in the upper band so nothing falls below
+       the crop line where `.features` overlaps. Reveal transforms
+       live on framer-motion's outer node; .orbit-float handles the
+       ambient drift on an inner wrapper. Mobile placement + desktop
+       fan-out are tuned in the media queries below.
+     ---------------------------------------------------------- */
+  .hero-orbit {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .orbit-item {
+    position: absolute;
+    /* Size to content so right-/left-anchored items overflow the phone
+       box into the gutter instead of being shrink-wrapped to the sliver
+       between the anchor and the box edge (which crushes bubbles to one
+       word per line). The bubble's own max-width still controls wrap. */
+    width: max-content;
+    will-change: transform, opacity;
+  }
+
+  .orbit-float {
+    animation: orbit-float-a 7s var(--ease) infinite;
+  }
+  .orbit-float-b { animation-name: orbit-float-b; animation-duration: 8.5s; animation-delay: -1.5s; }
+  .orbit-float-c { animation-name: orbit-float-c; animation-duration: 6.5s; animation-delay: -0.8s; }
+
+  /* Conversation turn — sender pfp + message bubble. Caller reads
+     [avatar][bubble]; Jenna flips to [bubble][logo] via DOM order. */
+  .orbit-turn {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .orbit-pfp {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+    margin-right: -12px;
+    box-shadow:
+      0 6px 16px -8px var(--shadow-strong),
+      0 0 0 3px var(--bg);
+  }
+
+  .orbit-pfp img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Jenna sender mark — the brand "J" avatar, matching the dashboard
+     header chip (`.ps-avatar-brand`): solid accent circle, white J. */
+  .orbit-pfp-jenna {
+    display: grid;
+    place-items: center;
+    margin-right: 0;
+    margin-left: -12px;
+    background: var(--accent);
+    color: var(--ink-on-accent);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    box-shadow:
+      0 6px 16px -8px var(--shadow-strong),
+      0 0 0 3px var(--bg);
+  }
+
+  .orbit-msg {
+    margin: 0;
+    padding: 0.5rem 0.72rem;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: 0.01em;
+    /* Wide enough that the longest line ("Hey, um, can I get 2…") wraps
+       to exactly two lines at this font size rather than stacking into a
+       tall sliver. */
+    max-width: 156px;
+    border-radius: 14px;
+    box-shadow:
+      0 14px 34px -16px var(--shadow-strong),
+      0 3px 10px -6px var(--shadow-soft);
+  }
+
+  .orbit-msg-caller {
+    background: var(--surface);
+    color: var(--fg);
+    border-bottom-left-radius: 5px;
+  }
+
+  .orbit-msg-jenna {
+    background: var(--accent);
+    color: var(--ink-on-accent);
+    border-bottom-right-radius: 5px;
+  }
+
+  /* Toast POS mark — the actual app icon, nothing else. The source PNG
+     has black corners (not transparent), so we clip with a rounded
+     radius to crop them off, leaving a clean app-icon tile floating on
+     a transparent background. */
+  .orbit-toast {
+    display: block;
+    width: 46px;
+    height: 46px;
+    border-radius: 23%;
+    overflow: hidden;
+    box-shadow:
+      0 12px 28px -12px var(--shadow-strong),
+      0 3px 10px -6px var(--shadow-soft);
+  }
+
+  .orbit-toast img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Stat chips — small floating pills */
+  .orbit-chip-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 13px;
+    border-radius: var(--r-pill);
+    background: var(--surface);
+    box-shadow:
+      0 12px 28px -14px var(--shadow-strong),
+      0 2px 8px -5px var(--shadow-soft);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  .orbit-chip-star {
+    width: 13px;
+    height: 13px;
+    color: #f5b301;
+    fill: #f5b301;
+  }
+
+  /* Phone-first placement (<640px) — there isn't room beside the
+     narrowed phone to sit fully outside it, so the two small bubbles
+     tuck against the top-left / right edges with only a sliver of
+     overlap. The Toast badge + chips need real gutter space, so they
+     wait for the ≥640 tablet fan-out + ≥960 desktop fan-out below. */
+  .orbit-caller { top: -5%; left: -1%; }
+  .orbit-jenna  { top: 30%; right: -1%; }
+  /* Toast logo floats top-right — kept high so it stays inside the
+     visible band (the lower phone is cropped by `.features` on phones). */
+  .orbit-pos    { top: 6%; right: 2%; left: auto; }
+  .orbit-chip-order,
+  .orbit-chip-rating { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-float { animation: none; }
   }
 
   /* ----------------------------------------------------------
@@ -3887,6 +4084,31 @@
 }
 
 
+/* Hero orbit — tablet fan-out (640–959). The layout is still the
+   stacked single column, but the narrowed phone (88% / 340px max) now
+   leaves real gutters on either side, so the bubbles move OUT of the
+   phone into that gutter (caller left, Jenna + Toast right) instead of
+   overlaying the screen. Anchored to the phone edges so only a sliver
+   overlaps. */
+@media (min-width: 640px) and (max-width: 959px) {
+  .orbit-msg { font-size: 13px; max-width: 156px; padding: 0.6rem 0.8rem; }
+  .orbit-pfp { width: 36px; height: 36px; }
+  .orbit-pfp-jenna { font-size: 16px; }
+
+  .orbit-caller { top: 2%; right: 94%; left: auto; }
+  .orbit-jenna  { top: 26%; left: 92%; right: auto; }
+  /* Toast kept high (lower phone is cropped at this width). */
+  .orbit-pos {
+    display: block;
+    top: 2%;
+    left: 89%;
+    right: auto;
+  }
+  .orbit-chip-order,
+  .orbit-chip-rating { display: none; }
+}
+
+
 /* Hero split layout — desktop (≥960) puts the iPhone next to the copy.
    Below this, everything stacks centered (the default `.hero-inner`
    layout above already handles that). */
@@ -3989,6 +4211,28 @@
     height: auto;
     max-width: 100%;
   }
+
+  /* Hero orbit — desktop fan-out. The split layout opens negative space
+     to the LEFT of the phone (the copy gap), so the conversation + Toast
+     badge live there, anchored to the phone's left edge with only a
+     sliver of overlap. The two small stat chips ride the right edge /
+     page gutter. Every offset keeps items in the upper band, above the
+     crop line where `.features` overlaps the phone. */
+  .orbit-pfp { width: 42px; height: 42px; }
+  .orbit-pfp-jenna { font-size: 17px; }
+
+  .orbit-msg {
+    font-size: 14.5px;
+    max-width: 208px;
+    padding: 0.7rem 0.9rem;
+    border-radius: 18px;
+  }
+
+  .orbit-caller { top: 6%;  right: 96%; left: auto; }
+  .orbit-jenna  { top: 40%; right: 93%; left: auto; }
+  .orbit-pos         { display: flex;  top: 66%; right: 92%; left: auto; }
+  .orbit-chip-order  { display: block; top: 16%; left: 88%; right: auto; }
+  .orbit-chip-rating { display: block; top: 73%; left: 82%; right: auto; }
 }
 
 

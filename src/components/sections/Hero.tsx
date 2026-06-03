@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Glass } from '@/components/ui/glass'
 import { Iphone } from '@/components/ui/iphone'
 import { BackgroundPaths } from '@/components/widgets/BackgroundPaths'
+import { HeroOrbit } from '@/components/widgets/HeroOrbit'
 import { PhoneScreen } from '@/components/widgets/PhoneScreen'
 
 // Hero — split layout. Desktop puts the copy column (title, sub, CTA,
@@ -61,6 +62,7 @@ export function Hero() {
           <Iphone className="hero-phone-iphone">
             <PhoneScreen />
           </Iphone>
+          <HeroOrbit />
         </div>
       </div>
     </section>
