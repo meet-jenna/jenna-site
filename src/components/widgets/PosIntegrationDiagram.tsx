@@ -51,7 +51,7 @@ const PosMark = ({ src, alt = '' }: { src: string; alt?: string }) => (
 )
 
 const JennaMark = () => (
-  <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--accent)] shadow-[0_0_24px_-6px_rgba(28,0,255,0.6)]">
+  <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--brand)] shadow-[0_0_24px_-6px_rgba(28,0,255,0.6)]">
     <span
       className="text-[30px] font-bold leading-none text-white"
       style={{ fontFamily: 'var(--font-sans)' }}

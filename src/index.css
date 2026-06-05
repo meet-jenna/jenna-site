@@ -23,71 +23,73 @@
 :root {
   color-scheme: light;
 
-  /* ─── Surfaces ────────────────────────────────────────────── */
-  --bg: #fafbff;
-  --bg-elev: #eff3fa;
-  --bg-elev-2: #eff3fa;
-  --surface: #fdfdff;
-  --surface-2: #eff3fa;
-  --surface-translucent: rgba(250, 251, 255, 0.82);
+  /* ─── Surfaces — pure white + neutral gray (no blue cast) ───── */
+  --bg: #ffffff;
+  --bg-elev: #f4f5f6;
+  --bg-elev-2: #f4f5f6;
+  --surface: #ffffff;
+  --surface-2: #f4f5f6;
+  --surface-translucent: rgba(255, 255, 255, 0.82);
 
-  /* Section rotation — canvas ↔ cloud alternation.
-     Hero uses --hero-bg (deeper blue stage) for phone contrast. */
-  --bg-contrast: #eff3fa;
-  --bg-paper: #fdfdff;
-  --hero-bg: #e4ebf8;
+  /* Section rotation — white ↔ light gray alternation. */
+  --bg-contrast: #f4f5f6;
+  --bg-paper: #ffffff;
+  --hero-bg: #eeeff1;
 
-  /* Hairlines — cool blue grays */
-  --hairline: #d8e0ef;
-  --hairline-strong: #aebbd4;
+  /* Hairlines — neutral grays */
+  --hairline: #e4e5e8;
+  --hairline-strong: #c9cbcf;
 
-  /* ─── Text — cool ink stack ───────────────────────────────── */
-  --fg: #151a24;
-  --fg-muted: #2c3344;
-  --fg-soft: #4e596e;
-  --fg-faint: #7a869c;
+  /* ─── Text — neutral ink stack ────────────────────────────── */
+  --fg: #17181a;
+  --fg-muted: #2c2e33;
+  --fg-soft: #565961;
+  --fg-faint: #868a92;
 
-  /* ─── Brand — single chromatic accent ─────────────────────────
-     Jenna brand violet (#1c00ff). Used exclusively for primary CTAs,
-     interactive cues, brand gradients (avatars, waveforms, brand-mark).
-     Exemptions documented in the .cursorrules notes:
-       - .rainbow-btn keeps its multi-color stack
-       - memory-profile avatars keep tone-coded (pink/teal/lime)
-     ─────────────────────────────────────────────────────────── */
-  --accent: #1c00ff;
-  --accent-bright: #4d3aff;
-  --accent-deep: #1200a3;
-  --accent-glow: rgba(28, 0, 255, 0.14);
+  /* ─── Brand blue — the ONLY chromatic color in the system ─────
+     Reserved exclusively for the Jenna logo and the "J in a circle"
+     marks (.ps-avatar-brand, .orbit-pfp-jenna, PosIntegrationDiagram
+     JennaMark). Everything else is monochrome white/gray/ink. */
+  --brand: #1c00ff;
+  --brand-fg: #ffffff;
 
-  /* Status — kept as semantic system extension (live-call cue) */
-  --live: #0fa674;
-  --live-glow: rgba(15, 166, 116, 0.24);
+  /* ─── Accent — neutralized to ink (monochrome) ────────────────
+     Primary CTAs, interactive cues and former-brand gradients now
+     render as near-black ink on white. No chroma. */
+  --accent: #17181a;
+  --accent-bright: #2c2e33;
+  --accent-deep: #050507;
+  --accent-glow: rgba(23, 24, 26, 0.12);
+
+  /* Status — neutralized (no green) */
+  --live: #565961;
+  --live-glow: rgba(23, 24, 26, 0.18);
 
   /* Theme-aware atoms */
   --ink: #ffffff;
   --ink-on-accent: #ffffff;
 
-  /* Overlays — cool blue-black veils */
-  --overlay-1: rgba(21, 26, 36, 0.022);
-  --overlay-2: rgba(21, 26, 36, 0.034);
-  --overlay-3: rgba(21, 26, 36, 0.044);
-  --overlay-4: rgba(21, 26, 36, 0.054);
-  --overlay-5: rgba(21, 26, 36, 0.068);
-  --overlay-border: rgba(21, 26, 36, 0.12);
+  /* Overlays — neutral black veils */
+  --overlay-1: rgba(23, 24, 26, 0.022);
+  --overlay-2: rgba(23, 24, 26, 0.034);
+  --overlay-3: rgba(23, 24, 26, 0.044);
+  --overlay-4: rgba(23, 24, 26, 0.054);
+  --overlay-5: rgba(23, 24, 26, 0.068);
+  --overlay-border: rgba(23, 24, 26, 0.12);
 
   --inset-card: transparent;
   --inset-card-2: transparent;
 
-  --grid-stroke: rgba(28, 0, 255, 0.035);
+  --grid-stroke: rgba(23, 24, 26, 0.035);
 
-  /* Shadows — subtle blue cast */
-  --shadow-soft: rgba(15, 25, 60, 0.08);
-  --shadow-strong: rgba(15, 25, 60, 0.1);
-  --shadow-xl: 0px 0px 60px -13px rgba(15, 25, 60, 0.1);
+  /* Shadows — neutral gray */
+  --shadow-soft: rgba(0, 0, 0, 0.08);
+  --shadow-strong: rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.1);
 
-  /* Nav — cool blue-white glass (tinted to hero/canvas, not neutral white) */
-  --nav-bg-1: rgba(248, 250, 255, 0.64);
-  --nav-bg-2: rgba(228, 235, 248, 0.36);
+  /* Nav — neutral white glass */
+  --nav-bg-1: rgba(255, 255, 255, 0.64);
+  --nav-bg-2: rgba(244, 245, 246, 0.36);
 
   /* Glass surface — shared by nav island + reusable Glass primitive */
   --glass-bg: linear-gradient(
@@ -103,8 +105,8 @@
   --glass-highlight: rgba(255, 255, 255, 0.82);
   --glass-rim: rgba(255, 255, 255, 0.42);
   --glass-shadow:
-    0 18px 52px -18px rgba(15, 25, 60, 0.26),
-    0 6px 16px -6px rgba(15, 25, 60, 0.14);
+    0 18px 52px -18px rgba(0, 0, 0, 0.18),
+    0 6px 16px -6px rgba(0, 0, 0, 0.1);
   --glass-inset:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(255, 255, 255, 0.28);
@@ -113,16 +115,16 @@
   --glass-button-bg-1: rgba(255, 255, 255, 0.84);
   --glass-button-bg-2: rgba(255, 255, 255, 0.58);
   --glass-button-blur: 18px;
-  --glass-button-shadow: 0 4px 14px -4px rgba(15, 25, 60, 0.18);
+  --glass-button-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.14);
   --glass-button-inset: inset 0 1px 0 rgba(255, 255, 255, 0.98);
   --glass-button-hover-bg-1: rgba(255, 255, 255, 0.94);
   --glass-button-hover-bg-2: rgba(255, 255, 255, 0.68);
 
-  --btn-primary-glow: rgba(28, 0, 255, 0.16);
-  --btn-primary-glow-strong: rgba(28, 0, 255, 0.24);
+  --btn-primary-glow: rgba(23, 24, 26, 0.16);
+  --btn-primary-glow-strong: rgba(23, 24, 26, 0.24);
 
-  --card-tint: rgba(28, 0, 255, 0.045);
-  --card-edge: linear-gradient(180deg, rgba(21, 26, 36, 0.06), transparent 1px);
+  --card-tint: rgba(23, 24, 26, 0.04);
+  --card-edge: linear-gradient(180deg, rgba(23, 24, 26, 0.06), transparent 1px);
 
   --glow-opacity: 0.38;
 
@@ -176,14 +178,14 @@
      Per design call: the Magic UI rainbow CTA on the live-call
      card has its own color stack and is exempt from the
      single-accent rule. Do not migrate to brand violet. */
-  --rainbow-color-1: hsl(0 100% 63%);
-  --rainbow-color-2: hsl(270 100% 63%);
-  --rainbow-color-3: hsl(210 100% 63%);
-  --rainbow-color-4: hsl(195 100% 63%);
-  --rainbow-color-5: hsl(90 100% 63%);
-  --rainbow-fill: #eff3fa;
-  --rainbow-fill-fade: rgba(239, 243, 250, 0.62);
-  --rainbow-fg: #151a24;
+  --rainbow-color-1: hsl(0 0% 18%);
+  --rainbow-color-2: hsl(0 0% 32%);
+  --rainbow-color-3: hsl(0 0% 50%);
+  --rainbow-color-4: hsl(0 0% 32%);
+  --rainbow-color-5: hsl(0 0% 18%);
+  --rainbow-fill: #f4f5f6;
+  --rainbow-fill-fade: rgba(244, 245, 246, 0.62);
+  --rainbow-fg: #17181a;
 
   /* Footer divider — flips per theme so it stays subtle on whichever
      surface (dark in light theme, light in dark theme). */
@@ -213,56 +215,59 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* ─── Surfaces ────────────────────────────────────────────── */
-  --bg: #070b14;
-  --bg-elev: #0f1524;
-  --bg-elev-2: #0f1524;
-  --surface: #0c101c;
-  --surface-2: #121926;
-  --surface-translucent: rgba(7, 11, 20, 0.82);
-  --bg-contrast: #121926;
-  --bg-paper: #0c101c;
-  --hero-bg: #151d30;
+  /* ─── Surfaces — neutral dark gray (no blue cast) ───────────── */
+  --bg: #0e0f11;
+  --bg-elev: #17181b;
+  --bg-elev-2: #17181b;
+  --surface: #121315;
+  --surface-2: #1b1c1f;
+  --surface-translucent: rgba(14, 15, 17, 0.82);
+  --bg-contrast: #1b1c1f;
+  --bg-paper: #121315;
+  --hero-bg: #1f2023;
 
-  /* Hairlines — blue slate */
-  --hairline: #1e2a42;
-  --hairline-strong: #2d3f5c;
+  /* Hairlines — neutral slate */
+  --hairline: #2a2c30;
+  --hairline-strong: #3a3d42;
 
-  /* ─── Text — cool moonlight stack ─────────────────────────── */
-  --fg: #eef2fa;
-  --fg-muted: #c5cde0;
-  --fg-soft: #8b97b0;
-  --fg-faint: #5c6880;
+  /* ─── Text — neutral moonlight stack ──────────────────────── */
+  --fg: #f3f4f6;
+  --fg-muted: #d2d4d8;
+  --fg-soft: #9a9da4;
+  --fg-faint: #6a6d74;
 
-  /* ─── Brand — single chromatic accent (unchanged) ────────────
-     Violet stays #1c00ff. Glow strengthens on dark. */
-  --accent-glow: rgba(28, 0, 255, 0.35);
+  /* ─── Accent — neutralized to light ink for dark surfaces ──── */
+  --accent: #f3f4f6;
+  --accent-bright: #ffffff;
+  --accent-deep: #d2d4d8;
+  --accent-glow: rgba(243, 244, 246, 0.18);
+  --ink-on-accent: #0e0f11;
 
-  /* Status — brighter green on dark for legibility */
-  --live: #22d3a4;
-  --live-glow: rgba(34, 211, 164, 0.45);
+  /* Status — neutralized (no green) */
+  --live: #9a9da4;
+  --live-glow: rgba(243, 244, 246, 0.22);
 
   /* Theme-aware atoms */
-  --ink: #070b14;
+  --ink: #0e0f11;
 
-  /* Overlays — cool white veils on navy */
-  --overlay-1: rgba(238, 242, 250, 0.025);
-  --overlay-2: rgba(238, 242, 250, 0.035);
-  --overlay-3: rgba(238, 242, 250, 0.045);
-  --overlay-4: rgba(238, 242, 250, 0.055);
-  --overlay-5: rgba(238, 242, 250, 0.07);
-  --overlay-border: rgba(238, 242, 250, 0.14);
+  /* Overlays — neutral white veils on gray */
+  --overlay-1: rgba(243, 244, 246, 0.025);
+  --overlay-2: rgba(243, 244, 246, 0.035);
+  --overlay-3: rgba(243, 244, 246, 0.045);
+  --overlay-4: rgba(243, 244, 246, 0.055);
+  --overlay-5: rgba(243, 244, 246, 0.07);
+  --overlay-border: rgba(243, 244, 246, 0.14);
 
-  --grid-stroke: rgba(28, 0, 255, 0.08);
+  --grid-stroke: rgba(243, 244, 246, 0.06);
 
   /* Shadows — deep navy cast */
   --shadow-soft: rgba(0, 0, 0, 0.45);
   --shadow-strong: rgba(0, 0, 0, 0.5);
   --shadow-xl: 0px 0px 60px -13px rgba(0, 0, 0, 0.55);
 
-  /* Nav — blue-tinted glass */
-  --nav-bg-1: rgba(18, 26, 44, 0.88);
-  --nav-bg-2: rgba(7, 11, 20, 0.6);
+  /* Nav — neutral dark glass */
+  --nav-bg-1: rgba(27, 28, 31, 0.88);
+  --nav-bg-2: rgba(14, 15, 17, 0.6);
 
   --glass-bg: linear-gradient(
     180deg,
@@ -291,18 +296,18 @@
   --glass-button-hover-bg-1: rgba(88, 90, 102, 0.94);
   --glass-button-hover-bg-2: rgba(58, 60, 72, 0.72);
 
-  --btn-primary-glow: rgba(28, 0, 255, 0.3);
-  --btn-primary-glow-strong: rgba(28, 0, 255, 0.4);
+  --btn-primary-glow: rgba(243, 244, 246, 0.22);
+  --btn-primary-glow-strong: rgba(243, 244, 246, 0.32);
 
-  --card-tint: rgba(28, 0, 255, 0.08);
-  --card-edge: linear-gradient(180deg, rgba(238, 242, 250, 0.08), transparent 1px);
+  --card-tint: rgba(243, 244, 246, 0.06);
+  --card-edge: linear-gradient(180deg, rgba(243, 244, 246, 0.08), transparent 1px);
 
   --glow-opacity: 0.55;
 
-  /* Rainbow CTA — fill matches dark cloud surface */
-  --rainbow-fill: #121926;
-  --rainbow-fill-fade: rgba(18, 25, 38, 0.62);
-  --rainbow-fg: #eef2fa;
+  /* Rainbow CTA — neutral dark surface */
+  --rainbow-fill: #1b1c1f;
+  --rainbow-fill-fade: rgba(27, 28, 31, 0.62);
+  --rainbow-fg: #f3f4f6;
 
   /* Footer divider — dark-tinted on light footer. */
   --footer-divider: rgba(0, 0, 0, 0.08);
@@ -564,7 +569,7 @@
     border-radius: inherit;
     background: linear-gradient(
       0deg,
-      rgba(15, 25, 60, 0.1) 0%,
+      rgba(0, 0, 0, 0.08) 0%,
       transparent 42%
     );
     pointer-events: none;
@@ -632,7 +637,7 @@
     );
     transform: translateY(-1px);
     box-shadow:
-      0 6px 18px -4px rgba(15, 25, 60, 0.22),
+      0 6px 18px -4px rgba(0, 0, 0, 0.18),
       var(--glass-button-inset);
   }
 
@@ -1114,9 +1119,9 @@
 
   .bento-card .bg-white {
     box-shadow:
-      0 0 0 1px rgba(21, 26, 36, 0.04),
-      0 2px 4px rgba(15, 25, 60, 0.04),
-      0 12px 24px rgba(15, 25, 60, 0.05) !important;
+      0 0 0 1px rgba(23, 24, 26, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 12px 24px rgba(0, 0, 0, 0.05) !important;
   }
 
   [data-theme="dark"] .bento-card .bg-white {
@@ -1334,7 +1339,7 @@
     background: var(--surface-2);
     box-shadow:
       0 0 0 1px var(--hairline),
-      0 2px 6px rgba(15, 25, 60, 0.06);
+      0 2px 6px rgba(0, 0, 0, 0.06);
     font-size: clamp(20px, 2.2vw, 26px);
     line-height: 1;
     user-select: none;
@@ -1345,7 +1350,7 @@
     transform: translateY(-2px);
     box-shadow:
       0 0 0 1px var(--hairline-strong),
-      0 6px 14px rgba(15, 25, 60, 0.1);
+      0 6px 14px rgba(0, 0, 0, 0.1);
   }
 
   .lang-chip-more {
@@ -1387,9 +1392,9 @@
     min-height: 220px;
     border: none;
     background:
-      radial-gradient(120% 90% at 30% 20%, rgba(237, 64, 179, 0.55), transparent 60%),
-      radial-gradient(120% 90% at 80% 80%, rgba(110, 247, 204, 0.45), transparent 60%),
-      linear-gradient(135deg, #1a0033 0%, #060611 100%);
+      radial-gradient(120% 90% at 30% 20%, rgba(243, 244, 246, 0.18), transparent 60%),
+      radial-gradient(120% 90% at 80% 80%, rgba(243, 244, 246, 0.12), transparent 60%),
+      linear-gradient(135deg, #1b1c1f 0%, #0e0f11 100%);
   }
 
   /* Shader wrapper — fills the .memory-visual parent. The
@@ -1437,8 +1442,8 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #6ef7cc;
-    box-shadow: 0 0 8px #6ef7cc;
+    background: #f3f4f6;
+    box-shadow: 0 0 8px rgba(243, 244, 246, 0.7);
     animation: memory-pulse 1.8s ease-in-out infinite;
   }
 
@@ -1490,23 +1495,23 @@
   }
 
   .memory-profile-avatar[data-tone="pink"] {
-    background: linear-gradient(140deg, #ed40b3, #b054de);
-    box-shadow: 0 0 12px -3px rgba(237, 64, 179, 0.55);
+    background: linear-gradient(140deg, #6a6d74, #44464b);
+    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
     color: #fff;
   }
   .memory-profile-avatar[data-tone="teal"] {
-    background: linear-gradient(140deg, #6ef7cc, #2a9d8f);
-    box-shadow: 0 0 12px -3px rgba(110, 247, 204, 0.55);
-    color: #08221c;
+    background: linear-gradient(140deg, #9a9da4, #6a6d74);
+    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
+    color: #fff;
   }
   .memory-profile-avatar[data-tone="lime"] {
-    background: linear-gradient(140deg, #adfa1e, #6ec80a);
-    box-shadow: 0 0 12px -3px rgba(173, 250, 30, 0.55);
-    color: #1d2c00;
+    background: linear-gradient(140deg, #b6b8bd, #868a92);
+    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
+    color: #17181a;
   }
   .memory-profile-avatar[data-tone="violet"] {
-    background: linear-gradient(140deg, #b054de, #6e34a8);
-    box-shadow: 0 0 12px -3px rgba(176, 84, 222, 0.55);
+    background: linear-gradient(140deg, #565961, #2c2e33);
+    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
     color: #fff;
   }
 
@@ -1544,8 +1549,8 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #6ef7cc;
-    box-shadow: 0 0 8px #6ef7cc;
+    background: var(--fg-faint);
+    box-shadow: 0 0 8px rgba(23, 24, 26, 0.25);
     margin-left: 0.25rem;
     flex-shrink: 0;
     animation: memory-pulse 1.8s ease-in-out infinite;
@@ -1787,8 +1792,8 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--live);
-    background: rgba(15, 166, 116, 0.08);
-    border: 1px solid rgba(15, 166, 116, 0.2);
+    background: rgba(23, 24, 26, 0.06);
+    border: 1px solid rgba(23, 24, 26, 0.16);
     border-radius: var(--r-pill);
   }
 
@@ -2281,7 +2286,7 @@
   }
 
   .sign-pos {
-    background: rgba(15, 166, 116, 0.12);
+    background: rgba(23, 24, 26, 0.08);
     color: var(--live);
   }
 
@@ -3069,7 +3074,7 @@
     inset: 0 auto auto 0;
     width: 100%;
     max-width: none;
-    filter: drop-shadow(0 14px 28px rgba(15, 25, 60, 0.16));
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.16));
   }
 
   .iphone-screen-slot {
@@ -3148,8 +3153,8 @@
     place-items: center;
     margin-right: 0;
     margin-left: -12px;
-    background: var(--accent);
-    color: var(--ink-on-accent);
+    background: var(--brand);
+    color: var(--brand-fg);
     font-family: var(--font-sans);
     font-weight: 700;
     font-size: 14px;
@@ -3231,8 +3236,8 @@
   .orbit-chip-star {
     width: 13px;
     height: 13px;
-    color: #f5b301;
-    fill: #f5b301;
+    color: var(--fg);
+    fill: var(--fg);
   }
 
   /* Phone-first placement (<640px) — there isn't room beside the
@@ -3278,7 +3283,7 @@
     --fg-muted: #333333;
     --fg-soft: #5d5d5d;
     --fg-faint: #888888;
-    --card-tint: rgba(28, 0, 255, 0.03);
+    --card-tint: rgba(23, 24, 26, 0.03);
 
     position: relative;
     width: 100%;
@@ -3297,14 +3302,14 @@
 
   /* Dark theme — iOS-style blue-charcoal screen inside the mockup */
   [data-theme="dark"] .phone-screen {
-    --bg: #121926;
-    --bg-paper: #151d30;
-    --hairline: #1e2a42;
-    --fg: #eef2fa;
-    --fg-muted: #c5cde0;
-    --fg-soft: #8b97b0;
-    --fg-faint: #5c6880;
-    --card-tint: rgba(28, 0, 255, 0.12);
+    --bg: #17181b;
+    --bg-paper: #1f2023;
+    --hairline: #2a2c30;
+    --fg: #f3f4f6;
+    --fg-muted: #d2d4d8;
+    --fg-soft: #9a9da4;
+    --fg-faint: #6a6d74;
+    --card-tint: rgba(243, 244, 246, 0.1);
 
     background:
       radial-gradient(circle at 50% 0%, var(--card-tint), transparent 55%),
@@ -3335,8 +3340,8 @@
   }
 
   .ps-avatar-brand {
-    background: var(--accent);
-    color: var(--ink-on-accent);
+    background: var(--brand);
+    color: var(--brand-fg);
   }
 
   /* ─── 1 · Header ─────────────────────────────────────────────────

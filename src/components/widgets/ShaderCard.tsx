@@ -18,7 +18,7 @@ import { ColorPanels } from '@paper-design/shaders-react'
 const MemoColorPanels = React.memo(ColorPanels)
 
 const SHADER_PROPS: Partial<ComponentProps<typeof ColorPanels>> = {
-  colors: ['#ed40b3', '#6ef7cc', '#adfa1e', '#b054de'],
+  colors: ['#f3f4f6', '#c9cbcf', '#9a9da4', '#565961'],
   colorBack: '#ffffff00',
   density: 5.03,
   angle1: 0.68,
