@@ -26,28 +26,28 @@ const items: SmsItem[] = [
     description: 'Jenna',
     time: 'just now',
     icon: ReceiptText,
-    color: '#17181a',
+    color: '#00C9A7',
   },
   {
     name: 'Review order',
     description: 'Jenna',
     time: '2m ago',
     icon: Star,
-    color: '#565961',
+    color: '#FFB800',
   },
   {
     name: 'Book reservation',
     description: 'Jenna',
     time: '5m ago',
     icon: CalendarCheck,
-    color: '#868a92',
+    color: '#1E86FF',
   },
   {
     name: 'Coupon Code',
     description: 'Jenna',
     time: '8m ago',
     icon: MessageSquareText,
-    color: '#2c2e33',
+    color: '#1c00ff',
   },
 ]
 

@@ -1083,11 +1083,34 @@
 
   /* Bento grid — page-max-width container, 24px gutter (Shares element gap). */
   .bento {
+    /* The bento section keeps the full chromatic palette (brand violet
+       + green status). The rest of the site is monochrome — these
+       overrides re-introduce color only for descendants of .bento. */
+    --accent: #1c00ff;
+    --accent-bright: #4d3aff;
+    --accent-deep: #1200a3;
+    --accent-glow: rgba(28, 0, 255, 0.14);
+    --live: #0fa674;
+    --live-glow: rgba(15, 166, 116, 0.24);
+    --card-tint: rgba(28, 0, 255, 0.045);
+    --ink-on-accent: #ffffff;
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--element-gap);
     max-width: var(--page-max-width);
     margin: 0 auto;
+  }
+
+  [data-theme="dark"] .bento {
+    --accent: #1c00ff;
+    --accent-bright: #4d3aff;
+    --accent-deep: #1200a3;
+    --accent-glow: rgba(28, 0, 255, 0.35);
+    --live: #22d3a4;
+    --live-glow: rgba(34, 211, 164, 0.45);
+    --card-tint: rgba(28, 0, 255, 0.08);
+    --ink-on-accent: #ffffff;
   }
 
   .bento-2x { grid-column: span 2; }
@@ -1119,9 +1142,9 @@
 
   .bento-card .bg-white {
     box-shadow:
-      0 0 0 1px rgba(23, 24, 26, 0.04),
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 12px 24px rgba(0, 0, 0, 0.05) !important;
+      0 0 0 1px rgba(21, 26, 36, 0.04),
+      0 2px 4px rgba(15, 25, 60, 0.04),
+      0 12px 24px rgba(15, 25, 60, 0.05) !important;
   }
 
   [data-theme="dark"] .bento-card .bg-white {
@@ -1392,9 +1415,9 @@
     min-height: 220px;
     border: none;
     background:
-      radial-gradient(120% 90% at 30% 20%, rgba(243, 244, 246, 0.18), transparent 60%),
-      radial-gradient(120% 90% at 80% 80%, rgba(243, 244, 246, 0.12), transparent 60%),
-      linear-gradient(135deg, #1b1c1f 0%, #0e0f11 100%);
+      radial-gradient(120% 90% at 30% 20%, rgba(237, 64, 179, 0.55), transparent 60%),
+      radial-gradient(120% 90% at 80% 80%, rgba(110, 247, 204, 0.45), transparent 60%),
+      linear-gradient(135deg, #1a0033 0%, #060611 100%);
   }
 
   /* Shader wrapper — fills the .memory-visual parent. The
@@ -1442,8 +1465,8 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #f3f4f6;
-    box-shadow: 0 0 8px rgba(243, 244, 246, 0.7);
+    background: #6ef7cc;
+    box-shadow: 0 0 8px #6ef7cc;
     animation: memory-pulse 1.8s ease-in-out infinite;
   }
 
@@ -1495,23 +1518,23 @@
   }
 
   .memory-profile-avatar[data-tone="pink"] {
-    background: linear-gradient(140deg, #6a6d74, #44464b);
-    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
+    background: linear-gradient(140deg, #ed40b3, #b054de);
+    box-shadow: 0 0 12px -3px rgba(237, 64, 179, 0.55);
     color: #fff;
   }
   .memory-profile-avatar[data-tone="teal"] {
-    background: linear-gradient(140deg, #9a9da4, #6a6d74);
-    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
-    color: #fff;
+    background: linear-gradient(140deg, #6ef7cc, #2a9d8f);
+    box-shadow: 0 0 12px -3px rgba(110, 247, 204, 0.55);
+    color: #08221c;
   }
   .memory-profile-avatar[data-tone="lime"] {
-    background: linear-gradient(140deg, #b6b8bd, #868a92);
-    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
-    color: #17181a;
+    background: linear-gradient(140deg, #adfa1e, #6ec80a);
+    box-shadow: 0 0 12px -3px rgba(173, 250, 30, 0.55);
+    color: #1d2c00;
   }
   .memory-profile-avatar[data-tone="violet"] {
-    background: linear-gradient(140deg, #565961, #2c2e33);
-    box-shadow: 0 0 12px -3px rgba(23, 24, 26, 0.35);
+    background: linear-gradient(140deg, #b054de, #6e34a8);
+    box-shadow: 0 0 12px -3px rgba(176, 84, 222, 0.55);
     color: #fff;
   }
 
@@ -1549,8 +1572,8 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--fg-faint);
-    box-shadow: 0 0 8px rgba(23, 24, 26, 0.25);
+    background: #6ef7cc;
+    box-shadow: 0 0 8px #6ef7cc;
     margin-left: 0.25rem;
     flex-shrink: 0;
     animation: memory-pulse 1.8s ease-in-out infinite;
