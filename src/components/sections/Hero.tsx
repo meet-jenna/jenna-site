@@ -1,7 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
-import { Glass } from '@/components/ui/glass'
 import { Iphone } from '@/components/ui/iphone'
-import { BackgroundPaths } from '@/components/widgets/BackgroundPaths'
 import { HeroOrbit } from '@/components/widgets/HeroOrbit'
 import { PhoneScreen } from '@/components/widgets/PhoneScreen'
 
@@ -18,10 +16,8 @@ import { PhoneScreen } from '@/components/widgets/PhoneScreen'
 export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="hero-bg" aria-hidden="true">
-        <div className="glow glow-a" />
-        <div className="glow glow-b" />
-        <BackgroundPaths />
+      <div className="hero-backdrop" aria-hidden="true">
+        <div className="hero-backdrop-glow" />
       </div>
 
       <div className="hero-inner">
@@ -48,10 +44,10 @@ export function Hero() {
             className="hero-cta animate-fade-in motion-reduce:animate-none"
             style={{ animationDelay: '160ms' }}
           >
-            <Glass as="a" variant="button" className="btn nav-cta" href="#book">
+            <a className="btn btn-primary nav-cta" href="#book">
               Book a demo
               <ArrowUpRight className="nav-cta-icon" aria-hidden="true" />
-            </Glass>
+            </a>
           </div>
         </div>
 

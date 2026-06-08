@@ -2,12 +2,12 @@ import { ArrowUpRight } from 'lucide-react'
 import { Glass } from '@/components/ui/glass'
 import { ThemeToggle } from '@/components/widgets/ThemeToggle'
 
-// Always-floating header. A single translucent rounded rectangle hovers
-// at the top of the page with two slots:
-//   - Left:  brand chip wrapping the Jenna logo (small inner radius)
-//   - Right: theme toggle + ghost CTA (matching small inner radius)
-// The "chip-inside-pill" pattern (small radius nested in larger radius)
-// is the signature of the General Intelligence Co. nav this is based on.
+// Floating glass header (classic glassmorphism bar). A single wide,
+// translucent rounded rectangle hovers near the top with a soft drop
+// shadow. Three balanced slots via a 1fr/auto/1fr grid:
+//   - Left:   brand logo
+//   - Center: section nav links
+//   - Right:  Sign in + theme toggle + filled primary CTA
 //
 // Both brand-logo variants stay in markup; CSS toggles which is visible
 // based on the active [data-theme] on <html>.
@@ -41,6 +41,13 @@ export function Nav() {
           />
         </a>
 
+        <nav className="nav-links" aria-label="Primary">
+          <a href="#how">Features</a>
+          <a href="#savings">Savings</a>
+          <a href="#customize">Customize</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
         <div className="nav-actions">
           <a
             className="nav-signin"
@@ -50,10 +57,10 @@ export function Nav() {
             Sign in
           </a>
           <ThemeToggle />
-          <Glass as="a" variant="button" className="btn nav-cta" href="#book">
+          <a className="btn btn-primary nav-cta" href="#book">
             Book a demo
             <ArrowUpRight className="nav-cta-icon" aria-hidden="true" />
-          </Glass>
+          </a>
         </div>
       </Glass>
     </header>

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Star } from 'lucide-react'
 
 // HeroOrbit — floating call "conversation" that lives in the negative
 // space around the hero iPhone. Two large chat bubbles play out one
@@ -24,10 +23,31 @@ import { Star } from 'lucide-react'
 // so the conversation lingers on screen well after it finishes typing).
 const PHASE_MS = [3200, 3200, 3200, 9000]
 
+// Tracks a media query so reveals can branch on breakpoint — the Toast and
+// the food emojis are tossed in different directions depending on which side
+// of the phone the Toast rests on (top-right on phone/tablet, left on desktop).
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia(query)
+    const sync = () => setMatches(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [query])
+  return matches
+}
+
 export function HeroOrbit() {
   const reduceMotion = useReducedMotion()
+  const isMobile = useMediaQuery('(max-width: 639px)')
+  const isDesktop = useMediaQuery('(min-width: 960px)')
   const [phase, setPhase] = useState(reduceMotion ? PHASE_MS.length - 1 : 0)
   const timer = useRef<number | undefined>(undefined)
+
+  // Each time the Toast is thrown (phase advances to 1), bump a counter to
+  // (re)fire the food-emoji burst that follows it.
+  const [burst, setBurst] = useState(0)
 
   useEffect(() => {
     if (reduceMotion) return
@@ -38,11 +58,23 @@ export function HeroOrbit() {
     return () => window.clearTimeout(timer.current)
   }, [phase, reduceMotion])
 
+  useEffect(() => {
+    if (reduceMotion) return
+    if (phase === 1) setBurst((b) => b + 1)
+  }, [phase, reduceMotion])
+
   // Visible once the thread has advanced to (or past) the given phase.
   const at = (p: number) => reduceMotion || phase >= p
 
+  // Which side of the phone the Toast rests on — drives the toss origin for
+  // both the Toast and the food emojis.
+  const side: 'left' | 'right' = isDesktop ? 'left' : 'right'
+
   return (
     <div className="hero-orbit" aria-hidden="true">
+      {/* STORED — conversation bubbles (caller + Jenna). Uncomment this
+          block to restore the "Hey, um, can I get 2 pizzas and knots?" /
+          "Got it, placing your order now." thread.
       <OrbitItem className="orbit-caller" visible={at(1)} floatVariant="a">
         <div className="orbit-turn">
           <span className="orbit-pfp">
@@ -58,48 +90,128 @@ export function HeroOrbit() {
           <span className="orbit-pfp orbit-pfp-jenna">J</span>
         </div>
       </OrbitItem>
+      */}
 
-      <OrbitItem className="orbit-pos" visible={at(3)} floatVariant="c">
+      <OrbitItem
+        className="orbit-pos"
+        visible={at(1)}
+        floatVariant="c"
+        reveal="swing"
+        swingFrom={isMobile ? { x: -64, y: 72 } : undefined}
+      >
         <span className="orbit-toast">
           <img src="/assets/logos/pos/toast.png" alt="" width={72} height={72} />
         </span>
       </OrbitItem>
 
-      <OrbitItem className="orbit-chip orbit-chip-order" visible={at(3)} floatVariant="b">
-        <span className="orbit-chip-inner">+1 order</span>
-      </OrbitItem>
-      <OrbitItem className="orbit-chip orbit-chip-rating" visible={at(3)} floatVariant="a">
-        <span className="orbit-chip-inner">
-          <Star className="orbit-chip-star" /> 4.9
-        </span>
-      </OrbitItem>
+      {/* Food emojis — anchored at the Toast's resting spot, tossed out from
+          behind the phone 1s / 2s after the Toast, flying back into the logo
+          and shrinking away as if eaten. */}
+      {!reduceMotion && (
+        <div className="orbit-item orbit-emoji-anchor">
+          <ThrownEmoji char="🍕" label="pizza" burst={burst} delay={1} side={side} />
+          <ThrownEmoji char="🍔" label="hamburger" burst={burst} delay={2} side={side} />
+        </div>
+      )}
     </div>
   )
 }
 
+// A food emoji flung out from behind the phone that flies into the Toast logo
+// (the anchor's origin, i.e. x/y = 0) and shrinks away — like the logo eats
+// it. `burst` (re)triggers the flight via key remount; `delay` staggers the
+// two emojis; `side` flips the toss direction to come from the phone.
+function ThrownEmoji({
+  char,
+  label,
+  burst,
+  delay,
+  side,
+}: {
+  char: string
+  label: string
+  burst: number
+  delay: number
+  side: 'left' | 'right'
+}) {
+  // `from` = tucked behind the phone; `out` = the thrown-out apex (past the
+  // logo, away from the phone); both legs resolve back to 0,0 = the Toast.
+  const from = side === 'left' ? { x: 66, y: 28 } : { x: -62, y: 64 }
+  const out = side === 'left' ? { x: -30, y: -18 } : { x: 28, y: -30 }
+
+  return (
+    <motion.span
+      key={burst}
+      className="orbit-emoji"
+      role="img"
+      aria-label={label}
+      initial={{ opacity: 0, scale: 0.2, x: from.x, y: from.y, rotate: -40 }}
+      animate={
+        burst > 0
+          ? {
+              x: [from.x, out.x, 0, 0],
+              y: [from.y, out.y, 0, 0],
+              scale: [0.2, 1, 1, 0],
+              opacity: [0, 1, 1, 0],
+              rotate: [-40, 8, 0, 0],
+            }
+          : { opacity: 0 }
+      }
+      transition={
+        burst > 0
+          ? { duration: 1.5, delay, times: [0, 0.4, 0.85, 1], ease: 'easeInOut' }
+          : { duration: 0 }
+      }
+    >
+      {char}
+    </motion.span>
+  )
+}
+
 type FloatVariant = 'a' | 'b' | 'c'
+type Reveal = 'rise' | 'swing'
 
 function OrbitItem({
   className,
   visible,
   floatVariant,
+  reveal = 'rise',
+  swingFrom,
   children,
 }: {
   className: string
   visible: boolean
   floatVariant: FloatVariant
+  reveal?: Reveal
+  swingFrom?: { x: number; y: number }
   children: React.ReactNode
 }) {
+  // `swing` is the Toast logo's "thrown out from behind the phone" reveal:
+  // it starts tucked + tiny + rotated (occluded behind the device since the
+  // orbit layer sits below it), then a low-damping spring flings it out to
+  // its resting spot. `swingFrom` adds a translate so the logo actually
+  // travels along an arc (used on mobile to toss it up to the top-right);
+  // without it the reveal pivots in place via the CSS transform-origin.
+  // `rise` is the original gentle fade-up for the (disabled) chat bubbles.
+  const hidden =
+    reveal === 'swing'
+      ? { opacity: 0, scale: 0.3, rotate: -75, x: swingFrom?.x ?? 0, y: swingFrom?.y ?? 0 }
+      : { opacity: 0, y: 16, scale: 0.92 }
+  const shown =
+    reveal === 'swing'
+      ? { opacity: 1, scale: 1, rotate: 0, x: 0, y: 0 }
+      : { opacity: 1, y: 0, scale: 1 }
+  const transition =
+    reveal === 'swing'
+      ? { type: 'spring' as const, stiffness: 200, damping: 12, mass: 1 }
+      : { type: 'spring' as const, stiffness: 320, damping: 28 }
+
   return (
     <motion.div
       className={`orbit-item ${className}`}
       initial={false}
-      animate={{
-        opacity: visible ? 1 : 0,
-        y: visible ? 0 : 16,
-        scale: visible ? 1 : 0.92,
-      }}
-      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      animate={visible ? shown : hidden}
+      transition={transition}
     >
       <div className={`orbit-float orbit-float-${floatVariant}`}>{children}</div>
     </motion.div>

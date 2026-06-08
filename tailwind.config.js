@@ -106,10 +106,12 @@ export default {
         input: 'var(--input)',
       },
 
-      // ─── Shares radius scale ───────────────────────────────────────
-      // small=4 / inputs=16 / accordion=24 / cards=36 / largeFeatures=60 / pill=99
-      // Legacy aliases (sm/md/lg/xl/pill) preserved so existing component
-      // CSS keeps resolving; new semantic names exposed for new markup.
+      // ─── iPhone-tuned radius scale ─────────────────────────────────
+      // One proportional family keyed to the hero iPhone corner
+      // (radius ≈ 0.16–0.2 of an element's shorter side):
+      // tiny=6 / inputs=18 / accordion=28 / cards=50 / largeFeatures=72 / pill=99
+      // Aliases (sm/md/lg/xl/2xl/pill) resolve to the live CSS vars so
+      // retuning the scale only happens once, in index.css.
       borderRadius: {
         sm: 'var(--r-sm)',
         md: 'var(--r-md)',
@@ -117,12 +119,12 @@ export default {
         xl: 'var(--r-xl)',
         '2xl': 'var(--r-2xl)',
         pill: 'var(--r-pill)',
-        // Shares-named semantic radii (per Refero spec)
-        small: '4px',
-        inputs: '16px',
-        accordion: '24px',
-        cards: '36px',
-        'large-features': '60px',
+        // Semantic names — kept in sync with the --r-* vars above.
+        small: '6px',
+        inputs: '18px',
+        accordion: '28px',
+        cards: '50px',
+        'large-features': '72px',
         buttons: '99px',
       },
 
@@ -188,12 +190,6 @@ export default {
         section: 'var(--section-gap)',  // 48px
         card:    'var(--card-padding)', // 24px
         element: 'var(--element-gap)',  // 24px
-      },
-
-      boxShadow: {
-        // Single Shares elevation token.
-        xl: 'var(--shadow-xl)',
-        shares: 'var(--shadow-xl)',
       },
 
       transitionTimingFunction: {

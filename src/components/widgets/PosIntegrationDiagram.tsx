@@ -30,7 +30,7 @@ const Node = forwardRef<
   <div
     ref={ref}
     className={cn(
-      'z-10 flex h-12 w-12 items-center justify-center overflow-hidden border border-[rgba(31,31,31,0.08)] bg-white shadow-[0_8px_24px_-12px_rgba(31,31,31,0.25)]',
+      'z-10 flex h-12 w-12 items-center justify-center overflow-hidden border border-[rgba(31,31,31,0.08)] bg-white',
       shape === 'tile' ? 'rounded-2xl' : 'rounded-full p-2',
       className,
     )}
@@ -51,7 +51,7 @@ const PosMark = ({ src, alt = '' }: { src: string; alt?: string }) => (
 )
 
 const JennaMark = () => (
-  <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--brand)] shadow-[0_0_24px_-6px_rgba(28,0,255,0.6)]">
+  <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--brand)]">
     <span
       className="text-[30px] font-bold leading-none text-white"
       style={{ fontFamily: 'var(--font-sans)' }}

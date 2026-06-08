@@ -52,10 +52,11 @@ function CallsSparkline() {
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </linearGradient>
       </defs>
-      <path d={`${line} L100,32 L0,32 Z`} fill="url(#psCallsFill)" />
+      <path className="ps-chart-area" d={`${line} L100,32 L0,32 Z`} fill="url(#psCallsFill)" />
       <path
         className="ps-chart-line"
         d={line}
+        pathLength={1}
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -87,6 +88,8 @@ function OrdersBars() {
         return (
           <rect
             key={i}
+            className="ps-bar"
+            style={{ animationDelay: `${i * 0.07}s` }}
             x={x}
             y={32 - h}
             width={barW}
@@ -156,8 +159,12 @@ export function PhoneScreen() {
         </div>
 
         <div className="ps-orders-list">
-          {ORDERS.map((order) => (
-            <div className="ps-order" key={order.ref}>
+          {ORDERS.map((order, i) => (
+            <div
+              className="ps-order"
+              key={order.ref}
+              style={{ animationDelay: `${i * 0.08}s` }}
+            >
               <img
                 className="ps-order-avatar"
                 src={order.avatar}

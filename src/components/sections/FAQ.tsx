@@ -40,12 +40,11 @@ export function FAQ() {
       </div>
 
       <header className="section-head">
-        <span className="eyebrow">FAQ</span>
         <h2 id="faq-title" className="section-title">
-          Frequently Asked <em>Questions.</em>
+          FAQ's
         </h2>
         <p className="section-sub">
-          Everything you need to know about Jenna. Can’t find what you’re looking for? Book a demo and we’ll walk you through it.
+          Common questions on Jenna answered.
         </p>
       </header>
 
