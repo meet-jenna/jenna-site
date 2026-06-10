@@ -6,9 +6,9 @@ import type React from "react"
 // Badge component for consistency
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[14px] py-[6px] bg-white shadow-[0px_0px_0px_4px_rgba(55,50,47,0.05)] overflow-hidden rounded-[90px] flex justify-start items-center gap-[8px] border border-[rgba(2,6,23,0.08)] shadow-xs">
+    <div className="px-[14px] py-[6px] bg-white shadow-[0px_0px_0px_4px_rgba(36,36,36,0.05)] overflow-hidden rounded-[90px] flex justify-start items-center gap-[8px] border border-[rgba(2,6,23,0.08)] shadow-xs">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
-      <div className="text-center flex justify-center flex-col text-[#37322F] text-xs font-medium leading-3 font-sans">
+      <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
       </div>
     </div>
@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <div className="w-full border-b border-[rgba(55,50,47,0.12)] flex flex-col justify-center items-center">
+    <div className="w-full border-b border-[rgba(36,36,36,0.12)] flex flex-col justify-center items-center">
       {/* Header Section */}
 
       {/* Testimonial Content */}
@@ -88,9 +88,9 @@ export default function TestimonialsSection() {
               src={testimonials[activeTestimonial].image || "/placeholder.svg"}
               alt={testimonials[activeTestimonial].name}
             />
-            <div className="flex-1 px-6 py-6 shadow-[0px_0px_0px_0.75px_rgba(50,45,43,0.12)] overflow-hidden flex flex-col justify-start items-start gap-6 shadow-none pb-0 pt-0">
+            <div className="flex-1 px-6 py-6 shadow-[0px_0px_0px_0.75px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col justify-start items-start gap-6 shadow-none pb-0 pt-0">
               <div
-                className="self-stretch justify-start flex flex-col text-[#49423D] text-2xl md:text-[32px] font-medium leading-10 md:leading-[42px] font-sans h-[200px] md:h-[210px] overflow-hidden line-clamp-5 transition-all duration-700 ease-in-out tracking-tight"
+                className="self-stretch justify-start flex flex-col text-[#242424] text-2xl md:text-[32px] font-medium leading-10 md:leading-[42px] font-sans h-[200px] md:h-[210px] overflow-hidden line-clamp-5 transition-all duration-700 ease-in-out tracking-tight"
                 style={{
                   filter: isTransitioning ? "blur(4px)" : "blur(0px)",
                   transition: "filter 0.7s ease-in-out",
@@ -105,10 +105,10 @@ export default function TestimonialsSection() {
                   transition: "filter 0.7s ease-in-out",
                 }}
               >
-                <div className="self-stretch justify-center flex flex-col text-[rgba(73,66,61,0.90)] text-lg font-medium leading-[26px] font-sans">
+                <div className="self-stretch justify-center flex flex-col text-[rgba(36,36,36,0.90)] text-lg font-medium leading-[26px] font-sans">
                   {testimonials[activeTestimonial].name}
                 </div>
-                <div className="self-stretch justify-center flex flex-col text-[rgba(73,66,61,0.70)] text-lg font-medium leading-[26px] font-sans">
+                <div className="self-stretch justify-center flex flex-col text-[rgba(36,36,36,0.70)] text-lg font-medium leading-[26px] font-sans">
                   {testimonials[activeTestimonial].company}
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function TestimonialsSection() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M15 18L9 12L15 6"
-                    stroke="#46413E"
+                    stroke="#6B7280"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -141,7 +141,7 @@ export default function TestimonialsSection() {
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9 18L15 12L9 6"
-                    stroke="#46413E"
+                    stroke="#6B7280"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"

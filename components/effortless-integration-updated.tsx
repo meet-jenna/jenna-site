@@ -63,7 +63,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "320px",
           height: "320px",
           borderRadius: "50%",
-          border: "1px solid rgba(55, 50, 47, 0.2)",
+          border: "1px solid rgba(36, 36, 36, 0.2)",
           opacity: 0.8,
         }}
       />
@@ -77,7 +77,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "240px",
           height: "240px",
           borderRadius: "50%",
-          border: "1px solid rgba(55, 50, 47, 0.25)",
+          border: "1px solid rgba(36, 36, 36, 0.25)",
           opacity: 0.7,
         }}
       />
@@ -91,7 +91,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "160px",
           height: "160px",
           borderRadius: "50%",
-          border: "1px solid rgba(55, 50, 47, 0.3)",
+          border: "1px solid rgba(36, 36, 36, 0.3)",
           opacity: 0.6,
         }}
       />
@@ -115,7 +115,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             left: `${centerX - 36}px`,
             top: `${centerY - 36}px`,
             position: "absolute",
-            background: "#37322f",
+            background: "#101010",
             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
             borderRadius: "99px",
             display: "flex",
@@ -138,7 +138,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             left: `${getPositionOnRing(80, Math.PI).x - 16}px`,
             top: `${getPositionOnRing(80, Math.PI).y - 16}px`,
             position: "absolute",
-            background: "#000000",
+            background: "#101010",
             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
             borderRadius: "50%",
             display: "flex",
@@ -297,7 +297,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             left: `${getPositionOnRing(160, 0).x - 16}px`,
             top: `${getPositionOnRing(160, 0).y - 16}px`,
             position: "absolute",
-            background: "#000000",
+            background: "#101010",
             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
             borderRadius: "50%",
             display: "flex",
@@ -327,9 +327,9 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
         >
           <defs>
             <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="rgba(55, 50, 47, 0.1)" />
-              <stop offset="50%" stopColor="rgba(55, 50, 47, 0.05)" />
-              <stop offset="100%" stopColor="rgba(55, 50, 47, 0.1)" />
+              <stop offset="0%" stopColor="rgba(36, 36, 36, 0.1)" />
+              <stop offset="50%" stopColor="rgba(36, 36, 36, 0.05)" />
+              <stop offset="100%" stopColor="rgba(36, 36, 36, 0.1)" />
             </linearGradient>
           </defs>
 

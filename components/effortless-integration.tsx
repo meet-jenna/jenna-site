@@ -27,12 +27,12 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({
     theme === "light"
       ? {
           "--ei-background": "#f8f9fa",
-          "--ei-center-bg": "#37322f",
+          "--ei-center-bg": "#101010",
           "--ei-center-text": "#ffffff",
         }
       : ({
           "--ei-background": "#1f2937",
-          "--ei-center-bg": "#37322f",
+          "--ei-center-bg": "#101010",
           "--ei-center-text": "#ffffff",
         } as React.CSSProperties)
 

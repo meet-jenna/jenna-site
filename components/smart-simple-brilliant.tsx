@@ -27,7 +27,7 @@ const SmartSimpleBrilliant: React.FC<SmartSimpleBrilliantProps> = ({
     theme === "light"
       ? {
           "--ssb-surface": "#ffffff",
-          "--ssb-text": "#1b1919",
+          "--ssb-text": "#242424",
           "--ssb-border": "rgba(0,0,0,0.08)",
           "--ssb-inner-border": "rgba(0,0,0,0.12)",
           "--ssb-shadow": "rgba(0,0,0,0.12)",
