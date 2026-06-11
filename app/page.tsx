@@ -13,6 +13,7 @@ import FAQSection from "../components/faq-section"
 import PricingSection from "../components/pricing-section"
 import CTASection from "../components/cta-section"
 import FooterSection from "../components/footer-section"
+import HeroDashboard from "../components/hero/hero-dashboard"
 import { ArrowUpRight } from "lucide-react"
 import { PosGridWordmark } from "../components/integration-logo"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
@@ -35,6 +36,7 @@ export default function LandingPage() {
   const mountedRef = useRef(true)
 
   useEffect(() => {
+    mountedRef.current = true
     const progressInterval = setInterval(() => {
       if (!mountedRef.current) return
 
@@ -161,43 +163,7 @@ export default function LandingPage() {
                   <div className="self-stretch flex-1 flex justify-start items-start">
                     {/* Main Content */}
                     <div className="w-full h-full flex items-center justify-center">
-                      <div className="relative w-full h-full overflow-hidden">
-                        <div
-                          className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                            activeCard === 0 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dsadsadsa.jpg-xTHS4hGwCWp2H5bTj8np6DXZUyrxX7.jpeg"
-                            alt="Jenna call dashboard showing incoming orders and reservations"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-
-                        <div
-                          className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                            activeCard === 1 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src="/analytics-dashboard-with-charts-graphs-and-data-vi.jpg"
-                            alt="Jenna analytics showing call volume and order trends"
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-
-                        <div
-                          className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                            activeCard === 2 ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-95 blur-sm"
-                          }`}
-                        >
-                          <img
-                            src="/data-visualization-dashboard-with-interactive-char.jpg"
-                            alt="Jenna POS sync dashboard with live order flow"
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      </div>
+                      <HeroDashboard activeView={activeCard} />
                     </div>
                   </div>
                 </div>
