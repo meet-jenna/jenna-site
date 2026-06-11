@@ -17,20 +17,6 @@ import { ArrowUpRight } from "lucide-react"
 import { PosGridWordmark } from "../components/integration-logo"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
 
-const HERO_PATTERN_FILTER = "hue-rotate(15deg) saturate(0.7) brightness(1.2)"
-
-function HeroPatternGlow({ className }: { className: string }) {
-  return (
-    <img
-      src="/mask-group-pattern.svg"
-      alt=""
-      aria-hidden
-      className={className}
-      style={{ filter: HERO_PATTERN_FILTER }}
-    />
-  )
-}
-
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
@@ -128,23 +114,27 @@ export default function LandingPage() {
             </div>
 
             {/* Hero Section */}
-            <div className="pt-36 sm:pt-32 md:pt-40 lg:pt-[296px] pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0 relative">
-              <div className="w-full max-w-[937px] lg:w-[937px] flex flex-col justify-center items-center gap-4 sm:gap-5 md:gap-6 lg:gap-8">
-                <div className="self-stretch rounded-[3px] flex flex-col justify-center items-center gap-5 sm:gap-6 md:gap-7 lg:gap-10">
-                  <div className="w-full max-w-[820px] lg:w-[820px] text-center flex justify-center flex-col text-[#242424] text-[38px] sm:text-[42px] md:text-[58px] lg:text-[92px] font-normal leading-[1.06] sm:leading-[1.1] md:leading-[1.12] lg:leading-[1.05] font-serif tracking-[-0.02em] px-2 sm:px-4 md:px-0">
-                    The AI Hostess
-                    <br />
-                    For Every Restaurant
-                  </div>
-                  <div className="w-full max-w-[580px] lg:w-[580px] text-center flex justify-center flex-col text-[rgba(36,36,36,0.80)] text-base sm:text-lg md:text-xl lg:text-[22px] font-medium leading-[1.45] sm:leading-[1.5] md:leading-[1.55] lg:leading-[1.6] font-sans px-2 sm:px-4 md:px-0">
-                    Jenna connects to your existing systems and
-                    <br className="hidden sm:block" />
-                    handles every call start to finish.
-                  </div>
-                </div>
+            <div className="pt-28 sm:pt-32 md:pt-36 lg:pt-44 pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full relative">
+              <div className="w-full max-w-[640px] flex flex-col justify-center items-center gap-4 relative z-10">
+                <Badge
+                  icon={
+                    <div className="w-[10px] h-[10px] bg-[#242424] rounded-[3px] rotate-45 flex items-center justify-center">
+                      <span className="-rotate-45 text-white text-[7px] font-bold leading-none font-sans">J</span>
+                    </div>
+                  }
+                  text="AI for Restaurants"
+                />
+                <h1 className="w-full text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em] px-2 sm:px-0">
+                  The AI Hostess
+                  <br />
+                  For Every Restaurant
+                </h1>
+                <p className="w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans px-2 sm:px-0">
+                  Jenna connects to your existing systems and handles every call start to finish.
+                </p>
               </div>
 
-              <div className="w-full max-w-[497px] lg:w-[497px] flex flex-col justify-center items-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative z-10 mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+              <div className="w-full max-w-[497px] flex flex-col justify-center items-center relative z-10 mt-8 sm:mt-10 md:mt-12">
                 <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
                   <div className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center">
                     <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
@@ -156,13 +146,15 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="absolute left-1/2 -translate-x-1/2 z-0 pointer-events-none hidden sm:block sm:top-[312px] md:top-[344px] lg:top-[400px]">
-                <HeroPatternGlow className="w-[1404px] md:w-[2106px] lg:w-[2808px] h-auto opacity-40 md:opacity-50 mix-blend-multiply" />
-              </div>
-
               <div className="w-full max-w-[960px] lg:w-[960px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
-                <div className="absolute left-1/2 top-2 z-0 -translate-x-1/2 -translate-y-[66%] pointer-events-none sm:hidden">
-                  <HeroPatternGlow className="w-[min(100vw,840px)] h-auto opacity-35 mix-blend-multiply" />
+                {/* Top-edge glow: anchored to the hero card's top edge, spans its full width on all breakpoints */}
+                <div className="absolute top-2 sm:top-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 lg:left-11 lg:right-11 z-0 pointer-events-none">
+                  <img
+                    src="/gradients/hero-top-glow.svg"
+                    alt=""
+                    aria-hidden
+                    className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
+                  />
                 </div>
                 <div className="relative z-[1] w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
                   {/* Dashboard Content */}
@@ -398,7 +390,7 @@ export default function LandingPage() {
                     <div className="border-b border-r-0 md:border-r border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Every order, organized
+                          Every Event, Organized
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Jenna logs each call the moment it happens, so you always see what's coming in.
@@ -438,7 +430,7 @@ export default function LandingPage() {
                     <div className="border-r-0 md:border-r border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Integrated for 100% accuracy
+                          Never Guesses
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Live menu and prices pulled from your POS — every order comes out right.
@@ -457,7 +449,7 @@ export default function LandingPage() {
                     <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Your numbers, tracked for you
+                          Tracks How You're Doing
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Every call, order, and dollar — logged in your portal automatically.
