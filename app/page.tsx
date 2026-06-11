@@ -17,6 +17,20 @@ import { ArrowUpRight } from "lucide-react"
 import { PosGridWordmark } from "../components/integration-logo"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
 
+const HERO_PATTERN_FILTER = "hue-rotate(15deg) saturate(0.7) brightness(1.2)"
+
+function HeroPatternGlow({ className }: { className: string }) {
+  return (
+    <img
+      src="/mask-group-pattern.svg"
+      alt=""
+      aria-hidden
+      className={className}
+      style={{ filter: HERO_PATTERN_FILTER }}
+    />
+  )
+}
+
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
@@ -72,9 +86,9 @@ export default function LandingPage() {
           {/* Right vertical line */}
           <div className="w-[1px] h-full absolute right-4 sm:right-6 md:right-8 lg:right-0 top-0 bg-[rgba(36,36,36,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
 
-          <div className="self-stretch pt-[9px] overflow-hidden border-b border-[rgba(36,36,36,0.06)] flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[66px] relative z-10">
+          <div className="self-stretch pt-[9px] overflow-x-hidden border-b border-[rgba(36,36,36,0.06)] flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[66px] relative z-10">
             {/* Navigation */}
-            <div className="w-full h-12 sm:h-14 md:h-16 lg:h-[84px] absolute left-0 top-0 flex justify-center items-center z-20 px-6 sm:px-8 md:px-12 lg:px-0">
+            <div className="w-full h-12 sm:h-14 md:h-16 lg:h-[84px] absolute left-0 top-4 sm:top-0 flex justify-center items-center z-20 px-6 sm:px-8 md:px-12 lg:px-0">
               <div className="w-full h-0 absolute left-0 top-6 sm:top-7 md:top-8 lg:top-[42px] border-t border-[rgba(36,36,36,0.12)] shadow-[0px_1px_0px_white]"></div>
 
               <div className="w-full max-w-[calc(100%-32px)] sm:max-w-[calc(100%-48px)] md:max-w-[calc(100%-64px)] lg:max-w-[700px] lg:w-[700px] h-10 sm:h-11 md:h-12 py-1.5 sm:py-2 px-3 sm:px-4 md:px-4 pr-2 sm:pr-3 bg-[#F4F4F4] backdrop-blur-sm shadow-[0px_0px_0px_2px_white] overflow-hidden rounded-[50px] flex justify-between items-center relative z-30">
@@ -114,7 +128,7 @@ export default function LandingPage() {
             </div>
 
             {/* Hero Section */}
-            <div className="pt-36 sm:pt-32 md:pt-40 lg:pt-[296px] pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0">
+            <div className="pt-36 sm:pt-32 md:pt-40 lg:pt-[296px] pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full sm:pl-0 sm:pr-0 pl-0 pr-0 relative">
               <div className="w-full max-w-[937px] lg:w-[937px] flex flex-col justify-center items-center gap-4 sm:gap-5 md:gap-6 lg:gap-8">
                 <div className="self-stretch rounded-[3px] flex flex-col justify-center items-center gap-5 sm:gap-6 md:gap-7 lg:gap-10">
                   <div className="w-full max-w-[820px] lg:w-[820px] text-center flex justify-center flex-col text-[#242424] text-[38px] sm:text-[42px] md:text-[58px] lg:text-[92px] font-normal leading-[1.06] sm:leading-[1.1] md:leading-[1.12] lg:leading-[1.05] font-serif tracking-[-0.02em] px-2 sm:px-4 md:px-0">
@@ -142,19 +156,15 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="absolute top-[320px] sm:top-[312px] md:top-[344px] lg:top-[400px] left-1/2 transform -translate-x-1/2 z-0 pointer-events-none">
-                <img
-                  src="/mask-group-pattern.svg"
-                  alt=""
-                  className="w-[936px] sm:w-[1404px] md:w-[2106px] lg:w-[2808px] h-auto opacity-30 sm:opacity-40 md:opacity-50 mix-blend-multiply"
-                  style={{
-                    filter: "hue-rotate(15deg) saturate(0.7) brightness(1.2)",
-                  }}
-                />
+              <div className="absolute left-1/2 -translate-x-1/2 z-0 pointer-events-none hidden sm:block sm:top-[312px] md:top-[344px] lg:top-[400px]">
+                <HeroPatternGlow className="w-[1404px] md:w-[2106px] lg:w-[2808px] h-auto opacity-40 md:opacity-50 mix-blend-multiply" />
               </div>
 
               <div className="w-full max-w-[960px] lg:w-[960px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
-                <div className="w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
+                <div className="absolute left-1/2 top-2 z-0 -translate-x-1/2 -translate-y-[66%] pointer-events-none sm:hidden">
+                  <HeroPatternGlow className="w-[min(100vw,840px)] h-auto opacity-35 mix-blend-multiply" />
+                </div>
+                <div className="relative z-[1] w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
                   {/* Dashboard Content */}
                   <div className="self-stretch flex-1 flex justify-start items-start">
                     {/* Main Content */}
@@ -361,12 +371,10 @@ export default function LandingPage() {
                       text="Built for restaurants"
                     />
                     <div className="w-full max-w-[598.06px] lg:w-[598.06px] text-center flex justify-center flex-col text-[#242424] text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-                      Everything your phone line should do, on its own
+                      An Advantage You Need
                     </div>
                     <div className="self-stretch text-center text-[#6B7280] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
-                      From the first ring to the order hitting your POS,
-                      <br />
-                      Jenna runs the whole call — accurately, every time.
+                      Jenna is the communication layer that helps your restaurant run smoother
                     </div>
                   </div>
                 </div>
@@ -401,7 +409,7 @@ export default function LandingPage() {
                           width="100%"
                           height="100%"
                           theme="light"
-                          className="scale-50 sm:scale-65 md:scale-75 lg:scale-90"
+                          className="scale-60 sm:scale-65 md:scale-75 lg:scale-90"
                         />
                       </div>
                     </div>
@@ -421,7 +429,7 @@ export default function LandingPage() {
                           width="400"
                           height="250"
                           theme="light"
-                          className="scale-60 sm:scale-75 md:scale-90"
+                          className="scale-70 sm:scale-75 md:scale-90"
                         />
                       </div>
                     </div>

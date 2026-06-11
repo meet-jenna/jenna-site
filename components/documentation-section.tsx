@@ -3,6 +3,27 @@
 import { useState, useEffect } from "react"
 import type React from "react"
 
+const HOW_IT_WORKS_CARDS = [
+  {
+    title: "We connect your POS",
+    description: "Jenna syncs with your menu, prices, and hours — we handle the entire integration.",
+  },
+  {
+    title: "We customize for you",
+    description: "Set the greeting, the upsells, and exactly how Jenna sounds on every call.",
+  },
+  {
+    title: "We attach it to your phone",
+    description: "Forward your line to Jenna and start capturing every call right away.",
+  },
+] as const
+
+const STEP_GRADIENTS = [
+  "bg-gradient-to-br from-blue-50 to-blue-100",
+  "bg-gradient-to-br from-purple-50 to-purple-100",
+  "bg-gradient-to-br from-green-50 to-green-100",
+] as const
+
 // Badge component for consistency
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
@@ -19,32 +40,14 @@ export default function DocumentationSection() {
   const [activeCard, setActiveCard] = useState(0)
   const [animationKey, setAnimationKey] = useState(0)
 
-  const cards = [
-    {
-      title: "Connect your POS",
-      description: "Jenna syncs with your menu, prices, and hours in minutes.",
-      image: "/modern-dashboard-interface-with-data-visualization.jpg",
-    },
-    {
-      title: "Make her yours",
-      description: "Set the greeting, the upsells, and exactly how Jenna sounds on every call.",
-      image: "/analytics-dashboard.png",
-    },
-    {
-      title: "Go live in days",
-      description: "Forward your line to Jenna and start capturing every call right away.",
-      image: "/team-collaboration-interface-with-shared-workspace.jpg",
-    },
-  ]
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveCard((prev) => (prev + 1) % cards.length)
+      setActiveCard((prev) => (prev + 1) % HOW_IT_WORKS_CARDS.length)
       setAnimationKey((prev) => prev + 1)
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [cards.length])
+  }, [])
 
   const handleCardClick = (index: number) => {
     setActiveCard(index)
@@ -63,12 +66,10 @@ export default function DocumentationSection() {
             text="How it works"
           />
           <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-3xl md:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-            Set it up once, then let Jenna answer the phones
+            We Build You Enjoy
           </div>
           <div className="self-stretch text-center text-[#6B7280] text-base font-normal leading-7 font-sans">
-            Connect your POS, set your greeting, and go live.
-            <br />
-            Jenna takes it from there.
+            Jenna is a completely done-for-you process
           </div>
         </div>
       </div>
@@ -78,12 +79,12 @@ export default function DocumentationSection() {
         <div className="flex-1 py-8 md:py-11 flex flex-col md:flex-row justify-start items-center gap-6 md:gap-12">
           {/* Left Column - Feature Cards */}
           <div className="w-full md:w-auto md:max-w-[400px] flex flex-col justify-center items-center gap-4 order-2 md:order-1">
-            {cards.map((card, index) => {
+            {HOW_IT_WORKS_CARDS.map((card, index) => {
               const isActive = index === activeCard
 
               return (
                 <div
-                  key={index}
+                  key={card.title}
                   onClick={() => handleCardClick(index)}
                   className={`w-full overflow-hidden flex flex-col justify-start items-start transition-all duration-300 cursor-pointer ${
                     isActive
@@ -113,17 +114,9 @@ export default function DocumentationSection() {
           </div>
 
           {/* Right Column - Image */}
-          <div className="w-full md:w-auto rounded-lg flex flex-col justify-center items-center gap-2 order-1 md:order-2 md:px-0 px-[00]">
+          <div className="w-full md:w-auto rounded-lg flex flex-col justify-center items-center gap-2 order-1 md:order-2 md:px-0">
             <div className="w-full md:w-[580px] h-[250px] md:h-[420px] bg-white shadow-[0px_0px_0px_0.9056603908538818px_rgba(0,0,0,0.08)] overflow-hidden rounded-lg flex flex-col justify-start items-start">
-              <div
-                className={`w-full h-full transition-all duration-300 ${
-                  activeCard === 0
-                    ? "bg-gradient-to-br from-blue-50 to-blue-100"
-                    : activeCard === 1
-                      ? "bg-gradient-to-br from-purple-50 to-purple-100"
-                      : "bg-gradient-to-br from-green-50 to-green-100"
-                }`}
-              />
+              <div className={`w-full h-full transition-all duration-300 ${STEP_GRADIENTS[activeCard]}`} />
             </div>
           </div>
         </div>
