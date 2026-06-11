@@ -1,17 +1,14 @@
 "use client"
 
-import { useState } from "react"
-
 export default function PricingSection() {
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annually">("annually")
-
   const plans = {
     starter: {
       name: "Starter",
-      monthly: 199,
-      annually: 159,
+      price: 500,
       description: "For single-location restaurants getting off the phone and back on the floor.",
       features: [
+        "750 minutes included per month",
+        "$0.65 per minute for every minute over",
         "24/7 AI phone answering",
         "Menu, hours & FAQ handling",
         "Table reservations",
@@ -20,29 +17,12 @@ export default function PricingSection() {
         "Unlimited concurrent calls",
       ],
     },
-    professional: {
-      name: "Professional",
-      monthly: 349,
-      annually: 279,
-      description: "Full-service AI hostess — orders, reservations, and POS sync in one plan.",
-      features: [
-        "Everything in Starter",
-        "Pickup & delivery phone ordering",
-        "Direct POS integration",
-        "Secure phone payments",
-        "Smart upselling on every order",
-        "Live menu sync from your POS",
-        "SMS order confirmations",
-        "Priority onboarding (48 hrs)",
-      ],
-    },
     enterprise: {
       name: "Enterprise",
-      monthly: 499,
-      annually: 399,
-      description: "For groups and multi-unit operators who need scale, control, and dedicated support.",
+      price: 999,
+      description: "Multi-location build for groups and operators who need scale, control, and dedicated support.",
       features: [
-        "Everything in Professional",
+        "Everything in Starter",
         "Multi-location dashboard",
         "Dedicated account manager",
         "Custom voice & greeting",
@@ -84,57 +64,8 @@ export default function PricingSection() {
 
           {/* Description */}
           <div className="self-stretch text-center text-[#6B7280] text-base font-normal leading-7 font-sans">
-            Flat per-location pricing. No per-minute fees, no hidden costs — just Jenna on your line.
+            Transparent per-location pricing with included minutes — just Jenna on your line.
           </div>
-        </div>
-      </div>
-
-      {/* Billing Toggle Section */}
-      <div className="self-stretch px-6 md:px-16 py-9 relative flex justify-center items-center gap-4">
-        {/* Horizontal line */}
-        <div className="w-full max-w-[1060px] h-0 absolute left-1/2 transform -translate-x-1/2 top-[63px] border-t border-[rgba(36,36,36,0.12)] z-0"></div>
-
-        {/* Toggle Container */}
-        <div className="p-3 relative bg-[rgba(36,36,36,0.03)] border border-[rgba(36,36,36,0.02)] backdrop-blur-[44px] backdrop-saturate-150 backdrop-brightness-110 flex justify-center items-center rounded-lg z-20 before:absolute before:inset-0 before:bg-white before:opacity-60 before:rounded-lg before:-z-10">
-          <div className="p-[2px] bg-[rgba(36,36,36,0.10)] shadow-[0px_1px_0px_white] rounded-[99px] border-[0.5px] border-[rgba(36,36,36,0.08)] flex justify-center items-center gap-[2px] relative">
-            <div
-              className={`absolute top-[2px] w-[calc(50%-1px)] h-[calc(100%-4px)] bg-white shadow-[0px_2px_4px_rgba(0,0,0,0.08)] rounded-[99px] transition-all duration-300 ease-in-out ${
-                billingPeriod === "annually" ? "left-[2px]" : "right-[2px]"
-              }`}
-            />
-
-            <button
-              onClick={() => setBillingPeriod("annually")}
-              className="px-4 py-1 rounded-[99px] flex justify-center items-center gap-2 transition-colors duration-300 relative z-10 flex-1"
-            >
-              <div
-                className={`text-[13px] font-medium leading-5 font-sans transition-colors duration-300 ${
-                  billingPeriod === "annually" ? "text-[#242424]" : "text-[#6B7280]"
-                }`}
-              >
-                Annually
-              </div>
-            </button>
-
-            <button
-              onClick={() => setBillingPeriod("monthly")}
-              className="px-4 py-1 rounded-[99px] flex justify-center items-center gap-2 transition-colors duration-300 relative z-10 flex-1"
-            >
-              <div
-                className={`text-[13px] font-medium leading-5 font-sans transition-colors duration-300 ${
-                  billingPeriod === "monthly" ? "text-[#242424]" : "text-[#6B7280]"
-                }`}
-              >
-                Monthly
-              </div>
-            </button>
-          </div>
-
-          {/* Decorative dots */}
-          <div className="w-[3px] h-[3px] absolute left-[5px] top-[5.25px] bg-[rgba(36,36,36,0.10)] shadow-[0px_0px_0.5px_rgba(0,0,0,0.12)] rounded-[99px]"></div>
-          <div className="w-[3px] h-[3px] absolute right-[5px] top-[5.25px] bg-[rgba(36,36,36,0.10)] shadow-[0px_0px_0.5px_rgba(0,0,0,0.12)] rounded-[99px]"></div>
-          <div className="w-[3px] h-[3px] absolute left-[5px] bottom-[5.25px] bg-[rgba(36,36,36,0.10)] shadow-[0px_0px_0.5px_rgba(0,0,0,0.12)] rounded-[99px]"></div>
-          <div className="w-[3px] h-[3px] absolute right-[5px] bottom-[5.25px] bg-[rgba(36,36,36,0.10)] shadow-[0px_0px_0.5px_rgba(0,0,0,0.12)] rounded-[99px]"></div>
         </div>
       </div>
 
@@ -154,10 +85,9 @@ export default function PricingSection() {
           </div>
 
           {/* Pricing Cards Container */}
-          <div className="flex-1 flex flex-col md:flex-row justify-center items-center gap-6 py-12 md:py-0">
+          <div className="flex-1 flex flex-col md:flex-row justify-center items-center gap-6 py-12 md:py-0 max-w-4xl">
             {/* Starter Plan */}
             <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-5 border border-[rgba(0,0,0,0.12)] border-[#E5E7EB] overflow-hidden flex flex-col justify-start items-start gap-12 bg-[rgba(255,255,255,0)]">
-              {/* Plan Header */}
               <div className="self-stretch flex flex-col justify-start items-center gap-9">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="text-[rgba(36,36,36,0.90)] text-lg font-medium leading-7 font-sans">{plans.starter.name}</div>
@@ -168,34 +98,10 @@ export default function PricingSection() {
 
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="flex flex-col justify-start items-start gap-1">
-                    <div className="relative h-[60px] flex items-center text-[#242424] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${plans.starter[billingPeriod]}</span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "annually" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "annually" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "annually" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "annually"}
-                      >
-                        ${plans.starter.annually}
-                      </span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "monthly" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "monthly" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "monthly" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "monthly"}
-                      >
-                        ${plans.starter.monthly}
-                      </span>
+                    <div className="h-[60px] flex items-center text-[#242424] text-5xl font-medium leading-[60px] font-serif">
+                      ${plans.starter.price}
                     </div>
-                    <div className="text-[#898989] text-sm font-medium font-sans">
-                      per location, per month.
-                    </div>
+                    <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
                   </div>
                 </div>
 
@@ -229,51 +135,25 @@ export default function PricingSection() {
               </div>
             </div>
 
-            {/* Professional Plan (Featured) */}
+            {/* Enterprise Plan (Featured) */}
             <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-5 bg-[#101010] border border-[rgba(0,0,0,0.12)] border-[rgba(36,36,36,0.12)] overflow-hidden flex flex-col justify-start items-start gap-12">
-              {/* Plan Header */}
               <div className="self-stretch flex flex-col justify-start items-center gap-9">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-white text-lg font-medium leading-7 font-sans">{plans.professional.name}</div>
+                  <div className="text-white text-lg font-medium leading-7 font-sans">{plans.enterprise.name}</div>
                   <div className="w-full max-w-[242px] text-[#A3A3A3] text-sm font-normal leading-5 font-sans">
-                    {plans.professional.description}
+                    {plans.enterprise.description}
                   </div>
                 </div>
 
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
                   <div className="flex flex-col justify-start items-start gap-1">
-                    <div className="relative h-[60px] flex items-center text-[#E5E7EB] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${plans.professional[billingPeriod]}</span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "annually" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "annually" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "annually" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "annually"}
-                      >
-                        ${plans.professional.annually}
-                      </span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "monthly" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "monthly" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "monthly" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "monthly"}
-                      >
-                        ${plans.professional.monthly}
-                      </span>
+                    <div className="h-[60px] flex items-center text-[#E5E7EB] text-5xl font-medium leading-[60px] font-serif">
+                      ${plans.enterprise.price}
                     </div>
-                    <div className="text-[#9CA3AF] text-sm font-medium font-sans">
-                      per location, per month.
-                    </div>
+                    <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
                   </div>
                 </div>
 
-                {/* CTA Button */}
                 <div className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="max-w-[108px] flex justify-center flex-col text-[#242424] text-[13px] font-medium leading-5 font-sans">
@@ -283,7 +163,7 @@ export default function PricingSection() {
               </div>
 
               <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                {plans.professional.features.map((feature, index) => (
+                {plans.enterprise.features.map((feature, index) => (
                   <div key={index} className="self-stretch flex justify-start items-center gap-[13px]">
                     <div className="w-4 h-4 relative flex items-center justify-center">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -297,80 +177,6 @@ export default function PricingSection() {
                       </svg>
                     </div>
                     <div className="flex-1 text-[#E5E7EB] text-[12.5px] font-normal leading-5 font-sans">{feature}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Enterprise Plan */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-5 bg-white border border-[#E5E7EB] overflow-hidden flex flex-col justify-start items-start gap-12">
-              {/* Plan Header */}
-              <div className="self-stretch flex flex-col justify-start items-center gap-9">
-                <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-[rgba(36,36,36,0.90)] text-lg font-medium leading-7 font-sans">{plans.enterprise.name}</div>
-                  <div className="w-full max-w-[242px] text-[rgba(36,36,36,0.70)] text-sm font-normal leading-5 font-sans">
-                    {plans.enterprise.description}
-                  </div>
-                </div>
-
-                <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="flex flex-col justify-start items-start gap-1">
-                    <div className="relative h-[60px] flex items-center text-[#242424] text-5xl font-medium leading-[60px] font-serif">
-                      <span className="invisible">${plans.enterprise[billingPeriod]}</span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "annually" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "annually" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "annually" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "annually"}
-                      >
-                        ${plans.enterprise.annually}
-                      </span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: billingPeriod === "monthly" ? 1 : 0,
-                          transform: `scale(${billingPeriod === "monthly" ? 1 : 0.8})`,
-                          filter: `blur(${billingPeriod === "monthly" ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={billingPeriod !== "monthly"}
-                      >
-                        ${plans.enterprise.monthly}
-                      </span>
-                    </div>
-                    <div className="text-[#898989] text-sm font-medium font-sans">
-                      per location, per month.
-                    </div>
-                  </div>
-                </div>
-
-                <div className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
-                  <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                  <div className="max-w-[108px] flex justify-center flex-col text-white text-[13px] font-medium leading-5 font-sans">
-                    Book a Demo
-                  </div>
-                </div>
-              </div>
-
-              <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                {plans.enterprise.features.map((feature, index) => (
-                  <div key={index} className="self-stretch flex justify-start items-center gap-[13px]">
-                    <div className="w-4 h-4 relative flex items-center justify-center">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M10 3L4.5 8.5L2 6"
-                          stroke="#9CA3AF"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex-1 text-[rgba(36,36,36,0.80)] text-[12.5px] font-normal leading-5 font-sans">
-                      {feature}
-                    </div>
                   </div>
                 ))}
               </div>
