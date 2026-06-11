@@ -1,5 +1,7 @@
 import type React from "react"
 
+import { getPosIntegration, type PosIntegrationId } from "@/lib/integrations/pos"
+
 interface EffortlessIntegrationProps {
   /** Fixed width from Figma: 482px */
   width?: number | string
@@ -13,14 +15,19 @@ interface EffortlessIntegrationProps {
  * Effortless Integration – Service integration constellation
  * Three concentric rings with logos positioned on ring axes
  */
+const RING_LOGOS: { id: PosIntegrationId; radius: number; angle: number }[] = [
+  { id: "toast", radius: 80, angle: Math.PI },
+  { id: "square", radius: 80, angle: 0 },
+  { id: "clover", radius: 120, angle: -Math.PI / 4 },
+  { id: "flipdish", radius: 120, angle: (3 * Math.PI) / 4 },
+  { id: "shift4", radius: 120, angle: (5 * Math.PI) / 4 },
+  { id: "ncr-aloha", radius: 160, angle: Math.PI },
+  { id: "oracle-micros", radius: 160, angle: 0 },
+]
+
 const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 482, height = 300, className = "" }) => {
   const centerX = 250
   const centerY = 179
-  const rings = [
-    { radius: 80, logos: 2 }, // Inner ring - 2 logos
-    { radius: 120, logos: 3 }, // Middle ring - 3 logos
-    { radius: 160, logos: 2 }, // Outer ring - 2 logos
-  ]
 
   const getPositionOnRing = (ringRadius: number, angle: number) => ({
     x: centerX + ringRadius * Math.cos(angle),
@@ -127,194 +134,39 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             color: "#ffffff",
           }}
         >
-          b
+          J
         </div>
 
-        {/* GitHub - 180° (left) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(80, Math.PI).x - 16}px`,
-            top: `${getPositionOnRing(80, Math.PI).y - 16}px`,
-            position: "absolute",
-            background: "#101010",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
-            alt="GitHub"
-            style={{
-              width: "18px",
-              height: "18px",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
-        </div>
+        {RING_LOGOS.map(({ id, radius, angle }) => {
+          const position = getPositionOnRing(radius, angle)
+          const integration = getPosIntegration(id)
 
-        {/* Slack - 0° (right) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(80, 0).x - 16}px`,
-            top: `${getPositionOnRing(80, 0).y - 16}px`,
-            position: "absolute",
-            background: "#ffffff",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/slack.svg"
-            alt="Slack"
-            style={{
-              width: "18px",
-              height: "18px",
-            }}
-          />
-        </div>
-
-        {/* Figma - 315° (top-right) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(120, -Math.PI / 4).x - 16}px`,
-            top: `${getPositionOnRing(120, -Math.PI / 4).y - 16}px`,
-            position: "absolute",
-            background: "#EEEFE8",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/figma.svg"
-            alt="Figma"
-            style={{
-              width: "16px",
-              height: "16px",
-            }}
-          />
-        </div>
-
-        {/* Discord - 135° (bottom-left) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(120, (3 * Math.PI) / 4).x - 16}px`,
-            top: `${getPositionOnRing(120, (3 * Math.PI) / 4).y - 16}px`,
-            position: "absolute",
-            background: "#5865F2",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg"
-            alt="Discord"
-            style={{
-              width: "18px",
-              height: "18px",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
-        </div>
-
-        {/* Notion - 225° (bottom-left diagonal) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(120, (5 * Math.PI) / 4).x - 16}px`,
-            top: `${getPositionOnRing(120, (5 * Math.PI) / 4).y - 16}px`,
-            position: "absolute",
-            background: "#ffffff",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/notion.svg"
-            alt="Notion"
-            style={{
-              width: "18px",
-              height: "18px",
-            }}
-          />
-        </div>
-
-        {/* Stripe - 180° (left) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(160, Math.PI).x - 16}px`,
-            top: `${getPositionOnRing(160, Math.PI).y - 16}px`,
-            position: "absolute",
-            background: "#635BFF",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/stripe.svg"
-            alt="Stripe"
-            style={{
-              width: "18px",
-              height: "18px",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
-        </div>
-
-        {/* Framer - 0° (right) */}
-        <div
-          style={{
-            width: "32px",
-            height: "32px",
-            left: `${getPositionOnRing(160, 0).x - 16}px`,
-            top: `${getPositionOnRing(160, 0).y - 16}px`,
-            position: "absolute",
-            background: "#101010",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/framer.svg"
-            alt="Framer"
-            style={{
-              width: "16px",
-              height: "16px",
-              filter: "brightness(0) invert(1)",
-            }}
-          />
-        </div>
+          return (
+            <div
+              key={id}
+              style={{
+                width: "32px",
+                height: "32px",
+                left: `${position.x - 16}px`,
+                top: `${position.y - 16}px`,
+                position: "absolute",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+                borderRadius: "50%",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={integration.circleIcon ?? integration.logo}
+                alt={integration.name}
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  display: "block",
+                }}
+              />
+            </div>
+          )
+        })}
 
         <svg
           style={{

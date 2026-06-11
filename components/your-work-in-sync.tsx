@@ -50,8 +50,6 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
   const imgFrame2147223205 = "/professional-woman-avatar-with-short-brown-hair-an.jpg"
   const imgFrame2147223206 = "/professional-man-avatar-with-beard-and-glasses-loo.jpg"
   const imgFrame2147223207 = "/professional-person-avatar-with-curly-hair-and-war.jpg"
-  const imgArrowUp =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round'%3E%3Cpath d='m5 12 7-7 7 7'/%3E%3Cpath d='M12 19V5'/%3E%3C/svg%3E"
 
   return (
     <div
@@ -130,7 +128,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                   whiteSpace: "nowrap",
                 }}
               >
-                Team updates flow seamlessly
+                Hey, can I order 2 pies?
               </span>
             </div>
           </div>
@@ -170,7 +168,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                   whiteSpace: "nowrap",
                 }}
               >
-                Hi everyone
+                Of course! Pickup or delivery?
               </span>
             </div>
             {/* Avatar */}
@@ -237,7 +235,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                   whiteSpace: "nowrap",
                 }}
               >
-                How about this instead?
+                Pickup please
               </span>
             </div>
           </div>
@@ -278,10 +276,10 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                   whiteSpace: "nowrap",
                 }}
               >
-                Great work, everyone!
+                Got it — ready in 20!
               </span>
             </div>
-            {/* Send button */}
+            {/* Audio wave indicator */}
             <div
               style={{
                 width: "36px",
@@ -292,19 +290,22 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 alignItems: "center",
                 justifyContent: "center",
                 boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.08)",
-                cursor: "pointer",
                 flexShrink: 0,
               }}
             >
-              <img
-                src={imgArrowUp || "/placeholder.svg"}
-                alt="Send"
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  filter: "brightness(0) invert(1)",
-                }}
-              />
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <rect x="3" y="11" width="2.5" height="2" rx="1.25" fill="#ffffff" />
+                <rect x="7" y="8" width="2.5" height="8" rx="1.25" fill="#ffffff" />
+                <rect x="11" y="5" width="2.5" height="14" rx="1.25" fill="#ffffff" />
+                <rect x="15" y="8" width="2.5" height="8" rx="1.25" fill="#ffffff" />
+                <rect x="19" y="11" width="2.5" height="2" rx="1.25" fill="#ffffff" />
+              </svg>
             </div>
           </div>
         </div>

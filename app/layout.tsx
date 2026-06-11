@@ -19,9 +19,9 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "Brillance - Effortless Custom Contract Billing",
+  title: "Jenna — The AI Hostess for Every Restaurant",
   description:
-    "Streamline your billing process with seamless automation for every custom contract, tailored by Brillance.",
+    "Jenna is the AI hostess for restaurants — she answers every call, takes pickup and delivery orders, and books reservations, all synced to your existing POS.",
     generator: 'v0.app'
 }
 

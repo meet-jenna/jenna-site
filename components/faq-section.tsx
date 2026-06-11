@@ -9,34 +9,34 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What is Brillance and who is it for?",
+    question: "What is Jenna and who is it for?",
     answer:
-      "Brillance is a comprehensive billing automation platform designed for businesses that need custom contract management. It's perfect for SaaS companies, service providers, and enterprises looking to streamline their billing processes.",
+      "Jenna is an AI hostess for restaurants. She answers your phone, takes pickup and delivery orders, and books reservations — start to finish. She's built for any restaurant that takes orders or bookings over the phone.",
   },
   {
-    question: "How does the custom contract billing work?",
+    question: "How does Jenna take an order?",
     answer:
-      "Our platform automatically processes your custom contracts, calculates billing amounts based on your specific terms, and generates invoices. You can set up complex pricing structures, usage-based billing, and custom billing cycles.",
+      "Jenna answers the call, understands what the customer wants, reads your live menu and prices, confirms the order, and sends it straight into your POS — just like a trained employee would.",
   },
   {
-    question: "Can I integrate Brillance with my existing tools?",
+    question: "Does Jenna work with my POS?",
     answer:
-      "Yes! Brillance integrates seamlessly with popular CRM systems, accounting software, and payment processors. We support APIs and webhooks for custom integrations with your existing workflow.",
+      "Yes. Jenna connects to the major POS systems so orders and reservations flow in automatically. There's no new hardware to buy and nothing for your staff to learn.",
   },
   {
-    question: "What kind of support do you provide?",
+    question: "What happens during a rush or after hours?",
     answer:
-      "We offer 24/7 customer support, dedicated account managers for enterprise clients, comprehensive documentation, and onboarding assistance to help you get started quickly.",
+      "Jenna answers every call instantly, 24/7 — no hold times and no missed orders, even when every table is full or you're closed.",
   },
   {
-    question: "Is my data secure with Brillance?",
+    question: "How accurate is Jenna?",
     answer:
-      "Absolutely. We use enterprise-grade security measures including end-to-end encryption, SOC 2 compliance, and regular security audits. Your data is stored in secure, redundant data centers.",
+      "Very. Because Jenna reads your live menu and prices directly from your system and confirms each order with the customer, what reaches your kitchen is exactly what was ordered.",
   },
   {
-    question: "How do I get started with Brillance?",
+    question: "How do I get started?",
     answer:
-      "Getting started is simple! Sign up for our free trial, connect your existing systems, and our onboarding team will help you set up your first custom billing workflow within 24 hours.",
+      "Book a quick demo to hear Jenna live. Once you're in, we connect your POS and you can be taking calls within days.",
   },
 ]
 
@@ -71,9 +71,7 @@ export default function FAQSection() {
             Frequently Asked Questions
           </div>
           <div className="w-full text-[#6B7280] text-base font-normal leading-7 font-sans">
-            Explore your data, build your dashboard,
-            <br className="hidden md:block" />
-            bring your team together.
+            Everything you need to know about putting Jenna on your phone line.
           </div>
         </div>
 

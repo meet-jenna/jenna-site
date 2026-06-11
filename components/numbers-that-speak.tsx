@@ -61,7 +61,7 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
         } as React.CSSProperties
       }
       role="img"
-      aria-label="Financial dashboard showing invoiced revenue charts"
+      aria-label="Restaurant dashboard showing phone order revenue"
       data-name="Numbers that speak"
       data-node-id="454:5856"
     >
@@ -259,7 +259,7 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                               whiteSpace: "pre",
                             }}
                           >
-                            Invoiced Revenue
+                            Phone Order Revenue
                           </div>
                           <div
                             className="tracking-widest"

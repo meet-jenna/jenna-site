@@ -6,10 +6,10 @@ export default function FooterSection() {
         <div className="h-auto p-4 md:p-8 flex flex-col justify-start items-start gap-8">
           {/* Brand Section */}
           <div className="self-stretch flex justify-start items-center gap-3">
-            <div className="text-center text-[#242424] text-xl font-semibold leading-4 font-sans">Brillance</div>
+            <div className="text-center text-[#242424] text-xl font-semibold leading-4 font-sans">Jenna</div>
           </div>
           <div className="text-[rgba(36,36,36,0.90)] text-sm font-medium leading-[18px] font-sans">
-            Coding made effortless
+            The AI hostess for every restaurant.
           </div>
 
           {/* Social Media Icons */}
@@ -72,10 +72,10 @@ export default function FooterSection() {
                 Integrations
               </div>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Real-time Previews
+                How it works
               </div>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Multi-Agent Coding
+                Book a demo
               </div>
             </div>
           </div>
@@ -85,19 +85,19 @@ export default function FooterSection() {
             <div className="text-[rgba(36,36,36,0.50)] text-sm font-medium leading-5 font-sans">Company</div>
             <div className="flex flex-col justify-center items-start gap-2">
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                About us
+                About
               </div>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Our team
+                Contact
+              </div>
+              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+                Blog
               </div>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Careers
               </div>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Brand
-              </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Contact
+                Partners
               </div>
             </div>
           </div>
@@ -107,19 +107,19 @@ export default function FooterSection() {
             <div className="text-[rgba(36,36,36,0.50)] text-sm font-medium leading-5 font-sans">Resources</div>
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Terms of use
-              </div>
-              <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                API Reference
+                Help center
               </div>
               <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Documentation
               </div>
               <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Community
+                Privacy policy
               </div>
               <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
-                Support
+                Terms of use
+              </div>
+              <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+                Status
               </div>
             </div>
           </div>
