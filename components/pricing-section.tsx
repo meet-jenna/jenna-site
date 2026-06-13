@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 export default function PricingSection() {
   const plans = {
     starter: {
@@ -104,12 +106,12 @@ export default function PricingSection() {
                   <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <div className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
+                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-white text-[13px] font-medium leading-5 font-sans">
                     Book a Demo
                   </div>
-                </div>
+                </Link>
               </div>
 
               {/* Features */}
@@ -153,12 +155,12 @@ export default function PricingSection() {
                   <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <div className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center">
+                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[99px] flex justify-center items-center cursor-pointer hover:bg-[#F4F4F4] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-[#242424] text-[13px] font-medium leading-5 font-sans">
                     Book a Demo
                   </div>
-                </div>
+                </Link>
               </div>
 
               {/* Features */}

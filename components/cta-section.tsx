@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 export default function CTASection() {
@@ -36,13 +37,13 @@ export default function CTASection() {
           </div>
           <div className="w-full max-w-[497px] flex flex-col justify-center items-center gap-12">
             <div className="flex justify-start items-center gap-4">
-              <div className="h-10 px-12 py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
+              <Link href="/book-demo" className="h-10 px-12 py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
                 <div className="w-44 h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                 <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[13px] font-medium leading-5 font-sans">
                   Book a Demo
                   <ArrowUpRight className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function FooterSection() {
   return (
     <div className="w-full pt-10 flex flex-col justify-start items-start">
@@ -74,9 +76,9 @@ export default function FooterSection() {
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 How it works
               </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              <Link href="/book-demo" className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Book a demo
-              </div>
+              </Link>
             </div>
           </div>
 

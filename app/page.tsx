@@ -14,9 +14,11 @@ import PricingSection from "../components/pricing-section"
 import CTASection from "../components/cta-section"
 import FooterSection from "../components/footer-section"
 import HeroDashboard from "../components/hero/hero-dashboard"
+import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { PosGridWordmark } from "../components/integration-logo"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
+import { PORTAL_URL } from "../lib/portal"
 
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
@@ -104,13 +106,19 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-                <div className="h-6 sm:h-7 md:h-8 flex justify-start items-start gap-2 sm:gap-3">
-                  <div className="px-2 sm:px-3 md:px-[14px] py-1 sm:py-[6px] bg-white shadow-[0px_1px_2px_rgba(36,36,36,0.12)] overflow-hidden rounded-full flex justify-center items-center gap-1">
+                <div className="h-6 sm:h-7 md:h-8 flex justify-end items-center gap-2 sm:gap-3 md:gap-4">
+                  <a
+                    href={PORTAL_URL}
+                    className="flex items-center text-[rgba(36,36,36,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
+                  >
+                    Sign in
+                  </a>
+                  <Link href="/book-demo" className="px-2 sm:px-3 md:px-[14px] py-1 sm:py-[6px] bg-white shadow-[0px_1px_2px_rgba(36,36,36,0.12)] overflow-hidden rounded-full flex justify-center items-center gap-1">
                     <div className="flex flex-col justify-center text-[#242424] text-xs md:text-[13px] font-medium leading-5 font-sans">
                       Demo
                     </div>
                     <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#242424] shrink-0" strokeWidth={2.25} />
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -138,13 +146,13 @@ export default function LandingPage() {
 
               <div className="w-full max-w-[497px] flex flex-col justify-center items-center relative z-10 mt-8 sm:mt-10 md:mt-12">
                 <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
-                  <div className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center">
+                  <Link href="/book-demo" className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
                     <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                     <div className="flex flex-row items-center justify-center gap-1.5 text-white text-sm sm:text-base md:text-[15px] font-medium leading-5 font-sans">
                       Book a Demo
                       <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" strokeWidth={2.25} />
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
 
