@@ -67,7 +67,7 @@ export default function LandingPage() {
     <div className="w-full min-h-screen relative bg-[#F4F4F4] overflow-x-hidden flex flex-col justify-start items-center">
       <div className="relative flex flex-col justify-start items-center w-full">
         {/* Main container with proper margins */}
-        <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] relative flex flex-col justify-start items-start min-h-screen">
+        <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] xl:max-w-[1180px] 2xl:max-w-[1320px] relative flex flex-col justify-start items-start min-h-screen">
           {/* Left vertical line */}
           <div className="w-[1px] h-full absolute left-4 sm:left-6 md:left-8 lg:left-0 top-0 bg-[rgba(36,36,36,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
 
@@ -79,7 +79,7 @@ export default function LandingPage() {
             <div className="w-full h-12 sm:h-14 md:h-16 lg:h-[84px] absolute left-0 top-4 sm:top-0 flex justify-center items-center z-20 px-6 sm:px-8 md:px-12 lg:px-0">
               <div className="w-full h-0 absolute left-0 top-6 sm:top-7 md:top-8 lg:top-[42px] border-t border-[rgba(36,36,36,0.12)] shadow-[0px_1px_0px_white]"></div>
 
-              <div className="w-full max-w-[calc(100%-32px)] sm:max-w-[calc(100%-48px)] md:max-w-[calc(100%-64px)] lg:max-w-[700px] lg:w-[700px] h-10 sm:h-11 md:h-12 py-1.5 sm:py-2 px-3 sm:px-4 md:px-4 pr-2 sm:pr-3 bg-[#F4F4F4] backdrop-blur-sm shadow-[0px_0px_0px_2px_white] overflow-hidden rounded-[50px] flex justify-between items-center relative z-30">
+              <div className="w-full max-w-[calc(100%-32px)] sm:max-w-[calc(100%-48px)] md:max-w-[calc(100%-64px)] lg:max-w-[700px] lg:w-[700px] xl:max-w-[780px] xl:w-[780px] 2xl:max-w-[870px] 2xl:w-[870px] h-10 sm:h-11 md:h-12 py-1.5 sm:py-2 px-3 sm:px-4 md:px-4 pr-2 sm:pr-3 bg-[#F4F4F4] backdrop-blur-sm shadow-[0px_0px_0px_2px_white] overflow-hidden rounded-[50px] flex justify-between items-center relative z-30">
                 <div className="flex justify-center items-center">
                   <div className="flex justify-start items-center">
                     <div className="flex flex-col justify-center text-[#242424] text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-5 font-sans">
@@ -148,7 +148,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="w-full max-w-[960px] lg:w-[960px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
+              <div className="w-full max-w-[960px] lg:w-[960px] xl:max-w-[1040px] xl:w-[1040px] 2xl:max-w-[1180px] 2xl:w-[1180px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
                 {/* Top-edge glow: anchored to the hero card's top edge, spans its full width on all breakpoints */}
                 <div className="absolute top-2 sm:top-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 lg:left-11 lg:right-11 z-0 pointer-events-none">
                   <img
@@ -158,7 +158,7 @@ export default function LandingPage() {
                     className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
                   />
                 </div>
-                <div className="relative z-[1] w-full max-w-[960px] lg:w-[960px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
+                <div className="relative z-[1] w-full max-w-[960px] lg:w-[960px] xl:max-w-[1040px] xl:w-[1040px] 2xl:max-w-[1180px] 2xl:w-[1180px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] xl:h-[753px] 2xl:h-[855px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
                   {/* Dashboard Content */}
                   <div className="self-stretch flex-1 flex justify-start items-start">
                     {/* Main Content */}
@@ -315,7 +315,7 @@ export default function LandingPage() {
               {/* Bento Grid Section */}
               <div className="w-full border-b border-[rgba(36,36,36,0.12)] flex flex-col justify-center items-center">
                 {/* Header Section */}
-                <div className="self-stretch px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] lg:w-[1060px] py-8 sm:py-12 md:py-16 border-b border-[rgba(36,36,36,0.12)] flex justify-center items-center gap-6">
+                <div className="self-stretch px-4 sm:px-6 md:px-8 lg:px-0 py-8 sm:py-12 md:py-16 border-b border-[rgba(36,36,36,0.12)] flex justify-center items-center gap-6">
                   <div className="w-full max-w-[616px] lg:w-[616px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(0,0,0,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
                     <Badge
                       icon={
@@ -362,12 +362,12 @@ export default function LandingPage() {
                           Jenna logs each call the moment it happens, so you always see what's coming in.
                         </p>
                       </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex items-center justify-center overflow-hidden">
+                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex items-center justify-center overflow-hidden">
                         <SmartSimpleBrilliant
                           width="100%"
                           height="100%"
                           theme="light"
-                          className="scale-60 sm:scale-65 md:scale-75 lg:scale-90"
+                          className="scale-60 sm:scale-65 md:scale-75 lg:scale-90 xl:scale-100 2xl:scale-110"
                         />
                       </div>
                     </div>
@@ -376,18 +376,18 @@ export default function LandingPage() {
                     <div className="border-b border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] font-semibold leading-tight font-sans text-lg sm:text-xl">
-                          Natural on every call
+                          Every Call, Natural
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Jenna understands what people want and answers instantly — just like your best host.
                         </p>
                       </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden text-right items-center justify-center">
+                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden text-right items-center justify-center">
                         <YourWorkInSync
                           width="400"
                           height="250"
                           theme="light"
-                          className="scale-70 sm:scale-75 md:scale-90"
+                          className="scale-70 sm:scale-75 md:scale-90 xl:scale-100 2xl:scale-105"
                         />
                       </div>
                     </div>
@@ -396,15 +396,15 @@ export default function LandingPage() {
                     <div className="border-r-0 md:border-r border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Never Guesses
+                          Every Order, Accurate
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Live menu and prices pulled from your POS — every order comes out right.
                         </p>
                       </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
+                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
                         <div className="w-full h-full flex items-center justify-center bg-transparent">
-                          <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full" />
+                          <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full xl:scale-110 2xl:scale-125" />
                         </div>
                         {/* Gradient mask for soft bottom edge */}
                         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F4F4F4] to-transparent pointer-events-none"></div>
@@ -415,19 +415,19 @@ export default function LandingPage() {
                     <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Tracks How You're Doing
+                          Every Number, Tracked
                         </h3>
                         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
                           Every call, order, and dollar — logged in your portal automatically.
                         </p>
                       </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-lg flex overflow-hidden items-center justify-center relative">
+                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden items-center justify-center relative">
                         <div className="absolute inset-0 flex items-center justify-center">
                           <NumbersThatSpeak
                             width="100%"
                             height="100%"
                             theme="light"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full xl:scale-110 2xl:scale-125"
                           />
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F4F4F4] to-transparent pointer-events-none"></div>

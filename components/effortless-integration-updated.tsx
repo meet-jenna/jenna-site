@@ -15,11 +15,11 @@ interface EffortlessIntegrationProps {
  * Effortless Integration – Service integration constellation
  * Three concentric rings with logos positioned on ring axes
  */
-const RING_LOGOS: { id: PosIntegrationId; radius: number; angle: number }[] = [
-  { id: "toast", radius: 80, angle: Math.PI },
-  { id: "square", radius: 80, angle: 0 },
-  { id: "clover", radius: 120, angle: -Math.PI / 4 },
-  { id: "flipdish", radius: 120, angle: (3 * Math.PI) / 4 },
+const RING_LOGOS: { id: PosIntegrationId; radius: number; angle: number; scale?: number }[] = [
+  { id: "toast", radius: 80, angle: Math.PI, scale: 1.2 },
+  { id: "square", radius: 80, angle: 0, scale: 0.9 },
+  { id: "clover", radius: 120, angle: -Math.PI / 4, scale: 1.15 },
+  { id: "flipdish", radius: 120, angle: (3 * Math.PI) / 4, scale: 1.15 },
   { id: "shift4", radius: 120, angle: (5 * Math.PI) / 4 },
   { id: "ncr-aloha", radius: 160, angle: Math.PI },
   { id: "oracle-micros", radius: 160, angle: 0 },
@@ -137,7 +137,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           J
         </div>
 
-        {RING_LOGOS.map(({ id, radius, angle }) => {
+        {RING_LOGOS.map(({ id, radius, angle, scale }) => {
           const position = getPositionOnRing(radius, angle)
           const integration = getPosIntegration(id)
 
@@ -162,6 +162,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
                   width: "32px",
                   height: "32px",
                   display: "block",
+                  transform: scale ? `scale(${scale})` : undefined,
                 }}
               />
             </div>

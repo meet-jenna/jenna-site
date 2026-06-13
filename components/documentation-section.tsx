@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import type React from "react"
+import { Settings } from "lucide-react"
+import HowItWorksVisual from "./how-it-works-visual"
 
 const HOW_IT_WORKS_CARDS = [
   {
@@ -16,12 +18,6 @@ const HOW_IT_WORKS_CARDS = [
     title: "We attach it to your phone",
     description: "Forward your line to Jenna and start capturing every call right away.",
   },
-] as const
-
-const STEP_GRADIENTS = [
-  "bg-gradient-to-br from-blue-50 to-blue-100",
-  "bg-gradient-to-br from-purple-50 to-purple-100",
-  "bg-gradient-to-br from-green-50 to-green-100",
 ] as const
 
 // Badge component for consistency
@@ -60,25 +56,23 @@ export default function DocumentationSection() {
       <div className="self-stretch px-6 md:px-24 py-12 md:py-16 border-b border-[rgba(36,36,36,0.12)] flex justify-center items-center gap-6">
         <div className="w-full max-w-[586px] px-6 py-5 shadow-[0px_2px_4px_rgba(0,0,0,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-4 shadow-none">
           <Badge
-            icon={
-              <div className="w-[10.50px] h-[10.50px] outline outline-[1.17px] outline-[#242424] outline-offset-[-0.58px] rounded-full"></div>
-            }
+            icon={<Settings className="w-[10.50px] h-[10.50px] text-[#242424]" />}
             text="How it works"
           />
           <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-3xl md:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-            We Build You Enjoy
+            Done For You
           </div>
           <div className="self-stretch text-center text-[#6B7280] text-base font-normal leading-7 font-sans">
-            Jenna is a completely done-for-you process
+            From the moment you sign up we build and manage every piece of Jenna
           </div>
         </div>
       </div>
 
       {/* Content Section */}
       <div className="self-stretch px-4 md:px-9 overflow-hidden flex justify-start items-center">
-        <div className="flex-1 py-8 md:py-11 flex flex-col md:flex-row justify-start items-center gap-6 md:gap-12">
+        <div className="flex-1 py-8 md:py-11 flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 xl:gap-16">
           {/* Left Column - Feature Cards */}
-          <div className="w-full md:w-auto md:max-w-[400px] flex flex-col justify-center items-center gap-4 order-2 md:order-1">
+          <div className="w-full md:w-auto md:flex-1 md:max-w-[400px] xl:max-w-[440px] flex flex-col justify-center items-center gap-4 order-2 md:order-1">
             {HOW_IT_WORKS_CARDS.map((card, index) => {
               const isActive = index === activeCard
 
@@ -113,10 +107,10 @@ export default function DocumentationSection() {
             })}
           </div>
 
-          {/* Right Column - Image */}
-          <div className="w-full md:w-auto rounded-lg flex flex-col justify-center items-center gap-2 order-1 md:order-2 md:px-0">
-            <div className="w-full md:w-[580px] h-[250px] md:h-[420px] bg-white shadow-[0px_0px_0px_0.9056603908538818px_rgba(0,0,0,0.08)] overflow-hidden rounded-lg flex flex-col justify-start items-start">
-              <div className={`w-full h-full transition-all duration-300 ${STEP_GRADIENTS[activeCard]}`} />
+          {/* Right Column - Visual */}
+          <div className="w-full md:w-auto md:flex-1 rounded-lg flex flex-col justify-center items-center gap-2 order-1 md:order-2 md:px-0">
+            <div className="w-full md:w-[580px] xl:w-[640px] 2xl:w-[700px] h-[250px] md:h-[420px] xl:h-[440px] relative">
+              <HowItWorksVisual activeStep={activeCard} />
             </div>
           </div>
         </div>
