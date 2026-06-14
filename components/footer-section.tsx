@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function FooterSection() {
   return (
-    <div className="w-full pt-10 flex flex-col justify-start items-start">
+    <div className="w-full bg-[#F6F5F7] rounded-[6px] px-2 sm:px-6 pt-4 pb-2 flex flex-col justify-start items-start overflow-hidden">
       {/* Main Footer Content */}
       <div className="self-stretch h-auto flex flex-col md:flex-row justify-between items-stretch pr-0 pb-8 pt-0">
         <div className="h-auto p-4 md:p-8 flex flex-col justify-start items-start gap-8">
@@ -128,23 +128,13 @@ export default function FooterSection() {
         </div>
       </div>
 
-      {/* Bottom Section with Pattern */}
-      <div className="self-stretch h-12 relative overflow-hidden border-t border-b border-[rgba(36,36,36,0.12)]">
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-          <div className="w-full h-full relative">
-            {Array.from({ length: 400 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-[300px] h-16 border border-[rgba(3,7,18,0.08)]"
-                style={{
-                  left: `${i * 300 - 600}px`,
-                  top: "-120px",
-                  transform: "rotate(-45deg)",
-                  transformOrigin: "top left",
-                }}
-              />
-            ))}
-          </div>
+      {/* Bottom Section */}
+      <div className="self-stretch px-2 sm:px-2 py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div className="text-[rgba(36,36,36,0.55)] text-xs font-medium leading-5 font-sans">
+          © {new Date().getFullYear()} Jenna. All rights reserved.
+        </div>
+        <div className="text-[rgba(36,36,36,0.45)] text-xs font-medium leading-5 font-sans">
+          The AI hostess for every restaurant.
         </div>
       </div>
     </div>

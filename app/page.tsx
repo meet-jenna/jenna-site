@@ -23,11 +23,34 @@ import { PORTAL_URL } from "../lib/portal"
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[14px] py-[6px] bg-white shadow-[0px_0px_0px_4px_rgba(36,36,36,0.05)] overflow-hidden rounded-[90px] flex justify-start items-center gap-[8px] border border-[rgba(2,6,23,0.08)] shadow-xs">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
       </div>
+    </div>
+  )
+}
+
+// Section header — lives on the page background, outside containers
+function SectionHeader({
+  badge,
+  title,
+  description,
+}: {
+  badge: React.ReactNode
+  title: string
+  description: string
+}) {
+  return (
+    <div className="w-full max-w-[600px] mx-auto flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+      {badge}
+      <h2 className="text-[#242424] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.1] font-sans tracking-tight">
+        {title}
+      </h2>
+      <p className="text-[#6B7280] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
+        {description}
+      </p>
     </div>
   )
 }
@@ -66,417 +89,262 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="w-full min-h-screen relative bg-[#F4F4F4] overflow-x-hidden flex flex-col justify-start items-center">
-      <div className="relative flex flex-col justify-start items-center w-full">
-        {/* Main container with proper margins */}
-        <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-0 lg:max-w-[1060px] xl:max-w-[1180px] 2xl:max-w-[1320px] relative flex flex-col justify-start items-start min-h-screen">
-          {/* Left vertical line */}
-          <div className="w-[1px] h-full absolute left-4 sm:left-6 md:left-8 lg:left-0 top-0 bg-[rgba(36,36,36,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
-
-          {/* Right vertical line */}
-          <div className="w-[1px] h-full absolute right-4 sm:right-6 md:right-8 lg:right-0 top-0 bg-[rgba(36,36,36,0.12)] shadow-[1px_0px_0px_white] z-0"></div>
-
-          <div className="self-stretch pt-[9px] overflow-x-hidden border-b border-[rgba(36,36,36,0.06)] flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[66px] relative z-10">
-            {/* Navigation */}
-            <div className="w-full h-12 sm:h-14 md:h-16 lg:h-[84px] absolute left-0 top-4 sm:top-0 flex justify-center items-center z-20 px-6 sm:px-8 md:px-12 lg:px-0">
-              <div className="w-full h-0 absolute left-0 top-6 sm:top-7 md:top-8 lg:top-[42px] border-t border-[rgba(36,36,36,0.12)] shadow-[0px_1px_0px_white]"></div>
-
-              <div className="w-full max-w-[calc(100%-32px)] sm:max-w-[calc(100%-48px)] md:max-w-[calc(100%-64px)] lg:max-w-[700px] lg:w-[700px] xl:max-w-[780px] xl:w-[780px] 2xl:max-w-[870px] 2xl:w-[870px] h-10 sm:h-11 md:h-12 py-1.5 sm:py-2 px-3 sm:px-4 md:px-4 pr-2 sm:pr-3 bg-[#F4F4F4] backdrop-blur-sm shadow-[0px_0px_0px_2px_white] overflow-hidden rounded-[50px] flex justify-between items-center relative z-30">
-                <div className="flex justify-center items-center">
-                  <div className="flex justify-start items-center">
-                    <div className="flex flex-col justify-center text-[#242424] text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-5 font-sans">
-                      Jenna
-                    </div>
-                  </div>
-                  <div className="pl-3 sm:pl-4 md:pl-5 lg:pl-5 flex justify-start items-start hidden sm:flex flex-row gap-2 sm:gap-3 md:gap-4 lg:gap-4">
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(36,36,36,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        Features
-                      </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(36,36,36,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        Pricing
-                      </div>
-                    </div>
-                    <div className="flex justify-start items-center">
-                      <div className="flex flex-col justify-center text-[rgba(36,36,36,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans">
-                        FAQ
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="h-6 sm:h-7 md:h-8 flex justify-end items-center gap-2 sm:gap-3 md:gap-4">
-                  <a
-                    href={PORTAL_URL}
-                    className="flex items-center text-[rgba(36,36,36,0.80)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
-                  >
-                    Sign in
-                  </a>
-                  <Link href="/book-demo" className="px-2 sm:px-3 md:px-[14px] py-1 sm:py-[6px] bg-white shadow-[0px_1px_2px_rgba(36,36,36,0.12)] overflow-hidden rounded-full flex justify-center items-center gap-1">
-                    <div className="flex flex-col justify-center text-[#242424] text-xs md:text-[13px] font-medium leading-5 font-sans">
-                      Demo
-                    </div>
-                    <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#242424] shrink-0" strokeWidth={2.25} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Hero Section */}
-            <div className="pt-28 sm:pt-32 md:pt-36 lg:pt-44 pb-8 sm:pb-12 md:pb-16 flex flex-col justify-start items-center px-2 sm:px-4 md:px-8 lg:px-0 w-full relative">
-              <div className="w-full max-w-[640px] flex flex-col justify-center items-center gap-4 relative z-10">
-                <Badge
-                  icon={
-                    <div className="w-[10px] h-[10px] bg-[#242424] rounded-[3px] rotate-45 flex items-center justify-center">
-                      <span className="-rotate-45 text-white text-[7px] font-bold leading-none font-sans">J</span>
-                    </div>
-                  }
-                  text="AI for Restaurants"
-                />
-                <h1 className="w-full text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em] px-2 sm:px-0">
-                  The AI Hostess
-                  <br />
-                  For Every Restaurant
-                </h1>
-                <p className="w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans px-2 sm:px-0">
-                  Jenna connects to your existing systems and handles every call start to finish.
-                </p>
-              </div>
-
-              <div className="w-full max-w-[497px] flex flex-col justify-center items-center relative z-10 mt-8 sm:mt-10 md:mt-12">
-                <div className="backdrop-blur-[8.25px] flex justify-start items-center gap-4">
-                  <Link href="/book-demo" className="h-10 sm:h-11 md:h-12 px-6 sm:px-8 md:px-10 lg:px-12 py-2 sm:py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-full flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
-                    <div className="w-20 sm:w-24 md:w-28 lg:w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-                    <div className="flex flex-row items-center justify-center gap-1.5 text-white text-sm sm:text-base md:text-[15px] font-medium leading-5 font-sans">
-                      Book a Demo
-                      <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" strokeWidth={2.25} />
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="w-full max-w-[960px] lg:w-[960px] xl:max-w-[1040px] xl:w-[1040px] 2xl:max-w-[1180px] 2xl:w-[1180px] pt-2 sm:pt-4 pb-6 sm:pb-8 md:pb-10 px-2 sm:px-4 md:px-6 lg:px-11 flex flex-col justify-center items-center gap-2 relative z-5 my-8 sm:my-12 md:my-16 lg:my-16 mb-0 lg:pb-0">
-                {/* Top-edge glow: anchored to the hero card's top edge, spans its full width on all breakpoints */}
-                <div className="absolute top-2 sm:top-4 left-2 right-2 sm:left-4 sm:right-4 md:left-6 md:right-6 lg:left-11 lg:right-11 z-0 pointer-events-none">
-                  <img
-                    src="/gradients/hero-top-glow.svg"
-                    alt=""
-                    aria-hidden
-                    className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
-                  />
-                </div>
-                <div className="relative z-[1] w-full max-w-[960px] lg:w-[960px] xl:max-w-[1040px] xl:w-[1040px] 2xl:max-w-[1180px] 2xl:w-[1180px] h-[200px] sm:h-[280px] md:h-[450px] lg:h-[695.55px] xl:h-[753px] 2xl:h-[855px] bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)] overflow-hidden rounded-[6px] sm:rounded-[8px] lg:rounded-[9.06px] flex flex-col justify-start items-start">
-                  {/* Dashboard Content */}
-                  <div className="self-stretch flex-1 flex justify-start items-start">
-                    {/* Main Content */}
-                    <div className="w-full h-full flex items-center justify-center">
-                      <HeroDashboard activeView={activeCard} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="self-stretch border-t border-[#E5E7EB] border-b border-[#E5E7EB] flex justify-center items-start">
-                <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                  {/* Left decorative pattern */}
-                  <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                    {Array.from({ length: 50 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                      ></div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex-1 px-0 sm:px-2 md:px-0 flex flex-col md:flex-row justify-center items-stretch gap-0">
-                  {/* Feature Cards */}
-                  <FeatureCard
-                    title="Answers every call"
-                    description="First ring, 24/7 — no missed orders or reservations."
-                    isActive={activeCard === 0}
-                    progress={activeCard === 0 ? progress : 0}
-                    onClick={() => handleCardClick(0)}
-                  />
-                  <FeatureCard
-                    title="Takes the whole order"
-                    description="Pickup, delivery, or reservations — handled start to finish."
-                    isActive={activeCard === 1}
-                    progress={activeCard === 1 ? progress : 0}
-                    onClick={() => handleCardClick(1)}
-                  />
-                  <FeatureCard
-                    title="Syncs to your POS"
-                    description="Orders land in your existing system. No new hardware."
-                    isActive={activeCard === 2}
-                    progress={activeCard === 2 ? progress : 0}
-                    onClick={() => handleCardClick(2)}
-                  />
-                </div>
-
-                <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                  {/* Right decorative pattern */}
-                  <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                    {Array.from({ length: 50 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                      ></div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Proof Section */}
-              <div className="w-full border-b border-[rgba(36,36,36,0.12)] flex flex-col justify-center items-center">
-                <div className="self-stretch px-4 sm:px-6 md:px-24 py-8 sm:py-12 md:py-16 border-b border-[rgba(36,36,36,0.12)] flex justify-center items-center gap-6">
-                  <div className="w-full max-w-[586px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(0,0,0,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
-                    <Badge
-                      icon={
-                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="1" y="3" width="4" height="6" stroke="#242424" strokeWidth="1" fill="none" />
-                          <rect x="7" y="1" width="4" height="8" stroke="#242424" strokeWidth="1" fill="none" />
-                          <rect x="2" y="4" width="1" height="1" fill="#242424" />
-                          <rect x="3.5" y="4" width="1" height="1" fill="#242424" />
-                          <rect x="2" y="5.5" width="1" height="1" fill="#242424" />
-                          <rect x="3.5" y="5.5" width="1" height="1" fill="#242424" />
-                          <rect x="8" y="2" width="1" height="1" fill="#242424" />
-                          <rect x="9.5" y="2" width="1" height="1" fill="#242424" />
-                          <rect x="8" y="3.5" width="1" height="1" fill="#242424" />
-                          <rect x="9.5" y="3.5" width="1" height="1" fill="#242424" />
-                          <rect x="8" y="5" width="1" height="1" fill="#242424" />
-                          <rect x="9.5" y="5" width="1" height="1" fill="#242424" />
-                        </svg>
-                      }
-                      text="Integrations"
-                    />
-                    <div className="w-full max-w-[472.55px] text-center flex justify-center flex-col text-[#242424] text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-                      Connects to Your POS
-                    </div>
-                    <div className="self-stretch text-center text-[#6B7280] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
-                      Plugs into your existing POS. Orders and reservations flow in automatically.
-                    </div>
-                  </div>
-                </div>
-
-                {/* Logo Grid */}
-                <div className="self-stretch border-[rgba(36,36,36,0.12)] flex justify-center items-start border-t border-b-0">
-                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                    {/* Left decorative pattern */}
-                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                      {Array.from({ length: 50 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-0 border-l border-r border-[rgba(36,36,36,0.12)]">
-                    {/* Logo Grid - Responsive grid */}
-                    {POS_GRID_IDS.map((id, index) => {
-                      const isMobileFirstColumn = index % 2 === 0
-                      const isDesktopFirstColumn = index % 4 === 0
-                      const isDesktopLastColumn = index % 4 === 3
-                      const isDesktopTopRow = index < 4
-                      const isDesktopBottomRow = index >= 4
-
-                      return (
-                        <div
-                          key={id}
-                          className={`
-                            h-24 xs:h-28 sm:h-32 md:h-36 lg:h-40 flex justify-center items-center
-                            border-b border-[rgba(227,226,225,0.5)]
-                            ${index < 6 ? "sm:border-b-[0.5px]" : "sm:border-b"}
-                            ${index >= 6 ? "border-b" : ""}
-                            ${isMobileFirstColumn ? "border-r-[0.5px]" : ""}
-                            sm:border-r-[0.5px] sm:border-l-0
-                            ${isDesktopFirstColumn ? "md:border-l" : "md:border-l-[0.5px]"}
-                            ${isDesktopLastColumn ? "md:border-r" : "md:border-r-[0.5px]"}
-                            ${isDesktopTopRow ? "md:border-b-[0.5px]" : ""}
-                            ${isDesktopBottomRow ? "md:border-t-[0.5px] md:border-b" : ""}
-                            border-[#E5E7EB]
-                          `}
-                        >
-                          <PosGridWordmark id={id} />
-                        </div>
-                      )
-                    })}
-                  </div>
-
-                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                    {/* Right decorative pattern */}
-                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                      {Array.from({ length: 50 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bento Grid Section */}
-              <div className="w-full border-b border-[rgba(36,36,36,0.12)] flex flex-col justify-center items-center">
-                {/* Header Section */}
-                <div className="self-stretch px-4 sm:px-6 md:px-8 lg:px-0 py-8 sm:py-12 md:py-16 border-b border-[rgba(36,36,36,0.12)] flex justify-center items-center gap-6">
-                  <div className="w-full max-w-[616px] lg:w-[616px] px-4 sm:px-6 py-4 sm:py-5 shadow-[0px_2px_4px_rgba(0,0,0,0.06)] overflow-hidden rounded-lg flex flex-col justify-start items-center gap-3 sm:gap-4 shadow-none">
-                    <Badge
-                      icon={
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="1" y="1" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
-                          <rect x="7" y="1" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
-                          <rect x="1" y="7" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
-                          <rect x="7" y="7" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
-                        </svg>
-                      }
-                      text="Built for restaurants"
-                    />
-                    <div className="w-full max-w-[598.06px] lg:w-[598.06px] text-center flex justify-center flex-col text-[#242424] text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-                      An Advantage You Need
-                    </div>
-                    <div className="self-stretch text-center text-[#6B7280] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
-                      Jenna is the communication layer that helps your restaurant run smoother
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bento Grid Content */}
-                <div className="self-stretch flex justify-center items-start">
-                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                    {/* Left decorative pattern */}
-                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                      {Array.from({ length: 200 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-0 border-l border-r border-[rgba(36,36,36,0.12)]">
-                    {/* Top Left - Smart. Simple. Brilliant. */}
-                    <div className="border-b border-r-0 md:border-r border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Every Event, Organized
-                        </h3>
-                        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
-                          Jenna logs each call the moment it happens, so you always see what's coming in.
-                        </p>
-                      </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex items-center justify-center overflow-hidden">
-                        <SmartSimpleBrilliant
-                          width="100%"
-                          height="100%"
-                          theme="light"
-                          className="scale-60 sm:scale-65 md:scale-75 lg:scale-90 xl:scale-100 2xl:scale-110"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Top Right - Your work, in sync */}
-                    <div className="border-b border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[#242424] font-semibold leading-tight font-sans text-lg sm:text-xl">
-                          Every Call, Natural
-                        </h3>
-                        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
-                          Jenna understands what people want and answers instantly — just like your best host.
-                        </p>
-                      </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden text-right items-center justify-center">
-                        <YourWorkInSync
-                          width="400"
-                          height="250"
-                          theme="light"
-                          className="scale-70 sm:scale-75 md:scale-90 xl:scale-100 2xl:scale-105"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Bottom Left - Effortless integration */}
-                    <div className="border-r-0 md:border-r border-[rgba(36,36,36,0.12)] p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6 bg-transparent">
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Every Order, Accurate
-                        </h3>
-                        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
-                          Live menu and prices pulled from your POS — every order comes out right.
-                        </p>
-                      </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden justify-center items-center relative bg-transparent">
-                        <div className="w-full h-full flex items-center justify-center bg-transparent">
-                          <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full xl:scale-110 2xl:scale-125" />
-                        </div>
-                        {/* Gradient mask for soft bottom edge */}
-                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F4F4F4] to-transparent pointer-events-none"></div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Right - Numbers that speak */}
-                    <div className="p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-start items-start gap-4 sm:gap-6">
-                      <div className="flex flex-col gap-2">
-                        <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">
-                          Every Number, Tracked
-                        </h3>
-                        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">
-                          Every call, order, and dollar — logged in your portal automatically.
-                        </p>
-                      </div>
-                      <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-lg flex overflow-hidden items-center justify-center relative">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <NumbersThatSpeak
-                            width="100%"
-                            height="100%"
-                            theme="light"
-                            className="w-full h-full xl:scale-110 2xl:scale-125"
-                          />
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F4F4F4] to-transparent pointer-events-none"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-4 sm:w-6 md:w-8 lg:w-12 self-stretch relative overflow-hidden">
-                    {/* Right decorative pattern */}
-                    <div className="w-[120px] sm:w-[140px] md:w-[162px] left-[-40px] sm:left-[-50px] md:left-[-58px] top-[-120px] absolute flex flex-col justify-start items-start">
-                      {Array.from({ length: 200 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="self-stretch h-3 sm:h-4 rotate-[-45deg] origin-top-left outline outline-[0.5px] outline-[rgba(3,7,18,0.08)] outline-offset-[-0.25px]"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Documentation Section */}
-              <DocumentationSection />
-
-              {/* Testimonials Section */}
-              <TestimonialsSection />
-
-              {/* Pricing Section */}
-              <PricingSection />
-
-              {/* FAQ Section */}
-              <FAQSection />
-
-              {/* CTA Section */}
-              <CTASection />
-
-              {/* Footer Section */}
-              <FooterSection />
-            </div>
+    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+      {/* Navigation */}
+      <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
+        <div className="w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 bg-[#FFFFFF]/80 backdrop-blur-md border border-[rgba(36,36,36,0.10)] shadow-[0px_2px_8px_rgba(36,36,36,0.05)] rounded-[6px] flex justify-between items-center">
+          <div className="flex justify-center items-center">
+            <span className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">Jenna</span>
+            <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
+              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+                Features
+              </span>
+              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+                Pricing
+              </span>
+              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+                FAQ
+              </span>
+            </nav>
+          </div>
+          <div className="flex justify-end items-center gap-2 sm:gap-3">
+            <a
+              href={PORTAL_URL}
+              className="flex items-center text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
+            >
+              Sign in
+            </a>
+            <Link
+              href="/book-demo"
+              className="px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
+            >
+              <span className="text-white text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
+              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white shrink-0" strokeWidth={2.25} />
+            </Link>
           </div>
         </div>
+      </header>
+
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-12 sm:gap-16 lg:gap-20">
+        {/* Hero copy (lives on the page, no container) */}
+        <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10 lg:pt-14">
+          <Badge
+            icon={
+              <div className="w-[10px] h-[10px] bg-[#242424] rounded-[2px] rotate-45 flex items-center justify-center">
+                <span className="-rotate-45 text-white text-[7px] font-bold leading-none font-sans">J</span>
+              </div>
+            }
+            text="AI for Restaurants"
+          />
+          <h1 className="mt-5 w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
+            The AI Hostess
+            <br />
+            For Every Restaurant
+          </h1>
+          <p className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+            Jenna connects to your existing systems and handles every call start to finish.
+          </p>
+          <Link
+            href="/book-demo"
+            className="mt-8 h-11 md:h-12 px-8 md:px-12 relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+          >
+            <div className="w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+            <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
+              Book a Demo
+              <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
+            </div>
+          </Link>
+
+          {/* Hero dashboard */}
+          <div className="relative mt-10 sm:mt-12 w-full">
+            {/* Top-edge glow: straddles the dashboard's top edge */}
+            <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
+              <img
+                src="/gradients/hero-top-glow.svg"
+                alt=""
+                aria-hidden
+                className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
+              />
+            </div>
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] border border-[rgba(36,36,36,0.08)] shadow-[0px_8px_30px_rgba(36,36,36,0.08)] overflow-hidden">
+              <HeroDashboard activeView={activeCard} />
+            </div>
+          </div>
+        </section>
+
+        {/* Feature cards */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
+          <FeatureCard
+            title="Answers every call"
+            description="First ring, 24/7 — no missed orders or reservations."
+            isActive={activeCard === 0}
+            progress={activeCard === 0 ? progress : 0}
+            onClick={() => handleCardClick(0)}
+          />
+          <FeatureCard
+            title="Takes the whole order"
+            description="Pickup, delivery, or reservations — handled start to finish."
+            isActive={activeCard === 1}
+            progress={activeCard === 1 ? progress : 0}
+            onClick={() => handleCardClick(1)}
+          />
+          <FeatureCard
+            title="Syncs to your POS"
+            description="Orders land in your existing system. No new hardware."
+            isActive={activeCard === 2}
+            progress={activeCard === 2 ? progress : 0}
+            onClick={() => handleCardClick(2)}
+          />
+        </section>
+
+        {/* Social proof / integrations */}
+        <section className="flex flex-col gap-7 sm:gap-9">
+          <SectionHeader
+            badge={
+              <Badge
+                icon={
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="3" width="4" height="6" stroke="#242424" strokeWidth="1" fill="none" />
+                    <rect x="7" y="1" width="4" height="8" stroke="#242424" strokeWidth="1" fill="none" />
+                    <rect x="2" y="4" width="1" height="1" fill="#242424" />
+                    <rect x="3.5" y="4" width="1" height="1" fill="#242424" />
+                    <rect x="2" y="5.5" width="1" height="1" fill="#242424" />
+                    <rect x="3.5" y="5.5" width="1" height="1" fill="#242424" />
+                    <rect x="8" y="2" width="1" height="1" fill="#242424" />
+                    <rect x="9.5" y="2" width="1" height="1" fill="#242424" />
+                    <rect x="8" y="3.5" width="1" height="1" fill="#242424" />
+                    <rect x="9.5" y="3.5" width="1" height="1" fill="#242424" />
+                    <rect x="8" y="5" width="1" height="1" fill="#242424" />
+                    <rect x="9.5" y="5" width="1" height="1" fill="#242424" />
+                  </svg>
+                }
+                text="Integrations"
+              />
+            }
+            title="Connects to Your POS"
+            description="Plugs into your existing POS. Orders and reservations flow in automatically."
+          />
+
+          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            {POS_GRID_IDS.map((id) => (
+              <div
+                key={id}
+                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#F6F5F7] rounded-[6px]"
+              >
+                <PosGridWordmark id={id} />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Bento grid */}
+        <section className="flex flex-col gap-7 sm:gap-9">
+          <SectionHeader
+            badge={
+              <Badge
+                icon={
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
+                    <rect x="7" y="1" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
+                    <rect x="1" y="7" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
+                    <rect x="7" y="7" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
+                  </svg>
+                }
+                text="Built for restaurants"
+              />
+            }
+            title="An Advantage You Need"
+            description="Jenna is the communication layer that helps your restaurant run smoother"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <BentoCard
+              title="Every Event, Organized"
+              description="Jenna logs each call the moment it happens, so you always see what's coming in."
+            >
+              <SmartSimpleBrilliant
+                width="100%"
+                height="100%"
+                theme="light"
+                className="scale-60 sm:scale-65 md:scale-75 lg:scale-90 xl:scale-100 2xl:scale-110"
+              />
+            </BentoCard>
+
+            <BentoCard
+              title="Every Call, Natural"
+              description="Jenna understands what people want and answers instantly — just like your best host."
+            >
+              <YourWorkInSync
+                width="400"
+                height="250"
+                theme="light"
+                className="scale-70 sm:scale-75 md:scale-90 xl:scale-100 2xl:scale-105"
+              />
+            </BentoCard>
+
+            <BentoCard
+              title="Every Order, Accurate"
+              description="Live menu and prices pulled from your POS — every order comes out right."
+            >
+              <div className="w-full h-full flex items-center justify-center">
+                <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full xl:scale-110 2xl:scale-125" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F6F5F7] to-transparent pointer-events-none"></div>
+            </BentoCard>
+
+            <BentoCard
+              title="Every Number, Tracked"
+              description="Every call, order, and dollar — logged in your portal automatically."
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <NumbersThatSpeak width="100%" height="100%" theme="light" className="w-full h-full xl:scale-110 2xl:scale-125" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F6F5F7] to-transparent pointer-events-none"></div>
+            </BentoCard>
+          </div>
+        </section>
+
+        {/* Documentation Section */}
+        <DocumentationSection />
+
+        {/* Testimonials Section */}
+        <TestimonialsSection />
+
+        {/* Pricing Section */}
+        <PricingSection />
+
+        {/* FAQ Section */}
+        <FAQSection />
+
+        {/* CTA Section */}
+        <CTASection />
+      </main>
+
+      {/* Footer Section */}
+      <div className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pb-8">
+        <FooterSection />
+      </div>
+    </div>
+  )
+}
+
+function BentoCard({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="bg-[#F6F5F7] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
+      <div className="flex flex-col gap-2">
+        <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">{title}</h3>
+        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
+      </div>
+      <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-[6px] flex items-center justify-center overflow-hidden">
+        {children}
       </div>
     </div>
   )
@@ -497,15 +365,15 @@ function FeatureCard({
 }) {
   return (
     <div
-      className={`w-full md:flex-1 self-stretch px-6 py-5 overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer relative border-b md:border-b-0 last:border-b-0 ${
+      className={`relative w-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
-          ? "bg-white shadow-[0px_4px_8px_rgba(36,36,36,0.05)]"
-          : "border-l-0 border-r-0 md:border border-[#E5E7EB]/80"
+          ? "bg-white border-[rgba(36,36,36,0.12)] shadow-[0px_4px_14px_rgba(36,36,36,0.07)]"
+          : "bg-[#F6F5F7] border-transparent hover:bg-[#EEEDF0]"
       }`}
       onClick={onClick}
     >
       {isActive && (
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(0,0,0,0.08)]">
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(36,36,36,0.08)]">
           <div
             className="h-full bg-[#242424] transition-all duration-100 ease-linear"
             style={{ width: `${progress}%` }}
@@ -513,10 +381,10 @@ function FeatureCard({
         </div>
       )}
 
-      <div className="self-stretch flex justify-center flex-col text-[#242424] text-sm md:text-sm font-semibold leading-6 md:leading-6 font-sans">
+      <div className="self-stretch flex justify-center flex-col text-[#242424] text-sm font-semibold leading-6 font-sans">
         {title}
       </div>
-      <div className="self-stretch text-[#6B7280] text-[13px] md:text-[13px] font-normal leading-[22px] md:leading-[22px] font-sans">
+      <div className="self-stretch text-[#6B7280] text-[13px] font-normal leading-[22px] font-sans">
         {description}
       </div>
     </div>

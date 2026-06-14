@@ -52,8 +52,8 @@ function PanelShell({
 }) {
   return (
     <div
-      className="absolute inset-0 flex flex-col bg-white rounded-[12px] overflow-hidden"
-      style={{ border: `1px solid ${T.border}`, boxShadow: "0px 4px 16px rgba(36,36,36,0.06)" }}
+      className="absolute inset-0 flex flex-col bg-white rounded-[6px] overflow-hidden"
+      style={{ boxShadow: "0px 8px 30px rgba(36,36,36,0.10)" }}
     >
       <div
         className="flex items-center justify-between shrink-0"
