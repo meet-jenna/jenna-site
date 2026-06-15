@@ -25,24 +25,21 @@ export default function TestimonialsSection() {
         "We used to lose orders every Friday night because no one could get to the phone. Jenna answers every single call now — pickup revenue is up and the kitchen isn't slammed by the phone.",
       name: "Tony Russo",
       company: "Owner, Vitos Northport",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Sep%2011%2C%202025%2C%2011_35_19%20AM-z4zSRLsbOQDp7MJS1t8EXmGNB6Al9Z.png",
+      image: "/testimonials/restaurant-1.png",
     },
     {
       quote:
         "Orders come in exactly right because Jenna pulls straight from our menu. No more wrong sizes, no more comped meals from mistakes.",
       name: "Maria Delgado",
       company: "GM, Rosie's Trattoria",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Sep%2011%2C%202025%2C%2010_54_18%20AM-nbiecp92QNdTudmCrHr97uekrIPzCP.png",
+      image: "/testimonials/restaurant-2.png",
     },
     {
       quote:
         "My staff can focus on the guests in front of them instead of running to the phone. Reservations just show up already booked.",
       name: "Kevin Tran",
       company: "Owner, Harbor House Grill",
-      image:
-        "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Sep%2011%2C%202025%2C%2011_01_05%20AM-TBOe92trRxKn4G5So1m9D2h7LRH4PG.png",
+      image: "/testimonials/restaurant-3.png",
     },
   ]
 
@@ -71,59 +68,69 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <div className="w-full bg-[#FAF9FB] rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
-      {/* Testimonial Content */}
-      <div className="self-stretch px-4 sm:px-6 overflow-hidden flex justify-start items-center">
-        <div className="flex-1 py-12 sm:py-16 md:py-17 flex flex-col md:flex-row justify-center items-end gap-6">
-          <div className="self-stretch px-3 md:px-12 justify-center items-start gap-4 flex flex-col md:flex-row">
-            <img
-              className="w-48 h-50 md:w-48 md:h-50 rounded-lg object-cover transition-all duration-700 ease-in-out"
+    <div className="w-full rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
+      {/* Testimonial Card with restaurant photo background */}
+      <div className="relative w-full min-h-[420px] md:min-h-[480px] rounded-[6px] overflow-hidden flex items-end">
+        {/* Background restaurant photos (cross-fade) */}
+        {testimonials.map((t, index) => (
+          <div
+            key={index}
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out"
+            style={{
+              backgroundImage: `url(${t.image})`,
+              opacity: index === activeTestimonial && !isTransitioning ? 1 : 0,
+              transform: index === activeTestimonial ? "scale(1.03)" : "scale(1)",
+              transition: "opacity 0.7s ease-in-out, transform 8s ease-out",
+            }}
+          />
+        ))}
+
+        {/* Readability overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/20" />
+        <div className="absolute inset-0 bg-black/15" />
+
+        {/* Content */}
+        <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 pb-10 md:pb-12 pt-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div className="flex-1 max-w-3xl flex flex-col gap-6">
+            <div
+              className="text-white text-xl sm:text-2xl md:text-[30px] font-medium leading-8 md:leading-[42px] font-sans tracking-tight transition-all duration-700 ease-in-out [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]"
               style={{
-                opacity: isTransitioning ? 0.6 : 1,
-                transform: isTransitioning ? "scale(0.95)" : "scale(1)",
-                transition: "opacity 0.7s ease-in-out, transform 0.7s ease-in-out",
+                filter: isTransitioning ? "blur(4px)" : "blur(0px)",
+                opacity: isTransitioning ? 0.5 : 1,
+                transition: "filter 0.7s ease-in-out, opacity 0.7s ease-in-out",
               }}
-              src={testimonials[activeTestimonial].image || "/placeholder.svg"}
-              alt={testimonials[activeTestimonial].name}
-            />
-            <div className="flex-1 px-6 py-6 shadow-[0px_0px_0px_0.75px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col justify-start items-start gap-6 shadow-none pb-0 pt-0">
-              <div
-                className="self-stretch justify-start flex flex-col text-[#242424] text-2xl md:text-[32px] font-medium leading-10 md:leading-[42px] font-sans h-[200px] md:h-[210px] overflow-hidden line-clamp-5 transition-all duration-700 ease-in-out tracking-tight"
-                style={{
-                  filter: isTransitioning ? "blur(4px)" : "blur(0px)",
-                  transition: "filter 0.7s ease-in-out",
-                }}
-              >
-                "{testimonials[activeTestimonial].quote}"
+            >
+              "{testimonials[activeTestimonial].quote}"
+            </div>
+            <div
+              className="flex flex-col gap-1 transition-all duration-700 ease-in-out"
+              style={{
+                filter: isTransitioning ? "blur(4px)" : "blur(0px)",
+                opacity: isTransitioning ? 0.5 : 1,
+                transition: "filter 0.7s ease-in-out, opacity 0.7s ease-in-out",
+              }}
+            >
+              <div className="text-white text-lg font-semibold leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+                {testimonials[activeTestimonial].name}
               </div>
-              <div
-                className="self-stretch flex flex-col justify-start items-start gap-1 transition-all duration-700 ease-in-out"
-                style={{
-                  filter: isTransitioning ? "blur(4px)" : "blur(0px)",
-                  transition: "filter 0.7s ease-in-out",
-                }}
-              >
-                <div className="self-stretch justify-center flex flex-col text-[rgba(36, 36, 36,0.90)] text-lg font-medium leading-[26px] font-sans">
-                  {testimonials[activeTestimonial].name}
-                </div>
-                <div className="self-stretch justify-center flex flex-col text-[rgba(36, 36, 36,0.70)] text-lg font-medium leading-[26px] font-sans">
-                  {testimonials[activeTestimonial].company}
-                </div>
+              <div className="text-white/75 text-lg font-medium leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+                {testimonials[activeTestimonial].company}
               </div>
             </div>
           </div>
 
           {/* Navigation Arrows */}
-          <div className="pr-6 justify-start items-start gap-[14px] flex">
+          <div className="justify-start items-center gap-[14px] flex">
             <button
+              aria-label="Previous testimonial"
               onClick={() => handleNavigationClick((activeTestimonial - 1 + testimonials.length) % testimonials.length)}
-              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.08)] overflow-hidden rounded-full border border-[rgba(0,0,0,0.15)] justify-center items-center gap-2 flex hover:bg-gray-50 transition-colors"
+              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.18)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
             >
               <div className="w-6 h-6 relative overflow-hidden">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M15 18L9 12L15 6"
-                    stroke="#6B7280"
+                    stroke="#FFFFFF"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -132,14 +139,15 @@ export default function TestimonialsSection() {
               </div>
             </button>
             <button
+              aria-label="Next testimonial"
               onClick={() => handleNavigationClick((activeTestimonial + 1) % testimonials.length)}
-              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.08)] overflow-hidden rounded-full border border-[rgba(0,0,0,0.15)] justify-center items-center gap-2 flex hover:bg-gray-50 transition-colors"
+              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.18)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
             >
               <div className="w-6 h-6 relative overflow-hidden">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M9 18L15 12L9 6"
-                    stroke="#6B7280"
+                    stroke="#FFFFFF"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"

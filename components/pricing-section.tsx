@@ -73,20 +73,20 @@ export default function PricingSection() {
       <div className="w-full flex justify-center items-center">
         <div className="flex justify-center items-start w-full">
           {/* Pricing Cards Container */}
-          <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-4 sm:gap-5">
+          <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-4 sm:gap-5 xl:gap-6">
             {/* Starter Plan */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 xl:px-8 xl:py-8 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#FAF9FB] rounded-[6px]">
+            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-12 xl:py-12 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#FAF9FB] rounded-[6px]">
               {/* Plan info + CTA */}
-              <div className="w-full xl:w-[220px] 2xl:w-[250px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9">
+              <div className="w-full xl:w-[260px] 2xl:w-[300px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9 xl:gap-10">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-[rgba(36, 36, 36,0.90)] text-lg font-medium leading-7 font-sans">{plans.starter.name}</div>
-                  <div className="w-full max-w-[242px] text-[rgba(36, 36, 36,0.70)] text-sm font-normal leading-5 font-sans">
+                  <div className="text-[rgba(36, 36, 36,0.90)] text-lg xl:text-xl font-medium leading-7 font-sans">{plans.starter.name}</div>
+                  <div className="w-full max-w-[260px] text-[rgba(36, 36, 36,0.70)] text-sm font-normal leading-6 font-sans">
                     {plans.starter.description}
                   </div>
                 </div>
 
                 <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                  <div className="h-[60px] flex items-center text-[#242424] text-5xl font-medium leading-[60px] font-serif">
+                  <div className="h-[64px] flex items-center text-[#242424] text-5xl xl:text-6xl font-medium leading-none font-serif">
                     ${plans.starter.price}
                   </div>
                   <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
@@ -101,10 +101,10 @@ export default function PricingSection() {
               </div>
 
               {/* Features */}
-              <div className="w-full xl:flex-1 flex flex-col justify-center items-start gap-2.5 xl:pl-10 xl:border-l xl:border-[rgba(0,0,0,0.10)]">
+              <div className="w-full xl:flex-1 flex flex-col justify-center items-start gap-3 xl:gap-3.5 xl:pl-12 2xl:pl-14 xl:border-l xl:border-[rgba(0,0,0,0.10)]">
                 {plans.starter.features.map((feature, index) => (
                   <div key={index} className="self-stretch flex justify-start items-center gap-[13px]">
-                    <div className="w-4 h-4 relative flex items-center justify-center">
+                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M10 3L4.5 8.5L2 6"
@@ -115,7 +115,7 @@ export default function PricingSection() {
                         />
                       </svg>
                     </div>
-                    <div className="flex-1 text-[rgba(36, 36, 36,0.80)] text-[12.5px] font-normal leading-5 font-sans">
+                    <div className="flex-1 text-[rgba(36, 36, 36,0.80)] text-[13px] xl:text-sm font-normal leading-6 font-sans">
                       {feature}
                     </div>
                   </div>
@@ -124,18 +124,18 @@ export default function PricingSection() {
             </div>
 
             {/* Enterprise Plan (Featured) */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 xl:px-8 xl:py-8 bg-[#1A1815] overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 rounded-[6px]">
+            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-12 xl:py-12 bg-[#1A1815] overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 rounded-[6px]">
               {/* Plan info + CTA */}
-              <div className="w-full xl:w-[220px] 2xl:w-[250px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9">
+              <div className="w-full xl:w-[260px] 2xl:w-[300px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9 xl:gap-10">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-white text-lg font-medium leading-7 font-sans">{plans.enterprise.name}</div>
-                  <div className="w-full max-w-[242px] text-[#A3A3A3] text-sm font-normal leading-5 font-sans">
+                  <div className="text-white text-lg xl:text-xl font-medium leading-7 font-sans">{plans.enterprise.name}</div>
+                  <div className="w-full max-w-[260px] text-[#A3A3A3] text-sm font-normal leading-6 font-sans">
                     {plans.enterprise.description}
                   </div>
                 </div>
 
                 <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                  <div className="h-[60px] flex items-center text-[#E5E7EB] text-5xl font-medium leading-[60px] font-serif">
+                  <div className="h-[64px] flex items-center text-[#E5E7EB] text-5xl xl:text-6xl font-medium leading-none font-serif">
                     ${plans.enterprise.price}
                   </div>
                   <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
@@ -150,10 +150,10 @@ export default function PricingSection() {
               </div>
 
               {/* Features */}
-              <div className="w-full xl:flex-1 flex flex-col justify-center items-start gap-2.5 xl:pl-10 xl:border-l xl:border-[rgba(255,255,255,0.14)]">
+              <div className="w-full xl:flex-1 flex flex-col justify-center items-start gap-3 xl:gap-3.5 xl:pl-12 2xl:pl-14 xl:border-l xl:border-[rgba(255,255,255,0.14)]">
                 {plans.enterprise.features.map((feature, index) => (
                   <div key={index} className="self-stretch flex justify-start items-center gap-[13px]">
-                    <div className="w-4 h-4 relative flex items-center justify-center">
+                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M10 3L4.5 8.5L2 6"
@@ -164,7 +164,7 @@ export default function PricingSection() {
                         />
                       </svg>
                     </div>
-                    <div className="flex-1 text-[#E5E7EB] text-[12.5px] font-normal leading-5 font-sans">{feature}</div>
+                    <div className="flex-1 text-[#E5E7EB] text-[13px] xl:text-sm font-normal leading-6 font-sans">{feature}</div>
                   </div>
                 ))}
               </div>

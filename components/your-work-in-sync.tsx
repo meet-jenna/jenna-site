@@ -46,10 +46,31 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           "--yws-shadow": "rgba(0,0,0,0.24)",
         } as React.CSSProperties)
 
-  // Figma-exported assets
-  const imgFrame2147223205 = "/professional-woman-avatar-with-short-brown-hair-an.jpg"
-  const imgFrame2147223206 = "/professional-man-avatar-with-beard-and-glasses-loo.jpg"
-  const imgFrame2147223207 = "/professional-person-avatar-with-curly-hair-and-war.jpg"
+  // Single caller avatar — the whole conversation is between one caller and Jenna
+  const callerAvatar = "/professional-woman-avatar-with-short-brown-hair-an.jpg"
+
+  // Jenna's AI identity — plain circle with a "J", matching the order-accuracy bento hub
+  const jennaAvatar = (
+    <div
+      style={{
+        width: "36px",
+        height: "36px",
+        borderRadius: "50%",
+        background: theme === "light" ? "#242424" : "var(--yws-bubble-dark)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.08)",
+        flexShrink: 0,
+        fontFamily: "Inter, sans-serif",
+        fontWeight: 700,
+        fontSize: "16px",
+        color: "#ffffff",
+      }}
+    >
+      J
+    </div>
+  )
 
   return (
     <div
@@ -98,7 +119,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 width: "36px",
                 height: "36px",
                 borderRadius: "44px",
-                backgroundImage: `url('${imgFrame2147223205}')`,
+                backgroundImage: `url('${callerAvatar}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 border: "1px solid var(--yws-border)",
@@ -108,7 +129,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
             {/* Message bubble */}
             <div
               style={{
-                background: theme === "light" ? "#FAF9FB" : "var(--yws-bubble-light)",
+                background: theme === "light" ? "#E5E7EB" : "var(--yws-bubble-light)",
                 borderRadius: "999px",
                 padding: "0px 12px",
                 height: "36px",
@@ -171,19 +192,8 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 Of course! Pickup or delivery?
               </span>
             </div>
-            {/* Avatar */}
-            <div
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "44px",
-                backgroundImage: `url('${imgFrame2147223206}')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                border: "1px solid var(--yws-border)",
-                flexShrink: 0,
-              }}
-            />
+            {/* Avatar — Jenna */}
+            {jennaAvatar}
           </div>
 
           {/* Message 3: Left side with avatar */}
@@ -205,7 +215,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 width: "36px",
                 height: "36px",
                 borderRadius: "44px",
-                backgroundImage: `url('${imgFrame2147223207}')`,
+                backgroundImage: `url('${callerAvatar}')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 border: "1px solid var(--yws-border)",
@@ -215,7 +225,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
             {/* Message bubble */}
             <div
               style={{
-                background: theme === "light" ? "#FAF9FB" : "var(--yws-bubble-light)",
+                background: theme === "light" ? "#E5E7EB" : "var(--yws-bubble-light)",
                 borderRadius: "999px",
                 padding: "0px 12px",
                 height: "36px",

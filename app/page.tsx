@@ -58,7 +58,15 @@ function SectionHeader({
 export default function LandingPage() {
   const [activeCard, setActiveCard] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [scrolled, setScrolled] = useState(false)
   const mountedRef = useRef(true)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 8)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   useEffect(() => {
     mountedRef.current = true
@@ -92,7 +100,13 @@ export default function LandingPage() {
     <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
       {/* Navigation */}
       <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
-        <div className="w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 bg-[#FFFFFF]/80 backdrop-blur-md border border-[rgba(36, 36, 36,0.10)] shadow-[0px_2px_8px_rgba(36, 36, 36,0.05)] rounded-[6px] flex justify-between items-center">
+        <div
+          className={`w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 rounded-[6px] flex justify-between items-center transition-all duration-300 ${
+            scrolled
+              ? "bg-[#F4F4F5]/90 backdrop-blur-md shadow-[0px_2px_8px_rgba(36,36,36,0.06)]"
+              : "bg-transparent"
+          }`}
+        >
           <div className="flex justify-center items-center">
             <span className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">Jenna</span>
             <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
@@ -148,8 +162,8 @@ export default function LandingPage() {
             href="/book-demo"
             className="mt-8 h-11 md:h-12 px-8 md:px-12 relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
           >
-            <div className="w-44 h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
-            <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
+            <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
+            <div className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
               Book a Demo
               <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
             </div>
