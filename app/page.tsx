@@ -253,7 +253,7 @@ export default function LandingPage() {
                 text="Built for restaurants"
               />
             }
-            title="Does Everything & More"
+            title="Handles Every Call"
             description="Jenna is the communication layer that helps your restaurant run smoother."
           />
 
