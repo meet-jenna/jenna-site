@@ -64,20 +64,41 @@ export default function FooterSection() {
               Product
             </div>
             <div className="flex flex-col justify-end items-start gap-2">
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              <Link href="/#features" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 Features
-              </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              </Link>
+              <Link href="/#pricing" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 Pricing
-              </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              </Link>
+              <Link href="/integrations" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 Integrations
-              </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              </Link>
+              <Link href="/#how-it-works" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 How it works
-              </div>
-              <Link href="/book-demo" className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              </Link>
+              <Link href="/book-demo" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 Book a demo
+              </Link>
+            </div>
+          </div>
+
+          {/* Solutions Column */}
+          <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
+            <div className="self-stretch text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">
+              Solutions
+            </div>
+            <div className="flex flex-col justify-end items-start gap-2">
+              <Link href="/voice-ai-for-restaurants" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
+                Voice AI for Restaurants
+              </Link>
+              <Link href="/ai-phone-answering" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
+                AI Phone Answering
+              </Link>
+              <Link href="/restaurant-answering-service" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
+                Answering Service
+              </Link>
+              <Link href="/ai-hostess" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
+                AI Hostess
               </Link>
             </div>
           </div>
@@ -92,9 +113,9 @@ export default function FooterSection() {
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Contact
               </div>
-              <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
+              <Link href="/blog" className="text-[#242424] text-sm font-normal leading-5 font-sans hover:text-[#242424] transition-colors">
                 Blog
-              </div>
+              </Link>
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Careers
               </div>

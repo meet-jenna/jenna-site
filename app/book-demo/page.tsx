@@ -7,10 +7,26 @@ import { PosGridWordmark } from "../../components/integration-logo"
 import { POS_GRID_IDS } from "../../lib/integrations/pos"
 import { PORTAL_URL } from "../../lib/portal"
 
+const description =
+  "See Jenna live. Watch the AI voice hostess answer every call, take pickup and delivery orders, and book reservations — synced to the POS you already run."
+
 export const metadata: Metadata = {
-  title: "Book a Demo — Jenna",
-  description:
-    "See Jenna live. Watch the AI hostess answer every call, take pickup and delivery orders, and book reservations — synced to the POS you already run.",
+  title: "Book a Demo",
+  description,
+  alternates: {
+    canonical: "/book-demo",
+  },
+  openGraph: {
+    title: "Book a Demo — Jenna",
+    description,
+    url: "/book-demo",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book a Demo — Jenna",
+    description,
+  },
 }
 
 export default function BookDemoPage() {

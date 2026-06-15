@@ -19,6 +19,8 @@ import { ArrowUpRight } from "lucide-react"
 import { PosGridWordmark } from "../components/integration-logo"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
 import { PORTAL_URL } from "../lib/portal"
+import StructuredData from "../components/structured-data"
+import { faqJsonLd } from "../lib/seo"
 
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
@@ -98,6 +100,7 @@ export default function LandingPage() {
 
   return (
     <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+      <StructuredData data={faqJsonLd} />
       {/* Navigation */}
       <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
         <div
@@ -160,7 +163,7 @@ export default function LandingPage() {
           </p>
           <Link
             href="/book-demo"
-            className="mt-8 h-11 md:h-12 px-8 md:px-12 relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+            className="mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
             <div className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
@@ -187,7 +190,7 @@ export default function LandingPage() {
         </section>
 
         {/* Feature cards */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
+        <section id="features" className="scroll-mt-24 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
           <FeatureCard
             title="Answers every call"
             description="First ring, 24/7 — no missed orders or reservations."
@@ -319,13 +322,17 @@ export default function LandingPage() {
         </section>
 
         {/* Documentation Section */}
-        <DocumentationSection />
+        <div id="how-it-works" className="scroll-mt-24">
+          <DocumentationSection />
+        </div>
 
         {/* Testimonials Section */}
         <TestimonialsSection />
 
         {/* Pricing Section */}
-        <PricingSection />
+        <div id="pricing" className="scroll-mt-24">
+          <PricingSection />
+        </div>
 
         {/* FAQ Section */}
         <FAQSection />
