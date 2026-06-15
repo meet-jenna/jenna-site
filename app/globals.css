@@ -4,20 +4,20 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light palette: white page, light-gray containers (#F6F5F7) */
+  /* Light palette: white page, very light-gray containers (#FAF9FB) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.256 0 0);
-  --card: oklch(0.971 0.002 300);
+  --card: oklch(0.984 0.0015 300);
   --card-foreground: oklch(0.256 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.256 0 0);
   --primary: oklch(0.178 0 0);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.971 0.002 300);
+  --secondary: oklch(0.984 0.0015 300);
   --secondary-foreground: oklch(0.256 0 0);
-  --muted: oklch(0.971 0.002 300);
+  --muted: oklch(0.984 0.0015 300);
   --muted-foreground: oklch(0.556 0.014 264);
-  --accent: oklch(0.971 0.002 300);
+  --accent: oklch(0.984 0.0015 300);
   --accent-foreground: oklch(0.256 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);

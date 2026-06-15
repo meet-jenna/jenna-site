@@ -122,7 +122,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             left: `${centerX - 36}px`,
             top: `${centerY - 36}px`,
             position: "absolute",
-            background: "#101010",
+            background: "#242424",
             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
             borderRadius: "99px",
             display: "flex",

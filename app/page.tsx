@@ -23,7 +23,7 @@ import { PORTAL_URL } from "../lib/portal"
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -92,17 +92,17 @@ export default function LandingPage() {
     <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
       {/* Navigation */}
       <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
-        <div className="w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 bg-[#FFFFFF]/80 backdrop-blur-md border border-[rgba(36,36,36,0.10)] shadow-[0px_2px_8px_rgba(36,36,36,0.05)] rounded-[6px] flex justify-between items-center">
+        <div className="w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 bg-[#FFFFFF]/80 backdrop-blur-md border border-[rgba(36, 36, 36,0.10)] shadow-[0px_2px_8px_rgba(36, 36, 36,0.05)] rounded-[6px] flex justify-between items-center">
           <div className="flex justify-center items-center">
             <span className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">Jenna</span>
             <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
-              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
                 Features
               </span>
-              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
                 Pricing
               </span>
-              <span className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
                 FAQ
               </span>
             </nav>
@@ -110,7 +110,7 @@ export default function LandingPage() {
           <div className="flex justify-end items-center gap-2 sm:gap-3">
             <a
               href={PORTAL_URL}
-              className="flex items-center text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
+              className="flex items-center text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
             >
               Sign in
             </a>
@@ -130,7 +130,7 @@ export default function LandingPage() {
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10 lg:pt-14">
           <Badge
             icon={
-              <div className="w-[10px] h-[10px] bg-[#242424] rounded-[2px] rotate-45 flex items-center justify-center">
+              <div className="w-[10px] h-[10px] bg-[#101010] rounded-[2px] rotate-45 flex items-center justify-center">
                 <span className="-rotate-45 text-white text-[7px] font-bold leading-none font-sans">J</span>
               </div>
             }
@@ -166,7 +166,7 @@ export default function LandingPage() {
                 className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
               />
             </div>
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] border border-[rgba(36,36,36,0.08)] shadow-[0px_8px_30px_rgba(36,36,36,0.08)] overflow-hidden">
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
               <HeroDashboard activeView={activeCard} />
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function LandingPage() {
             {POS_GRID_IDS.map((id) => (
               <div
                 key={id}
-                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#F6F5F7] rounded-[6px]"
+                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#FAF9FB] rounded-[6px]"
               >
                 <PosGridWordmark id={id} />
               </div>
@@ -253,8 +253,8 @@ export default function LandingPage() {
                 text="Built for restaurants"
               />
             }
-            title="An Advantage You Need"
-            description="Jenna is the communication layer that helps your restaurant run smoother"
+            title="Does Everything & More"
+            description="Jenna is the communication layer that helps your restaurant run smoother."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
@@ -289,7 +289,7 @@ export default function LandingPage() {
               <div className="w-full h-full flex items-center justify-center">
                 <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full xl:scale-110 2xl:scale-125" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F6F5F7] to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#FAF9FB] to-transparent pointer-events-none"></div>
             </BentoCard>
 
             <BentoCard
@@ -299,7 +299,7 @@ export default function LandingPage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <NumbersThatSpeak width="100%" height="100%" theme="light" className="w-full h-full xl:scale-110 2xl:scale-125" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#F6F5F7] to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#FAF9FB] to-transparent pointer-events-none"></div>
             </BentoCard>
           </div>
         </section>
@@ -338,7 +338,7 @@ function BentoCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-[#F6F5F7] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
+    <div className="bg-[#FAF9FB] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
       <div className="flex flex-col gap-2">
         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">{title}</h3>
         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
@@ -367,15 +367,15 @@ function FeatureCard({
     <div
       className={`relative w-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
-          ? "bg-white border-[rgba(36,36,36,0.12)] shadow-[0px_4px_14px_rgba(36,36,36,0.07)]"
-          : "bg-[#F6F5F7] border-transparent hover:bg-[#EEEDF0]"
+          ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"
+          : "bg-[#FAF9FB] border-transparent hover:bg-gray-50"
       }`}
       onClick={onClick}
     >
       {isActive && (
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(36,36,36,0.08)]">
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(36, 36, 36,0.08)]">
           <div
-            className="h-full bg-[#242424] transition-all duration-100 ease-linear"
+            className="h-full bg-[#101010] transition-all duration-100 ease-linear"
             style={{ width: `${progress}%` }}
           />
         </div>

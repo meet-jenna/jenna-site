@@ -41,7 +41,7 @@ export default function PricingSection() {
       {/* Header Section */}
       <div className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
           {/* Pricing Badge */}
-          <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">
+          <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
             <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -60,7 +60,7 @@ export default function PricingSection() {
 
           {/* Title */}
           <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-3xl md:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-            Simple pricing, per location
+            Simple Pricing
           </div>
 
           {/* Description */}
@@ -75,12 +75,12 @@ export default function PricingSection() {
           {/* Pricing Cards Container */}
           <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-4 sm:gap-5">
             {/* Starter Plan */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 xl:px-8 xl:py-8 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#F6F5F7] rounded-[6px]">
+            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 xl:px-8 xl:py-8 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#FAF9FB] rounded-[6px]">
               {/* Plan info + CTA */}
               <div className="w-full xl:w-[220px] 2xl:w-[250px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
-                  <div className="text-[rgba(36,36,36,0.90)] text-lg font-medium leading-7 font-sans">{plans.starter.name}</div>
-                  <div className="w-full max-w-[242px] text-[rgba(36,36,36,0.70)] text-sm font-normal leading-5 font-sans">
+                  <div className="text-[rgba(36, 36, 36,0.90)] text-lg font-medium leading-7 font-sans">{plans.starter.name}</div>
+                  <div className="w-full max-w-[242px] text-[rgba(36, 36, 36,0.70)] text-sm font-normal leading-5 font-sans">
                     {plans.starter.description}
                   </div>
                 </div>
@@ -92,7 +92,7 @@ export default function PricingSection() {
                   <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
+                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-white text-[13px] font-medium leading-5 font-sans">
                     Book a Demo
@@ -108,14 +108,14 @@ export default function PricingSection() {
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M10 3L4.5 8.5L2 6"
-                          stroke="#9CA3AF"
+                          stroke="#6B7280"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </svg>
                     </div>
-                    <div className="flex-1 text-[rgba(36,36,36,0.80)] text-[12.5px] font-normal leading-5 font-sans">
+                    <div className="flex-1 text-[rgba(36, 36, 36,0.80)] text-[12.5px] font-normal leading-5 font-sans">
                       {feature}
                     </div>
                   </div>
@@ -141,7 +141,7 @@ export default function PricingSection() {
                   <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#F6F5F7] transition-colors">
+                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#FAF9FB] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-[#242424] text-[13px] font-medium leading-5 font-sans">
                     Book a Demo

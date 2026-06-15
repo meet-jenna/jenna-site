@@ -5,18 +5,18 @@ import { Check, Phone, Plug2, Settings2 } from "lucide-react"
 const T = {
   textPrimary: "#242424",
   textSecondary: "#6B7280",
-  textMuted: "rgba(107,114,128,0.85)",
-  border: "rgba(36,36,36,0.10)",
-  borderSoft: "rgba(36,36,36,0.06)",
+  textMuted: "rgba(107, 114, 128,0.85)",
+  border: "rgba(36, 36, 36,0.10)",
+  borderSoft: "rgba(36, 36, 36,0.06)",
   green: "#16A34A",
-  greenBg: "rgba(22,163,74,0.10)",
-  cardShadow: "0px 1px 2px rgba(36,36,36,0.05)",
+  greenBg: "rgba(22, 163, 74,0.10)",
+  cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
 } as const
 
 function Pill({ children, tone = "green" }: { children: React.ReactNode; tone?: "green" | "neutral" }) {
   const styles =
     tone === "green"
-      ? { background: T.greenBg, color: T.green, border: "1px solid rgba(22,163,74,0.18)" }
+      ? { background: T.greenBg, color: T.green, border: "1px solid rgba(22, 163, 74,0.18)" }
       : { background: "#F4F4F4", color: T.textSecondary, border: `1px solid ${T.borderSoft}` }
   return (
     <span
@@ -53,7 +53,7 @@ function PanelShell({
   return (
     <div
       className="absolute inset-0 flex flex-col bg-white rounded-[6px] overflow-hidden"
-      style={{ boxShadow: "0px 8px 30px rgba(36,36,36,0.10)" }}
+      style={{ boxShadow: "0px 8px 30px rgba(36, 36, 36,0.10)" }}
     >
       <div
         className="flex items-center justify-between shrink-0"
@@ -200,9 +200,9 @@ function ForwardPanel() {
         </span>
       </div>
       <div className="flex items-center" style={{ gap: 10 }}>
-        <span className="flex items-center justify-center rounded-full shrink-0" style={{ width: 30, height: 30, background: "#101010" }}>
+        <span className="flex items-center justify-center rounded-full shrink-0" style={{ width: 30, height: 30, background: "#242424" }}>
           <span className="rotate-45 flex items-center justify-center rounded-[4px]" style={{ width: 13, height: 13, background: "#fff" }}>
-            <span className="-rotate-45 font-bold leading-none" style={{ fontSize: 8, color: "#101010" }}>J</span>
+            <span className="-rotate-45 font-bold leading-none" style={{ fontSize: 8, color: "#242424" }}>J</span>
           </span>
         </span>
         <span className="flex flex-col" style={{ gap: 1 }}>

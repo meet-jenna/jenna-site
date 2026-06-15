@@ -32,7 +32,7 @@ export default function DemoForm() {
 
   if (submitted) {
     return (
-      <div className="w-full max-w-[460px] bg-white rounded-[6px] border border-[rgba(36,36,36,0.10)] shadow-[0px_8px_24px_rgba(36,36,36,0.06)] p-8 flex flex-col items-center text-center gap-4">
+      <div className="w-full max-w-[460px] bg-white rounded-[6px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_8px_24px_rgba(36, 36, 36,0.06)] p-8 flex flex-col items-center text-center gap-4">
         <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center">
           <Check className="w-6 h-6 text-[#16A34A]" strokeWidth={2.5} />
         </div>
@@ -50,7 +50,7 @@ export default function DemoForm() {
   return (
     <div
       id="demo-form"
-      className="w-full max-w-[460px] bg-white rounded-[6px] border border-[rgba(36,36,36,0.10)] shadow-[0px_8px_24px_rgba(36,36,36,0.06)] p-6 sm:p-8 flex flex-col gap-5"
+      className="w-full max-w-[460px] bg-white rounded-[6px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_8px_24px_rgba(36, 36, 36,0.06)] p-6 sm:p-8 flex flex-col gap-5"
     >
       <div className="flex flex-col gap-1">
         <div className="text-[#242424] text-lg font-semibold leading-tight font-sans tracking-tight">
@@ -108,7 +108,7 @@ export default function DemoForm() {
 
         <button
           type="submit"
-          className="mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+          className="mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
         >
           <div className="w-full h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply" />
           <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
@@ -117,7 +117,7 @@ export default function DemoForm() {
           </div>
         </button>
 
-        <p className="text-[#9CA3AF] text-[11px] leading-4 font-sans text-center">
+        <p className="text-[#6B7280] text-[11px] leading-4 font-sans text-center">
           By submitting this form, you agree to be contacted by Jenna about a demo.
         </p>
       </form>
@@ -129,7 +129,7 @@ export default function DemoForm() {
           padding: 0 14px;
           border-radius: 6px;
           border: 1px solid rgba(36, 36, 36, 0.12);
-          background: #f6f5f7;
+          background: #faf9fb;
           color: #242424;
           font-size: 14px;
           font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -137,7 +137,7 @@ export default function DemoForm() {
           transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
         }
         :global(.demo-input::placeholder) {
-          color: #9ca3af;
+          color: #6B7280;
         }
         :global(.demo-input:focus) {
           border-color: rgba(36, 36, 36, 0.4);

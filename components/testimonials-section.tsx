@@ -6,7 +6,7 @@ import type React from "react"
 // Badge component for consistency
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <div className="w-full bg-[#F6F5F7] rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
+    <div className="w-full bg-[#FAF9FB] rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
       {/* Testimonial Content */}
       <div className="self-stretch px-4 sm:px-6 overflow-hidden flex justify-start items-center">
         <div className="flex-1 py-12 sm:py-16 md:py-17 flex flex-col md:flex-row justify-center items-end gap-6">
@@ -103,10 +103,10 @@ export default function TestimonialsSection() {
                   transition: "filter 0.7s ease-in-out",
                 }}
               >
-                <div className="self-stretch justify-center flex flex-col text-[rgba(36,36,36,0.90)] text-lg font-medium leading-[26px] font-sans">
+                <div className="self-stretch justify-center flex flex-col text-[rgba(36, 36, 36,0.90)] text-lg font-medium leading-[26px] font-sans">
                   {testimonials[activeTestimonial].name}
                 </div>
-                <div className="self-stretch justify-center flex flex-col text-[rgba(36,36,36,0.70)] text-lg font-medium leading-[26px] font-sans">
+                <div className="self-stretch justify-center flex flex-col text-[rgba(36, 36, 36,0.70)] text-lg font-medium leading-[26px] font-sans">
                   {testimonials[activeTestimonial].company}
                 </div>
               </div>

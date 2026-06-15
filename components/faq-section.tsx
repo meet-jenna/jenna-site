@@ -82,10 +82,10 @@ export default function FAQSection() {
               const isOpen = openItems.includes(index)
 
               return (
-                <div key={index} className="w-full border-b border-[rgba(36,36,36,0.16)] overflow-hidden">
+                <div key={index} className="w-full border-b border-[rgba(36, 36, 36,0.16)] overflow-hidden">
                   <button
                     onClick={() => toggleItem(index)}
-                    className="w-full px-5 py-[18px] flex justify-between items-center gap-5 text-left hover:bg-[rgba(36,36,36,0.02)] transition-colors duration-200"
+                    className="w-full px-5 py-[18px] flex justify-between items-center gap-5 text-left hover:bg-[rgba(36, 36, 36,0.02)] transition-colors duration-200"
                     aria-expanded={isOpen}
                   >
                     <div className="flex-1 text-[#242424] text-base font-medium leading-6 font-sans">
@@ -93,7 +93,7 @@ export default function FAQSection() {
                     </div>
                     <div className="flex justify-center items-center">
                       <ChevronDownIcon
-                        className={`w-6 h-6 text-[rgba(36,36,36,0.60)] transition-transform duration-300 ease-in-out ${
+                        className={`w-6 h-6 text-[rgba(36, 36, 36,0.60)] transition-transform duration-300 ease-in-out ${
                           isOpen ? "rotate-180" : "rotate-0"
                         }`}
                       />

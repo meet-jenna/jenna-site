@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function FooterSection() {
   return (
-    <div className="w-full bg-[#F6F5F7] rounded-[6px] px-2 sm:px-6 pt-4 pb-2 flex flex-col justify-start items-start overflow-hidden">
+    <div className="w-full bg-[#FAF9FB] rounded-[6px] px-2 sm:px-6 pt-4 pb-2 flex flex-col justify-start items-start overflow-hidden">
       {/* Main Footer Content */}
       <div className="self-stretch h-auto flex flex-col md:flex-row justify-between items-stretch pr-0 pb-8 pt-0">
         <div className="h-auto p-4 md:p-8 flex flex-col justify-start items-start gap-8">
@@ -10,7 +10,7 @@ export default function FooterSection() {
           <div className="self-stretch flex justify-start items-center gap-3">
             <div className="text-center text-[#242424] text-xl font-semibold leading-4 font-sans">Jenna</div>
           </div>
-          <div className="text-[rgba(36,36,36,0.90)] text-sm font-medium leading-[18px] font-sans">
+          <div className="text-[rgba(36, 36, 36,0.90)] text-sm font-medium leading-[18px] font-sans">
             The AI hostess for every restaurant.
           </div>
 
@@ -60,7 +60,7 @@ export default function FooterSection() {
 
           {/* Product Column */}
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="self-stretch text-[rgba(36,36,36,0.50)] text-sm font-medium leading-5 font-sans">
+            <div className="self-stretch text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">
               Product
             </div>
             <div className="flex flex-col justify-end items-start gap-2">
@@ -84,7 +84,7 @@ export default function FooterSection() {
 
           {/* Company Column */}
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="text-[rgba(36,36,36,0.50)] text-sm font-medium leading-5 font-sans">Company</div>
+            <div className="text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">Company</div>
             <div className="flex flex-col justify-center items-start gap-2">
               <div className="text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 About
@@ -106,7 +106,7 @@ export default function FooterSection() {
 
           {/* Resources Column */}
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="text-[rgba(36,36,36,0.50)] text-sm font-medium leading-5 font-sans">Resources</div>
+            <div className="text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">Resources</div>
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="self-stretch text-[#242424] text-sm font-normal leading-5 font-sans cursor-pointer hover:text-[#242424] transition-colors">
                 Help center
@@ -130,10 +130,10 @@ export default function FooterSection() {
 
       {/* Bottom Section */}
       <div className="self-stretch px-2 sm:px-2 py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <div className="text-[rgba(36,36,36,0.55)] text-xs font-medium leading-5 font-sans">
+        <div className="text-[rgba(36, 36, 36,0.55)] text-xs font-medium leading-5 font-sans">
           © {new Date().getFullYear()} Jenna. All rights reserved.
         </div>
-        <div className="text-[rgba(36,36,36,0.45)] text-xs font-medium leading-5 font-sans">
+        <div className="text-[rgba(36, 36, 36,0.45)] text-xs font-medium leading-5 font-sans">
           The AI hostess for every restaurant.
         </div>
       </div>
