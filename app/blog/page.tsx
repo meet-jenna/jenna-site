@@ -44,7 +44,7 @@ export default function BlogIndexPage() {
   }
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={[breadcrumb, blogJsonLd]} />
       <SiteNav />
 
@@ -63,7 +63,7 @@ export default function BlogIndexPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group bg-[#FAF9FB] rounded-[6px] p-6 sm:p-8 flex flex-col gap-3 hover:bg-[#F4F2F6] transition-colors"
+              className="group bg-[#EFEFEF] rounded-[6px] p-6 sm:p-8 flex flex-col gap-3 hover:bg-[#E6E6E6] transition-colors"
             >
               <div className="flex items-center gap-3 text-xs font-medium font-sans">
                 <span className="px-2.5 py-1 rounded-full bg-white border border-[rgba(36,36,36,0.10)] text-[#242424]">

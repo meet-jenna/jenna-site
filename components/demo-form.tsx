@@ -129,7 +129,7 @@ export default function DemoForm() {
           padding: 0 14px;
           border-radius: 6px;
           border: 1px solid rgba(36, 36, 36, 0.12);
-          background: #faf9fb;
+          background: #EFEFEF;
           color: #242424;
           font-size: 14px;
           font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

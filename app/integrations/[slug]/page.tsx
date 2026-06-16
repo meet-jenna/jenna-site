@@ -86,7 +86,7 @@ export default function IntegrationPage({ params }: PageProps) {
   ]
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={[breadcrumb, faqJson]} />
       <SiteNav />
 
@@ -94,7 +94,7 @@ export default function IntegrationPage({ params }: PageProps) {
         {/* Hero */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-12 px-4 flex items-center justify-center bg-[#FAF9FB] rounded-[6px]">
+            <div className="h-12 px-4 flex items-center justify-center bg-[#EFEFEF] rounded-[6px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={integration.logo} alt={`${integration.name} logo`} className="h-5 w-auto object-contain" />
             </div>
@@ -127,7 +127,7 @@ export default function IntegrationPage({ params }: PageProps) {
         {/* How it works */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {steps.map((step, index) => (
-            <div key={step.title} className="bg-[#FAF9FB] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
+            <div key={step.title} className="bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
               <div className="text-[#9CA3AF] text-sm font-semibold font-sans">0{index + 1}</div>
               <h2 className="text-[#242424] text-base sm:text-lg font-semibold leading-tight font-sans">{step.title}</h2>
               <p className="text-[#6B7280] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
@@ -167,7 +167,7 @@ export default function IntegrationPage({ params }: PageProps) {
               <Link
                 key={other.id}
                 href={`/integrations/${other.id}`}
-                className="px-4 py-2 rounded-full bg-[#FAF9FB] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#F4F2F6] transition-colors"
+                className="px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
               >
                 {other.name}
               </Link>

@@ -120,7 +120,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
             )
           case "cta":
             return (
-              <div key={index} className="my-2 bg-[#FAF9FB] rounded-[6px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div key={index} className="my-2 bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <p className="text-[#242424] text-base sm:text-lg font-medium font-sans">{block.text}</p>
                 <Link
                   href={block.href}

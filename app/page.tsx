@@ -25,7 +25,7 @@ import { faqJsonLd } from "../lib/seo"
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -104,7 +104,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={faqJsonLd} />
       {/* Navigation */}
       <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
@@ -189,7 +189,7 @@ export default function LandingPage() {
                 src="/gradients/hero-top-glow.svg?v=3"
                 alt=""
                 aria-hidden
-                className="w-full h-auto -translate-y-1/2 opacity-70 mix-blend-multiply"
+                className="w-full h-auto -translate-y-[38%] opacity-70 mix-blend-multiply"
               />
             </div>
             <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
@@ -255,7 +255,7 @@ export default function LandingPage() {
             {POS_GRID_IDS.map((id) => (
               <div
                 key={id}
-                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#FAF9FB] rounded-[6px]"
+                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
               >
                 <PosGridWordmark id={id} />
               </div>
@@ -315,7 +315,7 @@ export default function LandingPage() {
               <div className="w-full h-full flex items-center justify-center">
                 <EffortlessIntegration width={400} height={250} className="max-w-full max-h-full xl:scale-110 2xl:scale-125" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#FAF9FB] to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#EFEFEF] to-transparent pointer-events-none"></div>
             </BentoCard>
 
             <BentoCard
@@ -325,7 +325,7 @@ export default function LandingPage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <NumbersThatSpeak width="100%" height="100%" theme="light" className="w-full h-full xl:scale-110 2xl:scale-125" />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#FAF9FB] to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#EFEFEF] to-transparent pointer-events-none"></div>
             </BentoCard>
           </div>
         </section>
@@ -370,7 +370,7 @@ function BentoCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-[#FAF9FB] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
+    <div className="bg-[#EFEFEF] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
       <div className="flex flex-col gap-2">
         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">{title}</h3>
         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
@@ -400,7 +400,7 @@ function FeatureCard({
       className={`relative w-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
           ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"
-          : "bg-[#FAF9FB] border-transparent hover:bg-gray-50"
+          : "bg-[#EFEFEF] border-transparent hover:bg-[#E6E6E6]"
       }`}
       onClick={onClick}
     >

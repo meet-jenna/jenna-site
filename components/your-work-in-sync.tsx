@@ -29,7 +29,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
           "--yws-surface": "#ffffff",
           "--yws-text-primary": "#242424",
           "--yws-text-secondary": "#6B7280",
-          "--yws-bubble-light": "#FAF9FB",
+          "--yws-bubble-light": "#EFEFEF",
           "--yws-bubble-dark": "#242424",
           "--yws-bubble-white": "#ffffff",
           "--yws-border": "rgba(0,0,0,0.08)",

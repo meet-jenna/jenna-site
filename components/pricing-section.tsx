@@ -41,7 +41,7 @@ export default function PricingSection() {
       {/* Header Section */}
       <div className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
           {/* Pricing Badge */}
-          <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+          <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
             <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -75,7 +75,7 @@ export default function PricingSection() {
           {/* Pricing Cards Container */}
           <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-4 sm:gap-5 xl:gap-6">
             {/* Starter Plan */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-12 xl:py-12 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#FAF9FB] rounded-[6px]">
+            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-12 xl:py-12 overflow-hidden flex flex-col xl:flex-row items-start xl:items-stretch gap-10 xl:gap-0 bg-[#EFEFEF] rounded-[6px]">
               {/* Plan info + CTA */}
               <div className="w-full xl:w-[260px] 2xl:w-[300px] xl:shrink-0 flex flex-col justify-start xl:justify-center items-start gap-9 xl:gap-10">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -141,7 +141,7 @@ export default function PricingSection() {
                   <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#FAF9FB] transition-colors">
+                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#EFEFEF] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-[#242424] text-[13px] font-medium leading-5 font-sans">
                     Book a Demo

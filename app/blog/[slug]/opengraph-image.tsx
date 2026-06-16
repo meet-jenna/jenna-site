@@ -23,7 +23,7 @@ export default function BlogOgImage({ params }: { params: { slug: string } }) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#FAF9FB",
+          backgroundColor: "#EFEFEF",
           padding: "80px",
           fontFamily: "sans-serif",
         }}

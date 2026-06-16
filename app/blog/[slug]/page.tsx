@@ -65,7 +65,7 @@ export default function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={[breadcrumb, articleJsonLd]} />
       <SiteNav />
 
@@ -77,7 +77,7 @@ export default function BlogPostPage({ params }: PageProps) {
               ← All posts
             </Link>
             <div className="flex items-center gap-3 text-xs font-medium font-sans">
-              <span className="px-2.5 py-1 rounded-full bg-[#FAF9FB] border border-[rgba(36,36,36,0.10)] text-[#242424]">
+              <span className="px-2.5 py-1 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424]">
                 {post.category}
               </span>
               <span className="text-[#9CA3AF]">
@@ -102,7 +102,7 @@ export default function BlogPostPage({ params }: PageProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#FAF9FB] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#F4F2F6] transition-colors"
+                    className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
                   >
                     {link.label}
                     <ArrowUpRight className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />

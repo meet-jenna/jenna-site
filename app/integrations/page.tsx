@@ -34,7 +34,7 @@ export default function IntegrationsIndexPage() {
   ])
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={breadcrumb} />
       <SiteNav />
 
@@ -60,7 +60,7 @@ export default function IntegrationsIndexPage() {
             <Link
               key={integration.id}
               href={`/integrations/${integration.id}`}
-              className="group h-32 sm:h-36 flex flex-col justify-center items-center gap-3 bg-[#FAF9FB] rounded-[6px] hover:bg-[#F4F2F6] transition-colors"
+              className="group h-32 sm:h-36 flex flex-col justify-center items-center gap-3 bg-[#EFEFEF] rounded-[6px] hover:bg-[#E6E6E6] transition-colors"
             >
               <PosGridWordmark id={integration.id} />
               <span className="text-[rgba(36,36,36,0.6)] text-xs font-medium font-sans group-hover:text-[#242424] transition-colors">

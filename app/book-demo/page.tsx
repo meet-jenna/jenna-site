@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function BookDemoPage() {
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       {/* Navigation */}
       <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-4">
         <div className="w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 bg-[#FFFFFF]/80 backdrop-blur-md border border-[rgba(36, 36, 36,0.10)] shadow-[0px_2px_8px_rgba(36, 36, 36,0.05)] rounded-[6px] flex justify-between items-center">
@@ -80,7 +80,7 @@ export default function BookDemoPage() {
 
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6">
         {/* Hero: two-column (copy + form) */}
-        <section className="w-full bg-[#FAF9FB] rounded-[6px] px-5 sm:px-10 lg:px-14 py-10 sm:py-14 lg:py-16">
+        <section className="w-full bg-[#EFEFEF] rounded-[6px] px-5 sm:px-10 lg:px-14 py-10 sm:py-14 lg:py-16">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             {/* Left column */}
             <div className="flex flex-col items-start gap-5 lg:pr-6">
@@ -112,7 +112,7 @@ export default function BookDemoPage() {
                   {POS_GRID_IDS.map((id) => (
                     <div
                       key={id}
-                      className="h-16 sm:h-[4.5rem] flex justify-center items-center bg-[#FAF9FB] rounded-[6px]"
+                      className="h-16 sm:h-[4.5rem] flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
                     >
                       <PosGridWordmark id={id} />
                     </div>

@@ -17,7 +17,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
   const faq = buildFaqJsonLd(content.faqs)
 
   return (
-    <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
+    <div className="w-full min-h-screen relative bg-[#F7F7F7] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={[breadcrumb, faq]} />
       <SiteNav />
 
@@ -60,7 +60,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
         {/* Feature grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {content.features.map((feature) => (
-            <div key={feature.title} className="bg-[#FAF9FB] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
+            <div key={feature.title} className="bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
               <h2 className="text-[#242424] text-base sm:text-lg font-semibold leading-tight font-sans">
                 {feature.title}
               </h2>
@@ -86,7 +86,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
               <Link
                 key={id}
                 href={`/integrations/${id}`}
-                className="h-24 sm:h-28 flex justify-center items-center bg-[#FAF9FB] rounded-[6px] hover:bg-[#F4F2F6] transition-colors"
+                className="h-24 sm:h-28 flex justify-center items-center bg-[#EFEFEF] rounded-[6px] hover:bg-[#E6E6E6] transition-colors"
               >
                 <PosGridWordmark id={id} />
               </Link>
@@ -119,7 +119,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 rounded-full bg-[#FAF9FB] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#F4F2F6] transition-colors"
+                className="px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
               >
                 {link.label}
               </Link>
