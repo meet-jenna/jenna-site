@@ -10,8 +10,8 @@ export const HD = {
   textMuted: "rgba(107, 114, 128,0.8)",
   border: "rgba(36, 36, 36,0.10)",
   borderSoft: "rgba(36, 36, 36,0.06)",
-  green: "#16A34A",
-  greenBg: "rgba(22, 163, 74,0.10)",
+  green: "#0EA5E9",
+  greenBg: "rgba(14, 165, 233,0.10)",
   cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
 } as const
 
@@ -57,7 +57,7 @@ function Pill({
 }) {
   const styles =
     tone === "green"
-      ? { background: HD.greenBg, color: HD.green, border: "1px solid rgba(22, 163, 74,0.18)" }
+      ? { background: HD.greenBg, color: HD.green, border: "1px solid rgba(14, 165, 233,0.18)" }
       : tone === "dark"
         ? { background: "#242424", color: "#ffffff", border: "1px solid #242424" }
         : { background: "#F4F4F4", color: HD.textSecondary, border: `1px solid ${HD.borderSoft}` }
@@ -170,7 +170,7 @@ export function CallsView({ isActive }: { isActive: boolean }) {
               gridTemplateColumns: cols,
               padding: "11.5px 18px",
               borderBottom: i < CALL_ROWS.length - 1 ? `1px solid ${HD.borderSoft}` : "none",
-              background: row.live ? "rgba(22, 163, 74,0.04)" : "transparent",
+              background: row.live ? "rgba(14, 165, 233,0.04)" : "transparent",
               fontSize: 13,
               animationDelay: `${i * 70}ms`,
             }}

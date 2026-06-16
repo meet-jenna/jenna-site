@@ -98,6 +98,11 @@ export default function LandingPage() {
     setProgress(0)
   }
 
+  const scrollToSection = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+
   return (
     <div className="w-full min-h-screen relative bg-[#FFFFFF] overflow-x-hidden flex flex-col items-center font-sans">
       <StructuredData data={faqJsonLd} />
@@ -113,15 +118,27 @@ export default function LandingPage() {
           <div className="flex justify-center items-center">
             <span className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">Jenna</span>
             <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
-              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              <a
+                href="#features"
+                onClick={scrollToSection("features")}
+                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+              >
                 Features
-              </span>
-              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              </a>
+              <a
+                href="#pricing"
+                onClick={scrollToSection("pricing")}
+                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+              >
                 Pricing
-              </span>
-              <span className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer">
+              </a>
+              <a
+                href="#faq"
+                onClick={scrollToSection("faq")}
+                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+              >
                 FAQ
-              </span>
+              </a>
             </nav>
           </div>
           <div className="flex justify-end items-center gap-2 sm:gap-3">
@@ -166,7 +183,10 @@ export default function LandingPage() {
             className="mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
-            <div className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
+            <div
+              className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-[15px] font-medium leading-5 font-sans"
+              style={{ color: "#FFFFFF", opacity: 1, mixBlendMode: "normal" }}
+            >
               Book a Demo
               <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
             </div>
@@ -190,7 +210,7 @@ export default function LandingPage() {
         </section>
 
         {/* Feature cards */}
-        <section id="features" className="scroll-mt-24 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
           <FeatureCard
             title="Answers every call"
             description="First ring, 24/7 — no missed orders or reservations."
@@ -255,7 +275,7 @@ export default function LandingPage() {
         </section>
 
         {/* Bento grid */}
-        <section className="flex flex-col gap-7 sm:gap-9">
+        <section id="features" className="scroll-mt-24 flex flex-col gap-7 sm:gap-9">
           <SectionHeader
             badge={
               <Badge
@@ -335,7 +355,9 @@ export default function LandingPage() {
         </div>
 
         {/* FAQ Section */}
-        <FAQSection />
+        <div id="faq" className="scroll-mt-24">
+          <FAQSection />
+        </div>
 
         {/* CTA Section */}
         <CTASection />

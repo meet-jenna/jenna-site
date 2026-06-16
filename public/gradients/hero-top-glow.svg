@@ -1,13 +1,13 @@
 <svg width="1920" height="520" viewBox="0 0 1920 520" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <radialGradient id="heroTopGlowWide" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
-      <stop offset="0%" stop-color="#FF8A3C" stop-opacity="0.5"/>
-      <stop offset="55%" stop-color="#FF9E4D" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#FFB92C" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#0EA5E9" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="heroTopGlowCore" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
-      <stop offset="0%" stop-color="#FF6B2C" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#FF962C" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <ellipse cx="960" cy="260" rx="1080" ry="250" fill="url(#heroTopGlowWide)"/>

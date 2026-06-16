@@ -8,15 +8,15 @@ const T = {
   textMuted: "rgba(107, 114, 128,0.85)",
   border: "rgba(36, 36, 36,0.10)",
   borderSoft: "rgba(36, 36, 36,0.06)",
-  green: "#16A34A",
-  greenBg: "rgba(22, 163, 74,0.10)",
+  green: "#0EA5E9",
+  greenBg: "rgba(14, 165, 233,0.10)",
   cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
 } as const
 
 function Pill({ children, tone = "green" }: { children: React.ReactNode; tone?: "green" | "neutral" }) {
   const styles =
     tone === "green"
-      ? { background: T.greenBg, color: T.green, border: "1px solid rgba(22, 163, 74,0.18)" }
+      ? { background: T.greenBg, color: T.green, border: "1px solid rgba(14, 165, 233,0.18)" }
       : { background: "#F4F4F4", color: T.textSecondary, border: `1px solid ${T.borderSoft}` }
   return (
     <span
@@ -191,19 +191,17 @@ function ForwardPanel() {
           <span style={{ fontSize: 11, color: T.textMuted }}>Your restaurant line</span>
           <span style={{ fontSize: 16, fontWeight: 600, color: T.textPrimary, letterSpacing: "-0.01em" }}>(415) 555-0132</span>
         </span>
-        {/* Toggle (on) */}
+        {/* Toggle (on) — intentionally stays green */}
         <span
           className="relative inline-flex items-center shrink-0"
-          style={{ width: 38, height: 22, borderRadius: 999, background: T.green, padding: 2 }}
+          style={{ width: 38, height: 22, borderRadius: 999, background: "#16A34A", padding: 2 }}
         >
           <span className="absolute rounded-full bg-white" style={{ width: 18, height: 18, right: 2, boxShadow: "0px 1px 2px rgba(0,0,0,0.2)" }} />
         </span>
       </div>
       <div className="flex items-center" style={{ gap: 10 }}>
-        <span className="flex items-center justify-center rounded-full shrink-0" style={{ width: 30, height: 30, background: "#242424" }}>
-          <span className="rotate-45 flex items-center justify-center rounded-[4px]" style={{ width: 13, height: 13, background: "#fff" }}>
-            <span className="-rotate-45 font-bold leading-none" style={{ fontSize: 8, color: "#242424" }}>J</span>
-          </span>
+        <span className="flex items-center justify-center rounded-full shrink-0" style={{ width: 30, height: 30, background: "#0EA5E9" }}>
+          <span className="font-bold leading-none" style={{ fontSize: 14, color: "#fff" }}>J</span>
         </span>
         <span className="flex flex-col" style={{ gap: 1 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: T.textPrimary }}>Forwarding to Jenna</span>
