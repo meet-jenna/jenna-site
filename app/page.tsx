@@ -167,6 +167,9 @@ export default function LandingPage() {
             <br />
             For Every Restaurant
           </h1>
+          <p className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+            Jenna connects to your existing systems and handles every call start to finish.
+          </p>
           <Link
             href="/book-demo"
             className="mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
