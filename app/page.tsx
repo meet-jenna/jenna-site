@@ -254,11 +254,11 @@ export default function LandingPage() {
             description="Plugs into your existing POS. Orders and reservations flow in automatically."
           />
 
-          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div className="w-full grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
             {POS_GRID_IDS.map((id) => (
               <div
                 key={id}
-                className="h-24 sm:h-28 lg:h-32 flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
+                className="h-20 sm:h-24 lg:h-[100px] flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
               >
                 <PosGridWordmark id={id} />
               </div>
@@ -279,7 +279,7 @@ export default function LandingPage() {
                     <rect x="7" y="7" width="4" height="4" stroke="#242424" strokeWidth="1" fill="none" />
                   </svg>
                 }
-                text="Built for restaurants"
+                text="Features"
               />
             }
             title="Handles Every Call"

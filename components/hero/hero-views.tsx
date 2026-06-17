@@ -216,6 +216,43 @@ const TICKET_ITEMS = [
   { qty: "2×", name: "Coke", note: "12 oz can", price: "$4.50" },
 ]
 
+const CALLER_AVATAR = "/professional-woman-avatar-with-short-brown-hair-an.jpg"
+
+function CallerAvatar({ size = 30 }: { size?: number }) {
+  return (
+    <span
+      className="rounded-full shrink-0"
+      style={{
+        width: size,
+        height: size,
+        backgroundImage: `url('${CALLER_AVATAR}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        border: `1px solid ${HD.borderSoft}`,
+      }}
+    />
+  )
+}
+
+function JennaAvatar({ size = 30 }: { size?: number }) {
+  return (
+    <span
+      className="inline-flex items-center justify-center rounded-full shrink-0"
+      style={{
+        width: size,
+        height: size,
+        background: HD.green,
+        color: "#ffffff",
+        fontWeight: 700,
+        fontSize: size * 0.5,
+        boxShadow: HD.cardShadow,
+      }}
+    >
+      J
+    </span>
+  )
+}
+
 export function OrderView({ isActive }: { isActive: boolean }) {
   return (
     <div className="w-full h-full flex flex-col" style={{ padding: "26px 30px", gap: 18 }} role="img" aria-label="Jenna taking a full pickup order on a live call">
@@ -250,16 +287,14 @@ export function OrderView({ isActive }: { isActive: boolean }) {
               Jenna speaking
             </span>
           </div>
-          <div className="flex-1 flex flex-col justify-end min-h-0" style={{ padding: "20px 20px", gap: 12 }}>
+          <div className="flex-1 flex flex-col justify-start min-h-0" style={{ padding: "20px 20px", gap: 12 }}>
           {TRANSCRIPT.map((msg, i) => (
             <div
               key={i}
               className={`flex items-end gap-2.5 ${msg.from === "jenna" ? "justify-end" : "justify-start"} ${isActive ? "hd-item-in" : ""}`}
               style={{ animationDelay: `${i * 110}ms` }}
             >
-              {msg.from === "jenna" && (
-                <span style={{ fontSize: 10.5, color: HD.textMuted, fontWeight: 500 }}>Jenna</span>
-              )}
+              {msg.from === "caller" && <CallerAvatar />}
               <span
                 className="rounded-full"
                 style={{
@@ -268,13 +303,15 @@ export function OrderView({ isActive }: { isActive: boolean }) {
                   fontWeight: 500,
                   lineHeight: "16px",
                   letterSpacing: "-0.2px",
+                  textAlign: "left",
                   background: msg.from === "jenna" ? "#242424" : "#EDEDED",
                   color: msg.from === "jenna" ? "#ffffff" : HD.textPrimary,
-                  maxWidth: "85%",
+                  maxWidth: "82%",
                 }}
               >
                 {msg.text}
               </span>
+              {msg.from === "jenna" && <JennaAvatar />}
             </div>
           ))}
           </div>

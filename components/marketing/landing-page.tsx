@@ -81,12 +81,12 @@ export default function LandingPage({ content }: { content: LandingPageContent }
               Orders and reservations flow into your existing system automatically — no new hardware.
             </p>
           </div>
-          <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div className="w-full grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
             {POS_GRID_IDS.map((id) => (
               <Link
                 key={id}
                 href={`/integrations/${id}`}
-                className="h-24 sm:h-28 flex justify-center items-center bg-[#EFEFEF] rounded-[6px] hover:bg-[#E6E6E6] transition-colors"
+                className="h-20 sm:h-24 lg:h-[100px] flex justify-center items-center bg-[#EFEFEF] rounded-[6px] hover:bg-[#E6E6E6] transition-colors"
               >
                 <PosGridWordmark id={id} />
               </Link>

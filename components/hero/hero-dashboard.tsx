@@ -35,10 +35,10 @@ const NAV_ITEMS = [
 function JennaMark({ size = 18 }: { size?: number }) {
   return (
     <span
-      className="bg-[#101010] rotate-45 flex items-center justify-center rounded-[4px] shrink-0"
-      style={{ width: size * 0.78, height: size * 0.78 }}
+      className="flex items-center justify-center rounded-full shrink-0"
+      style={{ width: size * 0.78, height: size * 0.78, background: HD.green }}
     >
-      <span className="-rotate-45 text-white font-bold leading-none" style={{ fontSize: size * 0.46 }}>
+      <span className="text-white font-bold leading-none" style={{ fontSize: size * 0.46 }}>
         J
       </span>
     </span>
@@ -49,7 +49,7 @@ function Sidebar({ activeView }: { activeView: number }) {
   return (
     <div
       className="h-full flex flex-col shrink-0"
-      style={{ width: SIDEBAR_W, background: "#FAFAFA", borderRight: `1px solid ${HD.borderSoft}`, padding: "14px 10px" }}
+      style={{ width: SIDEBAR_W, background: "#EFEFEF", borderRight: `1px solid ${HD.borderSoft}`, padding: "14px 10px" }}
     >
       <div className="flex flex-col" style={{ gap: 2 }}>
         {NAV_ITEMS.map((item) => {
@@ -227,7 +227,7 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
         <Topbar />
         <div className="flex-1 flex min-h-0">
           <Sidebar activeView={activeView} />
-          <div className="flex-1 relative min-w-0" style={{ background: "#FAFAFA" }}>
+          <div className="flex-1 relative min-w-0" style={{ background: "#EFEFEF" }}>
             {views.map((View, i) => (
               <div
                 key={i}
