@@ -34,7 +34,7 @@ export default function BookDemoPage() {
       {/* Navigation */}
       <SiteNav />
 
-      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6">
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6">
         {/* Hero: two-column (copy + form) */}
         <section className="w-full py-8 sm:py-14 lg:py-16">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">

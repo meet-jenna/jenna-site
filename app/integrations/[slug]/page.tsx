@@ -92,7 +92,7 @@ export default function IntegrationPage({ params }: PageProps) {
       <StructuredData data={[breadcrumb, faqJson]} />
       <SiteNav />
 
-      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-14 sm:gap-20">
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-14 sm:gap-20">
         {/* Hero */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
           <div data-reveal className="flex items-center gap-3 mb-6">

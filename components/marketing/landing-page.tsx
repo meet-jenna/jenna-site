@@ -23,7 +23,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
       <StructuredData data={[breadcrumb, faq]} />
       <SiteNav />
 
-      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-14 sm:gap-20">
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-14 sm:gap-20">
         {/* Hero */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
           <div data-reveal className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">

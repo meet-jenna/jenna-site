@@ -49,7 +49,7 @@ export default function BlogIndexPage() {
       <StructuredData data={[breadcrumb, blogJsonLd]} />
       <SiteNav />
 
-      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-14 sm:gap-16">
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-14 sm:gap-16">
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
           <h1 data-reveal className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             The Jenna Blog

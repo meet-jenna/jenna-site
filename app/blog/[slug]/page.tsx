@@ -69,7 +69,7 @@ export default function BlogPostPage({ params }: PageProps) {
       <StructuredData data={[breadcrumb, articleJsonLd]} />
       <SiteNav />
 
-      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-12 sm:gap-16">
+      <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-12 sm:gap-16">
         <article className="w-full max-w-[760px] mx-auto flex flex-col gap-8">
           {/* Header */}
           <header data-reveal className="flex flex-col gap-4">
