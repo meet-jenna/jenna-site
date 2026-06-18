@@ -206,30 +206,33 @@ export default function LandingPage() {
 
         {/* Feature cards */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 -mt-6 sm:-mt-8 lg:-mt-12">
-          <FeatureCard
-            title="Answers every call"
-            description="First ring, 24/7 — no missed orders or reservations."
-            isActive={activeCard === 0}
-            progress={activeCard === 0 ? progress : 0}
-            onClick={() => handleCardClick(0)}
-            index={0}
-          />
-          <FeatureCard
-            title="Takes the whole order"
-            description="Pickup, delivery, or reservations — handled start to finish."
-            isActive={activeCard === 1}
-            progress={activeCard === 1 ? progress : 0}
-            onClick={() => handleCardClick(1)}
-            index={1}
-          />
-          <FeatureCard
-            title="Syncs to your POS"
-            description="Orders land in your existing system. No new hardware."
-            isActive={activeCard === 2}
-            progress={activeCard === 2 ? progress : 0}
-            onClick={() => handleCardClick(2)}
-            index={2}
-          />
+          <div data-reveal className="h-full">
+            <FeatureCard
+              title="Answers every call"
+              description="First ring, 24/7 — no missed orders or reservations."
+              isActive={activeCard === 0}
+              progress={activeCard === 0 ? progress : 0}
+              onClick={() => handleCardClick(0)}
+            />
+          </div>
+          <div data-reveal className="h-full" style={{ "--reveal-delay": "90ms" } as React.CSSProperties}>
+            <FeatureCard
+              title="Takes the whole order"
+              description="Pickup, delivery, or reservations — handled start to finish."
+              isActive={activeCard === 1}
+              progress={activeCard === 1 ? progress : 0}
+              onClick={() => handleCardClick(1)}
+            />
+          </div>
+          <div data-reveal className="h-full" style={{ "--reveal-delay": "180ms" } as React.CSSProperties}>
+            <FeatureCard
+              title="Syncs to your POS"
+              description="Orders land in your existing system. No new hardware."
+              isActive={activeCard === 2}
+              progress={activeCard === 2 ? progress : 0}
+              onClick={() => handleCardClick(2)}
+            />
+          </div>
         </section>
 
         {/* Social proof / integrations */}
@@ -390,20 +393,16 @@ function FeatureCard({
   isActive,
   progress,
   onClick,
-  index = 0,
 }: {
   title: string
   description: string
   isActive: boolean
   progress: number
   onClick: () => void
-  index?: number
 }) {
   return (
     <div
-      data-reveal
-      style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
-      className={`relative w-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
+      className={`relative w-full h-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
           ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"
           : "bg-[#EFEFEF] border-transparent hover:bg-[#E6E6E6]"
