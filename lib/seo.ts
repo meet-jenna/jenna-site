@@ -1,4 +1,5 @@
 import { faqData } from "./faq"
+import { JENNA_LOGO } from "./brand"
 
 /**
  * Canonical production origin for the marketing site.
@@ -40,7 +41,7 @@ export const organizationJsonLd = {
   name: SITE_NAME,
   legalName: "Jenna AI",
   url: SITE_URL,
-  logo: absoluteUrl("/icon.svg"),
+  logo: absoluteUrl(JENNA_LOGO),
   description: SITE_DESCRIPTION,
   slogan: "The AI Hostess for Every Restaurant",
 }

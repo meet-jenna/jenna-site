@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { JennaWordmark } from "./jenna-logo"
 
 export default function FooterSection() {
   return (
@@ -8,7 +9,7 @@ export default function FooterSection() {
         <div className="h-auto p-4 md:p-8 flex flex-col justify-start items-start gap-8">
           {/* Brand Section */}
           <div className="self-stretch flex justify-start items-center gap-3">
-            <div className="text-center text-[#242424] text-xl font-semibold leading-4 font-sans">Jenna</div>
+            <JennaWordmark logoSize={32} textClassName="text-xl leading-4" />
           </div>
           <div className="text-[rgba(36, 36, 36,0.90)] text-sm font-medium leading-[18px] font-sans">
             The AI hostess for every restaurant.

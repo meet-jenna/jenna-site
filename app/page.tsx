@@ -16,7 +16,8 @@ import FooterSection from "../components/footer-section"
 import HeroDashboard from "../components/hero/hero-dashboard"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import { PosGridWordmark } from "../components/integration-logo"
+import { JennaWordmarkLink } from "../components/jenna-logo"
+import { PosLogoGrid } from "../components/pos-logo-grid"
 import { POS_GRID_IDS } from "../lib/integrations/pos"
 import { PORTAL_URL } from "../lib/portal"
 import StructuredData from "../components/structured-data"
@@ -45,7 +46,7 @@ function SectionHeader({
   description: string
 }) {
   return (
-    <div className="w-full max-w-[600px] mx-auto flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+    <div data-reveal className="w-full max-w-[600px] mx-auto flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
       {badge}
       <h2 className="text-[#242424] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.1] font-sans tracking-tight">
         {title}
@@ -116,7 +117,7 @@ export default function LandingPage() {
           }`}
         >
           <div className="flex justify-center items-center">
-            <span className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">Jenna</span>
+            <JennaWordmarkLink href="/" logoSize={26} />
             <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
               <a
                 href="#features"
@@ -150,7 +151,7 @@ export default function LandingPage() {
             </a>
             <Link
               href="/book-demo"
-              className="px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
+              className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
             >
               <span className="text-white text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
               <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white shrink-0" strokeWidth={2.25} />
@@ -162,17 +163,19 @@ export default function LandingPage() {
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-12 sm:gap-16 lg:gap-20">
         {/* Hero copy (lives on the page, no container) */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10 lg:pt-14">
-          <h1 className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
+          <h1 data-reveal className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             The AI Hostess
             <br />
             For Every Restaurant
           </h1>
-          <p className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
             Jenna connects to your existing systems and handles every call start to finish.
           </p>
           <Link
             href="/book-demo"
-            className="mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+            data-reveal
+            style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
+            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
             <div
@@ -185,14 +188,14 @@ export default function LandingPage() {
           </Link>
 
           {/* Hero dashboard */}
-          <div className="relative mt-10 sm:mt-12 w-full">
+          <div data-reveal="scale" style={{ "--reveal-delay": "260ms" } as React.CSSProperties} className="relative mt-10 sm:mt-12 w-full">
             {/* Top-edge glow: straddles the dashboard's top edge */}
             <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
               <img
-                src="/gradients/hero-top-glow.svg?v=3"
+                src="/gradients/hero-top-glow.svg?v=8"
                 alt=""
                 aria-hidden
-                className="w-full h-auto -translate-y-[38%] opacity-70 mix-blend-multiply"
+                className="w-full h-auto -translate-y-[38%] opacity-[0.82]"
               />
             </div>
             <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
@@ -209,6 +212,7 @@ export default function LandingPage() {
             isActive={activeCard === 0}
             progress={activeCard === 0 ? progress : 0}
             onClick={() => handleCardClick(0)}
+            index={0}
           />
           <FeatureCard
             title="Takes the whole order"
@@ -216,6 +220,7 @@ export default function LandingPage() {
             isActive={activeCard === 1}
             progress={activeCard === 1 ? progress : 0}
             onClick={() => handleCardClick(1)}
+            index={1}
           />
           <FeatureCard
             title="Syncs to your POS"
@@ -223,6 +228,7 @@ export default function LandingPage() {
             isActive={activeCard === 2}
             progress={activeCard === 2 ? progress : 0}
             onClick={() => handleCardClick(2)}
+            index={2}
           />
         </section>
 
@@ -254,15 +260,8 @@ export default function LandingPage() {
             description="Plugs into your existing POS. Orders and reservations flow in automatically."
           />
 
-          <div className="w-full grid grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
-            {POS_GRID_IDS.map((id) => (
-              <div
-                key={id}
-                className="h-20 sm:h-24 lg:h-[100px] flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
-              >
-                <PosGridWordmark id={id} />
-              </div>
-            ))}
+          <div data-reveal="fade">
+            <PosLogoGrid ids={POS_GRID_IDS} className="w-full" />
           </div>
         </section>
 
@@ -373,7 +372,7 @@ function BentoCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-[#EFEFEF] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
+    <div data-reveal="scale" className="hover-lift bg-[#EFEFEF] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
       <div className="flex flex-col gap-2">
         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">{title}</h3>
         <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
@@ -391,15 +390,19 @@ function FeatureCard({
   isActive,
   progress,
   onClick,
+  index = 0,
 }: {
   title: string
   description: string
   isActive: boolean
   progress: number
   onClick: () => void
+  index?: number
 }) {
   return (
     <div
+      data-reveal
+      style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
       className={`relative w-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
           ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"

@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import SiteNav from "../../components/marketing/site-nav"
 import DemoForm from "../../components/demo-form"
 import FooterSection from "../../components/footer-section"
-import { PosGridWordmark } from "../../components/integration-logo"
+import { PosLogoGrid } from "../../components/pos-logo-grid"
+import { JennaLogo } from "../../components/jenna-logo"
 import { POS_GRID_IDS } from "../../lib/integrations/pos"
 
 const description =
@@ -38,11 +39,9 @@ export default function BookDemoPage() {
         <section className="w-full py-8 sm:py-14 lg:py-16">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
             {/* Left column */}
-            <div className="flex flex-col items-start gap-5 lg:pr-6">
+            <div data-reveal="left" className="flex flex-col items-start gap-5 lg:pr-6">
               <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
-                <div className="w-[10px] h-[10px] bg-[#101010] rounded-[2px] rotate-45 flex items-center justify-center">
-                  <span className="-rotate-45 text-white text-[7px] font-bold leading-none font-sans">J</span>
-                </div>
+                <JennaLogo shape="app" size={16} />
                 <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
                   Book a Demo
                 </div>
@@ -63,21 +62,12 @@ export default function BookDemoPage() {
                 <div className="text-[rgba(36, 36, 36,0.55)] text-xs font-medium leading-4 font-sans uppercase tracking-wide">
                   Works with the POS you already use
                 </div>
-                <div className="grid grid-cols-4 gap-2 sm:gap-3">
-                  {POS_GRID_IDS.map((id) => (
-                    <div
-                      key={id}
-                      className="h-16 sm:h-[4.5rem] flex justify-center items-center bg-[#EFEFEF] rounded-[6px]"
-                    >
-                      <PosGridWordmark id={id} />
-                    </div>
-                  ))}
-                </div>
+                <PosLogoGrid ids={POS_GRID_IDS} />
               </div>
             </div>
 
             {/* Right column: form */}
-            <div className="flex justify-center lg:justify-end items-start">
+            <div data-reveal="right" className="flex justify-center lg:justify-end items-start">
               <div className="relative w-full max-w-[460px]">
                 {/* Hero-style glow straddling the top edge of the form */}
                 <div className="pointer-events-none absolute -top-12 sm:-top-16 left-1/2 -translate-x-1/2 z-0 w-[150%] sm:w-[160%]">

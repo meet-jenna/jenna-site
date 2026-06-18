@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og"
 import { getPost, getAllPostSlugs } from "../../../lib/blog"
+import { JENNA_LOGO } from "../../../lib/brand"
+import { SITE_URL } from "../../../lib/seo"
 
 export const alt = "Jenna Blog"
 export const size = { width: 1200, height: 630 }
@@ -29,22 +31,14 @@ export default function BlogOgImage({ params }: { params: { slug: string } }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <div
-            style={{
-              width: "56px",
-              height: "56px",
-              backgroundColor: "#101010",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#FFFFFF",
-              fontSize: "34px",
-              fontWeight: 700,
-            }}
-          >
-            J
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${SITE_URL}${JENNA_LOGO}`}
+            alt=""
+            width={56}
+            height={56}
+            style={{ borderRadius: "12px", objectFit: "cover" }}
+          />
           <div style={{ color: "#6B7280", fontSize: "28px", fontWeight: 500 }}>{category}</div>
         </div>
 

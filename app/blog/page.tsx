@@ -1,3 +1,4 @@
+import type React from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import SiteNav from "../../components/marketing/site-nav"
@@ -50,20 +51,22 @@ export default function BlogIndexPage() {
 
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-14 sm:gap-16">
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
-          <h1 className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
+          <h1 data-reveal className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             The Jenna Blog
           </h1>
-          <p className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
             {description}
           </p>
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group bg-[#EFEFEF] rounded-[6px] p-6 sm:p-8 flex flex-col gap-3 hover:bg-[#E6E6E6] transition-colors"
+              data-reveal="scale"
+              style={{ "--reveal-delay": `${(index % 2) * 90}ms` } as React.CSSProperties}
+              className="hover-lift group bg-[#EFEFEF] rounded-[6px] p-6 sm:p-8 flex flex-col gap-3 hover:bg-[#E6E6E6] transition-colors"
             >
               <div className="flex items-center gap-3 text-xs font-medium font-sans">
                 <span className="px-2.5 py-1 rounded-full bg-white border border-[rgba(36,36,36,0.10)] text-[#242424]">

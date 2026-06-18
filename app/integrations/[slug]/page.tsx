@@ -1,3 +1,4 @@
+import type React from "react"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -6,6 +7,7 @@ import SiteNav from "../../../components/marketing/site-nav"
 import CTASection from "../../../components/cta-section"
 import FooterSection from "../../../components/footer-section"
 import StructuredData from "../../../components/structured-data"
+import { JennaLogo } from "../../../components/jenna-logo"
 import { TOP_POS_INTEGRATIONS, getPosIntegration, type PosIntegrationId } from "../../../lib/integrations/pos"
 import { POS_CONTENT } from "../../../lib/integrations/content"
 import { buildBreadcrumbJsonLd, buildFaqJsonLd } from "../../../lib/seo"
@@ -93,26 +95,28 @@ export default function IntegrationPage({ params }: PageProps) {
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-14 sm:gap-20">
         {/* Hero */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
-          <div className="flex items-center gap-3 mb-6">
+          <div data-reveal className="flex items-center gap-3 mb-6">
             <div className="h-12 px-4 flex items-center justify-center bg-[#EFEFEF] rounded-[6px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={integration.logo} alt={`${integration.name} logo`} className="h-5 w-auto object-contain" />
             </div>
             <span className="text-[#9CA3AF] text-lg">+</span>
-            <div className="h-12 px-4 flex items-center justify-center bg-[#101010] rounded-[6px] text-white text-base font-semibold">
-              Jenna
+            <div className="h-12 px-3 flex items-center justify-center bg-[#EFEFEF] rounded-[6px]">
+              <JennaLogo shape="app" size={36} />
             </div>
           </div>
 
-          <h1 className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
+          <h1 data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             AI Phone Answering for {integration.name}
           </h1>
-          <p className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
             {copy.tagline}
           </p>
           <Link
             href="/book-demo"
-            className="mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
+            data-reveal
+            style={{ "--reveal-delay": "270ms" } as React.CSSProperties}
+            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
           >
             Book a Demo
             <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
@@ -127,7 +131,7 @@ export default function IntegrationPage({ params }: PageProps) {
         {/* How it works */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {steps.map((step, index) => (
-            <div key={step.title} className="bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
+            <div key={step.title} data-reveal="scale" style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties} className="hover-lift bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
               <div className="text-[#9CA3AF] text-sm font-semibold font-sans">0{index + 1}</div>
               <h2 className="text-[#242424] text-base sm:text-lg font-semibold leading-tight font-sans">{step.title}</h2>
               <p className="text-[#6B7280] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
@@ -167,7 +171,7 @@ export default function IntegrationPage({ params }: PageProps) {
               <Link
                 key={other.id}
                 href={`/integrations/${other.id}`}
-                className="px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
+                className="btn-cta px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
               >
                 {other.name}
               </Link>

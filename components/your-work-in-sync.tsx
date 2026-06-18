@@ -1,4 +1,5 @@
 import type React from "react"
+import { JENNA_LOGO } from "@/lib/brand"
 
 interface YourWorkInSyncProps {
   /** Fixed width from Figma: 482px */
@@ -49,27 +50,23 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
   // Single caller avatar — the whole conversation is between one caller and Jenna
   const callerAvatar = "/professional-woman-avatar-with-short-brown-hair-an.jpg"
 
-  // Jenna's AI identity — plain circle with a "J", matching the order-accuracy bento hub
+  // Jenna avatar — circular logo, matching the order-accuracy bento hub
   const jennaAvatar = (
-    <div
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={JENNA_LOGO}
+      alt="Jenna"
+      width={36}
+      height={36}
       style={{
         width: "36px",
         height: "36px",
         borderRadius: "50%",
-        background: "#0EA5E9",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        objectFit: "cover",
         boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.08)",
         flexShrink: 0,
-        fontFamily: "Inter, sans-serif",
-        fontWeight: 700,
-        fontSize: "16px",
-        color: "#ffffff",
       }}
-    >
-      J
-    </div>
+    />
   )
 
   return (
@@ -295,7 +292,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 width: "36px",
                 height: "36px",
                 borderRadius: "44px",
-                background: theme === "light" ? "#0EA5E9" : "var(--yws-bubble-dark)",
+                background: theme === "light" ? "#242424" : "var(--yws-bubble-dark)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

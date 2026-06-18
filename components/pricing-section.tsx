@@ -1,6 +1,8 @@
 "use client"
 
+import type React from "react"
 import Link from "next/link"
+import { STATUS_SUCCESS } from "@/lib/theme"
 
 export default function PricingSection() {
   const plans = {
@@ -39,7 +41,7 @@ export default function PricingSection() {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-8 sm:gap-10 pt-6 sm:pt-10">
       {/* Header Section */}
-      <div className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
           {/* Pricing Badge */}
           <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
             <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">
@@ -75,7 +77,7 @@ export default function PricingSection() {
           {/* Pricing Cards Container */}
           <div className="flex-1 flex flex-col md:flex-row justify-center items-stretch gap-4 sm:gap-5 xl:gap-6">
             {/* Starter Plan */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-10 xl:py-10 overflow-hidden flex flex-col gap-8 bg-[#EFEFEF] rounded-[6px]">
+            <div data-reveal="scale" className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-10 xl:py-10 overflow-hidden flex flex-col gap-8 bg-[#EFEFEF] rounded-[6px]">
               {/* Plan info + CTA */}
               <div className="w-full flex flex-col justify-start items-start gap-7">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -92,7 +94,7 @@ export default function PricingSection() {
                   <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
+                <Link href="/book-demo" className="btn-cta self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-white text-[13px] font-medium leading-5 font-sans">
                     Book a Demo
@@ -124,7 +126,7 @@ export default function PricingSection() {
             </div>
 
             {/* Enterprise Plan (Featured) */}
-            <div className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-10 xl:py-10 bg-[#1A1815] overflow-hidden flex flex-col gap-8 rounded-[6px]">
+            <div data-reveal="scale" style={{ "--reveal-delay": "100ms" } as React.CSSProperties} className="flex-1 max-w-full md:max-w-none self-stretch px-6 py-7 lg:px-9 lg:py-9 xl:px-10 xl:py-10 bg-[#1A1815] overflow-hidden flex flex-col gap-8 rounded-[6px]">
               {/* Plan info + CTA */}
               <div className="w-full flex flex-col justify-start items-start gap-7">
                 <div className="self-stretch flex flex-col justify-start items-start gap-2">
@@ -141,7 +143,7 @@ export default function PricingSection() {
                   <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
                 </div>
 
-                <Link href="/book-demo" className="self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#EFEFEF] transition-colors">
+                <Link href="/book-demo" className="btn-cta self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#EFEFEF] transition-colors">
                   <div className="w-full h-[41px] absolute left-0 top-[-0.5px] bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
                   <div className="flex justify-center flex-col text-[#242424] text-[13px] font-medium leading-5 font-sans">
                     Book a Demo
@@ -157,7 +159,7 @@ export default function PricingSection() {
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M10 3L4.5 8.5L2 6"
-                          stroke="#FF8000"
+                          stroke={STATUS_SUCCESS}
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"

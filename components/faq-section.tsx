@@ -29,7 +29,7 @@ export default function FAQSection() {
     <div className="w-full flex justify-center items-start">
       <div className="flex-1 flex flex-col lg:flex-row justify-start items-start gap-8 lg:gap-12">
         {/* Left Column - Header */}
-        <div className="w-full lg:flex-1 flex flex-col justify-center items-start gap-4 lg:py-5">
+        <div data-reveal="left" className="w-full lg:flex-1 flex flex-col justify-center items-start gap-4 lg:py-5">
           <div className="w-full flex flex-col justify-center text-[#242424] font-semibold leading-tight md:leading-[44px] font-sans text-3xl sm:text-4xl tracking-tight">
             Frequently Asked Questions
           </div>
@@ -39,7 +39,7 @@ export default function FAQSection() {
         </div>
 
         {/* Right Column - FAQ Items */}
-        <div className="w-full lg:flex-1 flex flex-col justify-center items-center">
+        <div data-reveal="right" className="w-full lg:flex-1 flex flex-col justify-center items-center">
           <div className="w-full flex flex-col">
             {faqData.map((item, index) => {
               const isOpen = openItems.includes(index)

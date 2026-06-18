@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
+import { JennaWordmarkLink } from "../jenna-logo"
 import { PORTAL_URL } from "../../lib/portal"
 
 /**
@@ -30,9 +31,7 @@ export default function SiteNav() {
         }`}
       >
         <div className="flex justify-center items-center">
-          <Link href="/" className="text-[#242424] text-lg sm:text-xl font-semibold leading-5 font-sans">
-            Jenna
-          </Link>
+          <JennaWordmarkLink href="/" logoSize={26} />
           <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
             <Link
               href="/#features"
@@ -63,7 +62,7 @@ export default function SiteNav() {
           </a>
           <Link
             href="/book-demo"
-            className="px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
+            className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
           >
             <span className="text-white text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
             <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white shrink-0" strokeWidth={2.25} />

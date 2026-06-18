@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <div className="w-full rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
+    <div data-reveal="scale" className="w-full rounded-[6px] overflow-hidden flex flex-col justify-center items-center">
       {/* Testimonial Card with restaurant photo background */}
       <div className="relative w-full min-h-[420px] md:min-h-[480px] rounded-[6px] overflow-hidden flex items-end">
         {/* Background restaurant photos (cross-fade) */}

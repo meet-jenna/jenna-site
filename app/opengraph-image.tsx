@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { JENNA_LOGO } from "../lib/brand"
+import { SITE_URL } from "../lib/seo"
 
 export const alt = "Jenna — AI Voice Hostess & Phone Answering for Restaurants"
 export const size = { width: 1200, height: 630 }
@@ -21,22 +23,14 @@ export default function OpengraphImage() {
       >
         {/* Wordmark */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <div
-            style={{
-              width: "64px",
-              height: "64px",
-              backgroundColor: "#101010",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#FFFFFF",
-              fontSize: "40px",
-              fontWeight: 700,
-            }}
-          >
-            J
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${SITE_URL}${JENNA_LOGO}`}
+            alt=""
+            width={64}
+            height={64}
+            style={{ borderRadius: "14px", objectFit: "cover" }}
+          />
           <div style={{ color: "#242424", fontSize: "44px", fontWeight: 600 }}>Jenna</div>
         </div>
 

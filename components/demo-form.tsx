@@ -108,7 +108,7 @@ export default function DemoForm() {
 
         <button
           type="submit"
-          className="mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+          className="btn-cta mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
         >
           <div className="w-full h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply" />
           <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">

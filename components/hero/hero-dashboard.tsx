@@ -15,6 +15,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react"
 import { CallsView, OrderView, PosSyncView, HD, LiveDot } from "./hero-views"
+import { JennaLogo } from "../jenna-logo"
 
 /** Fixed design canvas — scaled to fit the hero card like an object-cover image */
 const CANVAS_W = 960
@@ -33,16 +34,7 @@ const NAV_ITEMS = [
 ]
 
 function JennaMark({ size = 18 }: { size?: number }) {
-  return (
-    <span
-      className="flex items-center justify-center rounded-full shrink-0"
-      style={{ width: size * 0.78, height: size * 0.78, background: HD.green }}
-    >
-      <span className="text-white font-bold leading-none" style={{ fontSize: size * 0.46 }}>
-        J
-      </span>
-    </span>
-  )
+  return <JennaLogo shape="app" size={size} />
 }
 
 function Sidebar({ activeView }: { activeView: number }) {
@@ -90,8 +82,8 @@ function Sidebar({ activeView }: { activeView: number }) {
                     fontSize: 10,
                     fontWeight: 600,
                     padding: "2px 7px",
-                    background: item.badge === "Live" ? HD.greenBg : "#F4F4F4",
-                    color: item.badge === "Live" ? HD.green : HD.textSecondary,
+                    background: item.badge === "Live" ? HD.liveBg : "#F4F4F4",
+                    color: item.badge === "Live" ? HD.live : HD.textSecondary,
                   }}
                 >
                   {item.badge === "Live" && <LiveDot size={5} />}
@@ -154,7 +146,7 @@ function Topbar() {
           <Bell style={{ width: 15, height: 15, color: HD.textSecondary }} strokeWidth={1.9} />
           <span
             className="absolute rounded-full"
-            style={{ width: 6, height: 6, background: HD.green, top: -1, right: -1, border: "1.5px solid #ffffff" }}
+            style={{ width: 6, height: 6, background: HD.live, top: -1, right: -1, border: "1.5px solid #ffffff" }}
           />
         </span>
       </div>

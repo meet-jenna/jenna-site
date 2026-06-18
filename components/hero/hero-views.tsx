@@ -2,6 +2,8 @@
 
 import type React from "react"
 import { Check } from "lucide-react"
+import { JennaLogo } from "../jenna-logo"
+import { STATUS_LIVE, UI_SURFACE, UI_BORDER, UI_ROW_HIGHLIGHT } from "@/lib/theme"
 
 /* Shared design tokens for the hero dashboard views */
 export const HD = {
@@ -10,8 +12,8 @@ export const HD = {
   textMuted: "rgba(107, 114, 128,0.8)",
   border: "rgba(36, 36, 36,0.10)",
   borderSoft: "rgba(36, 36, 36,0.06)",
-  green: "#0EA5E9",
-  greenBg: "rgba(14, 165, 233,0.10)",
+  live: STATUS_LIVE,
+  liveBg: UI_SURFACE,
   cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
 } as const
 
@@ -20,9 +22,9 @@ export function LiveDot({ size = 7 }: { size?: number }) {
     <span className="relative inline-flex" style={{ width: size, height: size }}>
       <span
         className="absolute inline-flex h-full w-full rounded-full animate-ping"
-        style={{ background: HD.green, opacity: 0.5 }}
+        style={{ background: HD.live, opacity: 0.5 }}
       />
-      <span className="relative inline-flex rounded-full h-full w-full" style={{ background: HD.green }} />
+      <span className="relative inline-flex rounded-full h-full w-full" style={{ background: HD.live }} />
     </span>
   )
 }
@@ -57,7 +59,7 @@ function Pill({
 }) {
   const styles =
     tone === "green"
-      ? { background: HD.greenBg, color: HD.green, border: "1px solid rgba(14, 165, 233,0.18)" }
+      ? { background: HD.liveBg, color: HD.live, border: `1px solid ${UI_BORDER}` }
       : tone === "dark"
         ? { background: "#242424", color: "#ffffff", border: "1px solid #242424" }
         : { background: "#F4F4F4", color: HD.textSecondary, border: `1px solid ${HD.borderSoft}` }
@@ -75,9 +77,9 @@ function GreenCheck({ size = 14 }: { size?: number }) {
   return (
     <span
       className="inline-flex items-center justify-center rounded-full shrink-0"
-      style={{ width: size, height: size, background: HD.greenBg }}
+      style={{ width: size, height: size, background: HD.liveBg }}
     >
-      <Check style={{ width: size * 0.62, height: size * 0.62, color: HD.green }} strokeWidth={3} />
+      <Check style={{ width: size * 0.62, height: size * 0.62, color: HD.live }} strokeWidth={3} />
     </span>
   )
 }
@@ -170,7 +172,7 @@ export function CallsView({ isActive }: { isActive: boolean }) {
               gridTemplateColumns: cols,
               padding: "11.5px 18px",
               borderBottom: i < CALL_ROWS.length - 1 ? `1px solid ${HD.borderSoft}` : "none",
-              background: row.live ? "rgba(14, 165, 233,0.04)" : "transparent",
+              background: row.live ? UI_ROW_HIGHLIGHT : "transparent",
               fontSize: 13,
               animationDelay: `${i * 70}ms`,
             }}
@@ -182,12 +184,12 @@ export function CallsView({ isActive }: { isActive: boolean }) {
             <span>
               <Pill>{row.intent}</Pill>
             </span>
-            <span className="flex items-center gap-1.5" style={{ color: row.live ? HD.green : HD.textSecondary, fontWeight: row.live ? 500 : 400 }}>
-              {row.live ? <Waveform color={HD.green} barWidth={2} height={11} /> : <GreenCheck size={13} />}
+            <span className="flex items-center gap-1.5" style={{ color: row.live ? HD.live : HD.textSecondary, fontWeight: row.live ? 500 : 400 }}>
+              {row.live ? <Waveform color={HD.live} barWidth={2} height={11} /> : <GreenCheck size={13} />}
               {row.outcome}
             </span>
             <span style={{ color: HD.textSecondary }}>{row.duration}</span>
-            <span className="text-right" style={{ color: row.live ? HD.green : HD.textMuted, fontWeight: row.live ? 500 : 400 }}>
+            <span className="text-right" style={{ color: row.live ? HD.live : HD.textMuted, fontWeight: row.live ? 500 : 400 }}>
               {row.time}
             </span>
           </div>
@@ -235,22 +237,7 @@ function CallerAvatar({ size = 30 }: { size?: number }) {
 }
 
 function JennaAvatar({ size = 30 }: { size?: number }) {
-  return (
-    <span
-      className="inline-flex items-center justify-center rounded-full shrink-0"
-      style={{
-        width: size,
-        height: size,
-        background: HD.green,
-        color: "#ffffff",
-        fontWeight: 700,
-        fontSize: size * 0.5,
-        boxShadow: HD.cardShadow,
-      }}
-    >
-      J
-    </span>
-  )
+  return <JennaLogo shape="circle" size={size} />
 }
 
 export function OrderView({ isActive }: { isActive: boolean }) {

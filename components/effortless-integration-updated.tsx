@@ -1,5 +1,6 @@
 import type React from "react"
 
+import { JENNA_LOGO } from "@/lib/brand"
 import { getPosIntegration, type PosIntegrationId } from "@/lib/integrations/pos"
 
 interface EffortlessIntegrationProps {
@@ -115,27 +116,23 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
         }}
       >
         {/* Central hub */}
-        <div
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={JENNA_LOGO}
+          alt="Jenna"
+          width={72}
+          height={72}
           style={{
             width: "72px",
             height: "72px",
             left: `${centerX - 36}px`,
             top: `${centerY - 36}px`,
             position: "absolute",
-            background: "#0EA5E9",
+            borderRadius: "50%",
+            objectFit: "cover",
             boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
-            borderRadius: "99px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 700,
-            fontSize: "32px",
-            color: "#ffffff",
           }}
-        >
-          J
-        </div>
+        />
 
         {RING_LOGOS.map(({ id, radius, angle, scale }) => {
           const position = getPositionOnRing(radius, angle)

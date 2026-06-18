@@ -500,12 +500,12 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                             >
                               {[
                                 { height: "83px", color: "#F59E0B" },
-                                { height: "108px", color: "#0EA5E9" },
+                                { height: "108px", color: "#6366F1" },
                                 { height: "58px", color: "#10B981" },
                                 { height: "89px", color: "#8B5CF6" },
                                 { height: "83px", color: "#F43F5E" },
                                 { height: "89px", color: "#F59E0B" },
-                                { height: "83px", color: "#0EA5E9" },
+                                { height: "83px", color: "#6366F1" },
                                 { height: "95px", color: "#10B981" },
                                 { height: "108px", color: "#8B5CF6" },
                                 { height: "76px", color: "#F43F5E" },

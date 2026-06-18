@@ -53,7 +53,7 @@ export default function DocumentationSection() {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-7 sm:gap-9">
       {/* Header Section (on page, outside container) */}
-      <div className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
         <Badge
           icon={<Settings className="w-[10.50px] h-[10.50px] text-[#242424]" />}
           text="How it works"
@@ -70,7 +70,7 @@ export default function DocumentationSection() {
       <div className="w-full flex justify-start items-center">
         <div className="flex-1 flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 xl:gap-16">
           {/* Left Column - Feature Cards */}
-          <div className="w-full md:w-auto md:flex-1 md:max-w-[400px] xl:max-w-[440px] flex flex-col justify-center items-center gap-3 sm:gap-4 order-2 md:order-1">
+          <div data-reveal="left" className="w-full md:w-auto md:flex-1 md:max-w-[400px] xl:max-w-[440px] flex flex-col justify-center items-center gap-3 sm:gap-4 order-2 md:order-1">
             {HOW_IT_WORKS_CARDS.map((card, index) => {
               const isActive = index === activeCard
 
@@ -106,7 +106,7 @@ export default function DocumentationSection() {
           </div>
 
           {/* Right Column - Visual */}
-          <div className="w-full md:w-auto md:flex-1 flex flex-col justify-center items-center order-1 md:order-2 md:px-0">
+          <div data-reveal="right" className="w-full md:w-auto md:flex-1 flex flex-col justify-center items-center order-1 md:order-2 md:px-0">
             <div className="relative w-full md:w-[580px] xl:w-[640px] 2xl:w-[700px] h-[250px] md:h-[420px] xl:h-[440px]">
               <HowItWorksVisual activeStep={activeCard} />
             </div>

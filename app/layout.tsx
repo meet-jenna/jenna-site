@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Instrument_Serif } from "next/font/google"
 import "./globals.css"
 import StructuredData from "../components/structured-data"
+import ScrollReveal from "../components/scroll-reveal"
 import {
   SITE_URL,
   SITE_NAME,
@@ -45,13 +46,6 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   category: "technology",
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-light-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-icon.png" }],
-  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
@@ -93,11 +87,18 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.classList.add('reveal-enabled')",
+          }}
+        />
       </head>
       <body className="font-sans antialiased">
         <StructuredData
           data={[organizationJsonLd, websiteJsonLd, softwareApplicationJsonLd]}
         />
+        <ScrollReveal />
         {children}
       </body>
     </html>

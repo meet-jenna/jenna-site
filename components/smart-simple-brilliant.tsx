@@ -1,4 +1,5 @@
 import type React from "react"
+import { CALENDAR_AMBER, UI_SURFACE } from "@/lib/theme"
 
 interface SmartSimpleBrilliantProps {
   /** Fixed width from Figma: 482px */
@@ -131,25 +132,25 @@ const SmartSimpleBrilliant: React.FC<SmartSimpleBrilliantProps> = ({
                   height: "79.5px",
                   borderRadius: "4px",
                   overflow: "hidden",
-                  background: "rgba(14,165,233,0.1)",
+                  background: UI_SURFACE,
                   marginTop: "3px",
                   display: "flex",
                 }}
               >
-                <div style={{ width: "2.25px", background: "#0EA5E9" }} />
+                <div style={{ width: "2.25px", background: CALENDAR_AMBER }} />
                 <div style={{ padding: "4.5px", width: "100%" }}>
                   <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
                     <span
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "9px", color: "#0C4A6E" }}
+                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "9px", color: "#92400E" }}
                     >
                       2:00
                     </span>
                     <span
-                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "9px", color: "#0C4A6E" }}
+                      style={{ fontFamily: "Inter, sans-serif", fontWeight: 500, fontSize: "9px", color: "#92400E" }}
                     >
                       PM
                     </span>
-                    <div style={{ background: "#0C4A6E", padding: "1.5px", borderRadius: "100px" }}>
+                    <div style={{ background: "#92400E", padding: "1.5px", borderRadius: "100px" }}>
                       <div style={{ width: "8px", height: "8px", overflow: "hidden", position: "relative" }}>
                         <img
                           src={img1 || "/placeholder.svg"}
@@ -159,7 +160,7 @@ const SmartSimpleBrilliant: React.FC<SmartSimpleBrilliantProps> = ({
                       </div>
                     </div>
                   </div>
-                  <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "9px", color: "#0C4A6E" }}>
+                  <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "9px", color: "#92400E" }}>
                     Delivery — Taylor
                   </div>
                 </div>

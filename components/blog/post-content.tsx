@@ -124,7 +124,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                 <p className="text-[#242424] text-base sm:text-lg font-medium font-sans">{block.text}</p>
                 <Link
                   href={block.href}
-                  className="shrink-0 h-11 px-6 bg-[#101010] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[14px] font-medium font-sans gap-1.5"
+                  className="btn-cta shrink-0 h-11 px-6 bg-[#101010] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[14px] font-medium font-sans gap-1.5"
                 >
                   {block.label}
                   <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />

@@ -1,6 +1,8 @@
 "use client"
 
 import { Check, Phone, Plug2, Settings2 } from "lucide-react"
+import { JennaLogo } from "./jenna-logo"
+import { STATUS_LIVE, UI_SURFACE, UI_BORDER } from "@/lib/theme"
 
 const T = {
   textPrimary: "#242424",
@@ -8,15 +10,15 @@ const T = {
   textMuted: "rgba(107, 114, 128,0.85)",
   border: "rgba(36, 36, 36,0.10)",
   borderSoft: "rgba(36, 36, 36,0.06)",
-  green: "#0EA5E9",
-  greenBg: "rgba(14, 165, 233,0.10)",
+  live: STATUS_LIVE,
+  liveBg: UI_SURFACE,
   cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
 } as const
 
 function Pill({ children, tone = "green" }: { children: React.ReactNode; tone?: "green" | "neutral" }) {
   const styles =
     tone === "green"
-      ? { background: T.greenBg, color: T.green, border: "1px solid rgba(14, 165, 233,0.18)" }
+      ? { background: T.liveBg, color: T.live, border: `1px solid ${UI_BORDER}` }
       : { background: "#F4F4F4", color: T.textSecondary, border: `1px solid ${T.borderSoft}` }
   return (
     <span
@@ -32,9 +34,9 @@ function GreenCheck({ size = 16 }: { size?: number }) {
   return (
     <span
       className="inline-flex items-center justify-center rounded-full shrink-0"
-      style={{ width: size, height: size, background: T.greenBg }}
+      style={{ width: size, height: size, background: T.liveBg }}
     >
-      <Check style={{ width: size * 0.62, height: size * 0.62, color: T.green }} strokeWidth={3} />
+      <Check style={{ width: size * 0.62, height: size * 0.62, color: T.live }} strokeWidth={3} />
     </span>
   )
 }
@@ -159,7 +161,7 @@ function CustomizePanel() {
         </span>
         <span className="flex items-end" style={{ gap: 2.5, height: 22 }}>
           {bars.map((h, i) => (
-            <span key={i} style={{ width: 3, height: 22 * h, borderRadius: 3, background: T.green, opacity: 0.55 }} />
+            <span key={i} style={{ width: 3, height: 22 * h, borderRadius: 3, background: T.live, opacity: 0.55 }} />
           ))}
         </span>
       </div>
@@ -176,8 +178,8 @@ function ForwardPanel() {
       pill={
         <Pill tone="green">
           <span className="relative inline-flex" style={{ width: 6, height: 6 }}>
-            <span className="absolute inline-flex h-full w-full rounded-full animate-ping" style={{ background: T.green, opacity: 0.5 }} />
-            <span className="relative inline-flex rounded-full h-full w-full" style={{ background: T.green }} />
+            <span className="absolute inline-flex h-full w-full rounded-full animate-ping" style={{ background: T.live, opacity: 0.5 }} />
+            <span className="relative inline-flex rounded-full h-full w-full" style={{ background: T.live }} />
           </span>
           Live
         </Pill>
@@ -200,9 +202,7 @@ function ForwardPanel() {
         </span>
       </div>
       <div className="flex items-center" style={{ gap: 10 }}>
-        <span className="flex items-center justify-center rounded-full shrink-0" style={{ width: 30, height: 30, background: "#0EA5E9" }}>
-          <span className="font-bold leading-none" style={{ fontSize: 14, color: "#fff" }}>J</span>
-        </span>
+        <JennaLogo shape="circle" size={30} />
         <span className="flex flex-col" style={{ gap: 1 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: T.textPrimary }}>Forwarding to Jenna</span>
           <span style={{ fontSize: 11.5, color: T.textMuted }}>Answering every call, 24/7</span>

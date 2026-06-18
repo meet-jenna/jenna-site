@@ -72,7 +72,7 @@ export default function BlogPostPage({ params }: PageProps) {
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-6 flex flex-col gap-12 sm:gap-16">
         <article className="w-full max-w-[760px] mx-auto flex flex-col gap-8">
           {/* Header */}
-          <header className="flex flex-col gap-4">
+          <header data-reveal className="flex flex-col gap-4">
             <Link href="/blog" className="text-[#6B7280] text-sm font-medium font-sans hover:text-[#242424] transition-colors">
               ← All posts
             </Link>
@@ -102,7 +102,7 @@ export default function BlogPostPage({ params }: PageProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
+                    className="btn-cta inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
                   >
                     {link.label}
                     <ArrowUpRight className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />
