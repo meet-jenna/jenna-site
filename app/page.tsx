@@ -13,7 +13,7 @@ import FAQSection from "../components/faq-section"
 import PricingSection from "../components/pricing-section"
 import CTASection from "../components/cta-section"
 import FooterSection from "../components/footer-section"
-import HeroDashboard from "../components/hero/hero-dashboard"
+import HeroRestaurants from "../components/hero/hero-restaurants"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { JennaWordmarkLink } from "../components/jenna-logo"
@@ -158,29 +158,34 @@ export default function LandingPage() {
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-12 sm:gap-16 lg:gap-20">
         {/* Hero copy (lives on the page, no container) */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10 lg:pt-14">
-          <h1 data-reveal className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
-            The AI Hostess
-            <br />
-            For Every Restaurant.
-          </h1>
-          <Link
-            href="/book-demo"
-            data-reveal
-            style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
-            className="btn-cta mt-6 sm:mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
-          >
-            <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
-            <div
-              className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-[15px] font-medium leading-5 font-sans"
-              style={{ color: "#FFFFFF", opacity: 1, mixBlendMode: "normal" }}
+          <div className="w-full flex flex-col items-center px-4 sm:px-0">
+            <h1 data-reveal className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
+              The AI Hostess
+              <br />
+              For Every Restaurant.
+            </h1>
+            <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+              Jenna connects to your existing systems and handles every call start to finish.
+            </p>
+            <Link
+              href="/book-demo"
+              data-reveal
+              style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
+              className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
             >
-              Book a Demo
-              <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
-            </div>
-          </Link>
+              <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
+              <div
+                className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-[15px] font-medium leading-5 font-sans"
+                style={{ color: "#FFFFFF", opacity: 1, mixBlendMode: "normal" }}
+              >
+                Book a Demo
+                <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
+              </div>
+            </Link>
+          </div>
 
           {/* Hero dashboard */}
-          <div data-reveal="scale" style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="relative mt-10 sm:mt-12 w-full">
+          <div data-reveal="scale" style={{ "--reveal-delay": "260ms" } as React.CSSProperties} className="relative mt-10 sm:mt-12 w-full">
             {/* Top-edge glow: straddles the dashboard's top edge */}
             <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
               <img
@@ -190,8 +195,8 @@ export default function LandingPage() {
                 className="w-full h-auto -translate-y-[38%] opacity-[0.82]"
               />
             </div>
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
-              <HeroDashboard activeView={activeCard} />
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] rounded-[6px] shadow-[0px_8px_30px_rgba(36,36,36,0.12)] overflow-hidden">
+              <HeroRestaurants activeView={activeCard} />
             </div>
           </div>
         </section>
