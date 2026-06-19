@@ -62,10 +62,10 @@ export default function SiteNav() {
           </a>
           <Link
             href="/book-demo"
-            className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
+            className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#EFEFEF] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#E6E6E6] transition-colors"
           >
-            <span className="text-white text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
-            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white shrink-0" strokeWidth={2.25} />
+            <span className="text-[#242424] text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
+            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#242424] shrink-0" strokeWidth={2.25} />
           </Link>
         </div>
       </div>

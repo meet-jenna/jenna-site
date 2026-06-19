@@ -13,7 +13,7 @@ import FAQSection from "../components/faq-section"
 import PricingSection from "../components/pricing-section"
 import CTASection from "../components/cta-section"
 import FooterSection from "../components/footer-section"
-import HeroRestaurants from "../components/hero/hero-restaurants"
+import HeroDashboard from "../components/hero/hero-dashboard"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { JennaWordmarkLink } from "../components/jenna-logo"
@@ -146,10 +146,10 @@ export default function LandingPage() {
             </a>
             <Link
               href="/book-demo"
-              className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#101010] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#242424] transition-colors"
+              className="btn-cta px-3 md:px-[14px] py-[7px] bg-[#EFEFEF] overflow-hidden rounded-[6px] flex justify-center items-center gap-1 hover:bg-[#E6E6E6] transition-colors"
             >
-              <span className="text-white text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
-              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white shrink-0" strokeWidth={2.25} />
+              <span className="text-[#242424] text-xs md:text-[13px] font-medium leading-5 font-sans">Demo</span>
+              <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#242424] shrink-0" strokeWidth={2.25} />
             </Link>
           </div>
         </div>
@@ -195,8 +195,8 @@ export default function LandingPage() {
                 className="w-full h-auto -translate-y-[38%] opacity-[0.82]"
               />
             </div>
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] rounded-[6px] shadow-[0px_8px_30px_rgba(36,36,36,0.12)] overflow-hidden">
-              <HeroRestaurants activeView={activeCard} />
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
+              <HeroDashboard activeView={activeCard} />
             </div>
           </div>
         </section>
