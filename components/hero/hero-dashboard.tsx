@@ -219,7 +219,19 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
         <Topbar />
         <div className="flex-1 flex min-h-0">
           <Sidebar activeView={activeView} />
-          <div className="flex-1 relative min-w-0" style={{ background: "#EFEFEF" }}>
+          <div
+            className="flex-1 relative min-w-0"
+            style={{
+              backgroundImage: "url('/hero/restaurant-cartoon.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* Scrim: lifts contrast of the dashboard content above the illustration */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: "linear-gradient(180deg, rgba(247,247,247,0.78) 0%, rgba(247,247,247,0.66) 100%)" }}
+            />
             {views.map((View, i) => (
               <div
                 key={i}
