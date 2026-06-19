@@ -53,16 +53,13 @@ export default function DocumentationSection() {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-7 sm:gap-9">
       {/* Header Section (on page, outside container) */}
-      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 text-center">
         <Badge
           icon={<Settings className="w-[10.50px] h-[10.50px] text-[#242424]" />}
           text="How it works"
         />
         <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.1] font-sans tracking-tight">
-          Done For You
-        </div>
-        <div className="self-stretch text-center text-[#6B7280] text-sm sm:text-base font-normal leading-7 font-sans">
-          From the moment you sign up we build and manage every piece of Jenna
+          Done-For-You.
         </div>
       </div>
 

@@ -41,7 +41,7 @@ export default function PricingSection() {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-8 sm:gap-10 pt-6 sm:pt-10">
       {/* Header Section */}
-      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+      <div data-reveal className="w-full max-w-[586px] flex flex-col justify-start items-center gap-3 text-center">
           {/* Pricing Badge */}
           <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
             <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">
@@ -62,12 +62,7 @@ export default function PricingSection() {
 
           {/* Title */}
           <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-3xl md:text-5xl font-semibold leading-tight md:leading-[60px] font-sans tracking-tight">
-            Simple Pricing
-          </div>
-
-          {/* Description */}
-          <div className="self-stretch text-center text-[#6B7280] text-base font-normal leading-7 font-sans">
-            Transparent per-location pricing with included minutes — just Jenna on your line.
+            Simple Pricing.
           </div>
       </div>
 

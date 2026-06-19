@@ -39,21 +39,16 @@ function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
 function SectionHeader({
   badge,
   title,
-  description,
 }: {
   badge: React.ReactNode
   title: string
-  description: string
 }) {
   return (
-    <div data-reveal className="w-full max-w-[600px] mx-auto flex flex-col justify-start items-center gap-3 sm:gap-4 text-center">
+    <div data-reveal className="w-full max-w-[600px] mx-auto flex flex-col justify-start items-center gap-3 text-center">
       {badge}
       <h2 className="text-[#242424] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.1] font-sans tracking-tight">
         {title}
       </h2>
-      <p className="text-[#6B7280] text-sm sm:text-base font-normal leading-6 sm:leading-7 font-sans">
-        {description}
-      </p>
     </div>
   )
 }
@@ -166,16 +161,13 @@ export default function LandingPage() {
           <h1 data-reveal className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             The AI Hostess
             <br />
-            For Every Restaurant
+            For Every Restaurant.
           </h1>
-          <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
-            Jenna connects to your existing systems and handles every call start to finish.
-          </p>
           <Link
             href="/book-demo"
             data-reveal
-            style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
-            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+            style={{ "--reveal-delay": "90ms" } as React.CSSProperties}
+            className="btn-cta mt-6 sm:mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
           >
             <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
             <div
@@ -188,7 +180,7 @@ export default function LandingPage() {
           </Link>
 
           {/* Hero dashboard */}
-          <div data-reveal="scale" style={{ "--reveal-delay": "260ms" } as React.CSSProperties} className="relative mt-10 sm:mt-12 w-full">
+          <div data-reveal="scale" style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="relative mt-10 sm:mt-12 w-full">
             {/* Top-edge glow: straddles the dashboard's top edge */}
             <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
               <img
@@ -259,8 +251,7 @@ export default function LandingPage() {
                 text="Integrations"
               />
             }
-            title="Connects to Your POS"
-            description="Plugs into your existing POS. Orders and reservations flow in automatically."
+            title="Connects to Your POS."
           />
 
           <div data-reveal="fade">
@@ -284,8 +275,7 @@ export default function LandingPage() {
                 text="Features"
               />
             }
-            title="Handles Every Call"
-            description="Jenna is the communication layer that helps your restaurant run smoother."
+            title="Handles Every Call."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
