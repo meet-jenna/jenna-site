@@ -59,7 +59,7 @@ export default function DocumentationSection() {
           text="How it works"
         />
         <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight md:leading-[1.1] font-sans tracking-tight">
-          Done-For-You.
+          Done-For-You
         </div>
       </div>
 

@@ -16,6 +16,9 @@ const GRID_LOGO_CLASS: Partial<Record<PosIntegrationId, string>> = {
     "h-7 sm:h-8 md:h-9 w-auto max-w-[80%] object-contain object-center",
 }
 
+/** Renders brand logos as solid black monochrome so the grid reads as one consistent set */
+const MONOCHROME_CLASS = "brightness-0"
+
 /** Single wordmark sized for the POS logo grid (Cursor-style dark, compact) */
 export function PosGridWordmark({ id }: { id: PosIntegrationId }) {
   const integration = getPosIntegration(id)
@@ -25,7 +28,7 @@ export function PosGridWordmark({ id }: { id: PosIntegrationId }) {
     <img
       src={integration.logo}
       alt={integration.name}
-      className={GRID_LOGO_CLASS[id] ?? DEFAULT_GRID_LOGO_CLASS}
+      className={`${GRID_LOGO_CLASS[id] ?? DEFAULT_GRID_LOGO_CLASS} ${MONOCHROME_CLASS}`}
     />
   )
 }
