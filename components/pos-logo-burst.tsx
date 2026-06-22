@@ -105,7 +105,10 @@ function buildAttempt(width: number, buttonHalf: number): ThrownLogo[] {
   const crawlSet = new Set(order.slice(1, 3))
 
   // Every tile is the same size — only the in-SVG zoom differs per brand.
-  const TILE = 50 * k
+  // On roomy desktop widths the badges read as oversized, so taper them down a
+  // touch past the tablet breakpoint while leaving narrow screens untouched.
+  const desktopScale = 1 - 0.28 * Math.min(1, Math.max(0, (width - 1024) / 416))
+  const TILE = 50 * k * desktopScale
 
   // Each logo floats on its own non-overlapping period band so the bobs never
   // line up; assigned by shuffled order so it's not tied to brand.
