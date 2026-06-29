@@ -12,13 +12,13 @@ export default function PricingSection() {
       description: "For single-location restaurants getting off the phone and back on the floor.",
       features: [
         "750 minutes included per month",
-        "$0.65 per minute for every minute over",
-        "24/7 AI phone answering",
-        "Menu, hours & FAQ handling",
-        "Table reservations",
-        "Staff call transfers",
-        "Call recordings & dashboard",
-        "Unlimited concurrent calls",
+        "$0.65 per minute after 750 minutes",
+        "24/7 first-ring phone answering",
+        "Unlimited concurrent calls during rushes",
+        "Pickup and delivery orders sent to your POS",
+        "Live menu, pricing, hours, and FAQ answers",
+        "Table reservations and guest questions",
+        "Call transcripts, recordings, and dashboard",
       ],
     },
     enterprise: {
@@ -27,13 +27,14 @@ export default function PricingSection() {
       description: "Multi-location build for groups and operators who need scale, control, and dedicated support.",
       features: [
         "Everything in Starter",
-        "Multi-location dashboard",
-        "Dedicated account manager",
-        "Custom voice & greeting",
-        "SSO & enterprise security",
-        "Volume pricing (5+ locations)",
-        "Custom integrations & API access",
-        "SLA-backed uptime & support",
+        "750 minutes included per location",
+        "$0.65 per minute after included usage",
+        "Multi-location dashboard and reporting",
+        "Location-specific menus, hours, and routing",
+        "Custom voice, greeting, and upsell flows",
+        "Dedicated onboarding and account support",
+        "Staff transfer rules and escalation paths",
+        "Custom POS integrations and API access",
       ],
     },
   }
@@ -86,7 +87,9 @@ export default function PricingSection() {
                   <div className="flex items-center text-[#242424] text-5xl xl:text-6xl font-medium leading-none font-serif">
                     ${plans.starter.price}
                   </div>
-                  <div className="text-[#898989] text-sm font-medium font-sans">per location, per month.</div>
+                  <div className="text-[#898989] text-sm font-medium font-sans">
+                    per location, per month + usage over 750 minutes.
+                  </div>
                 </div>
 
                 <Link href="/book-demo" className="btn-cta self-stretch px-4 py-[10px] relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
@@ -135,7 +138,9 @@ export default function PricingSection() {
                   <div className="flex items-center text-[#E5E7EB] text-5xl xl:text-6xl font-medium leading-none font-serif">
                     ${plans.enterprise.price}
                   </div>
-                  <div className="text-[#9CA3AF] text-sm font-medium font-sans">per location, per month.</div>
+                  <div className="text-[#9CA3AF] text-sm font-medium font-sans">
+                    per location, per month + usage over 750 minutes.
+                  </div>
                 </div>
 
                 <Link href="/book-demo" className="btn-cta self-stretch px-4 py-[10px] relative bg-white shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#EFEFEF] transition-colors">

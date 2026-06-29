@@ -8,12 +8,18 @@ const cellClassName =
 type PosLogoGridProps = {
   ids: readonly PosIntegrationId[]
   className?: string
+  columnsClassName?: string
   linkToIntegrations?: boolean
 }
 
-export function PosLogoGrid({ ids, className, linkToIntegrations = false }: PosLogoGridProps) {
+export function PosLogoGrid({
+  ids,
+  className,
+  columnsClassName = "grid-cols-4 lg:grid-cols-8",
+  linkToIntegrations = false,
+}: PosLogoGridProps) {
   return (
-    <div className={`grid grid-cols-4 lg:grid-cols-8 gap-2 ${className ?? ""}`}>
+    <div className={`grid ${columnsClassName} gap-2 ${className ?? ""}`}>
       {ids.map((id) => {
         const cell = (
           <div className={cellClassName}>
