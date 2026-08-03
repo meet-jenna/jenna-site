@@ -131,6 +131,43 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                 </Link>
               </div>
             )
+          case "video": {
+            const youtubeId = block.youtubeId || process.env.NEXT_PUBLIC_DEMO_YOUTUBE_ID?.trim()
+            if (youtubeId) {
+              return (
+                <figure key={index} className="my-2 flex flex-col gap-3">
+                  <div className="relative w-full aspect-video rounded-[6px] overflow-hidden bg-[#EFEFEF]">
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                      title={block.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full border-0"
+                      loading="lazy"
+                    />
+                  </div>
+                  {block.caption && (
+                    <figcaption className="text-[#9CA3AF] text-sm font-sans">{block.caption}</figcaption>
+                  )}
+                </figure>
+              )
+            }
+            return (
+              <div key={index} className="my-2 bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex flex-col gap-1">
+                  <p className="text-[#242424] text-base sm:text-lg font-medium font-sans">{block.title}</p>
+                  {block.caption && <p className="text-[#6B7280] text-sm font-sans">{block.caption}</p>}
+                </div>
+                <Link
+                  href={block.fallbackHref ?? "/book-demo"}
+                  className="btn-cta shrink-0 h-11 px-6 bg-[#101010] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[14px] font-medium font-sans gap-1.5"
+                >
+                  {block.fallbackLabel ?? "Hear Jenna live"}
+                  <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
+                </Link>
+              </div>
+            )
+          }
           default:
             return null
         }

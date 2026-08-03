@@ -19,13 +19,13 @@ export const post: BlogPost = {
   body: [
     {
       type: "paragraph",
-      text: "If you're shopping for restaurant voice AI, three names come up often: Jenna, Slang AI, and Loman AI. They all answer the phone, but they're tuned for slightly different restaurants. This comparison walks through the criteria that actually matter so you can match the tool to your call mix.",
+      text: "If you're shopping for restaurant voice AI, three names come up often: [Jenna AI](/blog/what-is-jenna-ai) (Meet Jenna), Slang AI, and Loman AI. They all answer the phone, but they're tuned for slightly different restaurants. This comparison walks through the criteria that actually matter so you can match the tool to your call mix.",
     },
     { type: "heading", level: 2, text: "The short version" },
     {
       type: "list",
       items: [
-        "Jenna — an AI hostess built to take full orders and reservations and sync them to your POS, fully managed for you.",
+        "[Jenna](/about) — an AI hostess built to take full orders and reservations and sync them to your POS, fully managed for you.",
         "Slang AI — strongest fit for reservation-heavy, full-service restaurants.",
         "Loman AI — a 24/7 answerer that handles orders, reservations, menu questions, and payments.",
       ],
@@ -86,8 +86,8 @@ export const post: BlogPost = {
     },
   ],
   related: [
+    { label: "Jenna vs HeyTARA", href: "/blog/jenna-vs-heytara" },
+    { label: "What Is Jenna AI?", href: "/blog/what-is-jenna-ai" },
     { label: "Best Voice AI for Restaurants (2026)", href: "/blog/best-voice-ai-for-restaurants-2026" },
-    { label: "AI Phone Answering", href: "/ai-phone-answering" },
-    { label: "Restaurant Answering Service", href: "/restaurant-answering-service" },
   ],
 }

@@ -1,5 +1,6 @@
 import { faqData } from "./faq"
 import { JENNA_LOGO } from "./brand"
+import { getSameAsUrls, SITE_EMAIL } from "./social"
 
 /**
  * Canonical production origin for the marketing site.
@@ -16,6 +17,11 @@ export const SITE_DESCRIPTION =
 
 /** Primary keyword targets for the brand. */
 export const SITE_KEYWORDS = [
+  "Jenna AI",
+  "Meet Jenna",
+  "Jenna AI restaurant",
+  "Jenna AI hostess",
+  "Jenna voice AI",
   "restaurant AI",
   "voice AI",
   "AI for restaurants",
@@ -26,7 +32,6 @@ export const SITE_KEYWORDS = [
   "restaurant call answering AI",
   "AI order taking",
   "AI reservations",
-  "Jenna AI",
 ]
 
 /** Absolute URL helper for canonical/OG links. */
@@ -34,16 +39,32 @@ export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`
 }
 
+const sameAs = getSameAsUrls()
+const foundingDate = process.env.NEXT_PUBLIC_FOUNDING_DATE?.trim()
+
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
   legalName: "Jenna AI",
+  alternateName: ["Jenna AI", "Meet Jenna", "Jenna AI Hostess"],
   url: SITE_URL,
   logo: absoluteUrl(JENNA_LOGO),
   description: SITE_DESCRIPTION,
   slogan: "The AI Hostess for Every Restaurant",
+  email: SITE_EMAIL,
+  ...(foundingDate ? { foundingDate } : {}),
+  ...(sameAs.length > 0 ? { sameAs } : {}),
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: SITE_EMAIL,
+      url: absoluteUrl("/contact"),
+      availableLanguage: ["English"],
+    },
+  ],
 }
 
 export const websiteJsonLd = {
@@ -51,6 +72,7 @@ export const websiteJsonLd = {
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
   name: SITE_NAME,
+  alternateName: ["Jenna AI", "Meet Jenna"],
   url: SITE_URL,
   description: SITE_DESCRIPTION,
   publisher: { "@id": `${SITE_URL}/#organization` },
@@ -60,6 +82,7 @@ export const softwareApplicationJsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: SITE_NAME,
+  alternateName: ["Jenna AI", "Meet Jenna"],
   applicationCategory: "BusinessApplication",
   applicationSubCategory: "Restaurant phone answering & voice AI",
   operatingSystem: "Cloud-based (web)",

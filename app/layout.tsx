@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Instrument_Serif } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css"
 import StructuredData from "../components/structured-data"
 import ScrollReveal from "../components/scroll-reveal"
@@ -30,6 +31,10 @@ const instrumentSerif = Instrument_Serif({
   preload: true,
 })
 
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim()
+const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim()
+const twitterSite = process.env.NEXT_PUBLIC_TWITTER_SITE?.trim()
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -44,8 +49,15 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
   },
   category: "technology",
+  verification: {
+    ...(googleVerification ? { google: googleVerification } : {}),
+    ...(bingVerification ? { other: { "msvalidate.01": bingVerification } } : {}),
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
@@ -58,6 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
+    ...(twitterSite ? { site: twitterSite, creator: twitterSite } : {}),
   },
   robots: {
     index: true,
@@ -80,17 +93,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${instrumentSerif.variable} antialiased`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-        />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400&display=swap" />
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "document.documentElement.classList.add('reveal-enabled')",
+            __html: "document.documentElement.classList.add('reveal-enabled')",
           }}
         />
       </head>
@@ -100,6 +105,7 @@ export default function RootLayout({
         />
         <ScrollReveal />
         {children}
+        <Analytics />
       </body>
     </html>
   )

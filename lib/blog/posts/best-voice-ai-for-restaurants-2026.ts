@@ -61,10 +61,10 @@ export const post: BlogPost = {
         ["Built-in POS phone tools", "Basic call routing within your POS", "Limited", "Native"],
       ],
     },
-    { type: "heading", level: 3, text: "1. Jenna" },
+    { type: "heading", level: 3, text: "1. Jenna AI (Meet Jenna)" },
     {
       type: "paragraph",
-      text: "Jenna is an AI hostess built specifically for restaurants. She answers every call on the first ring, takes pickup and delivery orders start to finish, books reservations, and syncs everything to your POS — Toast, Square, Clover, Lightspeed, and more. It's fully managed: you forward your line and Jenna handles the rest. See the full list of [POS integrations](/integrations).",
+      text: "[Jenna AI](/blog/what-is-jenna-ai) is an AI hostess built specifically for restaurants at meetjenna.ai. She answers every call on the first ring, takes pickup and delivery orders start to finish, books reservations, and syncs everything to your POS — Toast, Square, Clover, Lightspeed, and more. It's fully managed: you forward your line and Jenna handles the rest. See [Jenna AI for restaurants](/blog/jenna-ai-for-restaurants) or the full list of [POS integrations](/integrations).",
     },
     { type: "heading", level: 3, text: "2. Slang AI" },
     {
@@ -119,7 +119,9 @@ export const post: BlogPost = {
     },
   ],
   related: [
+    { label: "What Is Jenna AI?", href: "/blog/what-is-jenna-ai" },
     { label: "Jenna vs Slang AI vs Loman AI", href: "/blog/jenna-vs-slang-vs-loman" },
+    { label: "Jenna vs HeyTARA", href: "/blog/jenna-vs-heytara" },
     { label: "AI phone answering cost", href: "/blog/ai-phone-answering-service-cost" },
     { label: "Voice AI for Restaurants", href: "/voice-ai-for-restaurants" },
   ],

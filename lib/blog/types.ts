@@ -13,6 +13,8 @@ export type ContentBlock =
   | { type: "quote"; text: string; cite?: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "cta"; text: string; label: string; href: string }
+  /** YouTube embed. Falls back to CTA if youtubeId is missing. */
+  | { type: "video"; youtubeId?: string; title: string; caption?: string; fallbackHref?: string; fallbackLabel?: string }
 
 export interface BlogPost {
   slug: string

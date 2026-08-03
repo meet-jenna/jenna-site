@@ -57,6 +57,11 @@ export default function BlogIndexPage() {
           <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
             {description}
           </p>
+          <p data-reveal style={{ "--reveal-delay": "140ms" } as React.CSSProperties} className="mt-2 text-sm font-medium font-sans">
+            <a href="/feed.xml" className="text-[#101010] underline underline-offset-2 hover:text-[#6B7280]">
+              RSS feed
+            </a>
+          </p>
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">

@@ -20,14 +20,38 @@ const INITIAL_STATE: FormState = {
 export default function DemoForm() {
   const [values, setValues] = useState<FormState>(INITIAL_STATE)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    setError(null)
+    setSubmitting(true)
+
+    try {
+      const response = await fetch("/api/demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+
+      const data = (await response.json().catch(() => null)) as { error?: string } | null
+
+      if (!response.ok) {
+        setError(data?.error ?? "Something went wrong. Please try again.")
+        return
+      }
+
+      setSubmitted(true)
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -66,6 +90,9 @@ export default function DemoForm() {
           <input
             type="text"
             required
+            name="name"
+            autoComplete="name"
+            disabled={submitting}
             value={values.name}
             onChange={handleChange("name")}
             placeholder="Jamie Rivera"
@@ -77,6 +104,9 @@ export default function DemoForm() {
           <input
             type="tel"
             required
+            name="phone"
+            autoComplete="tel"
+            disabled={submitting}
             value={values.phone}
             onChange={handleChange("phone")}
             placeholder="(555) 123-4567"
@@ -88,6 +118,9 @@ export default function DemoForm() {
           <input
             type="email"
             required
+            name="email"
+            autoComplete="email"
+            disabled={submitting}
             value={values.email}
             onChange={handleChange("email")}
             placeholder="you@restaurant.com"
@@ -99,6 +132,9 @@ export default function DemoForm() {
           <input
             type="text"
             required
+            name="restaurant"
+            autoComplete="organization"
+            disabled={submitting}
             value={values.restaurant}
             onChange={handleChange("restaurant")}
             placeholder="The Corner Bistro"
@@ -106,14 +142,21 @@ export default function DemoForm() {
           />
         </Field>
 
+        {error && (
+          <p className="text-[#B91C1C] text-[13px] leading-5 font-sans" role="alert">
+            {error}
+          </p>
+        )}
+
         <button
           type="submit"
-          className="btn-cta mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+          disabled={submitting}
+          className="btn-cta mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <div className="w-full h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply" />
           <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
-            Book a Demo
-            <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
+            {submitting ? "Sending…" : "Book a Demo"}
+            {!submitting && <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />}
           </div>
         </button>
 
@@ -143,6 +186,10 @@ export default function DemoForm() {
           border-color: rgba(36, 36, 36, 0.4);
           background: #ffffff;
           box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.06);
+        }
+        :global(.demo-input:disabled) {
+          opacity: 0.7;
+          cursor: not-allowed;
         }
       `}</style>
     </div>

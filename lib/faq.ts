@@ -7,7 +7,7 @@ export const faqData: FAQItem[] = [
   {
     question: "What is Jenna and who is it for?",
     answer:
-      "Jenna is an AI hostess for restaurants. She answers your phone, takes pickup and delivery orders, and books reservations — start to finish. She's built for any restaurant that takes orders or bookings over the phone.",
+      "Jenna (also called Jenna AI or Meet Jenna) is an AI voice hostess for restaurants. She answers your phone, takes pickup and delivery orders, and books reservations — start to finish — synced to your POS. She's built for any restaurant that takes orders or bookings over the phone.",
   },
   {
     question: "How does Jenna take an order?",
