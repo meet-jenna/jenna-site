@@ -3,151 +3,160 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import {
-  BarChart3,
   Bell,
-  CalendarDays,
-  Home,
-  Phone,
-  Plug2,
-  ReceiptText,
-  Search,
+  FileText,
+  HelpCircle,
+  LayoutDashboard,
+  Moon,
+  PhoneCall,
   Settings,
   UtensilsCrossed,
 } from "lucide-react"
-import { CallsView, OrderView, PosSyncView, HD, LiveDot } from "./hero-views"
+import { CallsView, IntegrationsView, OverviewView, HD } from "./hero-views"
 import { JennaLogo } from "../jenna-logo"
 
 /** Fixed design canvas — scaled to fit the hero card like an object-cover image */
 const CANVAS_W = 960
 const CANVAS_H = 696
-const SIDEBAR_W = 198
+const SIDEBAR_W = 200
 const TOPBAR_H = 52
 
 const NAV_ITEMS = [
-  { label: "Overview", icon: Home },
-  { label: "Calls", icon: Phone, activeForView: 0, badge: "Live" },
-  { label: "Orders", icon: ReceiptText, activeForView: 1, badge: "12" },
-  { label: "Reservations", icon: CalendarDays },
+  { label: "Overview", icon: LayoutDashboard, activeForView: 0 },
+  { label: "Calls", icon: PhoneCall, activeForView: 1 },
   { label: "Menu", icon: UtensilsCrossed },
-  { label: "Integrations", icon: Plug2, activeForView: 2 },
-  { label: "Analytics", icon: BarChart3 },
+  { label: "Reports", icon: FileText },
+  { label: "Settings", icon: Settings, activeForView: 2 },
+  { label: "Help", icon: HelpCircle },
 ]
 
-function JennaMark({ size = 18 }: { size?: number }) {
-  return <JennaLogo shape="app" size={size} />
-}
+const VIEW_TITLES = ["Overview", "Calls", "Settings"] as const
 
 function Sidebar({ activeView }: { activeView: number }) {
   return (
     <div
       className="h-full flex flex-col shrink-0"
-      style={{ width: SIDEBAR_W, background: "#EFEFEF", borderRight: `1px solid ${HD.borderSoft}`, padding: "14px 10px" }}
+      style={{
+        width: SIDEBAR_W,
+        background: HD.card,
+        borderRight: `1px solid ${HD.border}`,
+      }}
     >
-      <div className="flex flex-col" style={{ gap: 2 }}>
-        {NAV_ITEMS.map((item) => {
-          const isActive = item.activeForView === activeView
-          const Icon = item.icon
-          return (
-            <div
-              key={item.label}
-              className="flex items-center justify-between rounded-[7px] transition-colors duration-500"
-              style={{
-                padding: "7.5px 10px",
-                background: isActive ? "#ffffff" : "transparent",
-                border: `1px solid ${isActive ? HD.border : "transparent"}`,
-                boxShadow: isActive ? HD.cardShadow : "none",
-              }}
-            >
-              <span className="flex items-center" style={{ gap: 9 }}>
-                <Icon
-                  style={{ width: 14.5, height: 14.5, color: isActive ? HD.textPrimary : HD.textMuted }}
-                  strokeWidth={isActive ? 2.1 : 1.8}
-                />
-                <span
-                  style={{
-                    fontSize: 12.5,
-                    fontWeight: 500,
-                    color: isActive ? HD.textPrimary : HD.textSecondary,
-                    lineHeight: "15px",
-                  }}
-                >
-                  {item.label}
-                </span>
-              </span>
-              {item.badge && isActive && (
-                <span
-                  className="flex items-center rounded-full"
-                  style={{
-                    gap: 4,
-                    fontSize: 10,
-                    fontWeight: 600,
-                    padding: "2px 7px",
-                    background: item.badge === "Live" ? HD.liveBg : "#F4F4F4",
-                    color: item.badge === "Live" ? HD.live : HD.textSecondary,
-                  }}
-                >
-                  {item.badge === "Live" && <LiveDot size={5} />}
-                  {item.badge}
-                </span>
-              )}
-            </div>
-          )
-        })}
+      <div
+        className="flex items-center gap-2.5 shrink-0"
+        style={{ height: TOPBAR_H, padding: "0 14px", borderBottom: `1px solid ${HD.border}` }}
+      >
+        <JennaLogo shape="app" size={28} />
+        <span style={{ fontSize: 15, fontWeight: 600, color: HD.fg }}>Jenna</span>
       </div>
 
-      <div className="mt-auto flex flex-col" style={{ gap: 2 }}>
-        <div className="flex items-center" style={{ gap: 9, padding: "7.5px 10px" }}>
-          <Settings style={{ width: 14.5, height: 14.5, color: HD.textMuted }} strokeWidth={1.8} />
-          <span style={{ fontSize: 12.5, fontWeight: 500, color: HD.textSecondary }}>Settings</span>
+      <nav className="flex-1 overflow-hidden" style={{ padding: "12px 10px" }}>
+        <div className="flex flex-col" style={{ gap: 2 }}>
+          {NAV_ITEMS.map((item) => {
+            const isActive = item.activeForView === activeView
+            const Icon = item.icon
+            return (
+              <div
+                key={item.label}
+                className="relative flex items-center rounded-lg transition-colors duration-500"
+                style={{
+                  gap: 10,
+                  padding: "8px 10px",
+                  background: isActive ? HD.secondary : "transparent",
+                  color: isActive ? HD.fg : HD.muted,
+                }}
+              >
+                <span
+                  className="absolute left-0 top-1/2 -translate-y-1/2 rounded-r-full transition-opacity duration-500"
+                  style={{
+                    width: 3,
+                    height: 18,
+                    background: HD.accent,
+                    opacity: isActive ? 1 : 0,
+                  }}
+                />
+                <Icon
+                  style={{
+                    width: 16,
+                    height: 16,
+                    color: isActive ? HD.accent : HD.muted,
+                  }}
+                  strokeWidth={isActive ? 2.1 : 1.85}
+                />
+                <span style={{ fontSize: 12.5, fontWeight: 500, lineHeight: "15px" }}>{item.label}</span>
+              </div>
+            )
+          })}
         </div>
-        <div
-          className="flex items-center rounded-[7px] bg-white"
-          style={{ gap: 9, padding: "8px 10px", border: `1px solid ${HD.borderSoft}` }}
+      </nav>
+
+      <div
+        className="shrink-0 flex items-center gap-2.5"
+        style={{ padding: "12px 12px", borderTop: `1px solid ${HD.border}` }}
+      >
+        <span
+          className="rounded-lg flex items-center justify-center shrink-0 font-semibold"
+          style={{
+            width: 28,
+            height: 28,
+            fontSize: 10,
+            background: HD.secondary,
+            color: HD.fg,
+            border: `1px solid ${HD.border}`,
+          }}
         >
-          <span
-            className="rounded-full flex items-center justify-center shrink-0 text-white font-semibold"
-            style={{ width: 22, height: 22, background: "#242424", fontSize: 9.5 }}
-          >
-            BC
-          </span>
-          <span className="flex flex-col" style={{ gap: 1 }}>
-            <span style={{ fontSize: 11.5, fontWeight: 600, color: HD.textPrimary, lineHeight: "13px" }}>
-              Bella Cucina
-            </span>
-            <span style={{ fontSize: 10, color: HD.textMuted, lineHeight: "12px" }}>San Francisco</span>
-          </span>
-        </div>
+          HH
+        </span>
+        <span className="flex flex-col min-w-0">
+          <span style={{ fontSize: 11.5, fontWeight: 600, color: HD.fg, lineHeight: "14px" }}>Harbor House</span>
+          <span style={{ fontSize: 10, color: HD.muted, lineHeight: "12px" }}>Demo restaurant</span>
+        </span>
       </div>
     </div>
   )
 }
 
-function Topbar() {
+function Topbar({ activeView }: { activeView: number }) {
   return (
     <div
-      className="w-full flex items-center justify-between shrink-0 bg-white"
-      style={{ height: TOPBAR_H, borderBottom: `1px solid ${HD.borderSoft}`, padding: "0 18px" }}
+      className="w-full flex items-center justify-between shrink-0"
+      style={{
+        height: TOPBAR_H,
+        borderBottom: `1px solid ${HD.border}`,
+        padding: "0 18px",
+        background: "rgba(247, 247, 249, 0.88)",
+        backdropFilter: "blur(8px)",
+      }}
     >
-      <div className="flex items-center" style={{ gap: 10 }}>
-        <JennaMark size={20} />
-        <span style={{ fontSize: 14.5, fontWeight: 600, color: HD.textPrimary, letterSpacing: "-0.01em" }}>Jenna</span>
-        <span style={{ color: HD.border, fontSize: 13 }}>/</span>
-        <span style={{ fontSize: 12.5, fontWeight: 500, color: HD.textSecondary }}>Bella Cucina</span>
-      </div>
-      <div className="flex items-center" style={{ gap: 12 }}>
-        <div
-          className="flex items-center rounded-full"
-          style={{ gap: 7, padding: "5.5px 12px", background: "#F4F4F4", border: `1px solid ${HD.borderSoft}`, width: 170 }}
+      <span style={{ fontSize: 16, fontWeight: 600, color: HD.fg, letterSpacing: "-0.01em" }}>
+        {VIEW_TITLES[activeView] ?? "Overview"}
+      </span>
+      <div className="flex items-center" style={{ gap: 8 }}>
+        <span
+          className="flex items-center justify-center rounded-lg"
+          style={{ width: 30, height: 30, color: HD.muted }}
         >
-          <Search style={{ width: 12.5, height: 12.5, color: HD.textMuted }} strokeWidth={2} />
-          <span style={{ fontSize: 11.5, color: HD.textMuted }}>Search</span>
-        </div>
-        <span className="relative inline-flex">
-          <Bell style={{ width: 15, height: 15, color: HD.textSecondary }} strokeWidth={1.9} />
+          <Moon style={{ width: 15, height: 15 }} strokeWidth={1.9} />
+        </span>
+        <span className="relative flex items-center justify-center rounded-lg" style={{ width: 30, height: 30, color: HD.muted }}>
+          <Bell style={{ width: 15, height: 15 }} strokeWidth={1.9} />
           <span
             className="absolute rounded-full"
-            style={{ width: 6, height: 6, background: HD.live, top: -1, right: -1, border: "1.5px solid #ffffff" }}
+            style={{ width: 6, height: 6, background: HD.accent, top: 6, right: 6 }}
           />
+        </span>
+        <span
+          className="rounded-lg flex items-center justify-center font-semibold"
+          style={{
+            width: 30,
+            height: 30,
+            fontSize: 11,
+            background: HD.card,
+            color: HD.fg,
+            border: `1px solid ${HD.border}`,
+          }}
+        >
+          D
         </span>
       </div>
     </div>
@@ -155,9 +164,8 @@ function Topbar() {
 }
 
 /**
- * HeroDashboard — the hero card visual.
- * One cohesive Jenna dashboard; the main content crossfades between three
- * views in sync with the feature tabs (answers calls / takes orders / POS sync).
+ * HeroDashboard — scaled replica of the meet-jenna Harbor House operator portal.
+ * Main content crossfades Overview → Calls → Integrations with the feature tabs.
  */
 export default function HeroDashboard({ activeView }: { activeView: number }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -169,7 +177,6 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
     const update = () => {
       const { width, height } = el.getBoundingClientRect()
       if (width > 0 && height > 0) {
-        // Emulate object-cover: fill the card, crop the bottom edge if needed
         setScale(Math.max(width / CANVAS_W, height / CANVAS_H))
       }
     }
@@ -179,19 +186,11 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
     return () => ro.disconnect()
   }, [])
 
-  const views = [CallsView, OrderView, PosSyncView]
+  const views = [OverviewView, CallsView, IntegrationsView]
 
   return (
-    <div ref={containerRef} className="relative w-full h-full overflow-hidden bg-white">
+    <div ref={containerRef} className="relative w-full h-full overflow-hidden" style={{ background: HD.bg }}>
       <style>{`
-        @keyframes hd-wave {
-          0%, 100% { transform: scaleY(0.35); }
-          50% { transform: scaleY(1); }
-        }
-        .hd-wave-bar {
-          animation: hd-wave 1.1s ease-in-out infinite;
-          transform-origin: center;
-        }
         @keyframes hd-fade-up {
           from { opacity: 0; transform: translateY(7px); }
           to { opacity: 1; transform: translateY(0); }
@@ -200,12 +199,12 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
           animation: hd-fade-up 0.5s ease both;
         }
         @media (prefers-reduced-motion: reduce) {
-          .hd-wave-bar, .hd-item-in { animation: none; }
+          .hd-item-in { animation: none; }
         }
       `}</style>
 
       <div
-        className="absolute flex flex-col font-sans"
+        className="absolute flex font-sans"
         style={{
           width: CANVAS_W,
           height: CANVAS_H,
@@ -214,17 +213,21 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
           transform: `translateX(-50%) scale(${scale ?? 1})`,
           transformOrigin: "top center",
           opacity: scale === null ? 0 : 1,
+          background: HD.bg,
+          color: HD.fg,
         }}
       >
-        <Topbar />
-        <div className="flex-1 flex min-h-0">
-          <Sidebar activeView={activeView} />
-          <div className="flex-1 relative min-w-0" style={{ background: "#EFEFEF" }}>
+        <Sidebar activeView={activeView} />
+        <div className="flex-1 flex flex-col min-w-0 min-h-0">
+          <Topbar activeView={activeView} />
+          <div className="flex-1 relative min-w-0 min-h-0 overflow-hidden">
             {views.map((View, i) => (
               <div
                 key={i}
                 className={`absolute inset-0 transition-all duration-500 ease-in-out ${
-                  activeView === i ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-[0.97] blur-sm pointer-events-none"
+                  activeView === i
+                    ? "opacity-100 scale-100 blur-0"
+                    : "opacity-0 scale-[0.97] blur-sm pointer-events-none"
                 }`}
               >
                 <View isActive={activeView === i} />
@@ -233,6 +236,8 @@ export default function HeroDashboard({ activeView }: { activeView: number }) {
           </div>
         </div>
       </div>
+
+      <span className="sr-only">Harbor House demo dashboard — {VIEW_TITLES[activeView]}</span>
     </div>
   )
 }

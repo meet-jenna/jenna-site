@@ -161,12 +161,12 @@ export default function LandingPage() {
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10 lg:pt-14">
           <div className="w-full flex flex-col items-center px-4 sm:px-0">
             <h1 data-reveal className="w-full max-w-[680px] text-center text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[56px] font-semibold leading-[1.08] sm:leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
-              Meet Jenna —
-              <br />
               The AI Hostess
+              <br />
+              For Every Restaurant
             </h1>
-            <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[520px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
-              Jenna AI answers every restaurant call 24/7, takes pickup and delivery orders, and books reservations — synced to the POS you already run.
+            <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+              Jenna connects to your existing systems and handles every call start to finish.
             </p>
             <Link
               href="/book-demo"
@@ -199,7 +199,7 @@ export default function LandingPage() {
             </div>
             {/* One-time on-load flourish: POS logos spat out from behind the dashboard */}
             <PosLogoBurst />
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-white rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden">
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#F7F7F9] rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden ring-1 ring-black/[0.04]">
               <HeroDashboard activeView={activeCard} />
             </div>
           </div>
@@ -234,28 +234,6 @@ export default function LandingPage() {
               onClick={() => handleCardClick(2)}
             />
           </div>
-        </section>
-
-        {/* Entity definition — brand SEO */}
-        <section id="what-is-jenna" className="scroll-mt-24 w-full max-w-[720px] mx-auto flex flex-col items-center text-center gap-4 px-2">
-          <h2 data-reveal className="text-[#242424] text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight font-sans tracking-tight">
-            What is Jenna AI?
-          </h2>
-          <p data-reveal className="text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
-            Jenna is an AI voice hostess for restaurants. She answers your phone on the first ring, takes pickup and
-            delivery orders, and books reservations — then syncs everything to your existing POS. No new hardware. No
-            missed calls.{" "}
-            <Link href="/about" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
-              About Jenna
-            </Link>
-            {" · "}
-            <Link
-              href="/blog/what-is-jenna-ai"
-              className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]"
-            >
-              Read the full guide
-            </Link>
-          </p>
         </section>
 
         {/* Social proof / integrations */}
