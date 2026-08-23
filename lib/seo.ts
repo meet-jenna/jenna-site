@@ -1,5 +1,12 @@
 import { faqData } from "./faq"
 import { JENNA_LOGO } from "./brand"
+import {
+  FOUNDER_ALTERNATE_NAME,
+  FOUNDER_IMAGE,
+  FOUNDER_NAME,
+  FOUNDER_SAME_AS,
+  FOUNDER_URL,
+} from "./founder"
 import { getSameAsUrls, SITE_EMAIL } from "./social"
 
 /**
@@ -56,6 +63,14 @@ export const organizationJsonLd = {
   email: SITE_EMAIL,
   ...(foundingDate ? { foundingDate } : {}),
   ...(sameAs.length > 0 ? { sameAs } : {}),
+  founder: {
+    "@type": "Person",
+    name: FOUNDER_NAME,
+    alternateName: FOUNDER_ALTERNATE_NAME,
+    url: FOUNDER_URL,
+    image: absoluteUrl(FOUNDER_IMAGE),
+    sameAs: FOUNDER_SAME_AS,
+  },
   contactPoint: [
     {
       "@type": "ContactPoint",

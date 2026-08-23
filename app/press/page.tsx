@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import CompanyPage from "../../components/marketing/company-page"
+import FounderBlock from "../../components/marketing/founder-block"
+import { FOUNDER_NAME, FOUNDER_URL } from "../../lib/founder"
 import { absoluteUrl, buildBreadcrumbJsonLd, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "../../lib/seo"
 import {
   BRAND_DIRECTORY_BIO,
@@ -60,6 +62,12 @@ export default function PressPage() {
           </a>
         </li>
         <li>
+          <strong className="text-[#242424] font-medium">Founder:</strong>{" "}
+          <a href={FOUNDER_URL} className="text-[#101010] font-medium underline underline-offset-2">
+            {FOUNDER_NAME}
+          </a>
+        </li>
+        <li>
           <strong className="text-[#242424] font-medium">Press contact:</strong>{" "}
           <a href={`mailto:${SITE_EMAIL}`} className="text-[#101010] font-medium underline underline-offset-2">
             {SITE_EMAIL}
@@ -82,6 +90,7 @@ export default function PressPage() {
       </h2>
       <p>{BRAND_PRESS_BOILERPLATE}</p>
       <p>{SITE_DESCRIPTION}</p>
+      <FounderBlock />
 
       <h2 className="mt-4 text-[#242424] text-2xl font-semibold leading-tight font-sans tracking-tight">
         Disambiguation

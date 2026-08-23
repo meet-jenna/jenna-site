@@ -60,7 +60,11 @@ export default function BlogPostPage({ params }: PageProps) {
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
     keywords: post.keywords.join(", "),
-    author: { "@type": "Organization", name: post.author, url: absoluteUrl("/") },
+    author: {
+      "@type": "Person",
+      name: post.author,
+      url: post.authorUrl ?? absoluteUrl("/"),
+    },
     publisher: { "@id": `${absoluteUrl("/")}#organization` },
   }
 
@@ -87,7 +91,20 @@ export default function BlogPostPage({ params }: PageProps) {
             <h1 className="text-[#242424] text-3xl sm:text-4xl md:text-[44px] font-semibold leading-[1.12] font-sans tracking-[-0.02em]">
               {post.title}
             </h1>
-            <div className="text-[#6B7280] text-sm font-medium font-sans">By {post.author}</div>
+            <div className="text-[#6B7280] text-sm font-medium font-sans">
+              By{" "}
+              {post.authorUrl ? (
+                <a
+                  href={post.authorUrl}
+                  className="text-[#101010] underline underline-offset-2 hover:text-[#6B7280]"
+                  rel="noopener noreferrer"
+                >
+                  {post.author}
+                </a>
+              ) : (
+                post.author
+              )}
+            </div>
           </header>
 
           {/* Body */}

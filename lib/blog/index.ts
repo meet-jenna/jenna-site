@@ -1,4 +1,5 @@
 import type { BlogPost } from "./types"
+import { FOUNDER_NAME, FOUNDER_URL } from "../founder"
 import { post as bestVoiceAi } from "./posts/best-voice-ai-for-restaurants-2026"
 import { post as jennaVsSlangVsLoman } from "./posts/jenna-vs-slang-vs-loman"
 import { post as aiPhoneAnsweringCost } from "./posts/ai-phone-answering-service-cost"
@@ -19,7 +20,11 @@ const POSTS: BlogPost[] = [
   jennaVsSlangVsLoman,
   aiPhoneAnsweringCost,
   stopMissingCalls,
-]
+].map((post) => ({
+  ...post,
+  author: FOUNDER_NAME,
+  authorUrl: FOUNDER_URL,
+}))
 
 /** All posts, newest first. */
 export function getAllPosts(): BlogPost[] {

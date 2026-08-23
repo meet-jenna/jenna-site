@@ -9,7 +9,7 @@ import { getAllPosts, formatPostDate } from "../../lib/blog"
 import { absoluteUrl, buildBreadcrumbJsonLd } from "../../lib/seo"
 
 const description =
-  "Guides, comparisons, and operator playbooks on voice AI, AI phone answering, and running a smarter restaurant phone line — from the team behind Jenna."
+  "Guides, comparisons, and operator playbooks on voice AI, AI phone answering, and running a smarter restaurant phone line — from Anthony Shoosh, founder of Jenna."
 
 export const metadata: Metadata = {
   title: "Blog — Restaurant Voice AI Guides",
@@ -40,7 +40,11 @@ export default function BlogIndexPage() {
       url: absoluteUrl(`/blog/${p.slug}`),
       datePublished: p.publishedAt,
       dateModified: p.updatedAt ?? p.publishedAt,
-      author: { "@type": "Organization", name: p.author },
+      author: {
+        "@type": "Person",
+        name: p.author,
+        ...(p.authorUrl ? { url: p.authorUrl } : {}),
+      },
     })),
   }
 

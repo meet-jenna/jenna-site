@@ -23,6 +23,8 @@ export interface BlogPost {
   description: string
   keywords: string[]
   author: string
+  /** Person homepage when the author is a named founder. */
+  authorUrl?: string
   /** ISO date (YYYY-MM-DD). */
   publishedAt: string
   /** ISO date (YYYY-MM-DD), if updated after publish. */

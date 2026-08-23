@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import CompanyPage from "../../components/marketing/company-page"
+import FounderBlock from "../../components/marketing/founder-block"
 import { absoluteUrl, buildBreadcrumbJsonLd, SITE_DESCRIPTION } from "../../lib/seo"
 import { BRAND_PRESS_BOILERPLATE } from "../../lib/social"
 
@@ -99,6 +100,8 @@ export default function AboutPage() {
         </Link>{" "}
         on our blog.
       </p>
+
+      <FounderBlock />
 
       <h2 className="mt-4 text-[#242424] text-2xl font-semibold leading-tight font-sans tracking-tight">
         Not the other Jennas
