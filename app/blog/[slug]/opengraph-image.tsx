@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og"
 import { getPost, getAllPostSlugs } from "../../../lib/blog"
-import { JENNA_LOGO } from "../../../lib/brand"
-import { SITE_URL } from "../../../lib/seo"
+import { getLogoDataUri } from "../../../lib/og"
 
 export const alt = "Jenna Blog"
 export const size = { width: 1200, height: 630 }
@@ -11,10 +10,11 @@ export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
 }
 
-export default function BlogOgImage({ params }: { params: { slug: string } }) {
+export default async function BlogOgImage({ params }: { params: { slug: string } }) {
   const post = getPost(params.slug)
   const title = post?.title ?? "Jenna Blog"
   const category = post?.category ?? "Restaurant Voice AI"
+  const logo = await getLogoDataUri()
 
   return new ImageResponse(
     (
@@ -33,7 +33,7 @@ export default function BlogOgImage({ params }: { params: { slug: string } }) {
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${SITE_URL}${JENNA_LOGO}`}
+            src={logo}
             alt=""
             width={56}
             height={56}

@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og"
-import { JENNA_LOGO } from "../lib/brand"
-import { SITE_URL } from "../lib/seo"
+import { getLogoDataUri } from "../lib/og"
 
 export const alt = "Jenna — AI Voice Hostess & Phone Answering for Restaurants"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const logo = await getLogoDataUri()
   return new ImageResponse(
     (
       <div
@@ -25,7 +25,7 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${SITE_URL}${JENNA_LOGO}`}
+            src={logo}
             alt=""
             width={64}
             height={64}
