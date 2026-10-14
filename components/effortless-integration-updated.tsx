@@ -128,9 +128,8 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             left: `${centerX - 36}px`,
             top: `${centerY - 36}px`,
             position: "absolute",
-            borderRadius: "50%",
-            objectFit: "cover",
-            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+            objectFit: "contain",
+            background: "transparent",
           }}
         />
 
