@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import SmartSimpleBrilliant from "../components/smart-simple-brilliant"
 import YourWorkInSync from "../components/your-work-in-sync"
 import EffortlessIntegration from "../components/effortless-integration-updated"
@@ -13,7 +13,7 @@ import FAQSection from "../components/faq-section"
 import PricingSection from "../components/pricing-section"
 import CTASection from "../components/cta-section"
 import FooterSection from "../components/footer-section"
-import HeroDashboard from "../components/hero/hero-dashboard"
+import HeroPortal from "../components/hero/hero-portal"
 import PosLogoBurst from "../components/pos-logo-burst"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
@@ -58,7 +58,8 @@ export default function LandingPage() {
   const [activeCard, setActiveCard] = useState(0)
   const [progress, setProgress] = useState(0)
   const [scrolled, setScrolled] = useState(false)
-  const mountedRef = useRef(true)
+  const [jump, setJump] = useState({ chapter: 0, key: 0 })
+  const chapterRef = useRef<{ start: number; durationMs: number } | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8)
@@ -67,32 +68,24 @@ export default function LandingPage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // The hero tour sets the active card; the bar fills over one chapter.
   useEffect(() => {
-    mountedRef.current = true
     const progressInterval = setInterval(() => {
-      if (!mountedRef.current) return
-
-      setProgress((prev) => {
-        if (prev >= 100) {
-          if (mountedRef.current) {
-            setActiveCard((current) => (current + 1) % 3)
-          }
-          return 0
-        }
-        return prev + 2 // 2% every 100ms = 5 seconds total
-      })
+      const chapter = chapterRef.current
+      if (chapter === null) return
+      setProgress(Math.min(100, ((performance.now() - chapter.start) / chapter.durationMs) * 100))
     }, 100)
+    return () => clearInterval(progressInterval)
+  }, [])
 
-    return () => {
-      mountedRef.current = false
-      clearInterval(progressInterval)
-    }
+  const handleChapter = useCallback((index: number, durationMs: number) => {
+    chapterRef.current = { start: performance.now(), durationMs }
+    setActiveCard(index)
+    setProgress(0)
   }, [])
 
   const handleCardClick = (index: number) => {
-    if (!mountedRef.current) return
-    setActiveCard(index)
-    setProgress(0)
+    setJump((prev) => ({ chapter: index, key: prev.key + 1 }))
   }
 
   const scrollToSection = (id: string) => (e: React.MouseEvent) => {
@@ -173,9 +166,8 @@ export default function LandingPage() {
               data-reveal
               data-hero-cta
               style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
-              className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+              className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#171717] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
             >
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(36,36,36,0.12)] mix-blend-multiply pointer-events-none"></div>
               <div
                 className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-[15px] font-medium leading-5 font-sans"
                 style={{ color: "#FFFFFF", opacity: 1, mixBlendMode: "normal" }}
@@ -199,8 +191,8 @@ export default function LandingPage() {
             </div>
             {/* One-time on-load flourish: POS logos spat out from behind the dashboard */}
             <PosLogoBurst />
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#F7F7F7] rounded-[6px] shadow-[0px_8px_30px_rgba(36,36,36,0.06)] overflow-hidden ring-1 ring-black/[0.04]">
-              <HeroDashboard activeView={activeCard} />
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#101010] rounded-[14px] sm:rounded-[20px] lg:rounded-[24px] shadow-[0px_8px_30px_rgba(36,36,36,0.06)] overflow-hidden ring-1 ring-black/[0.04]">
+              <HeroPortal chapter={jump.chapter} jumpKey={jump.key} onChapter={handleChapter} />
             </div>
           </div>
         </section>
