@@ -27,24 +27,24 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
   const themeVars =
     theme === "light"
       ? {
-          "--yws-surface": "#ffffff",
+          "--yws-surface": "#FFFFFF",
           "--yws-text-primary": "#242424",
-          "--yws-text-secondary": "#6B7280",
+          "--yws-text-secondary": "#5F6470",
           "--yws-bubble-light": "#EFEFEF",
           "--yws-bubble-dark": "#242424",
-          "--yws-bubble-white": "#ffffff",
-          "--yws-border": "rgba(0,0,0,0.08)",
-          "--yws-shadow": "rgba(0,0,0,0.08)",
+          "--yws-bubble-white": "#FFFFFF",
+          "--yws-border": "rgba(36,36,36,0.06)",
+          "--yws-shadow": "rgba(36,36,36,0.06)",
         }
       : ({
-          "--yws-surface": "#1f2937",
-          "--yws-text-primary": "#f9fafb",
-          "--yws-text-secondary": "#d1d5db",
-          "--yws-bubble-light": "#374151",
-          "--yws-bubble-dark": "#111827",
-          "--yws-bubble-white": "#ffffff",
+          "--yws-surface": "#101010",
+          "--yws-text-primary": "#F7F7F7",
+          "--yws-text-secondary": "#E6E6E6",
+          "--yws-bubble-light": "#242424",
+          "--yws-bubble-dark": "#101010",
+          "--yws-bubble-white": "#FFFFFF",
           "--yws-border": "rgba(255,255,255,0.12)",
-          "--yws-shadow": "rgba(0,0,0,0.24)",
+          "--yws-shadow": "rgba(36,36,36,0.25)",
         } as React.CSSProperties)
 
   // Single caller avatar — the whole conversation is between one caller and Jenna
@@ -63,7 +63,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
         height: "36px",
         borderRadius: "50%",
         objectFit: "cover",
-        boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.08)",
+        boxShadow: "0px 1px 2px 0px rgba(36,36,36,0.06)",
         flexShrink: 0,
       }}
     />
@@ -126,7 +126,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
             {/* Message bubble */}
             <div
               style={{
-                background: theme === "light" ? "#E5E7EB" : "var(--yws-bubble-light)",
+                background: theme === "light" ? "#E6E6E6" : "var(--yws-bubble-light)",
                 borderRadius: "999px",
                 padding: "0px 12px",
                 height: "36px",
@@ -182,7 +182,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                   fontSize: "13px",
                   lineHeight: "16px",
                   letterSpacing: "-0.4px",
-                  color: "#ffffff",
+                  color: "#FFFFFF",
                   whiteSpace: "nowrap",
                 }}
               >
@@ -222,7 +222,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
             {/* Message bubble */}
             <div
               style={{
-                background: theme === "light" ? "#E5E7EB" : "var(--yws-bubble-light)",
+                background: theme === "light" ? "#E6E6E6" : "var(--yws-bubble-light)",
                 borderRadius: "999px",
                 padding: "0px 12px",
                 height: "36px",
@@ -262,14 +262,14 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
             {/* Message bubble */}
             <div
               style={{
-                background: "#ffffff",
+                background: "#FFFFFF",
                 borderRadius: "16px",
                 padding: "0px 12px",
                 height: "36px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0px 0px 0px 1px rgba(0,0,0,0.08), 0px 1px 2px -0.4px rgba(0,0,0,0.08)",
+                boxShadow: "0px 0px 0px 1px rgba(36,36,36,0.06), 0px 1px 2px -0.4px rgba(36,36,36,0.06)",
                 overflow: "hidden",
               }}
             >
@@ -296,7 +296,7 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0px 1px 2px 0px rgba(0,0,0,0.08)",
+                boxShadow: "0px 1px 2px 0px rgba(36,36,36,0.06)",
                 flexShrink: 0,
               }}
             >
@@ -307,11 +307,11 @@ const YourWorkInSync: React.FC<YourWorkInSyncProps> = ({
                 fill="none"
                 aria-hidden="true"
               >
-                <rect x="3" y="11" width="2.5" height="2" rx="1.25" fill="#ffffff" />
-                <rect x="7" y="8" width="2.5" height="8" rx="1.25" fill="#ffffff" />
-                <rect x="11" y="5" width="2.5" height="14" rx="1.25" fill="#ffffff" />
-                <rect x="15" y="8" width="2.5" height="8" rx="1.25" fill="#ffffff" />
-                <rect x="19" y="11" width="2.5" height="2" rx="1.25" fill="#ffffff" />
+                <rect x="3" y="11" width="2.5" height="2" rx="1.25" fill="#FFFFFF" />
+                <rect x="7" y="8" width="2.5" height="8" rx="1.25" fill="#FFFFFF" />
+                <rect x="11" y="5" width="2.5" height="14" rx="1.25" fill="#FFFFFF" />
+                <rect x="15" y="8" width="2.5" height="8" rx="1.25" fill="#FFFFFF" />
+                <rect x="19" y="11" width="2.5" height="2" rx="1.25" fill="#FFFFFF" />
               </svg>
             </div>
           </div>

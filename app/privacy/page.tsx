@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 
   return (
     <CompanyPage title={title} description={description} showCta={false} jsonLd={breadcrumb}>
-      <p className="text-sm text-[#9CA3AF]">Last updated: August 3, 2026</p>
+      <p className="text-sm text-[#5F6470]">Last updated: August 3, 2026</p>
 
       <p>
         Jenna (&quot;we&quot;, &quot;us&quot;) operates meetjenna.ai and related services (the &quot;Service&quot;). This

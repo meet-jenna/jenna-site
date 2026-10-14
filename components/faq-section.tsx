@@ -33,7 +33,7 @@ export default function FAQSection() {
           <div className="w-full flex flex-col justify-center text-[#242424] font-semibold leading-tight md:leading-[44px] font-sans text-3xl sm:text-4xl tracking-tight">
             Frequently Asked Questions
           </div>
-          <div className="w-full text-[#6B7280] text-base font-normal leading-7 font-sans">
+          <div className="w-full text-[#5F6470] text-base font-normal leading-7 font-sans">
             Everything you need to know about putting Jenna on your phone line.
           </div>
         </div>
@@ -45,10 +45,10 @@ export default function FAQSection() {
               const isOpen = openItems.includes(index)
 
               return (
-                <div key={index} className="w-full border-b border-[rgba(36, 36, 36,0.16)] overflow-hidden">
+                <div key={index} className="w-full border-b border-[rgba(36,36,36,0.12)] overflow-hidden">
                   <button
                     onClick={() => toggleItem(index)}
-                    className="w-full px-5 py-[18px] flex justify-between items-center gap-5 text-left hover:bg-[rgba(36, 36, 36,0.02)] transition-colors duration-200"
+                    className="w-full px-5 py-[18px] flex justify-between items-center gap-5 text-left hover:bg-[rgba(36,36,36,0.06)] transition-colors duration-200"
                     aria-expanded={isOpen}
                   >
                     <div className="flex-1 text-[#242424] text-base font-medium leading-6 font-sans">
@@ -56,7 +56,7 @@ export default function FAQSection() {
                     </div>
                     <div className="flex justify-center items-center">
                       <ChevronDownIcon
-                        className={`w-6 h-6 text-[rgba(36, 36, 36,0.60)] transition-transform duration-300 ease-in-out ${
+                        className={`w-6 h-6 text-[#5F6470] transition-transform duration-300 ease-in-out ${
                           isOpen ? "rotate-180" : "rotate-0"
                         }`}
                       />
@@ -68,7 +68,7 @@ export default function FAQSection() {
                       isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="px-5 pb-[18px] text-[#6B7280] text-sm font-normal leading-6 font-sans">
+                    <div className="px-5 pb-[18px] text-[#5F6470] text-sm font-normal leading-6 font-sans">
                       {item.answer}
                     </div>
                   </div>

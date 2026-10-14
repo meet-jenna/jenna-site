@@ -26,7 +26,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
       <main className="w-full max-w-[1180px] px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-6 flex flex-col gap-14 sm:gap-20">
         {/* Hero */}
         <section className="flex flex-col justify-start items-center text-center pt-6 sm:pt-10">
-          <div data-reveal className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.10)] shadow-[0px_1px_1px_rgba(36,36,36,0.04)]">
+          <div data-reveal className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.12)] shadow-[0px_1px_1px_rgba(36,36,36,0.06)]">
             <JennaLogo shape="app" size={16} />
             <div className="text-center text-[#242424] text-xs font-medium leading-3 font-sans">{content.eyebrow}</div>
           </div>
@@ -34,14 +34,14 @@ export default function LandingPage({ content }: { content: LandingPageContent }
           <h1 data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-5 w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             {content.h1}
           </h1>
-          <p data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#5F6470] text-base md:text-lg font-normal leading-7 font-sans">
             {content.subhead}
           </p>
           <Link
             href="/book-demo"
             data-reveal
             style={{ "--reveal-delay": "270ms" } as React.CSSProperties}
-            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors"
+            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors"
           >
             <div className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
               Book a Demo
@@ -53,7 +53,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
         {/* Intro copy */}
         <section className="w-full max-w-[760px] mx-auto flex flex-col gap-4">
           {content.intro.map((paragraph, index) => (
-            <p key={index} data-reveal className="text-[#374151] text-base md:text-lg font-normal leading-8 font-sans">
+            <p key={index} data-reveal className="text-[#242424] text-base md:text-lg font-normal leading-8 font-sans">
               {paragraph}
             </p>
           ))}
@@ -66,7 +66,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
               <h2 className="text-[#242424] text-base sm:text-lg font-semibold leading-tight font-sans">
                 {feature.title}
               </h2>
-              <p className="text-[#6B7280] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
+              <p className="text-[#5F6470] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
                 {feature.description}
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
             <h2 className="text-[#242424] text-2xl sm:text-3xl font-semibold leading-tight font-sans tracking-tight">
               Works with the POS you already use
             </h2>
-            <p className="text-[#6B7280] text-sm sm:text-base font-normal leading-7 font-sans">
+            <p className="text-[#5F6470] text-sm sm:text-base font-normal leading-7 font-sans">
               Orders and reservations flow into your existing system automatically — no new hardware.
             </p>
           </div>
@@ -95,12 +95,12 @@ export default function LandingPage({ content }: { content: LandingPageContent }
           </h2>
           <div className="flex flex-col">
             {content.faqs.map((item) => (
-              <details key={item.question} data-reveal="fade" className="group w-full border-b border-[rgba(36,36,36,0.16)]">
+              <details key={item.question} data-reveal="fade" className="group w-full border-b border-[rgba(36,36,36,0.12)]">
                 <summary className="w-full px-1 py-[18px] flex justify-between items-center gap-5 cursor-pointer list-none text-[#242424] text-base font-medium leading-6 font-sans">
                   {item.question}
-                  <ChevronDown className="w-5 h-5 shrink-0 text-[rgba(36,36,36,0.6)] transition-transform duration-200 group-open:rotate-180" />
+                  <ChevronDown className="w-5 h-5 shrink-0 text-[#5F6470] transition-transform duration-200 group-open:rotate-180" />
                 </summary>
-                <p className="px-1 pb-[18px] text-[#6B7280] text-sm font-normal leading-6 font-sans">{item.answer}</p>
+                <p className="px-1 pb-[18px] text-[#5F6470] text-sm font-normal leading-6 font-sans">{item.answer}</p>
               </details>
             ))}
           </div>
@@ -113,7 +113,7 @@ export default function LandingPage({ content }: { content: LandingPageContent }
               <Link
                 key={link.href}
                 href={link.href}
-                className="btn-cta px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
+                className="btn-cta px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.12)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
               >
                 {link.label}
               </Link>

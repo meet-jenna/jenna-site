@@ -26,7 +26,7 @@ export default function SiteNav() {
       <div
         className={`w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 rounded-[6px] flex justify-between items-center transition-all duration-300 ${
           scrolled
-            ? "bg-[#F4F4F5]/90 backdrop-blur-md shadow-[0px_2px_8px_rgba(36,36,36,0.06)]"
+            ? "bg-[#EFEFEF]/90 backdrop-blur-md shadow-[0px_2px_8px_rgba(36,36,36,0.06)]"
             : "bg-transparent"
         }`}
       >
@@ -35,19 +35,19 @@ export default function SiteNav() {
           <nav className="pl-4 sm:pl-5 hidden sm:flex flex-row gap-3 sm:gap-4">
             <Link
               href="/#features"
-              className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
+              className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
             >
               Features
             </Link>
             <Link
               href="/#pricing"
-              className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
+              className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
             >
               Pricing
             </Link>
             <Link
               href="/#faq"
-              className="text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
+              className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors"
             >
               FAQ
             </Link>
@@ -56,7 +56,7 @@ export default function SiteNav() {
         <div className="flex justify-end items-center gap-2 sm:gap-3">
           <a
             href={PORTAL_URL}
-            className="flex items-center text-[rgba(36,36,36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
+            className="flex items-center text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
           >
             Sign in
           </a>

@@ -23,7 +23,7 @@ const HOW_IT_WORKS_CARDS = [
 // Badge component for consistency
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36,36,36,0.06)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -77,12 +77,12 @@ export default function DocumentationSection() {
                   onClick={() => handleCardClick(index)}
                   className={`w-full rounded-[6px] border overflow-hidden flex flex-col justify-start items-start transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"
+                      ? "bg-white border-[rgba(36,36,36,0.12)] shadow-[0px_4px_14px_rgba(36,36,36,0.06)]"
                       : "bg-[#EFEFEF] border-transparent hover:bg-[#E6E6E6]"
                   }`}
                 >
                   <div
-                    className={`w-full h-0.5 bg-[rgba(0,0,0,0.08)] overflow-hidden ${isActive ? "opacity-100" : "opacity-0"}`}
+                    className={`w-full h-0.5 bg-[rgba(36,36,36,0.06)] overflow-hidden ${isActive ? "opacity-100" : "opacity-0"}`}
                   >
                     <div
                       key={animationKey}
@@ -93,7 +93,7 @@ export default function DocumentationSection() {
                     <div className="self-stretch flex justify-center flex-col text-[#242424] text-sm font-semibold leading-6 font-sans">
                       {card.title}
                     </div>
-                    <div className="self-stretch text-[#6B7280] text-[13px] font-normal leading-[22px] font-sans whitespace-pre-line">
+                    <div className="self-stretch text-[#5F6470] text-[13px] font-normal leading-[22px] font-sans whitespace-pre-line">
                       {card.description}
                     </div>
                   </div>

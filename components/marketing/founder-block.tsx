@@ -24,7 +24,7 @@ export default function FounderBlock() {
         <p>
           <a
             href={FOUNDER_URL}
-            className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]"
+            className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]"
             rel="noopener noreferrer"
           >
             {FOUNDER_NAME}

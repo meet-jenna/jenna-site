@@ -66,7 +66,7 @@ export default function ContactPage() {
         Sales and general inquiries:{" "}
         <a
           href={`mailto:${SITE_EMAIL}`}
-          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]"
+          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]"
         >
           {SITE_EMAIL}
         </a>
@@ -75,7 +75,7 @@ export default function ContactPage() {
       <h2 className="mt-4 text-[#242424] text-2xl font-semibold leading-tight font-sans tracking-tight">Press & partners</h2>
       <p>
         For media kits, boilerplate, and directory bios, see our{" "}
-        <Link href="/press" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
+        <Link href="/press" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]">
           press page
         </Link>
         . Partnership and co-marketing ideas are welcome at the same inbox — include your restaurant or POS affiliation

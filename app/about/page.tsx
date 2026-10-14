@@ -65,7 +65,7 @@ export default function AboutPage() {
       <p>
         Jenna is built for restaurants where the phone still drives revenue: pickup, delivery, and reservations.
         Whether you run a single neighborhood spot or a multi-location group, Jenna connects to the{" "}
-        <Link href="/integrations" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
+        <Link href="/integrations" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]">
           POS you already use
         </Link>{" "}
         — Toast, Square, Clover, and more — so orders land in the kitchen without new hardware or staff training.
@@ -81,20 +81,20 @@ export default function AboutPage() {
       </ul>
       <p>
         Learn more about the{" "}
-        <Link href="/ai-hostess" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
+        <Link href="/ai-hostess" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]">
           AI hostess
         </Link>{" "}
         approach,{" "}
         <Link
           href="/voice-ai-for-restaurants"
-          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]"
+          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]"
         >
           voice AI for restaurants
         </Link>
         , or read{" "}
         <Link
           href="/blog/what-is-jenna-ai"
-          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]"
+          className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]"
         >
           What is Jenna AI?
         </Link>{" "}
@@ -114,11 +114,11 @@ export default function AboutPage() {
 
       <p>
         Ready to hear her live?{" "}
-        <Link href="/book-demo" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
+        <Link href="/book-demo" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]">
           Book a demo
         </Link>{" "}
         or{" "}
-        <Link href="/contact" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280]">
+        <Link href="/contact" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470]">
           contact us
         </Link>
         .

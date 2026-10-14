@@ -44,14 +44,14 @@ export default function IntegrationsIndexPage() {
           <h1 data-reveal className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             Connects to Your POS
           </h1>
-          <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#5F6470] text-base md:text-lg font-normal leading-7 font-sans">
             {description}
           </p>
           <Link
             href="/book-demo"
             data-reveal
             style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
-            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
+            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
           >
             Book a Demo
             <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
@@ -67,7 +67,7 @@ export default function IntegrationsIndexPage() {
               className="hover-lift group h-32 sm:h-36 flex flex-col justify-center items-center gap-3 bg-[#EFEFEF] rounded-[6px] hover:bg-[#E6E6E6] transition-colors"
             >
               <PosGridWordmark id={integration.id} />
-              <span className="text-[rgba(36,36,36,0.6)] text-xs font-medium font-sans group-hover:text-[#242424] transition-colors">
+              <span className="text-[#5F6470] text-xs font-medium font-sans group-hover:text-[#242424] transition-colors">
                 {integration.name}
               </span>
             </Link>

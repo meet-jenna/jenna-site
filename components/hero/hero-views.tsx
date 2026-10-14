@@ -24,22 +24,22 @@ import {
 
 /* Light operator-theme tokens (mirrors meet-jenna `.operator-theme-light`) */
 export const HD = {
-  bg: "#F7F7F9",
-  fg: "#2A2A30",
+  bg: "#F7F7F7",
+  fg: "#101010",
   card: "#FFFFFF",
-  muted: "#737380",
-  secondary: "#F1F1F4",
-  border: "#E2E2E6",
-  accent: "#2DB86A",
+  muted: "#5F6470",
+  secondary: "#EFEFEF",
+  border: "#E6E6E6",
+  accent: "#157A3A",
   accentFg: "#FFFFFF",
-  chart1: "#3B9FD9",
-  chart2: "#2DB86A",
-  chart3: "#E5A23B",
-  chart4: "#E05A3C",
-  warning: "#E5A23B",
-  success: "#2DB86A",
-  destructive: "#D94A3D",
-  cardShadow: "0px 1px 2px rgba(36, 36, 36, 0.04)",
+  chart1: "#7C3AED",
+  chart2: "#157A3A",
+  chart3: "#A74B06",
+  chart4: "#D41C44",
+  warning: "#A74B06",
+  success: "#157A3A",
+  destructive: "#D41C44",
+  cardShadow: "0px 1px 2px rgba(36,36,36,0.06)",
 } as const
 
 export function LiveDot({ size = 7 }: { size?: number }) {

@@ -2,24 +2,24 @@
 
 import { Check, Phone, Plug2, Settings2 } from "lucide-react"
 import { JennaLogo } from "./jenna-logo"
-import { STATUS_LIVE, UI_SURFACE, UI_BORDER } from "@/lib/theme"
+import { STATUS_LIVE, UI_BORDER } from "@/lib/theme"
 
 const T = {
   textPrimary: "#242424",
-  textSecondary: "#6B7280",
-  textMuted: "rgba(107, 114, 128,0.85)",
-  border: "rgba(36, 36, 36,0.10)",
-  borderSoft: "rgba(36, 36, 36,0.06)",
+  textSecondary: "#5F6470",
+  textMuted: "#5F6470",
+  border: "rgba(36,36,36,0.12)",
+  borderSoft: "rgba(36,36,36,0.06)",
   live: STATUS_LIVE,
-  liveBg: UI_SURFACE,
-  cardShadow: "0px 1px 2px rgba(36, 36, 36,0.05)",
+  liveBg: "#FFFFFF",
+  cardShadow: "0px 1px 2px rgba(36,36,36,0.06)",
 } as const
 
 function Pill({ children, tone = "green" }: { children: React.ReactNode; tone?: "green" | "neutral" }) {
   const styles =
     tone === "green"
       ? { background: T.liveBg, color: T.live, border: `1px solid ${UI_BORDER}` }
-      : { background: "#F4F4F4", color: T.textSecondary, border: `1px solid ${T.borderSoft}` }
+      : { background: "#EFEFEF", color: T.textSecondary, border: `1px solid ${T.borderSoft}` }
   return (
     <span
       className="inline-flex items-center gap-[5px] rounded-full font-medium whitespace-nowrap"
@@ -55,7 +55,7 @@ function PanelShell({
   return (
     <div
       className="absolute inset-0 flex flex-col bg-white rounded-[6px] overflow-hidden"
-      style={{ boxShadow: "0px 8px 30px rgba(36, 36, 36,0.10)" }}
+      style={{ boxShadow: "0px 8px 30px rgba(36,36,36,0.12)" }}
     >
       <div
         className="flex items-center justify-between shrink-0"
@@ -64,7 +64,7 @@ function PanelShell({
         <span className="flex items-center" style={{ gap: 10 }}>
           <span
             className="flex items-center justify-center rounded-[8px] shrink-0"
-            style={{ width: 30, height: 30, background: "#F4F4F4", border: `1px solid ${T.borderSoft}` }}
+            style={{ width: 30, height: 30, background: "#EFEFEF", border: `1px solid ${T.borderSoft}` }}
           >
             {icon}
           </span>
@@ -111,7 +111,7 @@ function ConnectPanel() {
     >
       <div
         className="flex items-center justify-between rounded-[9px]"
-        style={{ padding: "11px 14px", background: "#FAFAFA", border: `1px solid ${T.borderSoft}` }}
+        style={{ padding: "11px 14px", background: "#F7F7F7", border: `1px solid ${T.borderSoft}` }}
       >
         <span className="flex items-center" style={{ gap: 10 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -149,7 +149,7 @@ function CustomizePanel() {
         </span>
         <div
           className="rounded-[9px]"
-          style={{ padding: "12px 14px", background: "#FAFAFA", border: `1px solid ${T.borderSoft}`, fontSize: 13, lineHeight: "19px", color: T.textPrimary, fontWeight: 500 }}
+          style={{ padding: "12px 14px", background: "#F7F7F7", border: `1px solid ${T.borderSoft}`, fontSize: 13, lineHeight: "19px", color: T.textPrimary, fontWeight: 500 }}
         >
           “Thanks for calling Bella Cucina — this is Jenna. How can I help you tonight?”
         </div>
@@ -187,7 +187,7 @@ function ForwardPanel() {
     >
       <div
         className="flex items-center justify-between rounded-[9px]"
-        style={{ padding: "14px", background: "#FAFAFA", border: `1px solid ${T.borderSoft}` }}
+        style={{ padding: "14px", background: "#F7F7F7", border: `1px solid ${T.borderSoft}` }}
       >
         <span className="flex flex-col" style={{ gap: 2 }}>
           <span style={{ fontSize: 11, color: T.textMuted }}>Your restaurant line</span>
@@ -196,9 +196,9 @@ function ForwardPanel() {
         {/* Toggle (on) — intentionally stays green */}
         <span
           className="relative inline-flex items-center shrink-0"
-          style={{ width: 38, height: 22, borderRadius: 999, background: "#16A34A", padding: 2 }}
+          style={{ width: 38, height: 22, borderRadius: 999, background: "#157A3A", padding: 2 }}
         >
-          <span className="absolute rounded-full bg-white" style={{ width: 18, height: 18, right: 2, boxShadow: "0px 1px 2px rgba(0,0,0,0.2)" }} />
+          <span className="absolute rounded-full bg-white" style={{ width: 18, height: 18, right: 2, boxShadow: "0px 1px 2px rgba(36,36,36,0.25)" }} />
         </span>
       </div>
       <div className="flex items-center" style={{ gap: 10 }}>

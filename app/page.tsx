@@ -27,7 +27,7 @@ import { faqJsonLd } from "../lib/seo"
 // Reusable Badge Component
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36,36,36,0.06)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -108,7 +108,7 @@ export default function LandingPage() {
         <div
           className={`w-full max-w-[720px] xl:max-w-[800px] h-12 py-2 pl-4 pr-2 rounded-[6px] flex justify-between items-center transition-all duration-300 ${
             scrolled
-              ? "bg-[#F4F4F5]/90 backdrop-blur-md shadow-[0px_2px_8px_rgba(36,36,36,0.06)]"
+              ? "bg-[#EFEFEF]/90 backdrop-blur-md shadow-[0px_2px_8px_rgba(36,36,36,0.06)]"
               : "bg-transparent"
           }`}
         >
@@ -118,21 +118,21 @@ export default function LandingPage() {
               <a
                 href="#features"
                 onClick={scrollToSection("features")}
-                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+                className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
               >
                 Features
               </a>
               <a
                 href="#pricing"
                 onClick={scrollToSection("pricing")}
-                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+                className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
               >
                 Pricing
               </a>
               <a
                 href="#faq"
                 onClick={scrollToSection("faq")}
-                className="text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
+                className="text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors cursor-pointer"
               >
                 FAQ
               </a>
@@ -141,7 +141,7 @@ export default function LandingPage() {
           <div className="flex justify-end items-center gap-2 sm:gap-3">
             <a
               href={PORTAL_URL}
-              className="flex items-center text-[rgba(36, 36, 36,0.75)] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
+              className="flex items-center text-[#5F6470] text-xs md:text-[13px] font-medium leading-[14px] font-sans hover:text-[#242424] transition-colors px-2"
             >
               Sign in
             </a>
@@ -165,7 +165,7 @@ export default function LandingPage() {
               <br />
               For Every Restaurant
             </h1>
-            <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+            <p data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="mt-4 w-full max-w-[480px] text-center text-[#5F6470] text-base md:text-lg font-normal leading-7 font-sans">
               Jenna connects to your existing systems and handles every call start to finish.
             </p>
             <Link
@@ -173,9 +173,9 @@ export default function LandingPage() {
               data-reveal
               data-hero-cta
               style={{ "--reveal-delay": "180ms" } as React.CSSProperties}
-              className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
+              className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 relative z-10 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors"
             >
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply pointer-events-none"></div>
+              <div className="absolute inset-0 z-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(36,36,36,0.12)] mix-blend-multiply pointer-events-none"></div>
               <div
                 className="relative z-[1] flex flex-row items-center justify-center gap-1.5 text-[15px] font-medium leading-5 font-sans"
                 style={{ color: "#FFFFFF", opacity: 1, mixBlendMode: "normal" }}
@@ -191,7 +191,7 @@ export default function LandingPage() {
             {/* Top-edge glow: straddles the dashboard's top edge */}
             <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
               <img
-                src="/gradients/hero-top-glow.svg?v=10"
+                src="/gradients/hero-top-glow.svg?v=11"
                 alt=""
                 aria-hidden
                 className="w-full h-auto -translate-y-[38%] opacity-[0.82]"
@@ -199,7 +199,7 @@ export default function LandingPage() {
             </div>
             {/* One-time on-load flourish: POS logos spat out from behind the dashboard */}
             <PosLogoBurst />
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#F7F7F9] rounded-[6px] shadow-[0px_8px_30px_rgba(36, 36, 36,0.08)] overflow-hidden ring-1 ring-black/[0.04]">
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#F7F7F7] rounded-[6px] shadow-[0px_8px_30px_rgba(36,36,36,0.06)] overflow-hidden ring-1 ring-black/[0.04]">
               <HeroDashboard activeView={activeCard} />
             </div>
           </div>
@@ -377,7 +377,7 @@ function BentoCard({
     <div data-reveal="scale" className="hover-lift bg-[#EFEFEF] rounded-[6px] p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col justify-start items-start gap-4 sm:gap-6 overflow-hidden">
       <div className="flex flex-col gap-2">
         <h3 className="text-[#242424] text-lg sm:text-xl font-semibold leading-tight font-sans">{title}</h3>
-        <p className="text-[#6B7280] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
+        <p className="text-[#5F6470] text-sm md:text-base font-normal leading-relaxed font-sans">{description}</p>
       </div>
       <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] xl:h-[340px] rounded-[6px] flex items-center justify-center overflow-hidden">
         {children}
@@ -403,13 +403,13 @@ function FeatureCard({
     <div
       className={`relative w-full h-full px-6 py-5 rounded-[6px] overflow-hidden flex flex-col justify-start items-start gap-2 cursor-pointer border transition-all duration-300 ${
         isActive
-          ? "bg-white border-[rgba(36, 36, 36,0.12)] shadow-[0px_4px_14px_rgba(36, 36, 36,0.07)]"
+          ? "bg-white border-[rgba(36,36,36,0.12)] shadow-[0px_4px_14px_rgba(36,36,36,0.06)]"
           : "bg-[#EFEFEF] border-transparent hover:bg-[#E6E6E6]"
       }`}
       onClick={onClick}
     >
       {isActive && (
-        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(36, 36, 36,0.08)]">
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-[rgba(36,36,36,0.06)]">
           <div
             className="h-full bg-[#101010] transition-all duration-100 ease-linear"
             style={{ width: `${progress}%` }}
@@ -420,7 +420,7 @@ function FeatureCard({
       <div className="self-stretch flex justify-center flex-col text-[#242424] text-sm font-semibold leading-6 font-sans">
         {title}
       </div>
-      <div className="self-stretch text-[#6B7280] text-[13px] font-normal leading-[22px] font-sans">
+      <div className="self-stretch text-[#5F6470] text-[13px] font-normal leading-[22px] font-sans">
         {description}
       </div>
     </div>

@@ -124,7 +124,7 @@ function Topbar({ activeView }: { activeView: number }) {
         height: TOPBAR_H,
         borderBottom: `1px solid ${HD.border}`,
         padding: "0 18px",
-        background: "rgba(247, 247, 249, 0.88)",
+        background: "rgba(247,247,247,0.88)",
         backdropFilter: "blur(8px)",
       }}
     >

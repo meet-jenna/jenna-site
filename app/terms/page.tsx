@@ -33,7 +33,7 @@ export default function TermsPage() {
 
   return (
     <CompanyPage title={title} description={description} showCta={false} jsonLd={breadcrumb}>
-      <p className="text-sm text-[#9CA3AF]">Last updated: August 3, 2026</p>
+      <p className="text-sm text-[#5F6470]">Last updated: August 3, 2026</p>
 
       <p>
         These Terms of Use govern your access to the public website at meetjenna.ai (the &quot;Site&quot;) operated by

@@ -56,14 +56,14 @@ export default function DemoForm() {
 
   if (submitted) {
     return (
-      <div className="w-full max-w-[460px] bg-[#EFEFEF] rounded-[6px] shadow-[0px_8px_24px_rgba(36, 36, 36,0.06)] p-8 flex flex-col items-center text-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-[#16A34A]/10 flex items-center justify-center">
-          <Check className="w-6 h-6 text-[#16A34A]" strokeWidth={2.5} />
+      <div className="w-full max-w-[460px] bg-[#EFEFEF] rounded-[6px] shadow-[0px_8px_24px_rgba(36,36,36,0.06)] p-8 flex flex-col items-center text-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-[#157A3A]/10 flex items-center justify-center">
+          <Check className="w-6 h-6 text-[#157A3A]" strokeWidth={2.5} />
         </div>
         <div className="text-[#242424] text-2xl font-semibold leading-tight font-sans tracking-tight">
           You&apos;re all set, {values.name.split(" ")[0] || "thanks"}!
         </div>
-        <p className="text-[#6B7280] text-[15px] leading-7 font-sans">
+        <p className="text-[#5F6470] text-[15px] leading-7 font-sans">
           We&apos;ll reach out shortly to schedule your live demo and show you how Jenna handles every call for{" "}
           <span className="text-[#242424] font-medium">{values.restaurant || "your restaurant"}</span>.
         </p>
@@ -74,13 +74,13 @@ export default function DemoForm() {
   return (
     <div
       id="demo-form"
-      className="w-full max-w-[460px] bg-[#EFEFEF] rounded-[6px] shadow-[0px_8px_24px_rgba(36, 36, 36,0.06)] p-6 sm:p-8 flex flex-col gap-5"
+      className="w-full max-w-[460px] bg-[#EFEFEF] rounded-[6px] shadow-[0px_8px_24px_rgba(36,36,36,0.06)] p-6 sm:p-8 flex flex-col gap-5"
     >
       <div className="flex flex-col gap-1">
         <div className="text-[#242424] text-lg font-semibold leading-tight font-sans tracking-tight">
           Book your demo
         </div>
-        <p className="text-[#6B7280] text-[13px] leading-5 font-sans">
+        <p className="text-[#5F6470] text-[13px] leading-5 font-sans">
           Tell us where to reach you and we&apos;ll set up a live walkthrough.
         </p>
       </div>
@@ -143,7 +143,7 @@ export default function DemoForm() {
         </Field>
 
         {error && (
-          <p className="text-[#B91C1C] text-[13px] leading-5 font-sans" role="alert">
+          <p className="text-[#D41C44] text-[13px] leading-5 font-sans" role="alert">
             {error}
           </p>
         )}
@@ -151,16 +151,16 @@ export default function DemoForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="btn-cta mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36, 36, 36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="btn-cta mt-1 h-11 px-6 relative bg-[#101010] shadow-[0px_2px_4px_rgba(36,36,36,0.12)] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          <div className="w-full h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.20)] to-[rgba(0,0,0,0.10)] mix-blend-multiply" />
+          <div className="w-full h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0.25)] to-[rgba(36,36,36,0.12)] mix-blend-multiply" />
           <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[15px] font-medium leading-5 font-sans">
             {submitting ? "Sending…" : "Book a Demo"}
             {!submitting && <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />}
           </div>
         </button>
 
-        <p className="text-[#6B7280] text-[11px] leading-4 font-sans text-center">
+        <p className="text-[#5F6470] text-[11px] leading-4 font-sans text-center">
           By submitting this form, you agree to be contacted by Jenna about a demo.
         </p>
       </form>
@@ -171,8 +171,8 @@ export default function DemoForm() {
           height: 44px;
           padding: 0 14px;
           border-radius: 6px;
-          border: 1px solid rgba(36, 36, 36, 0.12);
-          background: #ffffff;
+          border: 1px solid rgba(36,36,36,0.12);
+          background: #FFFFFF;
           color: #242424;
           font-size: 14px;
           font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -180,12 +180,12 @@ export default function DemoForm() {
           transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
         }
         :global(.demo-input::placeholder) {
-          color: #6B7280;
+          color: #5F6470;
         }
         :global(.demo-input:focus) {
-          border-color: rgba(36, 36, 36, 0.4);
-          background: #ffffff;
-          box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.06);
+          border-color: rgba(36,36,36,0.5);
+          background: #FFFFFF;
+          box-shadow: 0 0 0 3px rgba(36,36,36,0.06);
         }
         :global(.demo-input:disabled) {
           opacity: 0.7;
@@ -209,7 +209,7 @@ function Field({
     <label className="flex flex-col gap-1.5">
       <span className="text-[#242424] text-[13px] font-medium leading-4 font-sans">
         {label}
-        {required && <span className="text-[#6B7280]"> *</span>}
+        {required && <span className="text-[#5F6470]"> *</span>}
       </span>
       {children}
     </label>

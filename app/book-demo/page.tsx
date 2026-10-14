@@ -40,7 +40,7 @@ export default function BookDemoPage() {
           <div className="w-full grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(420px,460px)] gap-8 sm:gap-10 lg:gap-14 items-start">
             {/* Left column */}
             <div data-reveal="left" className="flex flex-col items-start gap-6 lg:pr-4">
-              <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36, 36, 36,0.10)] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+              <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] border border-[rgba(36,36,36,0.12)] shadow-[0px_1px_1px_rgba(36,36,36,0.06)]">
                 <JennaLogo shape="app" size={16} />
                 <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
                   Book a Demo
@@ -55,7 +55,7 @@ export default function BookDemoPage() {
 
               {/* POS logos */}
               <div className="w-full max-w-[560px] pt-2 sm:pt-4 flex flex-col gap-4">
-                <div className="text-[rgba(36, 36, 36,0.55)] text-xs font-medium leading-4 font-sans uppercase tracking-wide">
+                <div className="text-[#5F6470] text-xs font-medium leading-4 font-sans uppercase tracking-wide">
                   Works with the POS you already use
                 </div>
                 <PosLogoGrid ids={POS_GRID_IDS} columnsClassName="grid-cols-2 sm:grid-cols-4" />
@@ -68,7 +68,7 @@ export default function BookDemoPage() {
                 {/* Hero-style glow straddling the top edge of the form */}
                 <div className="pointer-events-none absolute -top-12 sm:-top-16 left-1/2 -translate-x-1/2 z-0 w-[150%] sm:w-[160%]">
                   <img
-                    src="/gradients/hero-top-glow.svg?v=3"
+                    src="/gradients/hero-top-glow.svg?v=4"
                     alt=""
                     aria-hidden
                     className="w-full h-auto opacity-70 mix-blend-multiply"

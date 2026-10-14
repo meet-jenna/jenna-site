@@ -13,7 +13,7 @@ export default function CTASection() {
             <div className="self-stretch text-center flex justify-center flex-col text-[#242424] text-3xl md:text-5xl font-semibold leading-tight md:leading-[56px] font-sans tracking-tight">
               Ready to stop missing calls?
             </div>
-            <div className="self-stretch text-center text-[#6B7280] text-base leading-7 font-sans font-medium">
+            <div className="self-stretch text-center text-[#5F6470] text-base leading-7 font-sans font-medium">
               See Jenna answer your phones, take orders, and book tables.
               <br />
               Book a quick demo and hear her live.
@@ -21,8 +21,8 @@ export default function CTASection() {
           </div>
           <div className="w-full max-w-[497px] flex flex-col justify-center items-center gap-12">
             <div className="flex justify-start items-center gap-4">
-              <Link href="/book-demo" className="btn-cta h-11 px-12 py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
-                <div className="w-44 h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.10)] mix-blend-multiply"></div>
+              <Link href="/book-demo" className="btn-cta h-11 px-12 py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
+                <div className="w-44 h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(36,36,36,0.12)] mix-blend-multiply"></div>
                 <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[13px] font-medium leading-5 font-sans">
                   Book a Demo
                   <ArrowUpRight className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />

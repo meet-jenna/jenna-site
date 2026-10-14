@@ -37,9 +37,9 @@ export default function BlogOgImage({ params }: { params: { slug: string } }) {
             alt=""
             width={56}
             height={56}
-            style={{ borderRadius: "12px", objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
           />
-          <div style={{ color: "#6B7280", fontSize: "28px", fontWeight: 500 }}>{category}</div>
+          <div style={{ color: "#5F6470", fontSize: "28px", fontWeight: 500 }}>{category}</div>
         </div>
 
         <div
@@ -58,7 +58,7 @@ export default function BlogOgImage({ params }: { params: { slug: string } }) {
 
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ color: "#242424", fontSize: "28px", fontWeight: 500 }}>meetjenna.ai/blog</div>
-          <div style={{ color: "#6B7280", fontSize: "24px", fontWeight: 400 }}>The Jenna Blog</div>
+          <div style={{ color: "#5F6470", fontSize: "24px", fontWeight: 400 }}>The Jenna Blog</div>
         </div>
       </div>
     ),

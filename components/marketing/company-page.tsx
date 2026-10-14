@@ -33,10 +33,10 @@ export default function CompanyPage({
           <h1 className="text-[#242424] text-3xl sm:text-4xl md:text-[44px] font-semibold leading-[1.12] font-sans tracking-[-0.02em]">
             {title}
           </h1>
-          <p className="text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">{description}</p>
+          <p className="text-[#5F6470] text-base md:text-lg font-normal leading-7 font-sans">{description}</p>
         </header>
 
-        <div data-reveal className="w-full max-w-[720px] mx-auto flex flex-col gap-6 text-[#374151] text-base md:text-lg font-normal leading-8 font-sans">
+        <div data-reveal className="w-full max-w-[720px] mx-auto flex flex-col gap-6 text-[#242424] text-base md:text-lg font-normal leading-8 font-sans">
           {children}
         </div>
 

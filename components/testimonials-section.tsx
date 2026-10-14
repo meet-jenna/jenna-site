@@ -6,7 +6,7 @@ import type React from "react"
 // Badge component for consistency
 function Badge({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36, 36, 36,0.04)]">
+    <div className="px-[12px] py-[5px] bg-white overflow-hidden rounded-[6px] flex justify-start items-center gap-[8px] shadow-[0px_1px_1px_rgba(36,36,36,0.06)]">
       <div className="w-[14px] h-[14px] relative overflow-hidden flex items-center justify-center">{icon}</div>
       <div className="text-center flex justify-center flex-col text-[#242424] text-xs font-medium leading-3 font-sans">
         {text}
@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
         <div className="relative z-10 w-full px-6 sm:px-8 md:px-12 pb-10 md:pb-12 pt-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="flex-1 max-w-3xl flex flex-col gap-6">
             <div
-              className="text-white text-xl sm:text-2xl md:text-[30px] font-medium leading-8 md:leading-[42px] font-sans tracking-tight transition-all duration-700 ease-in-out [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]"
+              className="text-white text-xl sm:text-2xl md:text-[30px] font-medium leading-8 md:leading-[42px] font-sans tracking-tight transition-all duration-700 ease-in-out [text-shadow:0_1px_12px_rgba(36,36,36,0.5)]"
               style={{
                 filter: isTransitioning ? "blur(4px)" : "blur(0px)",
                 opacity: isTransitioning ? 0.5 : 1,
@@ -110,10 +110,10 @@ export default function TestimonialsSection() {
                 transition: "filter 0.7s ease-in-out, opacity 0.7s ease-in-out",
               }}
             >
-              <div className="text-white text-lg font-semibold leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+              <div className="text-white text-lg font-semibold leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(36,36,36,0.5)]">
                 {testimonials[activeTestimonial].name}
               </div>
-              <div className="text-white/75 text-lg font-medium leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+              <div className="text-white/75 text-lg font-medium leading-[26px] font-sans [text-shadow:0_1px_8px_rgba(36,36,36,0.5)]">
                 {testimonials[activeTestimonial].company}
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function TestimonialsSection() {
             <button
               aria-label="Previous testimonial"
               onClick={() => handleNavigationClick((activeTestimonial - 1 + testimonials.length) % testimonials.length)}
-              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.18)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
+              className="w-9 h-9 shadow-[0px_1px_2px_rgba(36,36,36,0.25)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
             >
               <div className="w-6 h-6 relative overflow-hidden">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +141,7 @@ export default function TestimonialsSection() {
             <button
               aria-label="Next testimonial"
               onClick={() => handleNavigationClick((activeTestimonial + 1) % testimonials.length)}
-              className="w-9 h-9 shadow-[0px_1px_2px_rgba(0,0,0,0.18)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
+              className="w-9 h-9 shadow-[0px_1px_2px_rgba(36,36,36,0.25)] overflow-hidden rounded-full border border-white/30 bg-white/10 backdrop-blur-sm justify-center items-center gap-2 flex hover:bg-white/20 transition-colors"
             >
               <div className="w-6 h-6 relative overflow-hidden">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

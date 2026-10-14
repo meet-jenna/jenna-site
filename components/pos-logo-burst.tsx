@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react"
  */
 const BURST_LOGOS = [
   { id: "toast", src: "/integrations/pos/icons/toast-circle.svg", name: "Toast", bg: "#FF4C00", zoom: 1.35 },
-  { id: "square", src: "/integrations/pos/icons/square-circle.svg", name: "Square", bg: "#000000", zoom: 1 },
+  { id: "square", src: "/integrations/pos/icons/square-circle.svg", name: "Square", bg: "#101010", zoom: 1 },
   { id: "clover", src: "/integrations/pos/icons/clover-circle.svg", name: "Clover", bg: "#FFFFFF", zoom: 1.35 },
   { id: "flipdish", src: "/integrations/pos/icons/flipdish-circle.svg", name: "FlipDish", bg: "#FFFFFF", zoom: 1.35 },
 ] as const
@@ -315,7 +315,7 @@ export default function PosLogoBurst() {
                 // Drop-shadow lives on this non-rotating wrapper so the shadow
                 // always falls straight down, even while the tile spins/twists.
                 filter:
-                  "drop-shadow(0px 8px 18px rgba(36,36,36,0.22)) drop-shadow(0px 3px 6px rgba(36,36,36,0.16)) drop-shadow(0px 1px 2px rgba(36,36,36,0.12))",
+                  "drop-shadow(0px 8px 18px rgba(36,36,36,0.25)) drop-shadow(0px 3px 6px rgba(36,36,36,0.12)) drop-shadow(0px 1px 2px rgba(36,36,36,0.12))",
                 willChange: t.crawl ? "transform, filter" : "filter",
               } as React.CSSProperties
             }

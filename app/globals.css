@@ -4,40 +4,42 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light palette: neutral light-gray page (#F7F7F7), slightly darker containers (#EFEFEF) */
-  --background: oklch(0.973 0 0);
-  --foreground: oklch(0.256 0 0);
-  --card: oklch(0.952 0 0);
-  --card-foreground: oklch(0.256 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.256 0 0);
-  --primary: oklch(0.178 0 0);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.952 0 0);
-  --secondary-foreground: oklch(0.256 0 0);
-  --muted: oklch(0.952 0 0);
-  --muted-foreground: oklch(0.556 0.014 264);
-  --accent: oklch(0.952 0 0);
-  --accent-foreground: oklch(0.256 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.0025 300);
-  --input: oklch(0.92 0.0025 300);
-  --ring: oklch(0.556 0.014 264);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Collapsed palette — 7 neutrals + 4 hues. Components hardcode these same
+     hex values, so change them together. Muted text (#5F6470) is the lightest
+     gray that keeps 4.5:1 on every surface down to #E6E6E6. */
+  --background: #f7f7f7;
+  --foreground: #242424;
+  --card: #efefef;
+  --card-foreground: #242424;
+  --popover: #ffffff;
+  --popover-foreground: #242424;
+  --primary: #101010;
+  --primary-foreground: #ffffff;
+  --secondary: #efefef;
+  --secondary-foreground: #242424;
+  --muted: #efefef;
+  --muted-foreground: #5f6470;
+  --accent: #efefef;
+  --accent-foreground: #242424;
+  --destructive: #D41C44;
+  --destructive-foreground: #ffffff;
+  --border: #e6e6e6;
+  --input: #e6e6e6;
+  --ring: #5f6470;
+  --chart-1: #7C3AED;
+  --chart-2: #157A3A;
+  --chart-3: #A74B06;
+  --chart-4: #D41C44;
+  --chart-5: #5f6470;
   --radius: 0.375rem;
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.256 0 0);
-  --sidebar-primary: oklch(0.178 0 0);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.965 0 0);
-  --sidebar-accent-foreground: oklch(0.256 0 0);
-  --sidebar-border: oklch(0.928 0.006 264);
-  --sidebar-ring: oklch(0.556 0.014 264);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #242424;
+  --sidebar-primary: #101010;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #efefef;
+  --sidebar-accent-foreground: #242424;
+  --sidebar-border: #e6e6e6;
+  --sidebar-ring: #5f6470;
   /* Updated font variables with explicit fallbacks for deployment */
   --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-instrument-serif: "Instrument Serif", ui-serif, serif;

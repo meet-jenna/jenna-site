@@ -100,7 +100,7 @@ export default function IntegrationPage({ params }: PageProps) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={integration.logo} alt={`${integration.name} logo`} className="h-5 w-auto object-contain" />
             </div>
-            <span className="text-[#9CA3AF] text-lg">+</span>
+            <span className="text-[#5F6470] text-lg">+</span>
             <div className="h-12 px-3 flex items-center justify-center bg-[#EFEFEF] rounded-[6px]">
               <JennaLogo shape="app" size={36} />
             </div>
@@ -109,14 +109,14 @@ export default function IntegrationPage({ params }: PageProps) {
           <h1 data-reveal style={{ "--reveal-delay": "90ms" } as React.CSSProperties} className="w-full max-w-[760px] text-[#242424] text-[2rem] sm:text-4xl md:text-5xl lg:text-[52px] font-semibold leading-[1.1] md:leading-[1.12] font-sans tracking-[-0.025em]">
             AI Phone Answering for {integration.name}
           </h1>
-          <p data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#6B7280] text-base md:text-lg font-normal leading-7 font-sans">
+          <p data-reveal style={{ "--reveal-delay": "180ms" } as React.CSSProperties} className="mt-4 w-full max-w-[560px] text-[#5F6470] text-base md:text-lg font-normal leading-7 font-sans">
             {copy.tagline}
           </p>
           <Link
             href="/book-demo"
             data-reveal
             style={{ "--reveal-delay": "270ms" } as React.CSSProperties}
-            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.08)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
+            className="btn-cta mt-8 h-11 md:h-12 px-8 md:px-12 bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] rounded-[6px] flex justify-center items-center hover:bg-[#242424] transition-colors text-white text-[15px] font-medium leading-5 font-sans gap-1.5"
           >
             Book a Demo
             <ArrowUpRight className="w-4 h-4 shrink-0" strokeWidth={2.25} />
@@ -125,16 +125,16 @@ export default function IntegrationPage({ params }: PageProps) {
 
         {/* Intro */}
         <section className="w-full max-w-[760px] mx-auto">
-          <p className="text-[#374151] text-base md:text-lg font-normal leading-8 font-sans">{copy.intro}</p>
+          <p className="text-[#242424] text-base md:text-lg font-normal leading-8 font-sans">{copy.intro}</p>
         </section>
 
         {/* How it works */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {steps.map((step, index) => (
             <div key={step.title} data-reveal="scale" style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties} className="hover-lift bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col gap-2">
-              <div className="text-[#9CA3AF] text-sm font-semibold font-sans">0{index + 1}</div>
+              <div className="text-[#5F6470] text-sm font-semibold font-sans">0{index + 1}</div>
               <h2 className="text-[#242424] text-base sm:text-lg font-semibold leading-tight font-sans">{step.title}</h2>
-              <p className="text-[#6B7280] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
+              <p className="text-[#5F6470] text-sm md:text-[15px] font-normal leading-relaxed font-sans">
                 {step.description}
               </p>
             </div>
@@ -148,14 +148,14 @@ export default function IntegrationPage({ params }: PageProps) {
           </h2>
           <div className="flex flex-col">
             {faqs.map((item) => (
-              <details key={item.question} className="group w-full border-b border-[rgba(36,36,36,0.16)]">
+              <details key={item.question} className="group w-full border-b border-[rgba(36,36,36,0.12)]">
                 <summary className="w-full px-1 py-[18px] flex justify-between items-center gap-5 cursor-pointer list-none text-[#242424] text-base font-medium leading-6 font-sans">
                   {item.question}
-                  <span className="shrink-0 text-[rgba(36,36,36,0.6)] transition-transform duration-200 group-open:rotate-45 text-xl leading-none">
+                  <span className="shrink-0 text-[#5F6470] transition-transform duration-200 group-open:rotate-45 text-xl leading-none">
                     +
                   </span>
                 </summary>
-                <p className="px-1 pb-[18px] text-[#6B7280] text-sm font-normal leading-6 font-sans">{item.answer}</p>
+                <p className="px-1 pb-[18px] text-[#5F6470] text-sm font-normal leading-6 font-sans">{item.answer}</p>
               </details>
             ))}
           </div>
@@ -171,7 +171,7 @@ export default function IntegrationPage({ params }: PageProps) {
               <Link
                 key={other.id}
                 href={`/integrations/${other.id}`}
-                className="btn-cta px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
+                className="btn-cta px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.12)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
               >
                 {other.name}
               </Link>

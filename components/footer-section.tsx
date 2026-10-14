@@ -73,7 +73,7 @@ export default function FooterSection() {
           <div className="self-stretch flex justify-start items-center gap-3">
             <JennaWordmark logoSize={32} textClassName="text-xl leading-4" />
           </div>
-          <div className="text-[rgba(36, 36, 36,0.90)] text-sm font-medium leading-[18px] font-sans">
+          <div className="text-[#242424] text-sm font-medium leading-[18px] font-sans">
             The AI hostess for every restaurant.
           </div>
 
@@ -88,7 +88,7 @@ export default function FooterSection() {
 
         <div className="self-stretch p-4 md:p-8 flex flex-col sm:flex-row flex-wrap justify-start sm:justify-between items-start gap-6 md:gap-8">
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="self-stretch text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">
+            <div className="self-stretch text-[#5F6470] text-sm font-medium leading-5 font-sans">
               Product
             </div>
             <div className="flex flex-col justify-end items-start gap-2">
@@ -111,7 +111,7 @@ export default function FooterSection() {
           </div>
 
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="self-stretch text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">
+            <div className="self-stretch text-[#5F6470] text-sm font-medium leading-5 font-sans">
               Solutions
             </div>
             <div className="flex flex-col justify-end items-start gap-2">
@@ -131,7 +131,7 @@ export default function FooterSection() {
           </div>
 
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">Company</div>
+            <div className="text-[#5F6470] text-sm font-medium leading-5 font-sans">Company</div>
             <div className="flex flex-col justify-center items-start gap-2">
               <Link href="/about" className={linkClass}>
                 About
@@ -152,7 +152,7 @@ export default function FooterSection() {
           </div>
 
           <div className="flex flex-col justify-start items-start gap-3 flex-1 min-w-[120px]">
-            <div className="text-[rgba(36, 36, 36,0.50)] text-sm font-medium leading-5 font-sans">Resources</div>
+            <div className="text-[#5F6470] text-sm font-medium leading-5 font-sans">Resources</div>
             <div className="flex flex-col justify-center items-start gap-2">
               <Link href="/blog/what-is-jenna-ai" className={linkClass}>
                 What is Jenna AI?
@@ -175,10 +175,10 @@ export default function FooterSection() {
       </div>
 
       <div className="self-stretch px-2 sm:px-2 py-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <div className="text-[rgba(36, 36, 36,0.55)] text-xs font-medium leading-5 font-sans">
+        <div className="text-[#5F6470] text-xs font-medium leading-5 font-sans">
           © {new Date().getFullYear()} Jenna. All rights reserved.
         </div>
-        <div className="text-[rgba(36, 36, 36,0.45)] text-xs font-medium leading-5 font-sans">
+        <div className="text-[#5F6470] text-xs font-medium leading-5 font-sans">
           Meet Jenna — the AI hostess for every restaurant.
         </div>
       </div>

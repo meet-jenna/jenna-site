@@ -77,26 +77,26 @@ export default function BlogPostPage({ params }: PageProps) {
         <article className="w-full max-w-[760px] mx-auto flex flex-col gap-8">
           {/* Header */}
           <header data-reveal className="flex flex-col gap-4">
-            <Link href="/blog" className="text-[#6B7280] text-sm font-medium font-sans hover:text-[#242424] transition-colors">
+            <Link href="/blog" className="text-[#5F6470] text-sm font-medium font-sans hover:text-[#242424] transition-colors">
               ← All posts
             </Link>
             <div className="flex items-center gap-3 text-xs font-medium font-sans">
-              <span className="px-2.5 py-1 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424]">
+              <span className="px-2.5 py-1 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.12)] text-[#242424]">
                 {post.category}
               </span>
-              <span className="text-[#9CA3AF]">
+              <span className="text-[#5F6470]">
                 {formatPostDate(post.publishedAt)} · {post.readingTimeMinutes} min read
               </span>
             </div>
             <h1 className="text-[#242424] text-3xl sm:text-4xl md:text-[44px] font-semibold leading-[1.12] font-sans tracking-[-0.02em]">
               {post.title}
             </h1>
-            <div className="text-[#6B7280] text-sm font-medium font-sans">
+            <div className="text-[#5F6470] text-sm font-medium font-sans">
               By{" "}
               {post.authorUrl ? (
                 <a
                   href={post.authorUrl}
-                  className="text-[#101010] underline underline-offset-2 hover:text-[#6B7280]"
+                  className="text-[#101010] underline underline-offset-2 hover:text-[#5F6470]"
                   rel="noopener noreferrer"
                 >
                   {post.author}
@@ -119,7 +119,7 @@ export default function BlogPostPage({ params }: PageProps) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="btn-cta inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.10)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
+                    className="btn-cta inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#EFEFEF] border border-[rgba(36,36,36,0.12)] text-[#242424] text-sm font-medium font-sans hover:bg-[#E6E6E6] transition-colors"
                   >
                     {link.label}
                     <ArrowUpRight className="w-3.5 h-3.5 shrink-0" strokeWidth={2.25} />

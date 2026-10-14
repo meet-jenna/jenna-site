@@ -20,13 +20,13 @@ function renderInline(text: string): React.ReactNode[] {
     const isInternal = href.startsWith("/")
     if (isInternal) {
       nodes.push(
-        <Link key={match.index} href={href} className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280] transition-colors">
+        <Link key={match.index} href={href} className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470] transition-colors">
           {label}
         </Link>,
       )
     } else {
       nodes.push(
-        <a key={match.index} href={href} target="_blank" rel="noopener noreferrer" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#6B7280] transition-colors">
+        <a key={match.index} href={href} target="_blank" rel="noopener noreferrer" className="text-[#101010] font-medium underline underline-offset-2 hover:text-[#5F6470] transition-colors">
           {label}
         </a>,
       )
@@ -56,7 +56,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
             )
           case "paragraph":
             return (
-              <p key={index} className="text-[#374151] text-base md:text-lg font-normal leading-8 font-sans">
+              <p key={index} className="text-[#242424] text-base md:text-lg font-normal leading-8 font-sans">
                 {renderInline(block.text)}
               </p>
             )
@@ -65,7 +65,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
             return (
               <ListTag
                 key={index}
-                className={`flex flex-col gap-2.5 pl-5 text-[#374151] text-base md:text-lg leading-8 font-sans ${
+                className={`flex flex-col gap-2.5 pl-5 text-[#242424] text-base md:text-lg leading-8 font-sans ${
                   block.ordered ? "list-decimal" : "list-disc"
                 }`}
               >
@@ -84,7 +84,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                   “{renderInline(block.text)}”
                 </p>
                 {block.cite && (
-                  <cite className="text-[#6B7280] text-sm font-medium not-italic font-sans">— {block.cite}</cite>
+                  <cite className="text-[#5F6470] text-sm font-medium not-italic font-sans">— {block.cite}</cite>
                 )}
               </blockquote>
             )
@@ -93,7 +93,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
               <figure key={index} className="w-full overflow-x-auto">
                 <table className="w-full border-collapse text-left text-sm sm:text-base font-sans">
                   <thead>
-                    <tr className="border-b border-[rgba(36,36,36,0.16)]">
+                    <tr className="border-b border-[rgba(36,36,36,0.12)]">
                       {block.headers.map((header, i) => (
                         <th key={i} className="py-3 pr-4 text-[#242424] font-semibold align-bottom">
                           {header}
@@ -103,9 +103,9 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                   </thead>
                   <tbody>
                     {block.rows.map((row, r) => (
-                      <tr key={r} className="border-b border-[rgba(36,36,36,0.08)]">
+                      <tr key={r} className="border-b border-[rgba(36,36,36,0.06)]">
                         {row.map((cell, c) => (
-                          <td key={c} className={`py-3 pr-4 align-top ${c === 0 ? "text-[#242424] font-medium" : "text-[#6B7280]"}`}>
+                          <td key={c} className={`py-3 pr-4 align-top ${c === 0 ? "text-[#242424] font-medium" : "text-[#5F6470]"}`}>
                             {cell}
                           </td>
                         ))}
@@ -114,7 +114,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                   </tbody>
                 </table>
                 {block.caption && (
-                  <figcaption className="mt-2 text-[#9CA3AF] text-xs font-sans">{block.caption}</figcaption>
+                  <figcaption className="mt-2 text-[#5F6470] text-xs font-sans">{block.caption}</figcaption>
                 )}
               </figure>
             )
@@ -147,7 +147,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
                     />
                   </div>
                   {block.caption && (
-                    <figcaption className="text-[#9CA3AF] text-sm font-sans">{block.caption}</figcaption>
+                    <figcaption className="text-[#5F6470] text-sm font-sans">{block.caption}</figcaption>
                   )}
                 </figure>
               )
@@ -156,7 +156,7 @@ export default function PostContent({ body }: { body: ContentBlock[] }) {
               <div key={index} className="my-2 bg-[#EFEFEF] rounded-[6px] p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="flex flex-col gap-1">
                   <p className="text-[#242424] text-base sm:text-lg font-medium font-sans">{block.title}</p>
-                  {block.caption && <p className="text-[#6B7280] text-sm font-sans">{block.caption}</p>}
+                  {block.caption && <p className="text-[#5F6470] text-sm font-sans">{block.caption}</p>}
                 </div>
                 <Link
                   href={block.fallbackHref ?? "/book-demo"}

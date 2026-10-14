@@ -29,7 +29,7 @@ export default function OpengraphImage() {
             alt=""
             width={64}
             height={64}
-            style={{ borderRadius: "14px", objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
           />
           <div style={{ color: "#242424", fontSize: "44px", fontWeight: 600 }}>Jenna</div>
         </div>
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
           >
             The AI Hostess for Every Restaurant
           </div>
-          <div style={{ color: "#6B7280", fontSize: "34px", fontWeight: 400, maxWidth: "820px" }}>
+          <div style={{ color: "#5F6470", fontSize: "34px", fontWeight: 400, maxWidth: "820px" }}>
             Answers every call, takes every order, and books reservations — 24/7, synced to your POS.
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function OpengraphImage() {
         {/* Footer */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ color: "#242424", fontSize: "30px", fontWeight: 500 }}>meetjenna.ai</div>
-          <div style={{ color: "#6B7280", fontSize: "26px", fontWeight: 400 }}>Voice AI for Restaurants</div>
+          <div style={{ color: "#5F6470", fontSize: "26px", fontWeight: 400 }}>Voice AI for Restaurants</div>
         </div>
       </div>
     ),
