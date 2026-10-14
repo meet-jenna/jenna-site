@@ -21,7 +21,7 @@ export default function CTASection() {
           </div>
           <div className="w-full max-w-[497px] flex flex-col justify-center items-center gap-12">
             <div className="flex justify-start items-center gap-4">
-              <Link href="/book-demo" className="btn-cta h-11 px-12 py-[6px] relative bg-[#101010] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#242424] transition-colors">
+              <Link href="/book-demo" className="btn-cta h-11 px-12 py-[6px] relative bg-[#D31E3F] shadow-[0px_0px_0px_2.5px_rgba(255,255,255,0.06)_inset] overflow-hidden rounded-[6px] flex justify-center items-center cursor-pointer hover:bg-[#D31E3F]/90 transition-colors">
                 <div className="w-44 h-[41px] absolute left-0 top-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(36,36,36,0.12)] mix-blend-multiply"></div>
                 <div className="flex flex-row items-center justify-center gap-1.5 text-white text-[13px] font-medium leading-5 font-sans">
                   Book a Demo
