@@ -191,7 +191,7 @@ export default function LandingPage() {
             </div>
             {/* One-time on-load flourish: POS logos spat out from behind the dashboard */}
             <PosLogoBurst />
-            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#101010] rounded-[14px] sm:rounded-[20px] lg:rounded-[24px] shadow-[0px_8px_30px_rgba(36,36,36,0.06)] overflow-hidden ring-1 ring-black/[0.04]">
+            <div className="relative z-[1] w-full h-[210px] sm:h-[320px] md:h-[480px] lg:h-[640px] xl:h-[700px] bg-[#101010] rounded-[6px] shadow-[0px_8px_30px_rgba(36,36,36,0.06)] overflow-hidden ring-1 ring-black/[0.04]">
               <HeroPortal chapter={jump.chapter} jumpKey={jump.key} onChapter={handleChapter} />
             </div>
           </div>
