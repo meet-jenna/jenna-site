@@ -68,7 +68,7 @@ export default function BookDemoPage() {
                 {/* Hero-style glow straddling the top edge of the form */}
                 <div className="pointer-events-none absolute -top-12 sm:-top-16 left-1/2 -translate-x-1/2 z-0 w-[150%] sm:w-[160%]">
                   <img
-                    src="/gradients/hero-top-glow.svg?v=4"
+                    src="/gradients/hero-top-glow.svg?v=5"
                     alt=""
                     aria-hidden
                     className="w-full h-auto opacity-70 mix-blend-multiply"

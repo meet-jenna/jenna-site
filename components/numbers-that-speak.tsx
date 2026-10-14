@@ -26,20 +26,20 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
   const themeVars =
     theme === "light"
       ? {
-          "--nts-surface": "#FFFFFF",
+          "--nts-surface": "#ffffff",
           "--nts-text-primary": "#242424",
-          "--nts-text-secondary": "#5F6470",
-          "--nts-text-muted": "#5F6470",
-          "--nts-border": "rgba(36,36,36,0.12)",
-          "--nts-shadow": "rgba(36,36,36,0.06)",
+          "--nts-text-secondary": "#6B7280",
+          "--nts-text-muted": "rgba(107,114,128,0.85)",
+          "--nts-border": "rgba(36, 36, 36,0.12)",
+          "--nts-shadow": "rgba(36, 36, 36,0.05)",
         }
       : ({
-          "--nts-surface": "#FFFFFF",
+          "--nts-surface": "#ffffff",
           "--nts-text-primary": "#242424",
-          "--nts-text-secondary": "#5F6470",
-          "--nts-text-muted": "#5F6470",
-          "--nts-border": "rgba(36,36,36,0.12)",
-          "--nts-shadow": "rgba(36,36,36,0.06)",
+          "--nts-text-secondary": "#6B7280",
+          "--nts-text-muted": "rgba(107,114,128,0.85)",
+          "--nts-border": "rgba(36, 36, 36,0.12)",
+          "--nts-shadow": "rgba(36, 36, 36,0.05)",
         } as React.CSSProperties)
 
   // Figma-exported assets
@@ -90,14 +90,14 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
         >
           <div>
             <div
-              className="border border-[rgba(36,36,36,0.06)]"
+              className="border border-[rgba(0,0,0,0.08)]"
               style={{
                 width: "270px",
                 height: "199.565px",
                 background: "var(--nts-surface)",
                 borderRadius: "4.696px",
                 boxShadow:
-                  "0px 0px 0px 0.587px rgba(36,36,36,0.12), 0px 1.174px 2.348px -0.587px rgba(36,36,36,0.06), 0px 1.761px 3.522px -0.88px rgba(36,36,36,0.06)",
+                  "0px 0px 0px 0.587px rgba(36, 36, 36,0.12), 0px 1.174px 2.348px -0.587px rgba(36, 36, 36,0.06), 0px 1.761px 3.522px -0.88px rgba(36, 36, 36,0.06)",
                 maskImage: `url('${imgSchedule}')`,
                 maskPosition: "-81.766px -1.312px",
                 maskSize: "430.746px 270.521px",
@@ -129,14 +129,14 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
         >
           <div>
             <div
-              className="border border-[rgba(36,36,36,0.06)]"
+              className="border border-[rgba(0,0,0,0.08)]"
               style={{
                 width: "330px",
                 height: "243.913px",
                 background: "var(--nts-surface)",
                 borderRadius: "5.739px",
                 boxShadow:
-                  "0px 0px 0px 0.717px rgba(36,36,36,0.12), 0px 1.435px 2.87px -0.717px rgba(36,36,36,0.06), 0px 2.152px 4.304px -1.076px rgba(36,36,36,0.06)",
+                  "0px 0px 0px 0.717px rgba(36, 36, 36,0.12), 0px 1.435px 2.87px -0.717px rgba(36, 36, 36,0.06), 0px 2.152px 4.304px -1.076px rgba(36, 36, 36,0.06)",
                 maskImage: `url('${imgSchedule}')`,
                 maskPosition: "-51.766px -11.138px",
                 maskSize: "430.746px 270.521px",
@@ -168,14 +168,14 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
         >
           <div>
             <div
-              className="border border-[rgba(36,36,36,0.06)]"
+              className="border border-[rgba(0,0,0,0.08)]"
               style={{
                 width: "360px",
                 height: "266.087px",
                 background: "var(--nts-surface)",
                 borderRadius: "6.261px",
                 boxShadow:
-                  "0px 0px 0px 0.783px rgba(36,36,36,0.12), 0px 1.565px 3.13px -0.783px rgba(36,36,36,0.06), 0px 2.348px 4.696px -1.174px rgba(36,36,36,0.06)",
+                  "0px 0px 0px 0.783px rgba(36, 36, 36,0.12), 0px 1.565px 3.13px -0.783px rgba(36, 36, 36,0.06), 0px 2.348px 4.696px -1.174px rgba(36, 36, 36,0.06)",
                 maskImage: `url('${imgSchedule}')`,
                 maskPosition: "-36.766px -21.051px",
                 maskSize: "430.746px 270.521px",
@@ -402,42 +402,42 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                                     style={{ height: "17.217px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                   <div
                                     style={{ height: "13.304px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                   <div
                                     style={{ height: "13.304px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                   <div
                                     style={{ height: "13.304px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                   <div
                                     style={{ height: "13.304px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                   <div
                                     style={{ height: "13.304px", width: "100%", display: "flex", alignItems: "center" }}
                                   >
                                     <div
-                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(36,36,36,0.06)" }}
+                                      style={{ width: "100%", height: "1px", backgroundColor: "rgba(0,0,0,0.05)" }}
                                     />
                                   </div>
                                 </div>
@@ -499,17 +499,17 @@ const NumbersThatSpeak: React.FC<NumbersThatSpeakProps> = ({
                               }}
                             >
                               {[
-                                { height: "83px", color: "#A74B06" },
-                                { height: "108px", color: "#7C3AED" },
-                                { height: "58px", color: "#157A3A" },
-                                { height: "89px", color: "#7C3AED" },
-                                { height: "83px", color: "#D41C44" },
-                                { height: "89px", color: "#A74B06" },
-                                { height: "83px", color: "#7C3AED" },
-                                { height: "95px", color: "#157A3A" },
-                                { height: "108px", color: "#7C3AED" },
-                                { height: "76px", color: "#D41C44" },
-                                { height: "89px", color: "#A74B06" },
+                                { height: "83px", color: "#F59E0B" },
+                                { height: "108px", color: "#6366F1" },
+                                { height: "58px", color: "#10B981" },
+                                { height: "89px", color: "#8B5CF6" },
+                                { height: "83px", color: "#F43F5E" },
+                                { height: "89px", color: "#F59E0B" },
+                                { height: "83px", color: "#6366F1" },
+                                { height: "95px", color: "#10B981" },
+                                { height: "108px", color: "#8B5CF6" },
+                                { height: "76px", color: "#F43F5E" },
+                                { height: "89px", color: "#F59E0B" },
                               ].map((item, index) => (
                                 <div
                                   key={index}

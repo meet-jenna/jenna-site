@@ -35,10 +35,10 @@ export const HD = {
   chart1: "#7C3AED",
   chart2: "#157A3A",
   chart3: "#A74B06",
-  chart4: "#D41C44",
+  chart4: "#D31E3F",
   warning: "#A74B06",
   success: "#157A3A",
-  destructive: "#D41C44",
+  destructive: "#D31E3F",
   cardShadow: "0px 1px 2px rgba(36,36,36,0.06)",
 } as const
 

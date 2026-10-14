@@ -191,7 +191,7 @@ export default function LandingPage() {
             {/* Top-edge glow: straddles the dashboard's top edge */}
             <div className="absolute top-0 left-0 right-0 z-0 pointer-events-none">
               <img
-                src="/gradients/hero-top-glow.svg?v=11"
+                src="/gradients/hero-top-glow.svg?v=12"
                 alt=""
                 aria-hidden
                 className="w-full h-auto -translate-y-[38%] opacity-[0.82]"

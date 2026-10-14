@@ -143,7 +143,7 @@ export default function DemoForm() {
         </Field>
 
         {error && (
-          <p className="text-[#D41C44] text-[13px] leading-5 font-sans" role="alert">
+          <p className="text-[#D31E3F] text-[13px] leading-5 font-sans" role="alert">
             {error}
           </p>
         )}

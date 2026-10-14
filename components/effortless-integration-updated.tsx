@@ -55,7 +55,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           right: 0,
           bottom: 0,
           background:
-            "linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.12) 100%)",
+            "linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 20%, transparent 80%, rgba(255,255,255,0.1) 100%)",
           pointerEvents: "none",
           zIndex: 10,
         }}
@@ -71,7 +71,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "320px",
           height: "320px",
           borderRadius: "50%",
-          border: "1px solid rgba(36,36,36,0.25)",
+          border: "1px solid rgba(36, 36, 36, 0.2)",
           opacity: 0.8,
         }}
       />
@@ -85,7 +85,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "240px",
           height: "240px",
           borderRadius: "50%",
-          border: "1px solid rgba(36,36,36,0.25)",
+          border: "1px solid rgba(36, 36, 36, 0.25)",
           opacity: 0.7,
         }}
       />
@@ -99,7 +99,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
           width: "160px",
           height: "160px",
           borderRadius: "50%",
-          border: "1px solid rgba(36,36,36,0.25)",
+          border: "1px solid rgba(36, 36, 36, 0.3)",
           opacity: 0.6,
         }}
       />
@@ -130,7 +130,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
             position: "absolute",
             borderRadius: "50%",
             objectFit: "cover",
-            boxShadow: "0px 4px 12px rgba(36,36,36,0.12)",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
           }}
         />
 
@@ -147,7 +147,7 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
                 left: `${position.x - 16}px`,
                 top: `${position.y - 16}px`,
                 position: "absolute",
-                boxShadow: "0px 4px 12px rgba(36,36,36,0.12)",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
                 borderRadius: "50%",
                 overflow: "hidden",
               }}
@@ -177,9 +177,9 @@ const EffortlessIntegration: React.FC<EffortlessIntegrationProps> = ({ width = 4
         >
           <defs>
             <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="rgba(36,36,36,0.12)" />
-              <stop offset="50%" stopColor="rgba(36,36,36,0.06)" />
-              <stop offset="100%" stopColor="rgba(36,36,36,0.12)" />
+              <stop offset="0%" stopColor="rgba(36, 36, 36, 0.1)" />
+              <stop offset="50%" stopColor="rgba(36, 36, 36, 0.05)" />
+              <stop offset="100%" stopColor="rgba(36, 36, 36, 0.1)" />
             </linearGradient>
           </defs>
 
