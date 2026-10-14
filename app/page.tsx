@@ -186,7 +186,7 @@ export default function LandingPage() {
                 src="/gradients/hero-top-glow.svg?v=12"
                 alt=""
                 aria-hidden
-                className="w-full h-auto -translate-y-[38%] opacity-[0.82]"
+                className="w-full h-auto -translate-y-[38%] opacity-50"
               />
             </div>
             {/* One-time on-load flourish: POS logos spat out from behind the dashboard */}
